@@ -1,0 +1,10 @@
+{% load i18n %}
+
+{% block content %}
+  <h2>{% translate "Login" %}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% translate "Login" %}</button>
+  </form>
+{% endblock %}
