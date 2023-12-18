@@ -18,8 +18,10 @@ django-debug-toolbar = "^4.2.0"
 django-extensions = "^3.2.3"
 radon = "^6.0.1"
 
-[tool.poetry.pygraphviz.dependencies]
+[tool.poetry.group.pygraphviz]
 optional = true
+
+[tool.poetry.group.pygraphviz.dependencies]
 pygraphviz = "^1.11"
 
 [build-system]
