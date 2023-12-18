@@ -38,6 +38,6 @@ https://pygraphviz.github.io/documentation/stable/install.html
 
 then run:
 ```sh
-poetry install --with pygraphviz
+poetry install --no-root --with pygraphviz
 poetry run python manage.py graph_models -o erd.png
 ```
