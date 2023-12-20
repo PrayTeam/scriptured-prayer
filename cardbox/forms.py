@@ -1,25 +1,16 @@
 from django import forms
-from .models import UserProfile, UserCard, UserCardNote, UserCategorySchedule,  PrayerUserCard
+from .models import UserProfile, UserCard, UserCardNote, UserCategoryOptions,  PrayerDeckUserCard
 from django.urls import reverse
 
 
-class UserCategoryScheduleForm(forms.ModelForm):
+class UserCategoryOptionsForm(forms.ModelForm):
     class Meta:
-        model = UserCategorySchedule
-        fields = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"]
-        widgets = {
-            "sun": forms.CheckboxInput(attrs={"class": "form-check-input"}),
-            "mon": forms.CheckboxInput(attrs={"class": "form-check-input"}),
-            "tue": forms.CheckboxInput(attrs={"class": "form-check-input"}),
-            "wed": forms.CheckboxInput(attrs={"class": "form-check-input"}),
-            "thu": forms.CheckboxInput(attrs={"class": "form-check-input"}),
-            "fri": forms.CheckboxInput(attrs={"class": "form-check-input"}),
-            "sat": forms.CheckboxInput(attrs={"class": "form-check-input"}),
-        }
+        model = UserCategoryOptions
+        fields = ["enabled", "pray_all_cards"]
 
 
-UserCategoryScheduleFormSet = forms.modelformset_factory(
-    UserCategorySchedule, form=UserCategoryScheduleForm, extra=0
+UserCategoryOptionsFormSet = forms.modelformset_factory(
+    UserCategoryOptions, form=UserCategoryOptionsForm, extra=0
 )
 
 UserCardNoteFormSet = forms.inlineformset_factory(
@@ -43,5 +34,5 @@ class UserCardNoteForm(forms.ModelForm):
         # need both the usercard and the prayerusercard
 class PrayerForm(forms.ModelForm):
     class Meta:
-        model = PrayerUserCard
+        model = PrayerDeckUserCard
         fields = []
