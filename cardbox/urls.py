@@ -5,7 +5,8 @@ from . import views
 
 app_name = "cardbox"
 urlpatterns = [
-    path("", views.CardBoxView.as_view(), name="cardbox"),
+    path("", views.IndexView.as_view(), name="cardbox"),
+    path(_("cards/"), views.UserCardListView.as_view(), name="usercard_list"),
     path(_("prayer/"), views.PrayerView.as_view(), name="prayer"),
     path(_("prayer/<int:seq>/"), views.PrayerView.as_view(), name="prayer"),
     path(

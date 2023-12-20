@@ -24,7 +24,7 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    path(_("cardbox/"), include("cardbox.urls")),
+    path("", include("cardbox.urls")),
     path(_("admin/"), admin.site.urls),
     path(_("accounts/"), include("django.contrib.auth.urls")),
 )

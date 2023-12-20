@@ -3,16 +3,19 @@ from django.forms.models import BaseModelForm
 from django.http import HttpResponse
 from django.utils import timezone
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, UpdateView, FormView
-from .models import UserCard, UserProfile, Prayer, UserCategorySchedule, PrayerUserCard
-from .forms import UserProfileForm, UserCategoryScheduleFormSet, UserCardNoteFormSet, PrayerForm
+from django.views.generic import ListView, DetailView, UpdateView, FormView, TemplateView
+from .models import UserCard, UserProfile, PrayerDeck, UserCategoryOptions, PrayerDeckUserCard
+from .forms import UserProfileForm, UserCategoryOptionsFormSet, UserCardNoteFormSet, PrayerForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 
 
-class CardBoxView(LoginRequiredMixin, ListView):
-    model = UserCard
+class IndexView(LoginRequiredMixin, TemplateView):
     template_name = "cardbox/index.html"
+
+class UserCardListView(LoginRequiredMixin, ListView):
+    model = UserCard
+    template_name = "cardbox/usercard_list.html"
 
     def get_queryset(self):
         return (
@@ -50,15 +53,15 @@ class UserCardDetailView(LoginRequiredMixin, UpdateView):
 
 
 class PrayerView(LoginRequiredMixin, UpdateView):
-    model = PrayerUserCard
+    model = PrayerDeckUserCard
     form_class = PrayerForm
 
     def get_object(self, queryset=None):
-        prayer, created = Prayer.objects.get_or_create(user=self.request.user, date=timezone.now().date())
+        prayer_deck, created = PrayerDeck.objects.get_or_create(user=self.request.user, date=timezone.now().date())
         if self.kwargs.get('seq'):
-            prayerusercard = prayer.prayerusercard_set.all()[self.kwargs.get('seq')]
+            prayerusercard = prayer_deck.prayerusercard_set.all()[self.kwargs.get('seq')]
         else:
-            prayerusercard = prayer.prayerusercard_set.all()[0]
+            prayerusercard = prayer_deck.prayerusercard_set.all()[0]
         return prayerusercard
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
@@ -107,15 +110,15 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["categoryformset"] = UserCategoryScheduleFormSet(
-            queryset=UserCategorySchedule.objects.filter(user=self.request.user)
+        context["categoryformset"] = UserCategoryOptionsFormSet(
+            queryset=UserCategoryOptions.objects.filter(user=self.request.user)
         )
         return context
 
     def form_valid(self, form):
-        formset = UserCategoryScheduleFormSet(
+        formset = UserCategoryOptionsFormSet(
             self.request.POST,
-            queryset=UserCategorySchedule.objects.filter(user=self.request.user),
+            queryset=UserCategoryOptions.objects.filter(user=self.request.user),
         )
         if formset.is_valid():
             formset.save()

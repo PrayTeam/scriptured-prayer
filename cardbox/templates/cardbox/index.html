@@ -1,11 +1,3 @@
 {% load i18n %}
 
-{% if usercard_list %}
-    <ul>
-    {% for usercard in usercard_list %}
-        <li><a href="{% url 'cardbox:usercard_detail' usercard.id %}">{{ usercard.card.title }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>{% translate "No cards are available." %}</p>
-{% endif %}
+{% translate "This is the index page for www.scripturedprayer.com." %}
