@@ -52,53 +52,17 @@ class UserCardDetailView(LoginRequiredMixin, UpdateView):
         return reverse("cardbox:usercard_detail", kwargs={"pk": self.object.pk})
 
 
-class PrayerView(LoginRequiredMixin, UpdateView):
-    model = PrayerDeckUserCard
-    form_class = PrayerForm
+class PrayerDeckView(LoginRequiredMixin, DetailView):
+    model = PrayerDeck
 
     def get_object(self, queryset=None):
-        prayer_deck, created = PrayerDeck.objects.get_or_create(user=self.request.user, date=timezone.now().date())
-        if self.kwargs.get('seq'):
-            prayerusercard = prayer_deck.prayerusercard_set.all()[self.kwargs.get('seq')]
+        if self.kwargs.get('pk'):
+            prayerdeck = PrayerDeck.objects.get(id=self.kwargs.get('pk'))
+            if prayerdeck.user != self.request.user:
+                raise PermissionError
         else:
-            prayerusercard = prayer_deck.prayerusercard_set.all()[0]
-        return prayerusercard
-
-    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        context["usercardnotes_formset"] = UserCardNoteFormSet(instance=self.object.usercard)
-        return context
-    
-    def form_valid(self, form: BaseModelForm) -> HttpResponse:
-        if self.request.POST.get('note_save'):
-            formset = UserCardNoteFormSet(
-                self.request.POST,
-                instance=self.object.usercard,
-            )
-            if formset.is_valid():
-                formset.save()
-
-        if self.request.POST.get("prayer_nav") == "next":
-            self.object.used = True
-            self.object.save()
-            if self.kwargs.get('seq') == self.request.user.userprofile.cards_per_day - 1 and self.request.POST.get('prayer_nav') == 'next':
-                self.object.prayer.completed = True
-                self.object.prayer.save()
-        return super().form_valid(form)
-    
-    def get_success_url(self) -> str:
-        if self.kwargs.get('seq') == self.request.user.userprofile.cards_per_day - 1 and self.request.POST.get('prayer_nav') == 'next':
-            return reverse("cardbox:cardbox") # We should make a celebration page
-        elif self.request.POST.get('prayer_nav') == 'prev' and (self.kwargs.get('seq') or 0) > 0:
-            return reverse("cardbox:prayer", kwargs={"seq": self.kwargs.get('seq')-1})
-        elif self.request.POST.get('prayer_nav') == 'next':
-            print("next")
-            return reverse("cardbox:prayer", kwargs={"seq": (self.kwargs.get('seq') or 0)+1})
-        elif self.request.POST.get('note_save'):
-            return reverse("cardbox:prayer", kwargs={"seq": self.kwargs.get('seq')})
-        else:
-            print(self.request.POST.get('prayer_nav'))
-            return reverse("cardbox:prayer", kwargs={"seq": 0})
+            prayerdeck = PrayerDeck.objects.filter(user=self.request.user).latest('date')
+        return prayerdeck
 
 class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = UserProfile

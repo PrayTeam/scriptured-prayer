@@ -1,11 +1,11 @@
 {% load i18n %}
 
-{{ prayerusercard.prayer.date | date:"l F d, Y" }}<br>
-title: {{ prayerusercard.usercard.card.title }}<br>
-scripture: {{ prayerusercard.usercard.card.scripture }}<br>
-text: {{ prayerusercard.usercard.card.text }}<br>
-used: {{ prayerusercard.used }}<br>
-private: {{ prayerusercard.usercard.card.private }}<br>
+{{ prayerdeckusercard.prayer.date | date:"l F d, Y" }}<br>
+title: {{ prayerdeckusercard.usercard.card.title }}<br>
+scripture: {{ prayerdeckusercard.usercard.card.scripture }}<br>
+text: {{ prayerdeckusercard.usercard.card.text }}<br>
+used: {{ prayerdeckusercard.used }}<br>
+private: {{ prayerdeckusercard.usercard.card.private }}<br>
 <form method="POST">
     {% csrf_token %}
 <table>
