@@ -1,18 +1,20 @@
+{% extends "cardbox/base.html" %}
 {% load i18n %}
 
+{% block content %}
 user: {{ prayerdeck.user.username }}
 <br>
 cards: 
-{% for usercard in prayerdeck.usercard_set %}
-{{ usercard.card.title }}
-<form method="POST">
-    {% csrf_token %}
-<table>
-{{ usercardnotes_formset.management_form }}
-{% for form in usercardnotes_formset %}
-{{ form.as_table }}
+<br><table>
+{% for prayerdeckusercard in prayerdeck.prayerdeckusercard_set.all %}
+<tr>{{ prayerdeckusercard.usercard.card.title }}</tr>
+<tr>{{ prayerdeckusercard.usercard.card.scripture }}</tr>
+<tr>{{ prayerdeckusercard.usercard.card.text }}</tr>
+<tr>
+{% for note in prayerdeckusercard.usercard.usercardnote_set.all %}
+<li>{{ note.note }}</li>
+{% endfor %}
+</tr>
 {% endfor %}
 </table>
-<button type="submit">{% translate "Save" %}</button>
-</form>
-{% endfor %}
+{% endblock %}

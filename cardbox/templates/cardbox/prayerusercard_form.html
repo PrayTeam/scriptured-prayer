@@ -1,5 +1,7 @@
+{% extends "cardbox/base.html" %}
 {% load i18n %}
 
+{% block content %}
 {{ prayerdeckusercard.prayer.date | date:"l F d, Y" }}<br>
 title: {{ prayerdeckusercard.usercard.card.title }}<br>
 scripture: {{ prayerdeckusercard.usercard.card.scripture }}<br>
@@ -21,3 +23,4 @@ private: {{ prayerdeckusercard.usercard.card.private }}<br>
     <button type="submit" name="prayer_nav" value="prev">{% translate "Previous"%}</button>
     <button type="submit" name="prayer_nav" value="next">{% translate "Next"%}</button>
 </form>
+{% endblock %}
