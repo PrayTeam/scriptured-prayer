@@ -116,9 +116,9 @@ def create_related_objects_for_user(instance, created, **kwargs):
             usercard = UserCard.objects.create(user=instance, card=card)
             usercard.save()
         for category in Category:
-            userschedule = UserCategoryOptions.objects.create(
+            option = UserCategoryOptions.objects.create(
                 user=instance, category=category
             )
-            userschedule.save()
+            option.save()
         userprofile = UserProfile.objects.create(user=instance)
         userprofile.save()
