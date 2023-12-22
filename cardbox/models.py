@@ -53,7 +53,7 @@ class UserCard(models.Model):
         return self.use_count + self.count_adjustment
 
     def __str__(self) -> str:
-        return f"{self.user.username} - {self.card.title} ({self.use_count})"
+        return f"{self.user.username} - {self.card.title})"
 
 
 class UserCardNote(models.Model):

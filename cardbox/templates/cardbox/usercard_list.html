@@ -1,5 +1,7 @@
+{% extends "cardbox/base.html" %}
 {% load i18n %}
 
+{% block content %}
 {% if usercard_list %}
     <ul>
     {% for usercard in usercard_list %}
@@ -9,3 +11,4 @@
 {% else %}
     <p>{% translate "No cards are available." %}</p>
 {% endif %}
+{% endblock %}

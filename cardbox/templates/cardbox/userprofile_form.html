@@ -1,9 +1,9 @@
+{% extends "cardbox/base.html" %}
 {% load i18n %}
 
-<!-- Accessing data from the model -->
+{% block content %}
 <h1>{{ user.username }}</h1>
 
-<!-- Accessing data from the form -->
 <form method="POST">
     {% csrf_token %}
     <table>
@@ -26,3 +26,4 @@
 </table>
     <button type="submit">{% translate "Save" %}</button>
 </form>
+{% endblock %}
