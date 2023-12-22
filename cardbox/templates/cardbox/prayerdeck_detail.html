@@ -1,0 +1,18 @@
+{% load i18n %}
+
+user: {{ prayerdeck.user.username }}
+<br>
+cards: 
+{% for usercard in prayerdeck.usercard_set %}
+{{ usercard.card.title }}
+<form method="POST">
+    {% csrf_token %}
+<table>
+{{ usercardnotes_formset.management_form }}
+{% for form in usercardnotes_formset %}
+{{ form.as_table }}
+{% endfor %}
+</table>
+<button type="submit">{% translate "Save" %}</button>
+</form>
+{% endfor %}
