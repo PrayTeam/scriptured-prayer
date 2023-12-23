@@ -1,4 +1,4 @@
-# Prayer Box
+# Scriptured Prayer
 
 > Pray intentionally, pray Scripturally, pray consistently.
 
