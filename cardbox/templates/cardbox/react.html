@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django with React</title>
+</head>
+<body>
+
+    <div id="react-root">
+        <!-- React components will be rendered here -->
+    </div>
+
+    <!-- Include React dependencies -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+    <!-- Your React components -->
+    <script type="text/babel">
+        const PrayerList = ({ prayers }) => {
+            return (
+                <div>
+                    <h1>Prayer List</h1>
+                    <ul>
+                        {prayers.map(prayer => (
+                            <li key={prayer.id}>
+                                {prayer.title} 
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            );
+        }
+
+        const App = () => {
+            const [prayers, setPrayers] = React.useState([
+                {id: 1, title:"Prayer Title 1"}, 
+                {id: 2, title:"Prayer Title 2"}, 
+                {id: 3, title:"Prayer Title 3"}, 
+                {id: 4, title:"Prayer Title 4"}]);
+
+            // React.useEffect(() => {
+            //     fetch('/myapp/tasks/')
+            //         .then(response => response.json())
+            //         .then(data => setTasks(data))
+            //         .catch(error => console.error('Error fetching tasks:', error));
+            // }, []);
+
+            return <PrayerList prayers={prayers} />;
+        }
+
+        ReactDOM.render(
+            <App />,
+            document.getElementById('react-root')
+        );
+    </script>
+
+</body>
+</html>

@@ -5,6 +5,8 @@ from . import views
 
 app_name = "cardbox"
 urlpatterns = [
+    path("react/", views.ReactView.as_view(), name="react"),
+
     path("", views.CardBoxView.as_view(), name="cardbox"),
     path(_("prayer/"), views.PrayerView.as_view(), name="prayer"),
     path(_("prayer/<int:seq>/"), views.PrayerView.as_view(), name="prayer"),

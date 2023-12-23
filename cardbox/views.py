@@ -10,6 +10,17 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 
 
+class ReactView(ListView) :
+    model = UserCard
+    template_name = "cardbox/react.html"
+    
+    def get_queryset(self):
+        return (
+            UserCard.objects.filter(user=self.request.user)
+            .order_by("card__category", "card__title")
+            .select_related("card")
+        )
+
 class CardBoxView(LoginRequiredMixin, ListView):
     model = UserCard
     template_name = "cardbox/index.html"
