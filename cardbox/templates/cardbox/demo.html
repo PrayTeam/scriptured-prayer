@@ -1,0 +1,13 @@
+{% load static %}
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="{% static 'utils/index.js' %}"></script>
+
+<noscript>You need to enable JavaScript view this page.</noscript>
+<!-- Try changing the value for [data-name] below. You'll have to reload the web page to see the changes. -->
+<div id="root1" data-name="Kenan"></div>
+<div id="root2"></div>
+
+<!-- [root] will be interpreted as an array; thus you can reuse the same component throughout the DOM -->
+<script src="{% static 'compiled/index.js' %}" root="root1,root2"></script>

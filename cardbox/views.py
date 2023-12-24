@@ -3,7 +3,7 @@ from django.forms.models import BaseModelForm
 from django.http import HttpResponse
 from django.utils import timezone
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, UpdateView, FormView
+from django.views.generic import ListView, DetailView, UpdateView, FormView, TemplateView
 from .models import UserCard, UserProfile, Prayer, UserCategorySchedule, PrayerUserCard
 from .forms import UserProfileForm, UserCategoryScheduleFormSet, UserCardNoteFormSet, PrayerForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -128,3 +128,9 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self) -> str:
         return reverse("cardbox:userprofile_update")
+
+class ReactDemoView(TemplateView) :
+    template_name = "cardbox/demo.html"
+
+    def index(request):
+        return render(request, 'demo.html', {})
