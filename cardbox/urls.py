@@ -12,4 +12,5 @@ urlpatterns = [
         _("profile/"), views.UserProfileUpdateView.as_view(), name="userprofile_update"
     ),
     path("<int:pk>/", views.UserCardDetailView.as_view(), name="usercard_detail"),
+    path("demo/", views.ReactDemoView.as_view(), name="demo"),
 ]
