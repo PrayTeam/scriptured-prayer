@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserProfile, UserCard, UserCardNote, UserCategoryOptions,  PrayerDeckUserCard
+from .models import UserProfile, UserCard, UserCardNote, UserCategoryOptions
 from django.urls import reverse
 
 
@@ -28,11 +28,3 @@ class UserCardNoteForm(forms.ModelForm):
     class Meta:
         model = UserCardNote
         fields = ["note"]
-
-# This is not complete
-        # I think I want the usercard, not the prayerusercard
-        # need both the usercard and the prayerusercard
-class PrayerForm(forms.ModelForm):
-    class Meta:
-        model = PrayerDeckUserCard
-        fields = []

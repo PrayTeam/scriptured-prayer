@@ -44,6 +44,7 @@ class UserCard(models.Model):
     card = models.ForeignKey(Card, on_delete=models.CASCADE)
     answered = models.BooleanField(default=False)
     hidden = models.BooleanField(default=False)
+    prayerdeck = models.ForeignKey("PrayerDeck", on_delete=models.CASCADE, blank=True, null=True)
     
     class Meta:
         unique_together = ["user", "card"]
@@ -79,19 +80,15 @@ class UserCategoryOptions(models.Model):
 
 
 class PrayerDeck(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, primary_key=True)
     date = models.DateTimeField("created timestamp", auto_now_add=True)
 
     def __str__(self) -> str:
         return f"{self.user.username} prayer on {self.date}"
 
-class PrayerDeckUserCard(models.Model):
+class UserCardPrayedLog(models.Model):
     usercard = models.ForeignKey(UserCard, on_delete=models.CASCADE)
-    prayerdeck = models.ForeignKey(PrayerDeck, on_delete=models.CASCADE)
     date_prayed = models.DateTimeField("date prayed", blank=True, null=True)
-
-    class Meta:
-        unique_together = ["usercard", "prayerdeck"]
 
     def __str__(self) -> str:
         return f"{self.usercard.user.username} - {self.usercard.card.title} in prayer on {self.prayerdeck.date}"
