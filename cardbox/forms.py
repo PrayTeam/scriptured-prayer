@@ -1,6 +1,5 @@
 from django import forms
 from .models import UserProfile, UserCard, UserCardNote, UserCategoryOptions
-from django.urls import reverse
 
 
 class UserCategoryOptionsForm(forms.ModelForm):
