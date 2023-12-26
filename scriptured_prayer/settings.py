@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "cardbox.apps.CardboxConfig",
+    "prayerapp.apps.PrayerappConfig",
     "modeltranslation",
     "django.contrib.admin",
     "debug_toolbar",

@@ -3,9 +3,9 @@ from django.utils.translation import gettext_lazy as _
 
 from . import views
 
-app_name = "cardbox"
+app_name = "prayerapp"
 urlpatterns = [
-    path("", views.CardBoxView.as_view(), name="cardbox"),
+    path("", views.CardsView.as_view(), name="cards"),
     path(_("prayer/"), views.PrayerView.as_view(), name="prayer"),
     path(_("prayer/<int:seq>/"), views.PrayerView.as_view(), name="prayer"),
     path(
