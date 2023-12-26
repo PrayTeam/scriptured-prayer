@@ -100,7 +100,7 @@ class Migration(migrations.Migration):
                 (
                     "card",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to="cardbox.card"
+                        on_delete=django.db.models.deletion.CASCADE, to="prayerapp.card"
                     ),
                 ),
                 (
@@ -153,7 +153,7 @@ class Migration(migrations.Migration):
                     "usercard",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="cardbox.usercard",
+                        to="prayerapp.usercard",
                     ),
                 ),
             ],
@@ -222,14 +222,14 @@ class Migration(migrations.Migration):
                 (
                     "prayer",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to="cardbox.prayer"
+                        on_delete=django.db.models.deletion.CASCADE, to="prayerapp.prayer"
                     ),
                 ),
                 (
                     "usercard",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="cardbox.usercard",
+                        to="prayerapp.usercard",
                     ),
                 ),
             ],

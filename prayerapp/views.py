@@ -10,9 +10,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 
 
-class CardBoxView(LoginRequiredMixin, ListView):
+class CardsView(LoginRequiredMixin, ListView):
     model = UserCard
-    template_name = "cardbox/index.html"
+    template_name = "prayerapp/index.html"
 
     def get_queryset(self):
         return (
@@ -25,7 +25,7 @@ class CardBoxView(LoginRequiredMixin, ListView):
 class UserCardDetailView(LoginRequiredMixin, UpdateView):
     model = UserCard
     fields = ["answered", "hidden"]
-    template_name = "cardbox/usercard_detail.html"
+    template_name = "prayerapp/usercard_detail.html"
 
     def is_valid(self) -> bool:
         return self.object.user == self.request.user
@@ -46,7 +46,7 @@ class UserCardDetailView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self) -> str:
-        return reverse("cardbox:usercard_detail", kwargs={"pk": self.object.pk})
+        return reverse("prayerapp:usercard_detail", kwargs={"pk": self.object.pk})
 
 
 class PrayerView(LoginRequiredMixin, UpdateView):
@@ -85,17 +85,17 @@ class PrayerView(LoginRequiredMixin, UpdateView):
     
     def get_success_url(self) -> str:
         if self.kwargs.get('seq') == self.request.user.userprofile.cards_per_day - 1 and self.request.POST.get('prayer_nav') == 'next':
-            return reverse("cardbox:cardbox") # We should make a celebration page
+            return reverse("prayerapp:cards") # We should make a celebration page
         elif self.request.POST.get('prayer_nav') == 'prev' and (self.kwargs.get('seq') or 0) > 0:
-            return reverse("cardbox:prayer", kwargs={"seq": self.kwargs.get('seq')-1})
+            return reverse("prayerapp:prayer", kwargs={"seq": self.kwargs.get('seq')-1})
         elif self.request.POST.get('prayer_nav') == 'next':
             print("next")
-            return reverse("cardbox:prayer", kwargs={"seq": (self.kwargs.get('seq') or 0)+1})
+            return reverse("prayerapp:prayer", kwargs={"seq": (self.kwargs.get('seq') or 0)+1})
         elif self.request.POST.get('note_save'):
-            return reverse("cardbox:prayer", kwargs={"seq": self.kwargs.get('seq')})
+            return reverse("prayerapp:prayer", kwargs={"seq": self.kwargs.get('seq')})
         else:
             print(self.request.POST.get('prayer_nav'))
-            return reverse("cardbox:prayer", kwargs={"seq": 0})
+            return reverse("prayerapp:prayer", kwargs={"seq": 0})
 
 class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = UserProfile
@@ -127,4 +127,4 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self) -> str:
-        return reverse("cardbox:userprofile_update")
+        return reverse("prayerapp:userprofile_update")
