@@ -31,7 +31,7 @@ msgid "Login"
 msgstr ""
 
 #: scriptured_prayer/urls.py:23
-msgid "cardbox/"
+msgid "prayerapp/"
 msgstr ""
 
 #: scriptured_prayer/urls.py:24
