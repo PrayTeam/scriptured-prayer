@@ -38,6 +38,7 @@ class UserCardDetailView(LoginRequiredMixin, UpdateView):
         formset = UserCardNoteFormSet(
             self.request.POST,
             instance=self.object,
+            form_kwargs={'request': self.request},
         )
         if formset.is_valid():
             formset.save()
@@ -71,9 +72,11 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
     def form_valid(self, form):
+        form = UserProfileForm(self.request.POST, request=self.request, instance=self.object)
         formset = UserCategoryOptionsFormSet(
             self.request.POST,
             queryset=UserCategoryOptions.objects.filter(user=self.request.user),
+            form_kwargs={'request': self.request},
         )
         if formset.is_valid():
             formset.save()
