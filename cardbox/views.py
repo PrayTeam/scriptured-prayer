@@ -4,13 +4,13 @@ from django.http import HttpResponse
 from django.utils import timezone
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, UpdateView, FormView, TemplateView
-from .models import UserCard, UserProfile, PrayerDeck, UserCategoryOptions
+from .models import UserCard, UserProfile, UserCategoryOptions
 from .forms import UserProfileForm, UserCategoryOptionsFormSet, UserCardNoteFormSet
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 
 
-class IndexView(LoginRequiredMixin, TemplateView):
+class IndexView(TemplateView):
     template_name = "cardbox/index.html"
 
 class UserCardListView(LoginRequiredMixin, ListView):
@@ -52,11 +52,12 @@ class UserCardDetailView(LoginRequiredMixin, UpdateView):
         return reverse("cardbox:usercard_detail", kwargs={"pk": self.object.pk})
 
 
-class PrayerDeckView(LoginRequiredMixin, DetailView):
-    model = PrayerDeck
+class PrayerDeckView(LoginRequiredMixin, ListView):
+    model = UserCard
+    template_name = "cardbox/prayerdeck.html"
 
-    def get_object(self, queryset=None):
-        return PrayerDeck.objects.get_or_create(user=self.request.user)
+    def get_queryset(self, queryset=None):
+        return UserCard.objects.filter(user=self.request.user, in_prayer_deck=True)
 
 class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = UserProfile

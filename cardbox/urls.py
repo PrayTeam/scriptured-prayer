@@ -8,7 +8,6 @@ urlpatterns = [
     path("", views.IndexView.as_view(), name="cardbox"),
     path(_("cards/"), views.UserCardListView.as_view(), name="usercard_list"),
     path(_("prayerdeck/"), views.PrayerDeckView.as_view(), name="prayer"),
-    path(_("prayerdeck/<int:pk>/"), views.PrayerDeckView.as_view(), name="prayer"),
     path(
         _("profile/"), views.UserProfileUpdateView.as_view(), name="userprofile_update"
     ),

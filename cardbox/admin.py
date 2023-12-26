@@ -10,26 +10,19 @@ from .models import (
     Card,
     UserCardNote,
     UserCategoryOptions,
-    PrayerDeck,
 )
 
 
 class UserProfileInline(admin.StackedInline):
     model = UserProfile
     can_delete = False
-
-
-class PrayerDeckInline(admin.StackedInline):
-    model = PrayerDeck
-    max_num = 1
-    fields = ("date", )
-    readonly_fields = ("date",)
+    readonly_fields = ("user", "prayer_deck_last_updated")
 
 
 class UserCardInline(admin.TabularInline):
     model = UserCard
     can_delete = True
-    fields = ("card", "answered", "hidden")
+    fields = ("card", "answered", "hidden", "last_prayed", "in_prayer_deck")
     readonly_fields = ("card", )
     extra = 0
     sortable_by = ("card__category", "answered", "hidden")
@@ -48,7 +41,6 @@ class UserAdmin(BaseUserAdmin):
     list_prefetch_related = ("userprofile", "usercard", "usercategoryschedule", "prayer")
     inlines = [
         UserProfileInline,
-        PrayerDeckInline,
         UserCategoryScheduleInline,
         UserCardInline,
     ]
@@ -65,11 +57,3 @@ class CardAdmin(TranslationAdmin):
     search_fields = ("title", "scripture", "text")
 
 admin.site.register(UserCard)
-
-
-@admin.register(PrayerDeck)
-class PrayerDeckAdmin(admin.ModelAdmin):
-    list_display = ("user", "date")
-    list_filter = ("user",)
-    search_fields = ("user",)
-    inlines = [UserCardInline]
