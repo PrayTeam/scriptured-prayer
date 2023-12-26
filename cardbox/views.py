@@ -4,8 +4,8 @@ from django.http import HttpResponse
 from django.utils import timezone
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, UpdateView, FormView, TemplateView
-from .models import UserCard, UserProfile, PrayerDeck, UserCategoryOptions, PrayerDeckUserCard
-from .forms import UserProfileForm, UserCategoryOptionsFormSet, UserCardNoteFormSet, PrayerForm
+from .models import UserCard, UserProfile, PrayerDeck, UserCategoryOptions
+from .forms import UserProfileForm, UserCategoryOptionsFormSet, UserCardNoteFormSet
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 
@@ -56,13 +56,7 @@ class PrayerDeckView(LoginRequiredMixin, DetailView):
     model = PrayerDeck
 
     def get_object(self, queryset=None):
-        if self.kwargs.get('pk'):
-            prayerdeck = PrayerDeck.objects.get(id=self.kwargs.get('pk'))
-            if prayerdeck.user != self.request.user:
-                raise PermissionError
-        else:
-            prayerdeck = PrayerDeck.objects.filter(user=self.request.user).latest('date')
-        return prayerdeck
+        return PrayerDeck.objects.get_or_create(user=self.request.user)
 
 class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = UserProfile

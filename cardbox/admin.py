@@ -11,7 +11,6 @@ from .models import (
     UserCardNote,
     UserCategoryOptions,
     PrayerDeck,
-    PrayerDeckUserCard,
 )
 
 
@@ -67,19 +66,10 @@ class CardAdmin(TranslationAdmin):
 
 admin.site.register(UserCard)
 
-class PrayerDeckUserCardInline(admin.TabularInline):
-    model = PrayerDeckUserCard
-    can_delete = True
-    fields = ("date_prayed", "usercard")
-   # readonly_fields = ("usercard__card", )
-    extra = 0
-    sortable_by = ("usercard__card__category", )
-
-
 
 @admin.register(PrayerDeck)
 class PrayerDeckAdmin(admin.ModelAdmin):
     list_display = ("user", "date")
     list_filter = ("user",)
     search_fields = ("user",)
-    inlines = [ PrayerDeckUserCardInline, ]
+    inlines = [UserCardInline]
