@@ -1,7 +1,7 @@
 import csv
 import requests
 from django.core.management.base import BaseCommand, CommandError
-from cardbox.models import Card
+from prayerapp.models import Card
 
 
 class Command(BaseCommand):
