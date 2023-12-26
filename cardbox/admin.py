@@ -8,7 +8,6 @@ from .models import (
     UserCard,
     UserProfile,
     Card,
-    UserCardNote,
     UserCategoryOptions,
 )
 

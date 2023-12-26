@@ -1,9 +1,5 @@
 from typing import Any
-from django.forms.models import BaseModelForm
-from django.http import HttpResponse
-from django.utils import timezone
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView, UpdateView, FormView, TemplateView
+from django.views.generic import ListView, UpdateView, TemplateView
 from .models import UserCard, UserProfile, UserCategoryOptions
 from .forms import UserProfileForm, UserCategoryOptionsFormSet, UserCardNoteFormSet
 from django.contrib.auth.mixins import LoginRequiredMixin
