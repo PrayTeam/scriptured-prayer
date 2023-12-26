@@ -17,8 +17,29 @@ class Category(models.TextChoices):
     BREATH_PRAYERS = "BP", _("Breath Prayers")
     PRAYERS_OF_THE_BIBLE = "PR", _("Prayers of the Bible")
 
+class AuditModel(models.Model):
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        related_name="%(app_label)s_%(class)s_created_by",
+        null=True,
+        blank=True,
+    )
+    modified_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        related_name="%(app_label)s_%(class)s_modified_by",
+        null=True,
+        blank=True,
+    )
 
-class UserProfile(models.Model):
+    class Meta:
+        abstract = True
+
+
+class UserProfile(AuditModel):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, primary_key=True
     )
@@ -29,7 +50,7 @@ class UserProfile(models.Model):
         return f"User profile: {self.user.username}"
 
 
-class Card(models.Model):
+class Card(AuditModel):
     category = models.CharField(max_length=2, choices=Category.choices)
     title = models.CharField(max_length=200)
     scripture = models.CharField(max_length=50)
@@ -40,7 +61,7 @@ class Card(models.Model):
         return f"{self.title} - {self.scripture} ({self.category})"
 
 
-class UserCard(models.Model):
+class UserCard(AuditModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     card = models.ForeignKey(Card, on_delete=models.CASCADE)
     answered = models.BooleanField(default=False)
@@ -58,7 +79,7 @@ class UserCard(models.Model):
         return f"{self.user.username} - {self.card.title})"
 
 
-class UserCardNote(models.Model):
+class UserCardNote(AuditModel):
     usercard = models.ForeignKey(UserCard, on_delete=models.CASCADE)
     note = models.CharField(max_length=200)
     date = models.DateTimeField("created timestamp", auto_now_add=True)
@@ -67,7 +88,7 @@ class UserCardNote(models.Model):
         return f"{self.usercard.user.username} - {self.usercard.card.title} Note {self.id} - {self.date}"
 
 
-class UserCategoryOptions(models.Model):
+class UserCategoryOptions(AuditModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     category = models.CharField(max_length=2, choices=Category.choices)
     enabled = models.BooleanField(default=True)
@@ -80,7 +101,7 @@ class UserCategoryOptions(models.Model):
         return f"{self.user.username} - {self.category}"
 
 
-class UserCardPrayedLog(models.Model):
+class UserCardPrayedLog(AuditModel):
     usercard = models.ForeignKey(UserCard, on_delete=models.CASCADE)
     date_prayed = models.DateTimeField("date prayed", blank=True, null=True)
 
@@ -95,7 +116,7 @@ def create_usercards_for_card(instance, created, **kwargs):
     """When a new card is created, create a UserCard for each user."""
     if created:
         for user in User.objects.all():
-            usercard = UserCard.objects.create(user=user, card=instance)
+            usercard = UserCard.objects.create(user=user, card=instance, created_by=instance.created_by,)
             usercard.save()
 
 
