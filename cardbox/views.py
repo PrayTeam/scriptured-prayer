@@ -80,10 +80,6 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
         )
         if formset.is_valid():
             formset.save()
-        else:
-            print("Invalid form")
-            print(formset.errors)
-            print(formset.non_form_errors())
 
         return super().form_valid(form)
 
