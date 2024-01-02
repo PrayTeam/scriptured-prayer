@@ -107,7 +107,9 @@ class UserCategoryOptions(AuditModel):
 
 class UserCardPrayedLog(models.Model):
     usercard = models.ForeignKey(UserCard, on_delete=models.CASCADE)
-    date_prayed = models.DateTimeField("date prayed", blank=True, null=True)
+    date_prayed = models.DateTimeField(
+        "date prayed", blank=True, null=True, auto_now_add=True
+    )
 
     def __str__(self) -> str:
         return f"{self.usercard.user.username} - {self.usercard.card.title} in prayer on {self.prayerdeck.date}"
