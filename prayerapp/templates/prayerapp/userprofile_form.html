@@ -1,0 +1,25 @@
+{% extends "prayerapp/base.html" %} {% load i18n %} {% block content %}
+<h1>{{ user.username }}</h1>
+
+<form method="POST">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+  </table>
+  <table>
+    <tr>
+      <th>{% translate "Prayer Category" %}</th>
+      <th>{% translate "Enabled" %}</th>
+      <th>{% translate "Pray All Cards" %}</th>
+    </tr>
+    {{ categoryformset.management_form }} {% for form in categoryformset %}
+    <tr>
+      <td>{{ form.instance.get_category_display }}{{ form.id }}</td>
+      <td>{{ form.enabled }}</td>
+      <td>{{ form.pray_all_cards }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <button type="submit">{% translate "Save" %}</button>
+</form>
+{% endblock %}

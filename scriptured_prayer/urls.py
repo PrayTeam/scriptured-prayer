@@ -1,5 +1,5 @@
 """
-URL configuration for prayer_box project.
+URL configuration for scriptured_prayer project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path
 from django.utils.translation import gettext_lazy as _
 
 urlpatterns = [
@@ -24,7 +24,7 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    path("", include("cardbox.urls")),
+    path(_(""), include("prayerapp.urls")),
     path(_("admin/"), admin.site.urls),
     path(_("accounts/"), include("django.contrib.auth.urls")),
 )

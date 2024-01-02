@@ -1,5 +1,5 @@
 """
-ASGI config for prayer_box project.
+ASGI config for scriptured_prayer project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "prayer_box.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "scriptured_prayer.settings")
 
 application = get_asgi_application()

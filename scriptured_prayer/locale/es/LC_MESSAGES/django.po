@@ -17,27 +17,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: prayer_box/settings.py:113
+#: scriptured_prayer/settings.py:113
 msgid "Spanish"
 msgstr ""
 
-#: prayer_box/settings.py:114
+#: scriptured_prayer/settings.py:114
 msgid "English"
 msgstr ""
 
-#: prayer_box/templates/registration/login.html:3
-#: prayer_box/templates/registration/login.html:7
+#: scriptured_prayer/templates/registration/login.html:3
+#: scriptured_prayer/templates/registration/login.html:7
 msgid "Login"
 msgstr ""
 
-#: prayer_box/urls.py:23
-msgid "cardbox/"
+#: scriptured_prayer/urls.py:23
+msgid "prayerapp/"
 msgstr ""
 
-#: prayer_box/urls.py:24
+#: scriptured_prayer/urls.py:24
 msgid "admin/"
 msgstr ""
 
-#: prayer_box/urls.py:25
+#: scriptured_prayer/urls.py:25
 msgid "accounts/"
 msgstr ""
