@@ -1,0 +1,17 @@
+{% extends "prayerapp/base.html" %}
+{% load i18n %}
+{% block content %}
+{% if usercard_list %}
+<ul>
+  {% for usercard in usercard_list %}
+  <li>
+    <a href="{% url 'prayerapp:usercard_detail' usercard.id %}"
+      >{{ usercard.card.title }}</a
+    >
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>{% translate "No cards are available." %}</p>
+{% endif %}
+{% endblock %}
