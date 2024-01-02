@@ -1,0 +1,22 @@
+{% extends "prayerapp/base.html" %}
+{% load i18n %}
+{% block content %}
+user: {{ user.username }}
+<br />
+cards:
+<br />
+<table>
+  {% for usercard in usercard_list %}
+  <tr>
+    <th>{{ usercard.card.title }}</th>
+    <th>{{ usercard.card.scripture }}</th>
+    <th>{{ usercard.card.text }}</th>
+    <th>
+      {% for note in usercard.usercardnote_set.all %}
+      <li>{{ note.note }}</li>
+      {% endfor %}
+    </th>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

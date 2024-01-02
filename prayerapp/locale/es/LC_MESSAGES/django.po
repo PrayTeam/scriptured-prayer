@@ -17,82 +17,82 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: cardbox/models.py:7
+#: prayerapp/models.py:7
 msgid "Names of God"
 msgstr ""
 
-#: cardbox/models.py:8
+#: prayerapp/models.py:8
 msgid "God Is ..."
 msgstr ""
 
-#: cardbox/models.py:9
+#: prayerapp/models.py:9
 msgid "Names of Jesus"
 msgstr ""
 
-#: cardbox/models.py:10
+#: prayerapp/models.py:10
 msgid "Names of the Holy Spirit"
 msgstr ""
 
-#: cardbox/models.py:11
+#: prayerapp/models.py:11
 msgid "In Christ"
 msgstr ""
 
-#: cardbox/models.py:12
+#: prayerapp/models.py:12
 msgid "Promises of God"
 msgstr ""
 
-#: cardbox/models.py:13
+#: prayerapp/models.py:13
 msgid "Stones of Remembrance"
 msgstr ""
 
-#: cardbox/models.py:14
+#: prayerapp/models.py:14
 msgid "Breath Prayers"
 msgstr ""
 
-#: cardbox/models.py:15
+#: prayerapp/models.py:15
 msgid "Prayers of the Bible"
 msgstr ""
 
-#: cardbox/templates/cardbox/index.html:8
+#: prayerapp/templates/prayerapp/index.html:8
 msgid "No cards are available."
 msgstr ""
 
-#: cardbox/templates/cardbox/userprofile_form.html:12
+#: prayerapp/templates/prayerapp/userprofile_form.html:12
 msgid "Prayer Category"
 msgstr ""
 
-#: cardbox/templates/cardbox/userprofile_form.html:13
+#: prayerapp/templates/prayerapp/userprofile_form.html:13
 msgid "Sun"
 msgstr ""
 
-#: cardbox/templates/cardbox/userprofile_form.html:14
+#: prayerapp/templates/prayerapp/userprofile_form.html:14
 msgid "Mon"
 msgstr ""
 
-#: cardbox/templates/cardbox/userprofile_form.html:15
+#: prayerapp/templates/prayerapp/userprofile_form.html:15
 msgid "Tue"
 msgstr ""
 
-#: cardbox/templates/cardbox/userprofile_form.html:16
+#: prayerapp/templates/prayerapp/userprofile_form.html:16
 msgid "Wed"
 msgstr ""
 
-#: cardbox/templates/cardbox/userprofile_form.html:17
+#: prayerapp/templates/prayerapp/userprofile_form.html:17
 msgid "Thu"
 msgstr ""
 
-#: cardbox/templates/cardbox/userprofile_form.html:18
+#: prayerapp/templates/prayerapp/userprofile_form.html:18
 msgid "Fri"
 msgstr ""
 
-#: cardbox/templates/cardbox/userprofile_form.html:19
+#: prayerapp/templates/prayerapp/userprofile_form.html:19
 msgid "Sat"
 msgstr ""
 
-#: cardbox/templates/cardbox/userprofile_form.html:35
+#: prayerapp/templates/prayerapp/userprofile_form.html:35
 msgid "Save"
 msgstr ""
 
-#: cardbox/urls.py:9
+#: prayerapp/urls.py:9
 msgid "profile/"
 msgstr ""

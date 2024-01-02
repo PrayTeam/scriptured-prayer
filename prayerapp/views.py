@@ -1,17 +1,20 @@
 from typing import Any
-from django.views.generic import ListView, UpdateView, TemplateView
-from .models import UserCard, UserProfile, UserCategoryOptions
-from .forms import UserProfileForm, UserCategoryOptionsFormSet, UserCardNoteFormSet
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
+from django.views.generic import ListView, TemplateView, UpdateView
+
+from .forms import UserCardNoteFormSet, UserCategoryOptionsFormSet, UserProfileForm
+from .models import UserCard, UserCategoryOptions, UserProfile
 
 
 class IndexView(TemplateView):
-    template_name = "cardbox/index.html"
+    template_name = "prayerapp/index.html"
+
 
 class UserCardListView(LoginRequiredMixin, ListView):
     model = UserCard
-    template_name = "cardbox/usercard_list.html"
+    template_name = "prayerapp/usercard_list.html"
 
     def get_queryset(self):
         return (
@@ -24,7 +27,7 @@ class UserCardListView(LoginRequiredMixin, ListView):
 class UserCardDetailView(LoginRequiredMixin, UpdateView):
     model = UserCard
     fields = ["answered", "hidden"]
-    template_name = "cardbox/usercard_detail.html"
+    template_name = "prayerapp/usercard_detail.html"
 
     def is_valid(self) -> bool:
         return self.object.user == self.request.user
@@ -38,7 +41,7 @@ class UserCardDetailView(LoginRequiredMixin, UpdateView):
         formset = UserCardNoteFormSet(
             self.request.POST,
             instance=self.object,
-            form_kwargs={'request': self.request},
+            form_kwargs={"request": self.request},
         )
         if formset.is_valid():
             formset.save()
@@ -46,15 +49,16 @@ class UserCardDetailView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self) -> str:
-        return reverse("cardbox:usercard_detail", kwargs={"pk": self.object.pk})
+        return reverse("prayerapp:usercard_detail", kwargs={"pk": self.object.pk})
 
 
 class PrayerDeckView(LoginRequiredMixin, ListView):
     model = UserCard
-    template_name = "cardbox/prayerdeck.html"
+    template_name = "prayerapp/prayerdeck.html"
 
     def get_queryset(self, queryset=None):
         return UserCard.objects.filter(user=self.request.user, in_prayer_deck=True)
+
 
 class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = UserProfile
@@ -72,11 +76,13 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
     def form_valid(self, form):
-        form = UserProfileForm(self.request.POST, request=self.request, instance=self.object)
+        form = UserProfileForm(
+            self.request.POST, request=self.request, instance=self.object
+        )
         formset = UserCategoryOptionsFormSet(
             self.request.POST,
             queryset=UserCategoryOptions.objects.filter(user=self.request.user),
-            form_kwargs={'request': self.request},
+            form_kwargs={"request": self.request},
         )
         if formset.is_valid():
             formset.save()
@@ -84,4 +90,4 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self) -> str:
-        return reverse("cardbox:userprofile_update")
+        return reverse("prayerapp:userprofile_update")
