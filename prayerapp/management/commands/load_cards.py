@@ -17,10 +17,7 @@ class Command(BaseCommand):
             "NJ": 48885571,
             "NS": 1671114364,
             "IC": 956380343,
-            "PG": None,
-            "SR": None,  # 175730326,
-            "BP": None,
-            "PR": None,
+            "PG": 1043713344,
         }
 
         for category, gid in gids.items():
@@ -28,13 +25,15 @@ class Command(BaseCommand):
                 spreadsheet = requests.get(
                     f"{base_url}{spreadsheet_id}/export?format=csv&gid={gid}"
                 )
-                data = csv.reader(spreadsheet.text.splitlines(), delimiter=",")
+                data = csv.reader(spreadsheet.text.splitlines()[2:], delimiter=",")
 
                 for line in data:
                     card = Card(
                         category=category,
                         title=line[0].strip(),
                         scripture=line[1].strip(),
+                        title_es=line[2].strip(),
+                        scripture_es=line[3].strip(),
                     )
                     card.save()
                     self.stdout.write(

@@ -1,18 +1,20 @@
 from typing import Any
-from django.forms.models import BaseModelForm
-from django.http import HttpResponse
-from django.utils import timezone
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView, UpdateView, FormView
-from .models import UserCard, UserProfile, Prayer, UserCategorySchedule, PrayerUserCard
-from .forms import UserProfileForm, UserCategoryScheduleFormSet, UserCardNoteFormSet, PrayerForm
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
+from django.views.generic import ListView, TemplateView, UpdateView
+
+from .forms import UserCardNoteFormSet, UserCategoryOptionsFormSet, UserProfileForm
+from .models import UserCard, UserCategoryOptions, UserProfile
 
 
-class CardsView(LoginRequiredMixin, ListView):
-    model = UserCard
+class IndexView(TemplateView):
     template_name = "prayerapp/index.html"
+
+
+class UserCardListView(LoginRequiredMixin, ListView):
+    model = UserCard
+    template_name = "prayerapp/usercard_list.html"
 
     def get_queryset(self):
         return (
@@ -39,6 +41,7 @@ class UserCardDetailView(LoginRequiredMixin, UpdateView):
         formset = UserCardNoteFormSet(
             self.request.POST,
             instance=self.object,
+            form_kwargs={"request": self.request},
         )
         if formset.is_valid():
             formset.save()
@@ -49,53 +52,13 @@ class UserCardDetailView(LoginRequiredMixin, UpdateView):
         return reverse("prayerapp:usercard_detail", kwargs={"pk": self.object.pk})
 
 
-class PrayerView(LoginRequiredMixin, UpdateView):
-    model = PrayerUserCard
-    form_class = PrayerForm
+class PrayerDeckView(LoginRequiredMixin, ListView):
+    model = UserCard
+    template_name = "prayerapp/prayerdeck.html"
 
-    def get_object(self, queryset=None):
-        prayer, created = Prayer.objects.get_or_create(user=self.request.user, date=timezone.now().date())
-        if self.kwargs.get('seq'):
-            prayerusercard = prayer.prayerusercard_set.all()[self.kwargs.get('seq')]
-        else:
-            prayerusercard = prayer.prayerusercard_set.all()[0]
-        return prayerusercard
+    def get_queryset(self, queryset=None):
+        return UserCard.objects.filter(user=self.request.user, in_prayer_deck=True)
 
-    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        context["usercardnotes_formset"] = UserCardNoteFormSet(instance=self.object.usercard)
-        return context
-    
-    def form_valid(self, form: BaseModelForm) -> HttpResponse:
-        if self.request.POST.get('note_save'):
-            formset = UserCardNoteFormSet(
-                self.request.POST,
-                instance=self.object.usercard,
-            )
-            if formset.is_valid():
-                formset.save()
-
-        if self.request.POST.get("prayer_nav") == "next":
-            self.object.used = True
-            self.object.save()
-            if self.kwargs.get('seq') == self.request.user.userprofile.cards_per_day - 1 and self.request.POST.get('prayer_nav') == 'next':
-                self.object.prayer.completed = True
-                self.object.prayer.save()
-        return super().form_valid(form)
-    
-    def get_success_url(self) -> str:
-        if self.kwargs.get('seq') == self.request.user.userprofile.cards_per_day - 1 and self.request.POST.get('prayer_nav') == 'next':
-            return reverse("prayerapp:cards") # We should make a celebration page
-        elif self.request.POST.get('prayer_nav') == 'prev' and (self.kwargs.get('seq') or 0) > 0:
-            return reverse("prayerapp:prayer", kwargs={"seq": self.kwargs.get('seq')-1})
-        elif self.request.POST.get('prayer_nav') == 'next':
-            print("next")
-            return reverse("prayerapp:prayer", kwargs={"seq": (self.kwargs.get('seq') or 0)+1})
-        elif self.request.POST.get('note_save'):
-            return reverse("prayerapp:prayer", kwargs={"seq": self.kwargs.get('seq')})
-        else:
-            print(self.request.POST.get('prayer_nav'))
-            return reverse("prayerapp:prayer", kwargs={"seq": 0})
 
 class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = UserProfile
@@ -107,22 +70,22 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["categoryformset"] = UserCategoryScheduleFormSet(
-            queryset=UserCategorySchedule.objects.filter(user=self.request.user)
+        context["categoryformset"] = UserCategoryOptionsFormSet(
+            queryset=UserCategoryOptions.objects.filter(user=self.request.user)
         )
         return context
 
     def form_valid(self, form):
-        formset = UserCategoryScheduleFormSet(
+        form = UserProfileForm(
+            self.request.POST, request=self.request, instance=self.object
+        )
+        formset = UserCategoryOptionsFormSet(
             self.request.POST,
-            queryset=UserCategorySchedule.objects.filter(user=self.request.user),
+            queryset=UserCategoryOptions.objects.filter(user=self.request.user),
+            form_kwargs={"request": self.request},
         )
         if formset.is_valid():
             formset.save()
-        else:
-            print("Invalid form")
-            print(formset.errors)
-            print(formset.non_form_errors())
 
         return super().form_valid(form)
 
