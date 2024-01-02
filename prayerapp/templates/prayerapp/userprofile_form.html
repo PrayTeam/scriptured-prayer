@@ -12,7 +12,8 @@
       <th>{% translate "Enabled" %}</th>
       <th>{% translate "Pray All Cards" %}</th>
     </tr>
-    {{ categoryformset.management_form }} {% for form in categoryformset %}
+    {{ categoryformset.management_form }}
+    {% for form in categoryformset %}
     <tr>
       <td>{{ form.instance.get_category_display }}{{ form.id }}</td>
       <td>{{ form.enabled }}</td>
