@@ -1,9 +1,9 @@
-from django.db import models
 from django.conf import settings
-from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import User
+from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
 
 
 class Category(models.TextChoices):
@@ -16,6 +16,7 @@ class Category(models.TextChoices):
     STONES_OF_REMEMBRANCE = "SR", _("Stones of Remembrance")
     BREATH_PRAYERS = "BP", _("Breath Prayers")
     PRAYERS_OF_THE_BIBLE = "PR", _("Prayers of the Bible")
+
 
 class AuditModel(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
@@ -44,7 +45,9 @@ class UserProfile(AuditModel):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, primary_key=True
     )
     cards_per_day = models.IntegerField(default=10)
-    prayer_deck_last_updated = models.DateTimeField("prayer deck last updated", blank=True, null=True)
+    prayer_deck_last_updated = models.DateTimeField(
+        "prayer deck last updated", blank=True, null=True
+    )
 
     def __str__(self) -> str:
         return f"User profile: {self.user.username}"
@@ -67,7 +70,8 @@ class UserCard(AuditModel):
     answered = models.BooleanField(default=False)
     hidden = models.BooleanField(default=False)
     last_prayed = models.DateTimeField("last prayed", blank=True, null=True)
-    in_prayer_deck = models.BooleanField(default=False)    
+    in_prayer_deck = models.BooleanField(default=False)
+
     class Meta:
         unique_together = ["user", "card"]
 
@@ -101,12 +105,13 @@ class UserCategoryOptions(AuditModel):
         return f"{self.user.username} - {self.category}"
 
 
-class UserCardPrayedLog(AuditModel):
+class UserCardPrayedLog(models.Model):
     usercard = models.ForeignKey(UserCard, on_delete=models.CASCADE)
     date_prayed = models.DateTimeField("date prayed", blank=True, null=True)
 
     def __str__(self) -> str:
         return f"{self.usercard.user.username} - {self.usercard.card.title} in prayer on {self.prayerdeck.date}"
+
 
 ## Signals ##
 
@@ -116,7 +121,11 @@ def create_usercards_for_card(instance, created, **kwargs):
     """When a new card is created, create a UserCard for each user."""
     if created:
         for user in User.objects.all():
-            usercard = UserCard.objects.create(user=user, card=instance, created_by=instance.created_by,)
+            usercard = UserCard.objects.create(
+                user=user,
+                card=instance,
+                created_by=instance.created_by,
+            )
             usercard.save()
 
 
