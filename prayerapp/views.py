@@ -6,7 +6,9 @@ from django.views.generic import ListView, TemplateView, UpdateView
 
 from .forms import UserCardNoteFormSet, UserCategoryOptionsFormSet, UserProfileForm
 from .models import UserCard, UserCategoryOptions, UserProfile
-
+from .serializers import UserCardSerializer
+from rest_framework import viewsets, permissions
+import django_filters
 
 class IndexView(TemplateView):
     template_name = "prayerapp/index.html"
@@ -91,3 +93,21 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self) -> str:
         return reverse("prayerapp:userprofile_update")
+
+class UserCardFilter(django_filters.FilterSet):
+    class Meta:
+        model = UserCard
+        fields = {
+            'card__category': ['exact'],
+            'answered': ['exact'],
+            'hidden': ['exact'],
+        }
+
+class UserCardViewSet(viewsets.ModelViewSet):
+    serializer_class = UserCardSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filterset_class = UserCardFilter
+
+    def get_queryset(self):
+        return UserCard.objects.prefetch_related("card", "usercardnote_set").filter(user=self.request.user)
