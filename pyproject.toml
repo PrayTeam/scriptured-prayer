@@ -11,6 +11,8 @@ Django = "^4.2.7"
 django-modeltranslation = "^0.18.11"
 whitenoise = "^6.6.0"
 requests = "^2.31.0"
+django-rest-framework = "^0.1.0"
+django-filter = "^23.5"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.3"
