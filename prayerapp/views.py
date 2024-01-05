@@ -101,6 +101,7 @@ class UserCardFilter(django_filters.FilterSet):
             'card__category': ['exact'],
             'answered': ['exact'],
             'hidden': ['exact'],
+            'in_prayer_deck': ['exact'],
         }
 
 class UserCardViewSet(viewsets.ModelViewSet):
