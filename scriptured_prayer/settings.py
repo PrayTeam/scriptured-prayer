@@ -37,7 +37,7 @@ DEBUG = os.environ.get("DJANGO_DEBUG", False)
 if DEBUG:
     ALLOWED_HOSTS = []
 else:
-    ALLOWED_HOSTS = ["www.scripturedprayer.com"]
+    ALLOWED_HOSTS = ["www.scripturedprayer.com", "soyokaze.pythonanywhere.com"]
 
 
 # Application definition
