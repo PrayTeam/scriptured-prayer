@@ -6,7 +6,7 @@ authors = ["Robbie Nichols <nichols.robbie@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.10"
 Django = "^4.2.7"
 django-modeltranslation = "^0.18.11"
 whitenoise = "^6.6.0"
