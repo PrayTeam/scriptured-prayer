@@ -47,8 +47,6 @@ INSTALLED_APPS = [
     "modeltranslation",
     "django.contrib.admin",
     "debug_toolbar",
-    "rest_framework",
-    "django_filters",
     "django_extensions",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -110,6 +108,10 @@ else:
             "USER": os.environ.get("DJANGO_DB_USERNAME"),
             "PASSWORD": os.environ.get("DJANGO_DB_PASSWORD"),
             "HOST": os.environ.get("DJANGO_DB_HOST"),
+            "OPTIONS": {
+                "charset": "utf8mb4",
+                "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
+            },
         }
     }
 # Password validation
