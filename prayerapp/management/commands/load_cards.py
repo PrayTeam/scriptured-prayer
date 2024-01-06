@@ -34,8 +34,8 @@ class Command(BaseCommand):
                         category=category,
                         title=line[0].strip(),
                         scripture=line[1].strip(),
-                        title_es=line[4].strip(),
-                        scripture_es=line[5].strip(),
+                        title_es=line[3].strip(),
+                        scripture_es=line[4].strip(),
                     )
                     card.save()
                     self.stdout.write(
