@@ -2,7 +2,7 @@ import * as esbuild from 'esbuild'
 
 let options = {
   entryPoints: ['src/**/*.jsx'],
-  outdir: '../cardbox/static/compiled',
+  outdir: '../prayerapp/static/compiled',
   packages: 'external',
   bundle: true,
   minify: true,

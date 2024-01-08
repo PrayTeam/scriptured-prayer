@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="{% static 'favicon.ico' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Components demo" />
+    <title>Scriptured Prayer</title>
+		<meta charset="UTF-8">
+		<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+		<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+	</head>
+
+	<body>
+        {% block content %}{% endblock %}
+	</body>
+</html>

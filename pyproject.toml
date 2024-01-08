@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "prayer-box"
+name = "scriptured-prayer"
 version = "0.1.0"
-description = "Follin's Digital Prayer Box"
+description = "Follin's Digital Prayer Box for scripturedprayer.com"
 authors = ["Robbie Nichols <nichols.robbie@gmail.com>"]
 readme = "README.md"
 

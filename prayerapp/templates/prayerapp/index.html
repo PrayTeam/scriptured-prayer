@@ -1,0 +1,15 @@
+{% extends "prayerapp/base.html" %}
+{% load static %}
+{% load i18n %} 
+{% block content %} 
+<noscript>You need to enable JavaScript view this page.</noscript>
+<script src="{% static 'utils/index.js' %}"></script>
+{% translate "This is the index page for www.scripturedprayer.com." %}
+
+<!-- Try changing the value for [data-name] below. You'll have to reload the web page to see the changes. -->
+<div id="root1" data-name="Kenan"></div>
+<div id="root2"></div>
+
+<!-- [root] will be interpreted as an array; thus you can reuse the same component throughout the DOM -->
+<script src="{% static 'compiled/index.js' %}" root="root1,root2"></script>
+{% endblock %}
