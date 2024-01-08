@@ -4,12 +4,68 @@
 {% block content %} 
 <noscript>You need to enable JavaScript view this page.</noscript>
 <script src="{% static 'compiled/utils/index.js' %}"></script>
-{% translate "This is the index page for www.scripturedprayer.com." %}
-
-<!-- Try changing the value for [data-name] below. You'll have to reload the web page to see the changes. -->
-<div id="root1" data-name="Kenan"></div>
-<div id="root2"></div>
-
-<!-- [root] will be interpreted as an array; thus you can reuse the same component throughout the DOM -->
-<script src="{% static 'compiled/index.js' %}" root="root1,root2"></script>
+<div class="w-full bg-[url('/static/images/forest.png')] bg-no-repeat bg-center bg-cover">
+  <div class="flex flex-col justify-center items-center">
+    <div class="flex flex-col md:flex-row uppercase text-white font-bold p-8 md:text-xl lg:text-2xl text-center tracking-widest">
+      <div class="md:mr-2">{% translate "Pray Intentionally." %}</div>
+      <div class="md:mr-2">{% translate "Pray Scripturally." %}</div>
+      <div class="md:mr-2">{% translate "Pray Consistently." %}</div>
+    </div>
+    <h1 class="uppercase text-white font-bold pt-48 pb-64 px-8 text-center text-5xl md:text-6xl lg:text-8xl">Scriptured Prayer</h1>
+  </div>
+</div>
+<div class="bg-snowgrass">
+  <div class="flex px-6 py-8 md:py-16 md:space-x-12 max-w-screen-xl mx-auto">
+    <div class="grow">
+      <img src="{% static 'images/reading-bible.jpg' %}" class="hidden md:block" />
+    </div>
+    <div>
+      <h2 class="uppercase font-bold text-4xl">Welcome.</h2>
+      <p class="my-4 text-xl">
+        Scriptured Prayer is a tool designed to help you maximize your prayer life.
+        Learn how to pray with Scripture-based prompts.
+        Stay focused with a daily routine of prayers, and fall in love with God as you praise Him each day.
+      </p>
+      <button class="transition-colors ease-in bg-black text-white font-bold text-lg py-4 px-8 mt-6 hover:text-black hover:bg-white">
+        Learn More
+      </button>
+    </div>
+  </div>
+</div>
+<div class="bg-lichen">
+  <div class="flex flex-col md:flex-row px-6 py-8 md:py-16 md:space-x-12 max-w-screen-xl mx-auto">
+    <div class="md:max-w-sm">
+      <h2 class="uppercase font-bold text-4xl">Start Here.</h2>
+      <p class="my-4 text-xl">
+        Use the Quick Start Praise Decks or sign up for a free account to customize your prayer cards.
+        Edit cards to add names, specific requests, and notes.
+      </p>
+    </div>
+    <div class="flex flex-col md:flex-row md:space-x-12">
+      <div class="flex w-full md:w-auto items-center p-6 mb-4 bg-olive rounded-xl text-white text-center uppercase md:text-3xl md:hover:scale-125 ease-out duration-300 cursor-pointer">Names of Jesus</div>
+      <div class="flex w-full md:w-auto items-center p-6 mb-4 bg-olive rounded-xl text-white text-center uppercase md:text-3xl md:hover:scale-125 ease-out duration-300 cursor-pointer">In Christ</div>
+      <div class="flex w-full md:w-auto items-center p-6 mb-4 bg-olive rounded-xl text-white text-center uppercase md:text-3xl md:hover:scale-125 ease-out duration-300 cursor-pointer">Promises of God</div>
+    </div>
+  </div>
+</div>
+<!-- todo: move "about us" section to separate page -->
+<!-- <div class="bg-snowgrass">
+  <div class="flex px-6 py-8 md:py-16 md:space-x-12 max-w-screen-xl mx-auto">
+    <img src="{% static 'images/dry-grass.jpg' %}" class="hidden md:block max-w-[700px]" />
+    <div>
+      <h2 class="uppercase font-bold text-4xl">About us</h2>
+      <div class="my-8 text-xl">
+        <h3 class="font-bold uppercase">Phone Number</h3>
+        <div class="my-2">(123) 456-7890</div>
+      </div>
+      <div class="my-8 text-xl">
+        <h3 class="font-bold uppercase">Email Address</h3>
+        <div class="my-2">hello@scripturedprayer.com</div>
+      </div>
+      <button class="transition-colors ease-in bg-black text-white font-bold text-lg py-4 px-8 mt-6 hover:text-black hover:bg-white">
+        Our Privacy Policy
+      </button>
+    </div>
+  </div>
+</div> -->
 {% endblock %}
