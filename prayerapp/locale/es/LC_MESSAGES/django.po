@@ -1,0 +1,98 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-14 10:50-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: prayerapp/models.py:7
+msgid "Names of God"
+msgstr ""
+
+#: prayerapp/models.py:8
+msgid "God Is ..."
+msgstr ""
+
+#: prayerapp/models.py:9
+msgid "Names of Jesus"
+msgstr ""
+
+#: prayerapp/models.py:10
+msgid "Names of the Holy Spirit"
+msgstr ""
+
+#: prayerapp/models.py:11
+msgid "In Christ"
+msgstr ""
+
+#: prayerapp/models.py:12
+msgid "Promises of God"
+msgstr ""
+
+#: prayerapp/models.py:13
+msgid "Stones of Remembrance"
+msgstr ""
+
+#: prayerapp/models.py:14
+msgid "Breath Prayers"
+msgstr ""
+
+#: prayerapp/models.py:15
+msgid "Prayers of the Bible"
+msgstr ""
+
+#: prayerapp/templates/prayerapp/index.html:8
+msgid "No cards are available."
+msgstr ""
+
+#: prayerapp/templates/prayerapp/userprofile_form.html:12
+msgid "Prayer Category"
+msgstr ""
+
+#: prayerapp/templates/prayerapp/userprofile_form.html:13
+msgid "Sun"
+msgstr ""
+
+#: prayerapp/templates/prayerapp/userprofile_form.html:14
+msgid "Mon"
+msgstr ""
+
+#: prayerapp/templates/prayerapp/userprofile_form.html:15
+msgid "Tue"
+msgstr ""
+
+#: prayerapp/templates/prayerapp/userprofile_form.html:16
+msgid "Wed"
+msgstr ""
+
+#: prayerapp/templates/prayerapp/userprofile_form.html:17
+msgid "Thu"
+msgstr ""
+
+#: prayerapp/templates/prayerapp/userprofile_form.html:18
+msgid "Fri"
+msgstr ""
+
+#: prayerapp/templates/prayerapp/userprofile_form.html:19
+msgid "Sat"
+msgstr ""
+
+#: prayerapp/templates/prayerapp/userprofile_form.html:35
+msgid "Save"
+msgstr ""
+
+#: prayerapp/urls.py:9
+msgid "profile/"
+msgstr ""
