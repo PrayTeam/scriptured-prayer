@@ -5,6 +5,19 @@
 An application that helps you connect with God.
 
 ---
+Here are a few terms that we should be sure to use correctly in our issues to avoid confusion. They don't have to be shown to the end user. At least 'User Card' is a user unfriendly term.
+
+### Card
+A single prayer that has a category, title, description, and scripture reference.
+### User Card
+A Card that has been associated with a User and includes notes, whether it has been answered, whether the user has hidden the card and some statistical measures of usage.
+
+### Prayer Deck (generated from Cards or UserCards)
+The current collection of User Cards a user will be/is/has finished praying through. There is only one per user. The Cards will be swapped out for new ones when the user starts a new prayer. This uses Cards for an anonymous user.
+### Daily Deck
+A specific Prayer Deck that is generated programmatically with user options (like frequency, whether it has been answered or hidden...).
+### Category Deck
+A collection of all User Cards for a particular user with a particular category. This would be Cards for an anonymous user.
 
 ## Getting started
 
