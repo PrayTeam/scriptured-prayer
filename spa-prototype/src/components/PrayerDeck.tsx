@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Button } from "@radix-ui/themes";
-import { BookmarkIcon } from "@radix-ui/react-icons";
+import { Button, Flex, Heading } from "@radix-ui/themes";
+import { CheckIcon } from "@radix-ui/react-icons";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Keyboard, A11y } from 'swiper/modules';
@@ -15,12 +15,14 @@ import './swiper.css'
 import UserCard from "./UserCard";
 
 export interface UserCardProps {
-  id: number;
-  card: string;
-  // "usercardnote_set": [],
-  // "answered": false,
-  // "hidden": false,
-  // "in_prayer_deck": false
+  id: number,
+  title: string,
+  scripture: string,
+  category: string,
+  usercardnote_set: string[],
+  answered: boolean,
+  hidden: boolean,
+  in_prayer_deck: boolean,
 }
 
 const PrayerDeck = () => {
@@ -45,11 +47,12 @@ const PrayerDeck = () => {
 
   return (
     <>
-      <h2>Today's Prayers</h2>
+    <Flex direction="column" gap='1' className="bg-teal-900 py-8">
+      
+      <Heading size="7" mt="4" className="text-white text-center">Today's Prayers</Heading>
 
       <Swiper
-
-        className="p-16 bg-teal-900"
+        className="pt-2 pb-8 px-16 w-full"
         modules={[Navigation, Pagination, Keyboard, A11y]}
         spaceBetween='14rem'
         slidesPerView={1}
@@ -59,17 +62,22 @@ const PrayerDeck = () => {
         pagination={{ clickable: true }}
         keyboard
       >
-        {userCards.map((item) => (
-          <SwiperSlide key={item.id} >
-            <UserCard usercard={item} />  
+        {userCards.map((userCard) => (
+          <SwiperSlide key={userCard.id} >
+            <UserCard usercard={userCard} />  
           </SwiperSlide>
         ))}
       </Swiper>     
 
-        <Button className="text-lg"> 
-        <BookmarkIcon width="16" height="16" />
+        <Button 
+          color="jade"
+          size="4"
+          className="w-80 m-auto"
+        > 
+        <CheckIcon width="24" height="24"  />
         Finish Prayer Session</Button>
 
+        </Flex>
     </>
   );
 };

@@ -1,0 +1,64 @@
+{
+  "hash": "3698f264",
+  "configHash": "15ac4a0e",
+  "lockfileHash": "ddc396e2",
+  "browserHash": "b6dfacaa",
+  "optimized": {
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "64ad2164",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "e501ea7a",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "ec1e82f2",
+      "needsInterop": true
+    },
+    "@radix-ui/themes": {
+      "src": "../../node_modules/@radix-ui/themes/dist/esm/index.js",
+      "file": "@radix-ui_themes.js",
+      "fileHash": "d457a259",
+      "needsInterop": false
+    },
+    "@radix-ui/react-icons": {
+      "src": "../../node_modules/@radix-ui/react-icons/dist/react-icons.esm.js",
+      "file": "@radix-ui_react-icons.js",
+      "fileHash": "a4c4746b",
+      "needsInterop": false
+    },
+    "swiper/react": {
+      "src": "../../node_modules/swiper/swiper-react.mjs",
+      "file": "swiper_react.js",
+      "fileHash": "7c4bc87c",
+      "needsInterop": false
+    },
+    "swiper/modules": {
+      "src": "../../node_modules/swiper/modules/index.mjs",
+      "file": "swiper_modules.js",
+      "fileHash": "f5a8712c",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-4ASWBRZ3": {
+      "file": "chunk-4ASWBRZ3.js"
+    },
+    "chunk-O6O4HUXW": {
+      "file": "chunk-O6O4HUXW.js"
+    },
+    "chunk-HNRGSTF7": {
+      "file": "chunk-HNRGSTF7.js"
+    },
+    "chunk-LQ2VYIYD": {
+      "file": "chunk-LQ2VYIYD.js"
+    }
+  }
+}
