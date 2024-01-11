@@ -7,12 +7,14 @@ function App() {
   return (
     <>
       <Theme>
-        <h1 className="text-4xl">Scriptured Prayer</h1>
+        <div className="h-screen flex flex-col">
+          <h1 className="text-4xl">Scriptured Prayer</h1>
 
-        <main>
-          <PrayerDeck />
-        </main>
-        <footer>&copy; 2024</footer>
+          <main>
+            <PrayerDeck />
+          </main>
+          <footer className="mt-auto text-center text-sm">&copy; Scriptured Prayer 2024</footer>
+        </div>
       </Theme>
     </>
   );
