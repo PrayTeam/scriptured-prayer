@@ -15,10 +15,10 @@ const UserCard = ({ usercard }: Props) => {
         mb="4"
         variant="soft"
         className="uppercase"> 
-        Names of God 
+        {usercard.category}
       </Badge>
 
-      <h3 className='text-3xl pb-8'>{usercard.card}</h3>
+      <h3 className='text-3xl pb-8'>{usercard.title}</h3>
 
       <div className="border-l-8 border-teal-600 pl-4">
         <p className="text-lg ">
@@ -26,7 +26,7 @@ const UserCard = ({ usercard }: Props) => {
           rocky summit where I take shelter, my shield, the horn that saves me,
           and my refuge.
         </p>
-        <p className="uppercase text-sm pt-4">Psalm 18:2 (NET)</p>
+        <p className="uppercase text-sm pt-4">{usercard.scripture}</p>
       </div>
 
 
