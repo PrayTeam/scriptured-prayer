@@ -57,7 +57,7 @@ class Card(AuditModel):
     category = models.CharField(max_length=2, choices=Category.choices)
     title = models.CharField(max_length=200)
     scripture = models.CharField(max_length=50)
-    text = models.CharField(max_length=500)
+    description = models.CharField(max_length=500)
     private = models.BooleanField(default=False)
 
     def __str__(self) -> str:
