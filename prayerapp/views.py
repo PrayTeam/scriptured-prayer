@@ -13,19 +13,6 @@ import django_filters
 class IndexView(TemplateView):
     template_name = "prayerapp/index.html"
 
-
-class UserCardListView(LoginRequiredMixin, ListView):
-    model = UserCard
-    template_name = "prayerapp/usercard_list.html"
-
-    def get_queryset(self):
-        return (
-            UserCard.objects.filter(user=self.request.user)
-            .order_by("card__category", "card__title")
-            .select_related("card")
-        )
-
-
 class UserCardDetailView(LoginRequiredMixin, UpdateView):
     model = UserCard
     fields = ["answered", "hidden"]
@@ -52,14 +39,6 @@ class UserCardDetailView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self) -> str:
         return reverse("prayerapp:usercard_detail", kwargs={"pk": self.object.pk})
-
-
-class PrayerDeckView(LoginRequiredMixin, ListView):
-    model = UserCard
-    template_name = "prayerapp/prayerdeck.html"
-
-    def get_queryset(self, queryset=None):
-        return UserCard.objects.filter(user=self.request.user, in_prayer_deck=True)
 
 
 class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
