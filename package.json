@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "scripts": {
+    "pre-commit": "cd scriptured-prayer-components && yarn lint-staged",
+    "postinstall": "husky install && cd scriptured-prayer-components && yarn"
+  },
+  "devDependencies": {
+    "husky": "^8.0.3"
+  }
+}
