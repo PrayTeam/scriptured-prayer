@@ -65,7 +65,10 @@ ROOT_URLCONF = "scriptured_prayer.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "scriptured_prayer/templates"],
+        "DIRS": [
+          BASE_DIR / "scriptured_prayer/templates",
+          BASE_DIR / "prayerapp/static/app",
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

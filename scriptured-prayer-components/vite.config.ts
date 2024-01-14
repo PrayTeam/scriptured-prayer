@@ -9,4 +9,13 @@ export default defineConfig({
       '~': '/src',
     },
   },
+  base: 'static/app',
+  build: {
+    outDir: '../prayerapp/static/app',
+    rollupOptions: {
+      input: {
+        app: './main.html',
+      }
+    }
+  },
 })
