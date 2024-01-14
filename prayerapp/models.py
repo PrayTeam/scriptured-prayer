@@ -17,6 +17,74 @@ class Category(models.TextChoices):
     BREATH_PRAYERS = "BP", _("Breath Prayers")
     PRAYERS_OF_THE_BIBLE = "PR", _("Prayers of the Bible")
 
+class BibleBook(models.TextChoices):
+    GENESIS = "GEN", _("Genesis")
+    EXODUS = "EXO", _("Exodus")
+    LEVITICUS = "LEV", _("Leviticus")
+    NUMBERS = "NUM", _("Numbers")
+    DEUTERONOMY = "DEU", _("Deuteronomy")
+    JOSHUA = "JOS", _("Joshua")
+    JUDGES = "JDG", _("Judges")
+    RUTH = "RUT", _("Ruth")
+    FIRST_SAMUEL = "1SA", _("1 Samuel")
+    SECOND_SAMUEL = "2SA", _("2 Samuel")
+    FIRST_KINGS = "1KI", _("1 Kings")
+    SECOND_KINGS = "2KI", _("2 Kings")
+    FIRST_CHRONICLES = "1CH", _("1 Chronicles")
+    SECOND_CHRONICLES = "2CH", _("2 Chronicles")
+    EZRA = "EZR", _("Ezra")
+    NEHEMIAH = "NEH", _("Nehemiah")
+    ESTHER = "EST", _("Esther")
+    JOB = "JOB", _("Job")
+    PSALMS = "PSA", _("Psalms")
+    PROVERBS = "PRO", _("Proverbs")
+    ECCLESIASTES = "ECC", _("Ecclesiastes")
+    SONG_OF_SOLOMON = "SNG", _("Song of Solomon")
+    ISAIAH = "ISA", _("Isaiah")
+    JEREMIAH = "JER", _("Jeremiah")
+    LAMENTATIONS = "LAM", _("Lamentations")
+    EZEKIEL = "EZK", _("Ezekiel")
+    DANIEL = "DAN", _("Daniel")
+    HOSEA = "HOS", _("Hosea")
+    JOEL = "JOL", _("Joel")
+    AMOS = "AMO", _("Amos")
+    OBADIAH = "OBA", _("Obadiah")
+    JONAH = "JON", _("Jonah")
+    MICAH = "MIC", _("Micah")
+    NAHUM = "NAM", _("Nahum")
+    HABAKKUK = "HAB", _("Habakkuk")
+    ZEPHANIAH = "ZEP", _("Zephaniah")
+    HAGGAI = "HAG", _("Haggai")
+    ZECHARIAH = "ZEC", _("Zechariah")
+    MALACHI = "MAL", _("Malachi")
+    MATTHEW = "MAT", _("Matthew")
+    MARK = "MRK", _("Mark")
+    LUKE = "LUK", _("Luke")
+    JOHN = "JHN", _("John")
+    ACTS = "ACT", _("Acts")
+    ROMANS = "ROM", _("Romans")
+    FIRST_CORINTHIANS = "1CO", _("1 Corinthians")
+    SECOND_CORINTHIANS = "2CO", _("2 Corinthians")
+    GALATIANS = "GAL", _("Galatians")
+    EPHESIANS = "EPH", _("Ephesians")
+    PHILIPPIANS = "PHP", _("Philippians")
+    COLOSSIANS = "COL", _("Colossians")
+    FIRST_THESSALONIANS = "1TH", _("1 Thessalonians")
+    SECOND_THESSALONIANS = "2TH", _("2 Thessalonians")
+    FIRST_TIMOTHY = "1TI", _("1 Timothy")
+    SECOND_TIMOTHY = "2TI", _("2 Timothy")
+    TITUS = "TIT", _("Titus")
+    PHILEMON = "PHM", _("PHILEMON")
+    HEBREWS = "HEB", _("Hebrews")
+    JAMES = "JAS", _("James")
+    FIRST_PETER = "1PE", _("1 Peter")
+    SECOND_PETER = "2PE", _("2 Peter")
+    FIRST_JOHN = "1JN", _("1 John")
+    SECOND_JOHN = "2JN", _("2 John")
+    THIRD_JOHN = "3JN", _("3 John")
+    JUDE = "JUD", _("Jude")
+    REVELATION = "REV", _("Revelation")
+
 
 class AuditModel(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
@@ -57,8 +125,11 @@ class Card(AuditModel):
     category = models.CharField(max_length=2, choices=Category.choices)
     title = models.CharField(max_length=200)
     scripture = models.CharField(max_length=50)
-    text = models.CharField(max_length=500)
+    description = models.CharField(max_length=500)
     private = models.BooleanField(default=False)
+    version = models.ForeignKey(
+        "BibleVersion", on_delete=models.SET_NULL, null=True, blank=True
+    )
 
     def __str__(self) -> str:
         return f"{self.title} - {self.scripture} ({self.category})"
@@ -114,6 +185,28 @@ class UserCardPrayedLog(models.Model):
     def __str__(self) -> str:
         return f"{self.usercard.user.username} - {self.usercard.card.title} in prayer on {self.prayerdeck.date}"
 
+
+class BibleVersion(models.Model):
+    name = models.CharField(max_length=50)
+    abbreviation = models.CharField(max_length=10, unique=True)
+    language_code = models.CharField(max_length=2)
+    copyright_notice = models.CharField(max_length=200)
+
+    def __str__(self) -> str:
+        return f"{self.name} ({self.abbreviation})"
+
+class BibleVerse(models.Model):
+    version = models.ForeignKey(BibleVersion, on_delete=models.CASCADE)
+    book = models.CharField(max_length=3, choices=BibleBook.choices)
+    chapter = models.IntegerField()
+    verse = models.IntegerField()
+    text = models.CharField(max_length=500)
+
+    class Meta:
+        unique_together = ["version", "book", "chapter", "verse"]
+
+    def __str__(self) -> str:
+        return f"{self.book} {self.chapter}:{self.verse} ({self.version.abbreviation})"
 
 ## Signals ##
 
