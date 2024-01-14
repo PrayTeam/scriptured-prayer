@@ -173,7 +173,7 @@ class UserCardPrayedLogAdmin(admin.ModelAdmin):
         return False
 
 @admin.register(BibleVersion)
-class BibleVersionAdmin(admin.ModelAdmin):
+class BibleVersionAdmin(TranslationAdmin):
     list_display = ("name", "abbreviation", "language_code")
     list_filter = ("language_code",)
     sortable_by = ("name", "abbreviation", "language_code")
