@@ -1,22 +1,20 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "@radix-ui/themes/styles.css";
 
 import { Theme } from "@radix-ui/themes";
-import PrayerDeck from "./components/PrayerDeck";
+import { Info, About, Home } from "./views";
+
+const router = createBrowserRouter([
+  { path: "/", element: <Info /> },
+  { path: "/about", element: <About /> },
+  { path: "/home", element: <Home /> },
+]);
 
 function App() {
   return (
-    <>
-      <Theme>
-        <div className="h-screen flex flex-col">
-          <h1 className="text-4xl">Scriptured Prayer</h1>
-
-          <main>
-            <PrayerDeck />
-          </main>
-          <footer className="mt-auto text-center text-sm">&copy; Scriptured Prayer 2024</footer>
-        </div>
-      </Theme>
-    </>
+    <Theme className="h-full">
+      <RouterProvider router={router} />
+    </Theme>
   );
 }
 
