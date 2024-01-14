@@ -3,4 +3,4 @@ from .models import Card
 
 @register(Card)
 class CardTranslationOptions(TranslationOptions):
-    fields = ('title', 'scripture', 'text')
+    fields = ('title', 'scripture', 'description', "version")
