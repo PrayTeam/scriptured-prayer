@@ -42,6 +42,8 @@ Run the following to seed the database and run the application server & frontend
 poetry install --no-root
 poetry run python manage.py migrate
 poetry run python manage.py load_cards
+poetry run python manage.py load_bible eng net
+poetry run python manage.py load_bible spa RV1909
 poetry run python manage.py createsuperuser
 poetry run python manage.py runserver
 ```
