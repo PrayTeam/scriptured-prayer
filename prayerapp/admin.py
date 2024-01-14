@@ -12,6 +12,7 @@ from .models import (
     UserCardPrayedLog,
     UserCategoryOptions,
     UserProfile,
+    BibleVersion
 )
 
 
@@ -100,12 +101,13 @@ class CardAdmin(TranslationAdmin):
     list_display = (
         "title",
         "scripture",
+        "version",
         "category",
         "private",
         "modified_by",
         "modified_date",
     )
-    list_filter = ("category", "private", "modified_by")
+    list_filter = ("category", "private", "modified_by", "version")
     sortable_by = ("title", "category", "modified_date")
     search_fields = ("title", "scripture", "text")
     readonly_fields = ("created_by", "modified_by", "created_date", "modified_date")
@@ -165,6 +167,16 @@ class UserCardPrayedLogAdmin(admin.ModelAdmin):
     list_filter = ("usercard__card__category", "usercard__user")
     sortable_by = ("usercard__card__category", "usercard__user", "date_prayed")
     readonly_fields = ("usercard", "date_prayed")
+    can_delete = False
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+@admin.register(BibleVersion)
+class BibleVersionAdmin(TranslationAdmin):
+    list_display = ("name", "abbreviation", "language_code")
+    list_filter = ("language_code",)
+    sortable_by = ("name", "abbreviation", "language_code")
     can_delete = False
 
     def has_add_permission(self, request, obj=None):
