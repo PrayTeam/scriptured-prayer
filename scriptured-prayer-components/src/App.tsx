@@ -4,11 +4,20 @@ import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
 import { Info, About, Home } from "./views";
 
-const router = createBrowserRouter([
-  { path: "/", element: <Info /> },
-  { path: "/about", element: <About /> },
-  { path: "/home", element: <Home /> },
-]);
+// this is really bad. todo: use a safer method for
+// obtaining i18n language code from browser
+const language = window.location.pathname.split("/")[1];
+
+const router = createBrowserRouter(
+  [
+    { path: "/", element: <Info /> },
+    { path: "/about", element: <About /> },
+    { path: "/home", element: <Home /> },
+  ],
+  {
+    basename: `/${language}`,
+  },
+);
 
 function App() {
   return (
