@@ -114,7 +114,7 @@ class UserProfile(AuditModel):
     )
     cards_per_day = models.IntegerField(default=10)
     prayer_deck_last_updated = models.DateTimeField(
-        "prayer deck last updated", blank=True, null=True
+        _("prayer deck last updated"), blank=True, null=True
     )
 
     def __str__(self) -> str:
@@ -157,7 +157,7 @@ class UserCard(AuditModel):
 class UserCardNote(AuditModel):
     usercard = models.ForeignKey(UserCard, on_delete=models.CASCADE)
     note = models.CharField(max_length=200)
-    date = models.DateTimeField("created timestamp", auto_now_add=True)
+    date = models.DateTimeField(_("created timestamp"), auto_now_add=True)
 
     def __str__(self) -> str:
         return f"{self.usercard.user.username} - {self.usercard.card.title} Note {self.id} - {self.date}"
@@ -179,7 +179,7 @@ class UserCategoryOptions(AuditModel):
 class UserCardPrayedLog(models.Model):
     usercard = models.ForeignKey(UserCard, on_delete=models.CASCADE)
     date_prayed = models.DateTimeField(
-        "date prayed", blank=True, null=True, auto_now_add=True
+        _("date prayed"), blank=True, null=True, auto_now_add=True
     )
 
     def __str__(self) -> str:
