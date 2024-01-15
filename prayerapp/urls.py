@@ -10,7 +10,8 @@ app_name = "prayerapp"
 urlpatterns = [
     path('api/', include(router.urls)),
     # to make react router play nice
-    re_path(r".*", views.IndexView.as_view(), name="prayerapp"),
+    path(r"", views.IndexView.as_view(), name="prayerapp"),
+    re_path(r"app/.*", views.IndexView.as_view()),
 ]
 
 urlpatterns += router.urls
