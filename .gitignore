@@ -141,3 +141,5 @@ node_modules
 
 # react build
 prayerapp/static/app/*
+
+.DS_Store
