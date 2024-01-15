@@ -6,7 +6,10 @@ import { Info, About, Home } from "./views";
 
 // this is really bad. todo: use a safer method for
 // obtaining i18n language code from browser
-const language = window.location.pathname.split("/")[1];
+const language =
+  import.meta.env.NODE_ENV === "development"
+    ? ""
+    : window.location.pathname.split("/")[1];
 
 const router = createBrowserRouter(
   [

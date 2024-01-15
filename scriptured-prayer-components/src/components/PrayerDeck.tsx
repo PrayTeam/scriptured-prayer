@@ -17,9 +17,14 @@ function PrayerDeck() {
     (async () => {
       try {
         // todo: get from api
-        const response = await fetch("/usercards.json");
+        const response = await fetch(
+          `${import.meta.env.VITE_PRAYERAPP_API}/en/api/usercards/?format=json`,
+          {
+            credentials: "include",
+          },
+        );
         const data = await response.json();
-        setUserCards(data.results);
+        setUserCards(data);
       } catch (error) {
         console.error(error);
       }
