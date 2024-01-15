@@ -11,8 +11,8 @@ const language = window.location.pathname.split("/")[1];
 const router = createBrowserRouter(
   [
     { path: "/", element: <Info /> },
-    { path: "/app/about", element: <About /> },
-    { path: "/app/home", element: <Home /> },
+    { path: "/about", element: <About /> },
+    { path: "/home", element: <Home /> },
   ],
   {
     basename: `/${language}`,
