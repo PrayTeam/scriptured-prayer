@@ -30,6 +30,9 @@ class Command(BaseCommand):
         zip_url = f"https://ebible.org/Scriptures/{ebible_language}{version}_readaloud.zip"
 
         r = requests.get(zip_url)
+        if r.status_code != 200:
+            zip_url = f"https://ebible.org/Scriptures/{ebible_language}-{version}_readaloud.zip"
+            r = requests.get(zip_url)
         r.raise_for_status()
         with ZipFile(BytesIO(r.content)) as zip_files:
             for zipinfo in zip_files.infolist():
