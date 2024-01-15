@@ -10,12 +10,13 @@ class Command(BaseCommand):
     help = "Load a version of the bible from ebible.org"
 
     def add_arguments(self, parser):
-        parser.add_argument("version", type=str)
         parser.add_argument("language", type=str)
+        parser.add_argument("version", type=str)
 
     def handle(self, *args, **options):
         version = options["version"]
         ebible_language = options["language"]
+        language = "en" # default to english
         match options["language"]:
             case "eng": language = "en"
             case "spa": language = "es"
@@ -29,6 +30,9 @@ class Command(BaseCommand):
         zip_url = f"https://ebible.org/Scriptures/{ebible_language}{version}_readaloud.zip"
 
         r = requests.get(zip_url)
+        if r.status_code != 200:
+            zip_url = f"https://ebible.org/Scriptures/{ebible_language}-{version}_readaloud.zip"
+            r = requests.get(zip_url)
         r.raise_for_status()
         with ZipFile(BytesIO(r.content)) as zip_files:
             for zipinfo in zip_files.infolist():
@@ -43,7 +47,7 @@ class Command(BaseCommand):
                             "name": f"{version} {language}",
                             "abbreviation": version.upper(),
                             "language_code": language,
-                            "copyright_text": "<replace me>",
+                            "copyright_notice": "<replace me>",
                         })
                     
                     with zip_files.open(zipinfo) as file:
