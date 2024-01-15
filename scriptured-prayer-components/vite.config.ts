@@ -9,13 +9,15 @@ export default defineConfig({
       '~': '/src',
     },
   },
-  base: 'static/app',
+  base: process.env.NODE_ENV === 'development' ? '' : 'static/app',
   build: {
     outDir: '../prayerapp/static/app',
     rollupOptions: {
-      input: {
-        app: './main.html',
-      }
-    }
+      output: {
+        entryFileNames: '[name].js',
+        chunkFileNames: '[name].js',
+        assetFileNames: '[name].[ext]',
+      },
+    },
   },
 })
