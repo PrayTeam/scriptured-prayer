@@ -4,7 +4,7 @@ This project contains the frontend components used in the Scriptured Prayer app.
 
 ---
 
-Requires Yarn.
+Requires Yarn and vite.
 
 ## Running
 
