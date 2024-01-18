@@ -9,9 +9,9 @@ export default defineConfig({
       '~': '/src',
     },
   },
-  base: process.env.NODE_ENV === 'development' ? '' : 'static/app',
+  base: process.env.NODE_ENV === 'development' ? '' : 'static/prayerapp',
   build: {
-    outDir: '../prayerapp/static/app',
+    outDir: '../prayerapp/static/prayerapp',
     rollupOptions: {
       output: {
         entryFileNames: '[name].js',
