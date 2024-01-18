@@ -140,6 +140,6 @@ GitHub.sublime-settings
 node_modules
 
 # react build
-prayerapp/static/app/*
+prayerapp/static/prayerapp/*
 
 .DS_Store
