@@ -25,7 +25,7 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    path(_(""), include("prayerapp.urls")),
     path(_("admin/"), admin.site.urls),
     path(_("accounts/"), include("django.contrib.auth.urls")),
+    path("", include("prayerapp.urls")), #Keep this last
 )
