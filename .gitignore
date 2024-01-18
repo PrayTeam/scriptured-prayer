@@ -135,3 +135,11 @@ GitHub.sublime-settings
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+
+# node
+node_modules
+
+# react build
+prayerapp/static/prayerapp/*
+
+.DS_Store

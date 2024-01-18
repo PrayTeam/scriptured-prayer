@@ -1,4 +1,5 @@
-from django.urls import path, include
+from django.urls import path, include, re_path
+from django.utils.translation import gettext_lazy as _
 from rest_framework import routers
 
 from . import views
@@ -7,8 +8,9 @@ router.register(r'usercards', views.UserCardViewSet, basename="usercards")
 
 app_name = "prayerapp"
 urlpatterns = [
-    path("", views.IndexView.as_view(), name="prayerapp"),
     path('api/', include(router.urls)),
+    # to make react router play nice
+    re_path(r".*", views.IndexView.as_view()),
 ]
 
 urlpatterns += router.urls

@@ -1,0 +1,48 @@
+/* Add your custom styles for pagination container */
+.swiper-pagination-fraction,
+.swiper-pagination-custom,
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  /* border:1px solid salmon; */
+  width: 80%;
+}
+
+/* Add your custom styles for pagination bullets */
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 4px;
+  background-color: #eee; /* Change to your desired color */
+  opacity: 0.8;
+  margin: 0 8px;
+  cursor: pointer;
+  border-radius: 10%;
+  transition: background-color 0.3s;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: rgb(13, 148, 136); /* Change to your desired active color */
+}
+
+/* Customize styles for the navigation links */
+.swiper-button-next,
+.swiper-button-prev {
+  color: rgb(13, 148, 136); /* Change to your desired text color */
+  opacity: 0.6666;
+  border-radius: 5px;
+  padding: 8px;
+  margin: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 6px;
+}
+
+/* Hover effect */
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: rgb(13, 148, 136);
+  opacity: 1;
+}
