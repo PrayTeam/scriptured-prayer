@@ -13,7 +13,8 @@ class BibleVerseSerializer(serializers.ModelSerializer):
         return obj.get_book_display()
 
 class UserCardSerializer(serializers.ModelSerializer):
-    category = serializers.SerializerMethodField()
+    category = serializers.SlugRelatedField(slug_field="name", read_only=True)
+    genre = serializers.SerializerMethodField()
     title = serializers.SlugRelatedField(slug_field="title", read_only=True, source="card")
     version = serializers.SerializerMethodField()
     description = serializers.SlugRelatedField(slug_field="description", read_only=True, source="card")
@@ -23,22 +24,22 @@ class UserCardSerializer(serializers.ModelSerializer):
     usercardnote_set = serializers.SlugRelatedField(slug_field="note", many=True, read_only=False, queryset=UserCardNote.objects.all())
     class Meta:
         model = UserCard
-        fields = ["id", "title", "version", "scripture", "scripture_text", "description", "copyright_notice", "category", "usercardnote_set", "answered", "hidden", "in_prayer_deck"]
+        fields = ["id", "title", "version", "scripture", "scripture_text", "description", "copyright_notice", "category", "genre", "usercardnote_set", "answered", "hidden", "in_prayer_deck"]
         read_only_fields = ["id", "card"]
-
-    def get_category(self, obj):
-        return obj.card.get_category_display()
     
     def get_version(self, obj):
-        return (obj.card.version or get_default_version()).abbreviation
+        return (obj.card.version or get_default_bible_version()).abbreviation
     
     def get_copyright_notice(self, obj):
-        return (obj.card.version or get_default_version()).copyright_notice
+        return (obj.card.version or get_default_bible_version()).copyright_notice
+    
+    def get_genre(self, obj):
+        return obj.card.category.get_genre_display()
 
     def get_scripture_text(self, obj):
 
         verses = BibleVerse.objects.none()
-        version = obj.card.version or get_default_version()
+        version = obj.card.version or get_default_bible_version()
         for ref in obj.card.scripture_en.split(";"):
             if ref.strip():
                 if ref_match := re.match(r"^([1-3]? ?[a-zA-Z]+)\.? ?([0-9]+):([0-9]+)$", ref.strip()):
@@ -77,7 +78,7 @@ def get_book_abbreviation(long_name):
         if sane_long_name == book.replace(" ", "").upper()[:len(sane_long_name)]:
             return abbreviation
         
-def get_default_version():
+def get_default_bible_version():
     """This is a poor place to keep defaults. I did not want to query the database for this. We will call it tech debt."""
     if get_language() == "es":
         return BibleVersion.objects.get(abbreviation="RV1909")
