@@ -77,7 +77,7 @@ class UserCardFilter(django_filters.FilterSet):
     class Meta:
         model = UserCard
         fields = {
-            'card__category': ['exact'],
+            'card__category__name': ['exact'],
             'answered': ['exact'],
             'hidden': ['exact'],
             'in_prayer_deck': ['exact'],
@@ -90,4 +90,4 @@ class UserCardViewSet(viewsets.ModelViewSet):
     filterset_class = UserCardFilter
 
     def get_queryset(self):
-        return UserCard.objects.prefetch_related("card", "usercardnote_set").filter(user=self.request.user)
+        return UserCard.objects.prefetch_related("card", "card__category", "usercardnote_set").filter(user=self.request.user)

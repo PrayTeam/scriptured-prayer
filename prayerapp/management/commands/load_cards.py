@@ -1,7 +1,7 @@
 import csv
 import requests
 from django.core.management.base import BaseCommand, CommandError
-from prayerapp.models import Card
+from prayerapp.models import Card, Category
 
 
 class Command(BaseCommand):
@@ -12,15 +12,19 @@ class Command(BaseCommand):
         spreadsheet_id = "1b6_n8i-cS4M556936OvuR6JovjxtYzni-od3l9QcwsE"
 
         gids = {
-            "NG": 0,
-            "GI": 1817719411,
-            "NJ": 48885571,
-            "NS": 1671114364,
-            "IC": 956380343,
-            "PG": 1043713344,
+            "Names of God": 0,
+            "God Is ...": 1817719411,
+            "Names of Jesus": 48885571,
+            "Names of the Holy Spirit": 1671114364,
+            "In Christ": 956380343,
+            "Promises of God": 1043713344,
         }
 
-        for category, gid in gids.items():
+        for category_name, gid in gids.items():
+            category, cat_created = Category.objects.get_or_create(name=category_name)
+            if cat_created:
+                category.save()
+
             if gid is not None:
                 spreadsheet = requests.get(
                     f"{base_url}{spreadsheet_id}/export?format=csv&gid={gid}"
