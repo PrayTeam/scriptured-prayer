@@ -138,7 +138,7 @@ def get_book_abbreviation(long_name: str) -> str:
     """Get the abbreviation for a book of the Bible from an unambiguous string
 
     Args:
-        long_name: The long name of the book of teh bible
+        long_name: The long name of the book of the bible
 
     Returns:
         str: three character abbreviation for the book of the bible
