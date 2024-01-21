@@ -21,7 +21,7 @@ class Command(BaseCommand):
         }
 
         for category_name, gid in gids.items():
-            category, cat_created = Category.objects.get_or_create(name=category_name)
+            category, cat_created = Category.objects.get_or_create(name=category_name, genre="Praise")
             if cat_created:
                 category.save()
 
