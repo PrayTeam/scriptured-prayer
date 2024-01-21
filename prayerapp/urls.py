@@ -5,6 +5,7 @@ from rest_framework import routers
 from . import views
 router = routers.DefaultRouter()
 router.register(r'usercards', views.UserCardViewSet, basename="usercards")
+router.register(r'cards', views.CardViewSet, basename="cards")
 
 app_name = "prayerapp"
 urlpatterns = [
@@ -12,5 +13,3 @@ urlpatterns = [
     # to make react router play nice
     re_path(r".*", views.IndexView.as_view()),
 ]
-
-urlpatterns += router.urls

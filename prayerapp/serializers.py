@@ -14,8 +14,25 @@ class BibleVerseSerializer(serializers.ModelSerializer):
     def get_book(self, obj):
         return obj.get_book_display()
 
-class UserCardSerializer(serializers.ModelSerializer):
+
+class CardSerializer(serializers.ModelSerializer):
     category = serializers.SlugRelatedField(slug_field="name", read_only=True)
+    genre = serializers.SlugRelatedField(slug_field="genre", read_only=True, source="category")
+    version = serializers.SlugRelatedField(slug_field="abbreviation", read_only=True, source="bibleversion")
+    scripture_text = serializers.SerializerMethodField()
+    copyright_notice = serializers.SlugRelatedField(slug_field="copyright_notice", read_only=True, source="bibleversion")
+    class Meta:
+        model = Card
+        fields = ["id", "title", "scripture", "version", "scripture_text", "description", "copyright_notice", "category", "genre"]
+        read_only_fields = ["id", "card"]
+    
+    def get_scripture_text(self, obj):
+        return obj.cardscripturejson_set.filter(bible_version=obj.version)[0].passage_json
+
+
+#-------
+class UserCardSerializer(serializers.ModelSerializer):
+    category = serializers.SerializerMethodField()
     genre = serializers.SerializerMethodField()
     title = serializers.SlugRelatedField(slug_field="title", read_only=True, source="card")
     version = serializers.SerializerMethodField()
@@ -30,10 +47,13 @@ class UserCardSerializer(serializers.ModelSerializer):
         read_only_fields = ["id", "card"]
     
     def get_version(self, obj):
-        return (obj.card.version).abbreviation
+        return obj.card.version.abbreviation
     
     def get_copyright_notice(self, obj):
-        return (obj.card.version).copyright_notice
+        return obj.card.version.copyright_notice
+    
+    def get_category(self, obj):
+        return obj.card.category.name
     
     def get_genre(self, obj):
         return obj.card.category.get_genre_display()

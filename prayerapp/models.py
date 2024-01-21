@@ -149,7 +149,7 @@ class Card(AuditModel):
     scripture = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
     private = models.BooleanField(default=False)
-    version = models.ForeignKey(
+    version = models.ForeignKey( # I believe model translation makes this field not able to prefetch
         BibleVersion, on_delete=models.SET_DEFAULT, default=1
     )
 
