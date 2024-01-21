@@ -110,6 +110,28 @@ class UserProfile(AuditModel):
 
     def __str__(self) -> str:
         return f"User profile: {self.user.username}"
+    
+class BibleVersion(models.Model):
+    name = models.CharField(max_length=50)
+    abbreviation = models.CharField(max_length=10, unique=True)
+    language_code = models.CharField(max_length=2)
+    copyright_notice = models.CharField(max_length=200)
+
+    def __str__(self) -> str:
+        return f"{self.name} ({self.abbreviation})"
+
+class BibleVerse(models.Model):
+    version = models.ForeignKey(BibleVersion, on_delete=models.CASCADE)
+    book = models.CharField(max_length=3, choices=BibleBook.choices)
+    chapter = models.IntegerField()
+    verse = models.IntegerField()
+    text = models.CharField(max_length=500)
+
+    class Meta:
+        unique_together = ["version", "book", "chapter", "verse"]
+
+    def __str__(self) -> str:
+        return f"{self.book} {self.chapter}:{self.verse} ({self.version.abbreviation})"
 
 class Category(AuditModel):
     name = models.CharField(max_length=50, unique=True)
@@ -128,7 +150,7 @@ class Card(AuditModel):
     description = models.CharField(max_length=500)
     private = models.BooleanField(default=False)
     version = models.ForeignKey(
-        "BibleVersion", on_delete=models.SET_NULL, null=True, blank=True
+        BibleVersion, on_delete=models.SET_DEFAULT, default=1
     )
 
     def __str__(self) -> str:
@@ -186,27 +208,16 @@ class UserCardPrayedLog(models.Model):
         return f"{self.usercard.user.username} - {self.usercard.card.title} in prayer on {self.prayerdeck.date}"
 
 
-class BibleVersion(models.Model):
-    name = models.CharField(max_length=50)
-    abbreviation = models.CharField(max_length=10, unique=True)
-    language_code = models.CharField(max_length=2)
-    copyright_notice = models.CharField(max_length=200)
-
-    def __str__(self) -> str:
-        return f"{self.name} ({self.abbreviation})"
-
-class BibleVerse(models.Model):
-    version = models.ForeignKey(BibleVersion, on_delete=models.CASCADE)
-    book = models.CharField(max_length=3, choices=BibleBook.choices)
-    chapter = models.IntegerField()
-    verse = models.IntegerField()
-    text = models.CharField(max_length=500)
+class CardScriptureJson(models.Model):
+    card = models.ForeignKey(Card, on_delete=models.CASCADE)
+    bible_version = models.ForeignKey(BibleVersion, on_delete=models.CASCADE)
+    passage_json = models.JSONField()
 
     class Meta:
-        unique_together = ["version", "book", "chapter", "verse"]
+        unique_together = ["card", "bible_version"]
 
     def __str__(self) -> str:
-        return f"{self.book} {self.chapter}:{self.verse} ({self.version.abbreviation})"
+        return f"{self.card.title} ({self.bible_version.abbreviation})"
 
 ## Signals ##
 
