@@ -90,4 +90,4 @@ class UserCardViewSet(viewsets.ModelViewSet):
     filterset_class = UserCardFilter
 
     def get_queryset(self):
-        return UserCard.objects.prefetch_related("card", "card__category", "usercardnote_set").filter(user=self.request.user)
+        return UserCard.objects.filter(user=self.request.user).prefetch_related("card", "card__category",  "usercardnote_set")

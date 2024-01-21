@@ -51,7 +51,7 @@ class UserCardInline(admin.TabularInline):
 class UserCardNoteInline(admin.TabularInline):
     model = UserCardNote
     fields = ("note",)
-    max_num = 0
+    extra = 1
 
 
 class UserCategoryOptionsInline(admin.TabularInline):
@@ -155,6 +155,7 @@ class UserCardAdmin(admin.ModelAdmin):
         "created_by",
         "modified_by",
     )
+    inlines = [UserCardNoteInline]
 
     def save_model(self, request, obj, form, change):
         if not obj.pk:
