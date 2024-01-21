@@ -10,6 +10,10 @@ from .serializers import CardSerializer, UserCardSerializer
 from rest_framework import viewsets, permissions
 import django_filters
 
+class BaseViewSet(viewsets.ModelViewSet):
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+
+
 class IndexView(TemplateView):
     template_name = "prayerapp/index.html"
 
@@ -92,20 +96,18 @@ class CardFilter(django_filters.FilterSet):
             'category__genre': ['exact'],
         }
 
-class UserCardViewSet(viewsets.ModelViewSet):
+class UserCardViewSet(BaseViewSet):
     serializer_class = UserCardSerializer
     permission_classes = [permissions.IsAuthenticated]
-    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
     filterset_class = UserCardFilter
 
     def get_queryset(self):
         return UserCard.objects.filter(user=self.request.user).prefetch_related("card", "card__category",  "usercardnote_set")
     
 
-class CardViewSet(viewsets.ModelViewSet):
+class CardViewSet(BaseViewSet):
     serializer_class = CardSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
     filterset_class = CardFilter
 
     def get_queryset(self):
