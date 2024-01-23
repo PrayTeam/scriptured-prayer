@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from modeltranslation.admin import TranslationAdmin
 
 from .models import (
+    Category,
     Card,
     UserCard,
     UserCardNote,
@@ -50,7 +51,7 @@ class UserCardInline(admin.TabularInline):
 class UserCardNoteInline(admin.TabularInline):
     model = UserCardNote
     fields = ("note",)
-    max_num = 0
+    extra = 1
 
 
 class UserCategoryOptionsInline(admin.TabularInline):
@@ -108,7 +109,7 @@ class CardAdmin(TranslationAdmin):
         "modified_date",
     )
     list_filter = ("category", "private", "modified_by", "version")
-    sortable_by = ("title", "category", "modified_date")
+    sortable_by = ("title", "category", "modified_date", "category_genre")
     search_fields = ("title", "scripture", "text")
     readonly_fields = ("created_by", "modified_by", "created_date", "modified_date")
 
@@ -135,6 +136,7 @@ class UserCardAdmin(admin.ModelAdmin):
     list_filter = (
         "user",
         "card__category",
+        "card__category__genre",
         "in_prayer_deck",
         "answered",
         "hidden",
@@ -153,6 +155,7 @@ class UserCardAdmin(admin.ModelAdmin):
         "created_by",
         "modified_by",
     )
+    inlines = [UserCardNoteInline]
 
     def save_model(self, request, obj, form, change):
         if not obj.pk:
@@ -181,3 +184,16 @@ class BibleVersionAdmin(TranslationAdmin):
 
     def has_add_permission(self, request, obj=None):
         return False
+
+@admin.register(Category)
+class CategoryAdmin(TranslationAdmin):
+    list_display = ("name", "genre", "modified_by", "modified_date")
+    list_filter = ("genre", "modified_by")
+    sortable_by = ("name", "genre", "modified_date")
+    readonly_fields = ("created_by", "modified_by", "created_date", "modified_date")
+
+    def save_model(self, request, obj, form, change):
+        if not obj.pk:
+            obj.created_by = request.user
+        obj.modified_by = request.user
+        super().save_model(request, obj, form, change)
