@@ -6,17 +6,6 @@ from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 
 
-class Category(models.TextChoices):
-    NAMES_OF_GOD = "NG", _("Names of God")
-    GOD_IS = "GI", _("God Is ...")
-    NAMES_OF_JESUS = "NJ", _("Names of Jesus")
-    NAMES_OF_THE_HOLY_SPIRIT = "NS", _("Names of the Holy Spirit")
-    IN_CHRIST = "IC", _("In Christ")
-    PROMISES_OF_GOD = "PG", _("Promises of God")
-    STONES_OF_REMEMBRANCE = "SR", _("Stones of Remembrance")
-    BREATH_PRAYERS = "BP", _("Breath Prayers")
-    PRAYERS_OF_THE_BIBLE = "PR", _("Prayers of the Bible")
-
 class BibleBook(models.TextChoices):
     GENESIS = "GEN", _("Genesis")
     EXODUS = "EXO", _("Exodus")
@@ -85,6 +74,8 @@ class BibleBook(models.TextChoices):
     JUDE = "JUD", _("Jude")
     REVELATION = "REV", _("Revelation")
 
+class CategoryGenre(models.TextChoices):
+    PRAISE = "PR", _("Praise")
 
 class AuditModel(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
@@ -119,20 +110,51 @@ class UserProfile(AuditModel):
 
     def __str__(self) -> str:
         return f"User profile: {self.user.username}"
+    
+class BibleVersion(models.Model):
+    name = models.CharField(max_length=50)
+    abbreviation = models.CharField(max_length=10, unique=True)
+    language_code = models.CharField(max_length=2)
+    copyright_notice = models.CharField(max_length=200)
+
+    def __str__(self) -> str:
+        return f"{self.name} ({self.abbreviation})"
+
+class BibleVerse(models.Model):
+    version = models.ForeignKey(BibleVersion, on_delete=models.CASCADE)
+    book = models.CharField(max_length=3, choices=BibleBook.choices)
+    chapter = models.IntegerField()
+    verse = models.IntegerField()
+    text = models.CharField(max_length=500)
+
+    class Meta:
+        unique_together = ["version", "book", "chapter", "verse"]
+
+    def __str__(self) -> str:
+        return f"{self.book} {self.chapter}:{self.verse} ({self.version.abbreviation})"
+
+class Category(AuditModel):
+    name = models.CharField(max_length=50, unique=True)
+    genre = models.CharField(max_length=2, choices=CategoryGenre.choices)
+    class Meta:
+        verbose_name_plural = _("categories")
+
+    def __str__(self) -> str:
+        return self.name
 
 
 class Card(AuditModel):
-    category = models.CharField(max_length=2, choices=Category.choices)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     scripture = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
     private = models.BooleanField(default=False)
-    version = models.ForeignKey(
-        "BibleVersion", on_delete=models.SET_NULL, null=True, blank=True
+    version = models.ForeignKey( # I believe model translation makes this field not able to prefetch
+        BibleVersion, on_delete=models.SET_DEFAULT, default=1
     )
 
     def __str__(self) -> str:
-        return f"{self.title} - {self.scripture} ({self.category})"
+        return f"{self.title} - {self.scripture} ({self.category.name})"
 
 
 class UserCard(AuditModel):
@@ -165,7 +187,7 @@ class UserCardNote(AuditModel):
 
 class UserCategoryOptions(AuditModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    category = models.CharField(max_length=2, choices=Category.choices)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     enabled = models.BooleanField(default=True)
     pray_all_cards = models.BooleanField(default=False)
 
@@ -186,27 +208,16 @@ class UserCardPrayedLog(models.Model):
         return f"{self.usercard.user.username} - {self.usercard.card.title} in prayer on {self.prayerdeck.date}"
 
 
-class BibleVersion(models.Model):
-    name = models.CharField(max_length=50)
-    abbreviation = models.CharField(max_length=10, unique=True)
-    language_code = models.CharField(max_length=2)
-    copyright_notice = models.CharField(max_length=200)
-
-    def __str__(self) -> str:
-        return f"{self.name} ({self.abbreviation})"
-
-class BibleVerse(models.Model):
-    version = models.ForeignKey(BibleVersion, on_delete=models.CASCADE)
-    book = models.CharField(max_length=3, choices=BibleBook.choices)
-    chapter = models.IntegerField()
-    verse = models.IntegerField()
-    text = models.CharField(max_length=500)
+class CardScriptureJson(models.Model):
+    card = models.ForeignKey(Card, on_delete=models.CASCADE)
+    bible_version = models.ForeignKey(BibleVersion, on_delete=models.CASCADE)
+    passage_json = models.JSONField()
 
     class Meta:
-        unique_together = ["version", "book", "chapter", "verse"]
+        unique_together = ["card", "bible_version"]
 
     def __str__(self) -> str:
-        return f"{self.book} {self.chapter}:{self.verse} ({self.version.abbreviation})"
+        return f"{self.card.title} ({self.bible_version.abbreviation})"
 
 ## Signals ##
 
@@ -231,10 +242,20 @@ def create_related_objects_for_user(instance, created, **kwargs):
         for card in Card.objects.filter(private=False):
             usercard = UserCard.objects.create(user=instance, card=card)
             usercard.save()
-        for category in Category:
+        for category in Category.objects.all():
             option = UserCategoryOptions.objects.create(
                 user=instance, category=category
             )
             option.save()
         userprofile = UserProfile.objects.create(user=instance)
         userprofile.save()
+
+@receiver(post_save, sender=Category)
+def create_related_objects_for_category(instance, created, **kwargs):
+    """When a new category is created, create a UserCategoryOption for each user."""
+    if created:
+        for user in User.objects.all():
+            option = UserCategoryOptions.objects.create(
+                user=user, category=instance
+            )
+            option.save()

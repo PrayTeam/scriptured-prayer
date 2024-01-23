@@ -5,10 +5,14 @@ from django.urls import reverse
 from django.views.generic import ListView, TemplateView, UpdateView
 
 from .forms import UserCardNoteFormSet, UserCategoryOptionsFormSet, UserProfileForm
-from .models import UserCard, UserCategoryOptions, UserProfile
-from .serializers import UserCardSerializer
+from .models import Card, UserCard, UserCategoryOptions, UserProfile
+from .serializers import CardSerializer, UserCardSerializer
 from rest_framework import viewsets, permissions
 import django_filters
+
+class BaseViewSet(viewsets.ModelViewSet):
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+
 
 class IndexView(TemplateView):
     template_name = "prayerapp/index.html"
@@ -77,17 +81,34 @@ class UserCardFilter(django_filters.FilterSet):
     class Meta:
         model = UserCard
         fields = {
-            'card__category': ['exact'],
+            'card__category__name': ['exact'],
+            'card__category__genre': ['exact'],
             'answered': ['exact'],
             'hidden': ['exact'],
             'in_prayer_deck': ['exact'],
         }
 
-class UserCardViewSet(viewsets.ModelViewSet):
+class CardFilter(django_filters.FilterSet):
+    class Meta:
+        model = Card
+        fields = {
+            'category__name': ['exact'],
+            'category__genre': ['exact'],
+        }
+
+class UserCardViewSet(BaseViewSet):
     serializer_class = UserCardSerializer
     permission_classes = [permissions.IsAuthenticated]
-    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
     filterset_class = UserCardFilter
 
     def get_queryset(self):
-        return UserCard.objects.prefetch_related("card", "usercardnote_set").filter(user=self.request.user)
+        return UserCard.objects.filter(user=self.request.user).prefetch_related("card", "card__category",  "usercardnote_set")
+    
+
+class CardViewSet(BaseViewSet):
+    serializer_class = CardSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filterset_class = CardFilter
+
+    def get_queryset(self):
+        return Card.objects.all().prefetch_related("category")
