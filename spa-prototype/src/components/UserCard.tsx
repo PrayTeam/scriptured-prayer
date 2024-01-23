@@ -1,4 +1,4 @@
-import { Badge, Text} from "@radix-ui/themes";
+import { Badge, Text, Heading} from "@radix-ui/themes";
 import { UserCardProps } from "./PrayerDeck";
 interface Props {
   usercard: UserCardProps;
@@ -6,7 +6,7 @@ interface Props {
 
 const UserCard = ({ usercard }: Props) => {
   return (
-    <div className="bg-gradient-to-bl from-teal-200 to-lime-200 h-50 py-12 px-16">
+    <div className="bg-gradient-to-bl from-teal-200 to-lime-200 py-12 px-8 md:px-16">
 
       {/* <p className="text-base font-light uppercase pb-4">Names of God</p> */}
       <Badge color="jade" 
@@ -18,7 +18,7 @@ const UserCard = ({ usercard }: Props) => {
         {usercard.category}
       </Badge>
 
-      <h3 className='text-3xl pb-8'>{usercard.title}</h3>
+      <Heading className='pb-8' size="8" >{usercard.title}</Heading>
 
       <div className="border-l-8 border-teal-600 pl-4">
         <p className="text-lg ">
@@ -30,7 +30,8 @@ const UserCard = ({ usercard }: Props) => {
       </div>
 
 
-      <Text color="jade"
+      <Text 
+        color="jade"
         as="p"
         size="2"
         mt="8"

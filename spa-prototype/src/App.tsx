@@ -1,6 +1,6 @@
 import "@radix-ui/themes/styles.css";
 
-import { Theme } from "@radix-ui/themes";
+import { Heading, Theme } from "@radix-ui/themes";
 import PrayerDeck from "./components/PrayerDeck";
 
 function App() {
@@ -8,14 +8,18 @@ function App() {
     <>
       <Theme>
         <div className="h-screen flex flex-col">
-          <h1 className="text-4xl">Scriptured Prayer</h1>
+          <Heading size="9" my="8" >Scriptured Prayer</Heading>
 
           <main>
             <PrayerDeck />
           </main>
           <footer className="mt-auto text-center text-sm">&copy; Scriptured Prayer 2024</footer>
         </div>
+
+        {/* <ThemePanel /> */}
+
       </Theme>
+
     </>
   );
 }

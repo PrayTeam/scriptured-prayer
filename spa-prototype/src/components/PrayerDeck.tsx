@@ -32,7 +32,7 @@ const PrayerDeck = () => {
     // Function to fetch data from the JSON file
     const fetchData = async () => {
       try {
-        const response = await fetch("/usercards.json");
+        const response = await fetch("/usercards8.json");
         const data = await response.json();
         console.log(data.results);
         setUserCards(data.results);
@@ -52,7 +52,7 @@ const PrayerDeck = () => {
       <Heading size="7" mt="4" className="text-white text-center">Today's Prayers</Heading>
 
       <Swiper
-        className="pt-2 pb-8 px-16 w-full"
+        className="pt-2 pb-8 px-8 md:px-16 w-full"
         modules={[Navigation, Pagination, Keyboard, A11y]}
         spaceBetween='14rem'
         slidesPerView={1}
