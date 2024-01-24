@@ -14,6 +14,7 @@ requests = "^2.31.0"
 django-rest-framework = "^0.1.0"
 django-filter = "^23.5"
 django-cors-headers = "^4.3.1"
+drf-spectacular = "^0.27.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.3"

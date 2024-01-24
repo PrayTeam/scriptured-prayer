@@ -43,7 +43,7 @@ class UserCardSerializer(serializers.ModelSerializer):
     usercardnote_set = serializers.SlugRelatedField(slug_field="note", many=True, read_only=True)
     class Meta:
         model = UserCard
-        fields = ["id", "title", "scripture", "version", "scripture_text", "description", "copyright_notice", "category", "genre", "usercardnote_set", "answered", "hidden", "in_prayer_deck"]
+        fields = ["id", "title", "scripture", "version", "scripture_text", "description", "copyright_notice", "category", "genre", "usercardnote_set", "answered", "hidden", "in_prayer_deck", "last_prayed"]
         read_only_fields = ["id", "card"]
     
     def get_version(self, obj):
