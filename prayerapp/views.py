@@ -7,7 +7,7 @@ from django.utils import timezone
 from .forms import UserCardNoteFormSet, UserCategoryOptionsFormSet, UserProfileForm
 from .models import Card, UserCard, UserCategoryOptions, UserProfile, UserCardPrayedLog
 from .serializers import CardSerializer, UserCardSerializer
-from rest_framework import viewsets, permissions, throttling, status
+from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 import django_filters
@@ -87,7 +87,7 @@ class UserCardFilter(django_filters.FilterSet):
             'hidden': ['exact'],
             'in_prayer_deck': ['exact'],
         }
-        
+
     def limit_filter(self, queryset, name, value):
         """Filter the queryset to return a certain number of usercards divided evenly across the category."""
         categories = queryset.values_list('card__category', flat=True).distinct()
@@ -134,7 +134,6 @@ class UserCardViewSet(viewsets.ModelViewSet):
     serializer_class = UserCardSerializer
     permission_classes = [permissions.IsAuthenticated]
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
-    throttle_classes = [throttling.UserRateThrottle]
     filterset_class = UserCardFilter
 
     def get_queryset(self):
@@ -155,7 +154,6 @@ class CardViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CardSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
-    throttle_classes = [throttling.AnonRateThrottle, throttling.UserRateThrottle]
     filterset_class = CardFilter
 
     def get_queryset(self):
