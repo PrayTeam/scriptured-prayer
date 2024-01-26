@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.admin",
     "debug_toolbar",
     "rest_framework",
+    "drf_spectacular",
     "django_filters",
     "django_extensions",
     "django.contrib.auth",
@@ -164,6 +165,23 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '5000/hour',
+        'user': '2000/day',
+    }
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Scriptured Prayer API',
+    'DESCRIPTION': 'Easy access to the backend for the Scriptured Prayer app.',
+    'VERSION': '0.4.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SERVE_PERMISSIONS': ['rest_framework.permissions.IsAdminUser'],
 }
 
 CORS_ALLOWED_ORIGINS = [
