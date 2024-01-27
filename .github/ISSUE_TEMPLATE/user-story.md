@@ -1,5 +1,5 @@
 ---
-name: User Story Template
+name: User Story
 about: A part of a feature, written in the user's voice.
 title: "[story]"
 labels: ''
