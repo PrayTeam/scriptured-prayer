@@ -76,6 +76,9 @@ class BibleBook(models.TextChoices):
 
 class CategoryGenre(models.TextChoices):
     PRAISE = "PR", _("Praise")
+    THANKSGIVING = "TH", _("Thanksgiving")
+    CONFESSION = "CN", _("Confession")
+    REQUEST = "RQ", _("Request")
 
 class AuditModel(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)

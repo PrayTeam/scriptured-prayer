@@ -11,17 +11,17 @@ class Command(BaseCommand):
         base_url = "https://docs.google.com/spreadsheets/d/"
         spreadsheet_id = "1b6_n8i-cS4M556936OvuR6JovjxtYzni-od3l9QcwsE"
 
-        gids = {
-            "Names of God": 0,
-            "God Is ...": 1817719411,
-            "Names of Jesus": 48885571,
-            "Names of the Holy Spirit": 1671114364,
-            "In Christ": 956380343,
-            "Promises of God": 1043713344,
-        }
+        categories = [
+            ("Names of God", 0, "PR"),
+            ("God Is ...", 1817719411, "PR"),
+            ("Names of Jesus", 48885571, "PR"),
+            ("Names of the Holy Spirit", 1671114364, "PR"),
+            ("In Christ", 956380343, "TH"),
+            ("Promises of God", 1043713344,"TH"),
+        ]
 
-        for category_name, gid in gids.items():
-            category, cat_created = Category.objects.get_or_create(name=category_name, genre="Praise")
+        for category_name, gid, genre in categories:
+            category, cat_created = Category.objects.get_or_create(name=category_name, genre=genre)
             if cat_created:
                 category.save()
 
