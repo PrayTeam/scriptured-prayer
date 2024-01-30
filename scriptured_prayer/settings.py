@@ -28,7 +28,8 @@ DEBUG = True
 
 # disable when going to prod
 ALLOWED_HOSTS = [
-  "localhost"
+  "localhost",
+  "127.0.0.1",
 ]
 
 
@@ -197,6 +198,7 @@ SPECTACULAR_SETTINGS = {
 # disable everything below when we go to prod
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173",
+    "http://127.0.0.1:5173",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
