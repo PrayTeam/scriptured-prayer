@@ -1,9 +1,10 @@
 import { Button } from "~/components/advertise";
 import dryGrass from "~/assets/dry-grass.jpg";
+import Footer from "~/components/Footer";
 
 export function About() {
   return (
-    <div className="bg-snowgrass h-full">
+    <div className="bg-snowgrass h-full flex flex-col">
       <div className="flex px-6 py-8 md:py-16 md:space-x-12 max-w-screen-xl mx-auto">
         <img src={dryGrass} className="hidden md:block max-w-[700px]" />
         <div>
@@ -19,6 +20,8 @@ export function About() {
           <Button>Our Privacy Policy</Button>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

@@ -1,3 +1,4 @@
 export * from "./Info";
 export * from "./About";
-export * from "./Home";
+export * from "./Pray";
+export * from "./Discover";

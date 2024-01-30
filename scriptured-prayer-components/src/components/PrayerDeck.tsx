@@ -11,20 +11,19 @@ import UserCard, { UserCardProps } from "./UserCard";
 
 function PrayerDeck() {
   const [userCards, setUserCards] = useState<UserCardProps[]>([]);
+  // const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // fetch data from the JSON file
     (async () => {
       try {
-        // todo: get from api
-        const response = await fetch(
-          `${import.meta.env.VITE_PRAYERAPP_API}/en/api/usercards/?format=json`,
-          {
-            credentials: "include",
-          },
-        );
+        const api_url = `${import.meta.env.VITE_PRAYERAPP_API}/en/api/usercards/?format=json`;
+
+        const response = await fetch(api_url, {
+          credentials: "include",
+        });
         const data = await response.json();
         setUserCards(data);
+        // setIsLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -33,7 +32,7 @@ function PrayerDeck() {
 
   return (
     <>
-      <Flex direction="column">
+      <Flex direction="column" mb={"8"}>
         <Heading size="7" my="4" className="text-black text-center">
           Today's Prayers
         </Heading>
@@ -44,6 +43,7 @@ function PrayerDeck() {
           spaceBetween="14rem"
           slidesPerView={1}
           keyboard
+          pagination={{ clickable: true }}
         >
           {userCards.map((userCard) => (
             <SwiperSlide key={userCard.id}>
@@ -52,7 +52,7 @@ function PrayerDeck() {
           ))}
         </Swiper>
 
-        <Button color="blue" size="4" className="w-80 mx-auto mt-4">
+        <Button color="green" size="4" className="w-80 mx-auto mt-4">
           <CheckIcon width="24" height="24" />
           Finish Prayer Session
         </Button>

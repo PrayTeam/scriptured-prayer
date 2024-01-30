@@ -1,6 +1,7 @@
 import { Button, Card } from "~/components/advertise";
 import forest from "~/assets/forest.png";
 import readingBible from "~/assets/reading-bible.jpg";
+import Footer from "~/components/Footer";
 
 export function Info() {
   return (
@@ -54,6 +55,8 @@ export function Info() {
           </div>
         </div>
       </div>
+
+      <Footer />
     </>
   );
 }

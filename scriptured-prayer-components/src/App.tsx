@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "@radix-ui/themes/styles.css";
 
 import { Theme } from "@radix-ui/themes";
-import { Info, About, Home } from "./views";
+import { Info, About, Pray, Discover } from "./views";
 
 // this is really bad. todo: use a safer method for
 // obtaining i18n language code from browser
@@ -15,7 +15,8 @@ const router = createBrowserRouter(
   [
     { path: "/", element: <Info /> },
     { path: "/about", element: <About /> },
-    { path: "/home", element: <Home /> },
+    { path: "/pray", element: <Pray /> },
+    { path: "/discover", element: <Discover /> },
   ],
   {
     basename: `/${language}`,
