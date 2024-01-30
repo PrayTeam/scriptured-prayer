@@ -7,27 +7,22 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import "~/swiper.css";
-import UserCard, { UserCardProps } from "./UserCard";
+import UserCard from "./UserCard";
+import { useApi } from "~/hooks";
+import { UserCardResponse } from "~/api/models/responses";
 
 function PrayerDeck() {
-  const [userCards, setUserCards] = useState<UserCardProps[]>([]);
+  const api = useApi();
+  const [userCards, setUserCards] = useState<UserCardResponse[]>([]);
 
   useEffect(() => {
-    // fetch data from the JSON file
     (async () => {
-      try {
-        // todo: get from api
-        const response = await fetch(
-          `${import.meta.env.VITE_PRAYERAPP_API}/en/api/usercards/?format=json`,
-          {
-            credentials: "include",
-          },
-        );
-        const data = await response.json();
-        setUserCards(data);
-      } catch (error) {
-        console.error(error);
-      }
+      api
+        .usercards()
+        .then((cards) => {
+          setUserCards(cards);
+        })
+        .catch((error) => console.error(error));
     })();
   }, []);
 
