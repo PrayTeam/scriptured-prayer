@@ -1,13 +1,20 @@
 from typing import Any
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.views.generic import TemplateView, UpdateView
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
+from django.forms.models import model_to_dict
 from django.utils import timezone
+from django.http import JsonResponse
+
 from .forms import UserCardNoteFormSet, UserCategoryOptionsFormSet, UserProfileForm
 from .models import Card, UserCard, UserCategoryOptions, UserProfile, UserCardPrayedLog
 from .serializers import CardSerializer, UserCardSerializer
 from rest_framework import viewsets, permissions, status
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import action
 import django_filters
@@ -158,3 +165,70 @@ class CardViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         return Card.objects.all().prefetch_related("category")
+
+@method_decorator(ensure_csrf_cookie, name='dispatch')
+class CSRFView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request, format=None):
+        return Response(True)
+
+@method_decorator(csrf_protect, name='dispatch')
+class LoginView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request, format=None):
+        data = self.request.data
+
+        username = data['username']
+        password = data['password']
+
+        if username is None or password is None:
+            return JsonResponse({
+                "errors": {
+                    "__all__": "Please enter a valid username and password"
+                }
+            }, status=400)
+
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            userJson = model_to_dict(user)
+            # remove any conspicuous variables we don't want the frontend to see
+            del userJson['password']
+            return JsonResponse(userJson)
+
+        # no dice
+        return JsonResponse({ "success": False }, status=400)
+
+class LogoutView(APIView):
+    def post(self, request, format=None):
+        try:
+            logout(request)
+            return JsonResponse({ 'success': 'User logged out successfully' })
+        except:
+            return JsonResponse({ 'error': 'Failed to logout user' })
+
+
+@method_decorator(csrf_protect, name='dispatch')
+class RegisterView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request, format=None):
+        data = self.request.data
+
+        username = data['username']
+        # todo: password requirements
+        password = data['password']
+
+        if User.objects.filter(username=username).exists():
+            return JsonResponse({ 'error': 'User with username already exists' })
+
+        user = User.objects.create_user(username=username, password=password)
+        user.save()
+        user = User.objects.get(username=username)
+        user_profile = UserProfile(user, first_name='', last_name='')
+        user_profile.save()
+
+        return JsonResponse({ 'success': 'User created successfully' })

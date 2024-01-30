@@ -1,32 +1,50 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "@radix-ui/themes/styles.css";
-
 import { Theme } from "@radix-ui/themes";
-import { Info, About, Home } from "./views";
 
-// this is really bad. todo: use a safer method for
-// obtaining i18n language code from browser
-const language =
-  import.meta.env.NODE_ENV === "development"
-    ? ""
-    : window.location.pathname.split("/")[1];
+import { Info, About, Home, Login, NotFound } from "./views";
+import { ProtectedRoutes } from "./components";
+import { useLocalStorage } from "./hooks";
+import { ProfileContext } from "./hooks";
+import PrayerDeck from "./components/PrayerDeck";
 
-const router = createBrowserRouter(
-  [
-    { path: "/", element: <Info /> },
-    { path: "/about", element: <About /> },
-    { path: "/home", element: <Home /> },
-  ],
-  {
-    basename: `/${language}`,
-  },
-);
+// todo: after MVP
+/*
+function translateRoute(key: string, language: string) {
+
+}
+*/
+
+const getRouter = (language: string) =>
+  createBrowserRouter(
+    [
+      { path: "/", element: <Info /> },
+      { path: "/login", element: <Login /> },
+      { path: "/about", element: <About /> },
+      {
+        element: <ProtectedRoutes />,
+        children: [
+          { path: "/home", element: <Home /> },
+          { path: "/prayer-decks", element: <PrayerDeck /> },
+        ],
+      },
+      { path: "*", element: <NotFound /> },
+    ],
+    {
+      basename: `/${language}`,
+    },
+  );
 
 function App() {
+  const [profile, setProfile] = useLocalStorage("profile");
+  const router = getRouter(profile.language);
+
   return (
-    <Theme className="h-full">
-      <RouterProvider router={router} />
-    </Theme>
+    <ProfileContext.Provider value={{ profile, setProfile }}>
+      <Theme className="h-full">
+        <RouterProvider router={router} />
+      </Theme>
+    </ProfileContext.Provider>
   );
 }
 
