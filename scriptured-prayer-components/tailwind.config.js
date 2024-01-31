@@ -13,6 +13,7 @@ export default {
       current: 'currentColor',
       white: '#fff',
       black: '#000',
+      night: '#1c1a24',
       snowgrass: '#c5ccc4',
       lichen: '#989a82',
       olive: '#33331b',
@@ -20,6 +21,7 @@ export default {
       sky: '#0ea5e9',
       emerald: '#10b981',
       purple: '#6c4565',
+      red: '#d10000',
       blue: '#33335d',
     },
     screens: {

@@ -8,7 +8,6 @@ export const localStorageDefaults: LocalStorage = {
   profile: {
     authenticated: false,
     language: "en",
-    darkMode: false,
     id: -1,
     email: "",
     username: "",

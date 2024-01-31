@@ -16,7 +16,7 @@ const apiUrl = `${import.meta.env.VITE_PRAYERAPP_API}/${language}/api/`;
 async function req<T>(url: RequestInfo, options: RequestInit): Promise<T> {
   const res = await fetch(`${apiUrl}${url}`, options);
   // if not within 2xx range
-  if (!res.ok) throw Error(`API returned ${res.status}`);
+  if (!res.ok) throw res.status;
   else {
     // since json is quite a common response type, let's determine that quickly:
     const json = res.headers.get("content-type")?.includes("application/json");
@@ -45,6 +45,16 @@ function toJson<T>(options: RequestInit, payload: T) {
   };
 }
 
+function withCsrf(options: RequestInit) {
+  return {
+    ...options,
+    headers: {
+      ...options.headers,
+      "X-CSRFToken": Cookies.get("csrftoken")!,
+    },
+  };
+}
+
 export function useApi() {
   const options: RequestInit = {
     headers: {},
@@ -54,20 +64,8 @@ export function useApi() {
   return {
     csrf: () => get<boolean>("csrf", options),
     login: (loginRequest: LoginRequest) =>
-      post<LoginResponse>(
-        "login",
-        toJson(
-          {
-            ...options,
-            headers: {
-              ...options.headers,
-              "X-CSRFToken": Cookies.get("csrftoken")!,
-            },
-          },
-          loginRequest,
-        ),
-      ),
-    logout: () => post<LogoutResponse>("logout", options),
+      post<LoginResponse>("login", toJson(withCsrf(options), loginRequest)),
+    logout: () => post<LogoutResponse>("logout", withCsrf(options)),
     usercards: () => get<UserCardResponse[]>("usercards/?format=json", options),
   };
 }
