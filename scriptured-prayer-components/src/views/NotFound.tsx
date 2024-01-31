@@ -1,16 +1,16 @@
-import { Link } from "~/components";
+import { Container, Link } from "~/components";
 
 export function NotFound() {
   return (
-    <div className="flex flex-col px-6 py-8 max-w-screen-xl mx-auto">
+    <Container className="flex flex-col">
       <h1 className="text-3xl mb-4">404 not found</h1>
-      <p>
+      <p className="mb-4">
         The page you are looking for has either been moved, or it does not
         exist.
       </p>
-      <p>
+      <p className="mb-4">
         Take me <Link href="/home">home</Link>.
       </p>
-    </div>
+    </Container>
   );
 }

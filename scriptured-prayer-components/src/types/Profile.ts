@@ -1,7 +1,6 @@
 export interface Profile {
   authenticated: boolean;
   language: string;
-  darkMode: boolean;
   id: number;
   email: string;
   username: string;

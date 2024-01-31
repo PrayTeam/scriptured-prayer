@@ -15,6 +15,7 @@ export function Login() {
   const [csrfToken, setCsrfToken] = useState<string | undefined>(
     Cookies.get("csrftoken"),
   );
+  const [error, setError] = useState<string>();
 
   // already logged in, navigate back to home
   useEffect(() => {
@@ -60,7 +61,16 @@ export function Login() {
             },
           });
         })
-        .catch((error) => console.error(error));
+        .catch((error) => {
+          switch (error) {
+            case 400:
+              setError("Invalid login");
+              break;
+            default:
+              setError("An unknown error occurred");
+              break;
+          }
+        });
     })();
   };
 
@@ -81,10 +91,12 @@ export function Login() {
             <Input
               placeholder="Password"
               name="password"
+              type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          {error && <div className="text-red mb-4">{error}</div>}
           <Button>Login</Button>
         </form>
       </div>

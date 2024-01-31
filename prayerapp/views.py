@@ -203,6 +203,8 @@ class LoginView(APIView):
         return JsonResponse({ "success": False }, status=400)
 
 class LogoutView(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+
     def post(self, request, format=None):
         try:
             logout(request)

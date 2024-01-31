@@ -1,5 +1,5 @@
 import { Button } from "~/components/advertise";
-import dryGrass from "~/assets/dry-grass.jpg";
+import dryGrass from "~/assets/images/dry-grass.jpg";
 
 export function About() {
   return (
