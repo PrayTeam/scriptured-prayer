@@ -1,6 +1,6 @@
 import re
 from rest_framework import serializers
-from .models import UserCard, BibleVerse, BibleBook, BibleVersion, CardScriptureJson, Card
+from .models import UserCard, BibleVerse, BibleBook, BibleVersion, CardScriptureJson, Card, Category
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from typing import Any
@@ -60,6 +60,18 @@ class UserCardSerializer(serializers.ModelSerializer):
     
     def get_scripture_text(self, obj):
         return obj.card.cardscripturejson_set.filter(bible_version=obj.card.version)[0].passage_json
+
+class CategorySerializer(serializers.ModelSerializer):
+    card_count = serializers.SerializerMethodField()
+    class Meta:
+        model = Category
+        fields = ["id", "name", "genre", "card_count", "inspiration"]
+        read_only_fields = ["id"]
+
+    def get_card_count(self, obj):
+        if "user" in self.context:
+            return obj.usercard_set.filter(user=self.context["user"]).count()
+        return obj.card_set.count()
 
 @receiver(post_save, sender=Card)
 def create_CardScriptureJson_for_card(instance, created, **kwargs):

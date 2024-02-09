@@ -11,4 +11,4 @@ class BibleVersionTranslationOptions(TranslationOptions):
 
 @register(Category)
 class CategoryTranslationOptions(TranslationOptions):
-    fields = ("name",)
+    fields = ("name", "inspiration")
