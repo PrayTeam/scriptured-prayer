@@ -3,7 +3,7 @@ from .models import Card, BibleVersion, Category
 
 @register(Card)
 class CardTranslationOptions(TranslationOptions):
-    fields = ('title', 'scripture', 'description', "version")
+    fields = ('title', 'scripture', 'description', "version", "instruction")
 
 @register(BibleVersion)
 class BibleVersionTranslationOptions(TranslationOptions):
@@ -11,4 +11,4 @@ class BibleVersionTranslationOptions(TranslationOptions):
 
 @register(Category)
 class CategoryTranslationOptions(TranslationOptions):
-    fields = ("name", "inspiration")
+    fields = ("name", "inspiration", "default_instruction")
