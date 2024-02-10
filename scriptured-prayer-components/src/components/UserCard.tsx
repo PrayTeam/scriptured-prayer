@@ -1,17 +1,7 @@
 import { Badge, Text } from "@radix-ui/themes";
+import { UserCardResponse } from "~/api/models/responses";
 
-export interface UserCardProps {
-  id: number;
-  title: string;
-  scripture: string;
-  category: string;
-  usercardnote_set: string[];
-  answered: boolean;
-  hidden: boolean;
-  in_prayer_deck: boolean;
-}
-
-function UserCard(props: UserCardProps) {
+function UserCard(props: UserCardResponse) {
   return (
     <div className="bg-gradient-to-bl from-lichen to-snowgrass h-50 py-12 px-16">
       <Badge

@@ -1,6 +1,8 @@
 {% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 <!doctype html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="{% static '/prayerapp/favicon.ico' %}" />
@@ -10,6 +12,12 @@
     <link rel="stylesheet" crossorigin href="{% static '/prayerapp/index.css' %}">
   </head>
   <body>
+    <script>
+      (function () {
+        const profile = JSON.parse(localStorage.getItem('profile')) ?? { language: '{{ LANGUAGE_CODE }}' };
+        localStorage.setItem('profile', JSON.stringify(Object.assign({}, profile, { language: '{{ LANGUAGE_CODE }}' })));
+      })();
+    </script>
     <div id="root"></div>
   </body>
 </html>

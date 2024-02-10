@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.views.generic import TemplateView, UpdateView
 from django.utils import timezone
+
 from .forms import UserCardNoteFormSet, UserCategoryOptionsFormSet, UserProfileForm
 from .models import Category, Card, UserCard, UserCategoryOptions, UserProfile, UserCardPrayedLog
 from .serializers import CardSerializer, UserCardSerializer, CategorySerializer
