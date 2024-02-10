@@ -1,3 +1,3 @@
-export * from "./LoginResponse";
+export * from "./UserResponse";
 export * from "./LogoutResponse";
 export * from "./UserCardResponse";

@@ -4,8 +4,8 @@ import { Profile } from "~/types";
 import { LoginRequest } from "~/api/models/requests";
 import {
   UserCardResponse,
-  LoginResponse,
   LogoutResponse,
+  UserResponse,
 } from "~/api/models/responses";
 
 const profile: Profile = JSON.parse(localStorage.getItem("profile")!);
@@ -64,8 +64,9 @@ export function useApi() {
   return {
     csrf: () => get<boolean>("csrf", options),
     login: (loginRequest: LoginRequest) =>
-      post<LoginResponse>("login", toJson(withCsrf(options), loginRequest)),
-    logout: () => post<LogoutResponse>("logout", withCsrf(options)),
+      post("login/", toJson(withCsrf(options), loginRequest)),
+    user: () => get<UserResponse>("user/", withCsrf(options)),
+    logout: () => post<LogoutResponse>("logout/", withCsrf(options)),
     usercards: () => get<UserCardResponse[]>("usercards/?format=json", options),
   };
 }
