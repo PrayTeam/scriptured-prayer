@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
 
 import logo from "~/assets/logo.svg";
 import { useApi, useProfile } from "~/hooks";
@@ -12,26 +11,12 @@ export function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const api = useApi();
-  const [csrfToken, setCsrfToken] = useState<string | undefined>(
-    Cookies.get("csrftoken"),
-  );
   const [error, setError] = useState<string>();
 
   // already logged in, navigate back to home
   useEffect(() => {
     if (profile.authenticated) navigate("/home");
   }, [profile]);
-
-  useEffect(() => {
-    if (!csrfToken) {
-      (async () => {
-        api
-          .csrf()
-          .then(() => setCsrfToken(Cookies.get("csrftoken") ?? ""))
-          .catch((error) => console.error(error));
-      })();
-    }
-  }, []);
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();

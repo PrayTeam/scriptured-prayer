@@ -62,10 +62,9 @@ export function useApi() {
   };
 
   return {
-    csrf: () => get<boolean>("csrf", options),
     login: (loginRequest: LoginRequest) =>
-      post("login/", toJson(withCsrf(options), loginRequest)),
-    user: () => get<UserResponse>("user/", withCsrf(options)),
+      post("login/", toJson(options, loginRequest)),
+    user: () => get<UserResponse>("user/", options),
     logout: () => post<LogoutResponse>("logout/", withCsrf(options)),
     usercards: () => get<UserCardResponse[]>("usercards/?format=json", options),
   };
