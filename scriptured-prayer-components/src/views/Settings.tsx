@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
 
 import { Container } from "~/components";
 import { LeftArrowIcon } from "~/components/Icons";
@@ -11,20 +9,6 @@ export function Settings() {
   const api = useApi();
   const { profile, setProfile } = useProfile();
   const navigate = useNavigate();
-  const [csrfToken, setCsrfToken] = useState<string | undefined>(
-    Cookies.get("csrftoken"),
-  );
-
-  useEffect(() => {
-    if (!csrfToken) {
-      (async () => {
-        api
-          .csrf()
-          .then(() => setCsrfToken(Cookies.get("csrftoken") ?? ""))
-          .catch((error) => console.error(error));
-      })();
-    }
-  }, []);
 
   const logout = async () => {
     api
