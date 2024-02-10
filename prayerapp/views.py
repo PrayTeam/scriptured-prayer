@@ -6,8 +6,8 @@ from django.views.generic import TemplateView, UpdateView
 from django.utils import timezone
 
 from .forms import UserCardNoteFormSet, UserCategoryOptionsFormSet, UserProfileForm
-from .models import Card, UserCard, UserCategoryOptions, UserProfile, UserCardPrayedLog
-from .serializers import CardSerializer, UserCardSerializer
+from .models import Category, Card, UserCard, UserCategoryOptions, UserProfile, UserCardPrayedLog
+from .serializers import CardSerializer, UserCardSerializer, CategorySerializer
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -159,3 +159,8 @@ class CardViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         return Card.objects.all().prefetch_related("category")
+    
+class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = CategorySerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]  
+    queryset = Category.objects.all()

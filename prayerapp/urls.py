@@ -6,6 +6,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 router = routers.DefaultRouter()
 router.register(r'usercards', views.UserCardViewSet, basename="usercards")
 router.register(r'cards', views.CardViewSet, basename="cards")
+router.register(r'categories', views.CategoryViewSet, basename="categories")
 
 app_name = "prayerapp"
 urlpatterns = [
