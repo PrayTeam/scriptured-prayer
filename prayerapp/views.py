@@ -69,9 +69,7 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
     def form_valid(self, form):
-        form = UserProfileForm(
-            self.request.POST, request=self.request, instance=self.object
-        )
+        form = UserProfileForm(self.request.POST, request=self.request, instance=self.object)
         formset = UserCategoryOptionsFormSet(
             self.request.POST,
             queryset=UserCategoryOptions.objects.filter(user=self.request.user),
@@ -111,14 +109,12 @@ class UserCardFilter(django_filters.FilterSet):
         new_queryset = queryset.none()
         for category in categories:
             if remainder > 0:
-                new_queryset |= queryset.filter(card__category=category).order_by(
-                    "-last_prayed"
-                )[: count_each_category + 1]
+                new_queryset |= queryset.filter(card__category=category).order_by("-last_prayed")[
+                    : count_each_category + 1
+                ]
                 remainder -= 1
             else:
-                new_queryset |= queryset.filter(card__category=category).order_by(
-                    "-last_prayed"
-                )[:count_each_category]
+                new_queryset |= queryset.filter(card__category=category).order_by("-last_prayed")[:count_each_category]
         return new_queryset
 
 
@@ -135,9 +131,7 @@ class CardFilter(django_filters.FilterSet):
         }
 
     def limit_filter(self, queryset, name, value):
-        categories = (
-            queryset.values_list("category", flat=True).distinct().order_by("?")
-        )
+        categories = queryset.values_list("category", flat=True).distinct().order_by("?")
         if len(categories) == 0:
             return queryset.none()
         if len(categories) == 1:
@@ -147,14 +141,10 @@ class CardFilter(django_filters.FilterSet):
         new_queryset = queryset.none()
         for category in categories:
             if remainder > 0:
-                new_queryset |= queryset.filter(category=category).order_by("?")[
-                    : count_each_category + 1
-                ]
+                new_queryset |= queryset.filter(category=category).order_by("?")[: count_each_category + 1]
                 remainder -= 1
             else:
-                new_queryset |= queryset.filter(category=category).order_by("?")[
-                    :count_each_category
-                ]
+                new_queryset |= queryset.filter(category=category).order_by("?")[:count_each_category]
         return new_queryset
 
 
