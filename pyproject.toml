@@ -32,3 +32,6 @@ pygraphviz = "^1.11"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 119

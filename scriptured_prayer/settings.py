@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+
 from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,8 +28,8 @@ SECRET_KEY = "django-insecure-823e65i1f(y#@jghqoy5f0ee*7q8$ghe7_7eww$i5ha9obfa@b
 DEBUG = True
 
 ALLOWED_HOSTS = [
-  "localhost",
-  "127.0.0.1",
+    "localhost",
+    "127.0.0.1",
 ]
 
 
@@ -81,7 +82,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-          BASE_DIR / "scriptured_prayer/templates",
+            BASE_DIR / "scriptured_prayer/templates",
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -166,34 +167,32 @@ INTERNAL_IPS = [
 ]
 
 GRAPH_MODELS = {
-  'all_applications': True,
-  'group_models': True,
+    "all_applications": True,
+    "group_models": True,
 }
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework.authentication.SessionAuthentication",),
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly",
     ],
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-    'DEFAULT_THROTTLE_CLASSES': [
-        'rest_framework.throttling.AnonRateThrottle',
-        'rest_framework.throttling.UserRateThrottle'
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.AnonRateThrottle",
+        "rest_framework.throttling.UserRateThrottle",
     ],
-    'DEFAULT_THROTTLE_RATES': {
-        'anon': '5000/hour',
-        'user': '2000/day',
-    }
+    "DEFAULT_THROTTLE_RATES": {
+        "anon": "5000/hour",
+        "user": "2000/day",
+    },
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Scriptured Prayer API',
-    'DESCRIPTION': 'Easy access to the backend for the Scriptured Prayer app.',
-    'VERSION': '0.4.0',
-    'SERVE_INCLUDE_SCHEMA': False,
-    'SERVE_PERMISSIONS': ['rest_framework.permissions.IsAdminUser'],
+    "TITLE": "Scriptured Prayer API",
+    "DESCRIPTION": "Easy access to the backend for the Scriptured Prayer app.",
+    "VERSION": "0.4.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
 }
 
 # for when we go to prod
