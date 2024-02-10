@@ -1,6 +1,6 @@
 import { Button, Card } from "~/components/advertise";
-import forest from "~/assets/forest.png";
-import readingBible from "~/assets/reading-bible.jpg";
+import forest from "~/assets/images/forest.png";
+import readingBible from "~/assets/images/reading-bible.jpg";
 
 export function Info() {
   return (
