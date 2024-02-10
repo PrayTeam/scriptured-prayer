@@ -10,19 +10,24 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         base_url = "https://docs.google.com/spreadsheets/d/"
         spreadsheet_id = "1b6_n8i-cS4M556936OvuR6JovjxtYzni-od3l9QcwsE"
+        
+        category_spreadsheet = requests.get(
+            f"{base_url}{spreadsheet_id}/export?format=csv&gid={1231372375}"
+            )
+        category_data = csv.reader(category_spreadsheet.text.splitlines()[1:], delimiter=",")
 
-        gids = {
-            "Names of God": 0,
-            "God Is ...": 1817719411,
-            "Names of Jesus": 48885571,
-            "Names of the Holy Spirit": 1671114364,
-            "In Christ": 956380343,
-            "Promises of God": 1043713344,
-        }
+        for category in category_data:
+            category_name = category[0]
+            gid = category[1]
+            genre = category[2]
+            inspiration = category[3]
 
-        for category_name, gid in gids.items():
-            category, cat_created = Category.objects.get_or_create(name=category_name, genre="Praise")
+            category, cat_created = Category.objects.get_or_create(name=category_name, defaults={"genre": genre, "inspiration": inspiration})
             if cat_created:
+                category.save()
+            else:
+                category.genre = genre
+                category.inspiration = inspiration
                 category.save()
 
             if gid is not None:
