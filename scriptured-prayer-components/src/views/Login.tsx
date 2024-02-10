@@ -41,24 +41,19 @@ export function Login() {
           username,
           password,
         })
-        .then((user) => {
-          setProfile({
-            ...profile,
-            ...{
-              authenticated: true,
-              id: user.id,
-              email: user.email,
-              username: user.username,
-              active: user.is_active,
-              staff: user.is_staff,
-              superuser: user.is_superuser,
-              joined: user.date_joined,
-              login: user.last_login,
-              firstName: user.first_name,
-              lastName: user.last_name,
-              permissions: user.user_permissions,
-              groups: user.groups,
-            },
+        .then(() => {
+          api.user().then((user) => {
+            setProfile({
+              ...profile,
+              ...{
+                authenticated: true,
+                id: user.pk,
+                email: user.email,
+                username: user.username,
+                firstName: user.first_name,
+                lastName: user.last_name,
+              },
+            });
           });
         })
         .catch((error) => {

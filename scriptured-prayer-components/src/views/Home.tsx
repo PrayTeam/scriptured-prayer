@@ -32,9 +32,9 @@ export function Home() {
   const { profile } = useProfile();
   // todo
   const [prayerDecks] = useState([
-    { title: "My First Prayer Deck" },
-    { title: "Seasonal Prayer Deck" },
-    { title: "Prayer Deck #3" },
+    { title: "Names of God" },
+    { title: "Names of Jesus" },
+    { title: "Names of the Holy Spirit" },
   ]);
 
   return (

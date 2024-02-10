@@ -26,7 +26,6 @@ SECRET_KEY = "django-insecure-823e65i1f(y#@jghqoy5f0ee*7q8$ghe7_7eww$i5ha9obfa@b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# disable when going to prod
 ALLOWED_HOSTS = [
   "localhost",
   "127.0.0.1",
@@ -41,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.admin",
     "debug_toolbar",
     "rest_framework",
+    "dj_rest_auth",
     "drf_spectacular",
     "django_filters",
     "django_extensions",
@@ -52,6 +52,11 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "corsheaders",
 ]
+
+REST_AUTH = {
+    "SESSION_LOGIN": True,
+    "TOKEN_MODEL": None,
+}
 
 MIDDLEWARE = [
     # cors must take priority
@@ -170,7 +175,6 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-        'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_THROTTLE_CLASSES': [
