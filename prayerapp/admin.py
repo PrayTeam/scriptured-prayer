@@ -109,8 +109,8 @@ class CardAdmin(TranslationAdmin):
         "modified_date",
     )
     list_filter = ("category", "private", "modified_by", "version")
-    sortable_by = ("title", "category", "modified_date", "category_genre")
-    search_fields = ("title", "scripture", "text")
+    sortable_by = ("title", "category", "modified_date", "category_genre", "instruction")
+    search_fields = ("title", "scripture", "text", "instruction")
     readonly_fields = ("created_by", "modified_by", "created_date", "modified_date")
 
     def save_model(self, request, obj, form, change):

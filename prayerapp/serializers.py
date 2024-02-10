@@ -1,6 +1,6 @@
 import re
 from rest_framework import serializers
-from .models import UserCard, BibleVerse, BibleBook, BibleVersion, CardScriptureJson, Card
+from .models import UserCard, BibleVerse, BibleBook, BibleVersion, CardScriptureJson, Card, Category
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from typing import Any
@@ -21,14 +21,17 @@ class CardSerializer(serializers.ModelSerializer):
     version = serializers.SlugRelatedField(slug_field="abbreviation", read_only=True, source="bibleversion")
     scripture_text = serializers.SerializerMethodField()
     copyright_notice = serializers.SlugRelatedField(slug_field="copyright_notice", read_only=True, source="bibleversion")
+    instruction = serializers.SerializerMethodField()
     class Meta:
         model = Card
-        fields = ["id", "title", "scripture", "version", "scripture_text", "description", "copyright_notice", "category", "genre"]
+        fields = ["id", "title", "scripture", "version", "scripture_text", "description", "copyright_notice", "category", "genre", "instruction"]
         read_only_fields = ["id", "card"]
     
     def get_scripture_text(self, obj):
         return obj.cardscripturejson_set.filter(bible_version=obj.version)[0].passage_json
 
+    def get_instruction(self, obj):
+        return obj.instruction if obj.instruction else obj.category.default_instruction
 
 #-------
 class UserCardSerializer(serializers.ModelSerializer):
@@ -40,10 +43,11 @@ class UserCardSerializer(serializers.ModelSerializer):
     scripture = serializers.SlugRelatedField(slug_field="scripture", read_only=True, source="card")
     scripture_text = serializers.SerializerMethodField()
     copyright_notice = serializers.SerializerMethodField()
+    instruction = serializers.SerializerMethodField()
     usercardnote_set = serializers.SlugRelatedField(slug_field="note", many=True, read_only=True)
     class Meta:
         model = UserCard
-        fields = ["id", "title", "scripture", "version", "scripture_text", "description", "copyright_notice", "category", "genre", "usercardnote_set", "answered", "hidden", "in_prayer_deck", "last_prayed"]
+        fields = ["id", "title", "scripture", "version", "scripture_text", "description", "copyright_notice", "category", "genre", "usercardnote_set", "answered", "hidden", "in_prayer_deck", "last_prayed", "instruction"]
         read_only_fields = ["id", "card"]
     
     def get_version(self, obj):
@@ -60,6 +64,20 @@ class UserCardSerializer(serializers.ModelSerializer):
     
     def get_scripture_text(self, obj):
         return obj.card.cardscripturejson_set.filter(bible_version=obj.card.version)[0].passage_json
+
+    def get_instruction(self, obj):
+        return obj.card.instruction if obj.card.instruction else obj.card.category.default_instruction
+class CategorySerializer(serializers.ModelSerializer):
+    card_count = serializers.SerializerMethodField()
+    class Meta:
+        model = Category
+        fields = ["id", "name", "genre", "card_count", "inspiration", "default_instruction"]
+        read_only_fields = ["id", "card_count"]
+
+    def get_card_count(self, obj):
+        if "user" in self.context:
+            return obj.usercard_set.filter(user=self.context["user"]).count()
+        return obj.card_set.count()
 
 @receiver(post_save, sender=Card)
 def create_CardScriptureJson_for_card(instance, created, **kwargs):

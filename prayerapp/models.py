@@ -76,6 +76,9 @@ class BibleBook(models.TextChoices):
 
 class CategoryGenre(models.TextChoices):
     PRAISE = "PR", _("Praise")
+    REQUEST = "RQ", _("Request")
+    CONFESSION = "CF", _("Confession")
+    THANKSGIVING = "TG", ("Thanksgiving")
 
 class AuditModel(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
@@ -136,6 +139,8 @@ class BibleVerse(models.Model):
 class Category(AuditModel):
     name = models.CharField(max_length=50, unique=True)
     genre = models.CharField(max_length=2, choices=CategoryGenre.choices)
+    inspiration = models.CharField(max_length=600)
+    default_instruction = models.CharField(max_length=200)
     class Meta:
         verbose_name_plural = _("categories")
 
@@ -149,6 +154,7 @@ class Card(AuditModel):
     scripture = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
     private = models.BooleanField(default=False)
+    instruction = models.CharField(max_length=200, blank=True, null=True)
     version = models.ForeignKey( # I believe model translation makes this field not able to prefetch
         BibleVersion, on_delete=models.SET_DEFAULT, default=1
     )
