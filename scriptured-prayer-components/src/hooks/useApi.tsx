@@ -63,9 +63,9 @@ export function useApi() {
 
   return {
     login: (loginRequest: LoginRequest) =>
-      post("login/", toJson(options, loginRequest)),
-    user: () => get<UserResponse>("user/", options),
-    logout: () => post<LogoutResponse>("logout/", withCsrf(options)),
+      post("auth/login/", toJson(options, loginRequest)),
+    user: () => get<UserResponse>("auth/user/", options),
+    logout: () => post<LogoutResponse>("auth/logout/", withCsrf(options)),
     usercards: () => get<UserCardResponse[]>("usercards/?format=json", options),
   };
 }
