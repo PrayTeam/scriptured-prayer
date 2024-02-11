@@ -7,4 +7,5 @@ class PrayerappConfig(AppConfig):
 
     def ready(self) -> None:
         import prayerapp.schema
+
         return super().ready()

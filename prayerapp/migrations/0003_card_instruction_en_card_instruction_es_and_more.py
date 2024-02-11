@@ -6,28 +6,28 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('prayerapp', '0002_card_instruction_category_default_instruction_and_more'),
+        ("prayerapp", "0002_card_instruction_category_default_instruction_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='card',
-            name='instruction_en',
+            model_name="card",
+            name="instruction_en",
             field=models.CharField(blank=True, max_length=200, null=True),
         ),
         migrations.AddField(
-            model_name='card',
-            name='instruction_es',
+            model_name="card",
+            name="instruction_es",
             field=models.CharField(blank=True, max_length=200, null=True),
         ),
         migrations.AddField(
-            model_name='category',
-            name='default_instruction_en',
+            model_name="category",
+            name="default_instruction_en",
             field=models.CharField(max_length=200, null=True),
         ),
         migrations.AddField(
-            model_name='category',
-            name='default_instruction_es',
+            model_name="category",
+            name="default_instruction_es",
             field=models.CharField(max_length=200, null=True),
         ),
     ]

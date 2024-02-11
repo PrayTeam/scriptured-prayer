@@ -1,20 +1,29 @@
 from typing import Any
 
+import django_filters
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
-from django.views.generic import TemplateView, UpdateView
 from django.utils import timezone
+from django.views.generic import TemplateView, UpdateView
+from rest_framework import permissions, status, viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 from .forms import UserCardNoteFormSet, UserCategoryOptionsFormSet, UserProfileForm
-from .models import Category, Card, UserCard, UserCategoryOptions, UserProfile, UserCardPrayedLog
-from .serializers import CardSerializer, UserCardSerializer, CategorySerializer
-from rest_framework import viewsets, permissions, status
-from rest_framework.response import Response
-from rest_framework.decorators import action
-import django_filters
+from .models import (
+    Card,
+    Category,
+    UserCard,
+    UserCardPrayedLog,
+    UserCategoryOptions,
+    UserProfile,
+)
+from .serializers import CardSerializer, CategorySerializer, UserCardSerializer
+
 
 class IndexView(TemplateView):
     template_name = "prayerapp/index.html"
+
 
 class UserCardDetailView(LoginRequiredMixin, UpdateView):
     model = UserCard
@@ -60,9 +69,7 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
     def form_valid(self, form):
-        form = UserProfileForm(
-            self.request.POST, request=self.request, instance=self.object
-        )
+        form = UserProfileForm(self.request.POST, request=self.request, instance=self.object)
         formset = UserCategoryOptionsFormSet(
             self.request.POST,
             queryset=UserCategoryOptions.objects.filter(user=self.request.user),
@@ -76,55 +83,65 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
     def get_success_url(self) -> str:
         return reverse("prayerapp:userprofile_update")
 
+
 class UserCardFilter(django_filters.FilterSet):
-    limit = django_filters.NumberFilter(method='limit_filter')
+    limit = django_filters.NumberFilter(method="limit_filter")
 
     class Meta:
         model = UserCard
         fields = {
-            'card__category__name': ['exact'],
-            'card__category__genre': ['exact'],
-            'answered': ['exact'],
-            'hidden': ['exact'],
-            'in_prayer_deck': ['exact'],
+            "card__category__name": ["exact"],
+            "card__category__genre": ["exact"],
+            "answered": ["exact"],
+            "hidden": ["exact"],
+            "in_prayer_deck": ["exact"],
         }
 
     def limit_filter(self, queryset, name, value):
         """Filter the queryset to return a certain number of usercards divided evenly across the category."""
-        categories = queryset.values_list('card__category', flat=True).distinct()
+        categories = queryset.values_list("card__category", flat=True).distinct()
+        if len(categories) == 0:
+            return queryset.none()
         if len(categories) == 1:
             return queryset.order_by("-last_prayed")[:value]
-        count_each_category = value//len(categories)
+        count_each_category = value // len(categories)
         remainder = value % len(categories)
         new_queryset = queryset.none()
         for category in categories:
             if remainder > 0:
-                new_queryset |= queryset.filter(card__category=category).order_by("-last_prayed")[:count_each_category+1]
+                new_queryset |= queryset.filter(card__category=category).order_by("-last_prayed")[
+                    : count_each_category + 1
+                ]
                 remainder -= 1
             else:
                 new_queryset |= queryset.filter(card__category=category).order_by("-last_prayed")[:count_each_category]
         return new_queryset
 
+
 class CardFilter(django_filters.FilterSet):
     """Filter the queryset to return a certain number of cards divided evenly across the category."""
-    limit = django_filters.NumberFilter(method='limit_filter')
+
+    limit = django_filters.NumberFilter(method="limit_filter")
+
     class Meta:
         model = Card
         fields = {
-            'category__name': ['exact'],
-            'category__genre': ['exact'],
+            "category__name": ["exact"],
+            "category__genre": ["exact"],
         }
 
     def limit_filter(self, queryset, name, value):
-        categories = queryset.values_list('category', flat=True).distinct().order_by("?")
+        categories = queryset.values_list("category", flat=True).distinct().order_by("?")
+        if len(categories) == 0:
+            return queryset.none()
         if len(categories) == 1:
             return queryset.order_by("last_prayed")[:value]
-        count_each_category = value//len(categories)
+        count_each_category = value // len(categories)
         remainder = value % len(categories)
         new_queryset = queryset.none()
         for category in categories:
             if remainder > 0:
-                new_queryset |= queryset.filter(category=category).order_by("?")[:count_each_category+1]
+                new_queryset |= queryset.filter(category=category).order_by("?")[: count_each_category + 1]
                 remainder -= 1
             else:
                 new_queryset |= queryset.filter(category=category).order_by("?")[:count_each_category]
@@ -138,9 +155,11 @@ class UserCardViewSet(viewsets.ModelViewSet):
     filterset_class = UserCardFilter
 
     def get_queryset(self):
-        return UserCard.objects.filter(user=self.request.user).prefetch_related("card", "card__category",  "usercardnote_set")
-    
-    @action(detail=True, methods=['post'])
+        return UserCard.objects.filter(user=self.request.user).prefetch_related(
+            "card", "card__category", "usercardnote_set"
+        )
+
+    @action(detail=True, methods=["post"])
     def log_prayer(self, request, pk=None, **kwargs):
         print("hello from usercardviewset")
         usercard = self.get_object()
@@ -151,6 +170,7 @@ class UserCardViewSet(viewsets.ModelViewSet):
         UserCardPrayedLog.objects.create(usercard=usercard)
         return Response(status=status.HTTP_201_CREATED)
 
+
 class CardViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CardSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -159,8 +179,9 @@ class CardViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         return Card.objects.all().prefetch_related("category")
-    
+
+
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CategorySerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]  
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Category.objects.all()
