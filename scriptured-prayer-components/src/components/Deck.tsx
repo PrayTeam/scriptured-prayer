@@ -20,7 +20,7 @@ export function Deck({
   return (
     <div
       onClick={onClick}
-      className={`flex-[0_0_auto] flex flex-col relative w-full items-center mb-4 overflow-clip rounded-xl text-white ${scaleOnHover ? "md:hover:scale-105" : ""} lg:w-[400px] h-[550px] ease-out duration-300 cursor-pointer`}
+      className={`flex flex-col relative w-full items-center mb-4 overflow-clip rounded-xl text-white ${scaleOnHover ? "md:hover:scale-105" : "flex-[0_0_auto]"} lg:w-[400px] h-[550px] ease-out duration-300 cursor-pointer`}
     >
       <div
         style={{ backgroundImage: `url('${image}')` }}
