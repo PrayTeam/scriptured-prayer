@@ -74,11 +74,13 @@ class BibleBook(models.TextChoices):
     JUDE = "JUD", _("Jude")
     REVELATION = "REV", _("Revelation")
 
+
 class CategoryGenre(models.TextChoices):
     PRAISE = "PR", _("Praise")
     REQUEST = "RQ", _("Request")
     CONFESSION = "CF", _("Confession")
     THANKSGIVING = "TG", ("Thanksgiving")
+
 
 class AuditModel(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
@@ -103,17 +105,14 @@ class AuditModel(models.Model):
 
 
 class UserProfile(AuditModel):
-    user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, primary_key=True
-    )
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, primary_key=True)
     cards_per_day = models.IntegerField(default=10)
-    prayer_deck_last_updated = models.DateTimeField(
-        _("prayer deck last updated"), blank=True, null=True
-    )
+    prayer_deck_last_updated = models.DateTimeField(_("prayer deck last updated"), blank=True, null=True)
 
     def __str__(self) -> str:
         return f"User profile: {self.user.username}"
-    
+
+
 class BibleVersion(models.Model):
     name = models.CharField(max_length=50)
     abbreviation = models.CharField(max_length=10, unique=True)
@@ -122,6 +121,7 @@ class BibleVersion(models.Model):
 
     def __str__(self) -> str:
         return f"{self.name} ({self.abbreviation})"
+
 
 class BibleVerse(models.Model):
     version = models.ForeignKey(BibleVersion, on_delete=models.CASCADE)
@@ -136,11 +136,13 @@ class BibleVerse(models.Model):
     def __str__(self) -> str:
         return f"{self.book} {self.chapter}:{self.verse} ({self.version.abbreviation})"
 
+
 class Category(AuditModel):
     name = models.CharField(max_length=50, unique=True)
     genre = models.CharField(max_length=2, choices=CategoryGenre.choices)
     inspiration = models.CharField(max_length=600)
     default_instruction = models.CharField(max_length=200)
+
     class Meta:
         verbose_name_plural = _("categories")
 
@@ -155,7 +157,7 @@ class Card(AuditModel):
     description = models.CharField(max_length=500)
     private = models.BooleanField(default=False)
     instruction = models.CharField(max_length=200, blank=True, null=True)
-    version = models.ForeignKey( # I believe model translation makes this field not able to prefetch
+    version = models.ForeignKey(  # I believe model translation makes this field not able to prefetch
         BibleVersion, on_delete=models.SET_DEFAULT, default=1
     )
 
@@ -206,9 +208,7 @@ class UserCategoryOptions(AuditModel):
 
 class UserCardPrayedLog(models.Model):
     usercard = models.ForeignKey(UserCard, on_delete=models.CASCADE)
-    date_prayed = models.DateTimeField(
-        _("date prayed"), blank=True, null=True, auto_now_add=True
-    )
+    date_prayed = models.DateTimeField(_("date prayed"), blank=True, null=True, auto_now_add=True)
 
     def __str__(self) -> str:
         return f"{self.usercard.user.username} - {self.usercard.card.title} in prayer on {self.prayerdeck.date}"
@@ -224,6 +224,7 @@ class CardScriptureJson(models.Model):
 
     def __str__(self) -> str:
         return f"{self.card.title} ({self.bible_version.abbreviation})"
+
 
 ## Signals ##
 
@@ -249,19 +250,16 @@ def create_related_objects_for_user(instance, created, **kwargs):
             usercard = UserCard.objects.create(user=instance, card=card)
             usercard.save()
         for category in Category.objects.all():
-            option = UserCategoryOptions.objects.create(
-                user=instance, category=category
-            )
+            option = UserCategoryOptions.objects.create(user=instance, category=category)
             option.save()
         userprofile = UserProfile.objects.create(user=instance)
         userprofile.save()
+
 
 @receiver(post_save, sender=Category)
 def create_related_objects_for_category(instance, created, **kwargs):
     """When a new category is created, create a UserCategoryOption for each user."""
     if created:
         for user in User.objects.all():
-            option = UserCategoryOptions.objects.create(
-                user=user, category=instance
-            )
+            option = UserCategoryOptions.objects.create(user=user, category=instance)
             option.save()

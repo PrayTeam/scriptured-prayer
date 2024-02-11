@@ -6,40 +6,48 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('prayerapp', '0001_initial'),
+        ("prayerapp", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='card',
-            name='instruction',
+            model_name="card",
+            name="instruction",
             field=models.CharField(blank=True, max_length=200, null=True),
         ),
         migrations.AddField(
-            model_name='category',
-            name='default_instruction',
-            field=models.CharField(default='default', max_length=200),
+            model_name="category",
+            name="default_instruction",
+            field=models.CharField(default="default", max_length=200),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='category',
-            name='inspiration',
-            field=models.CharField(default='default', max_length=600),
+            model_name="category",
+            name="inspiration",
+            field=models.CharField(default="default", max_length=600),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='category',
-            name='inspiration_en',
+            model_name="category",
+            name="inspiration_en",
             field=models.CharField(max_length=600, null=True),
         ),
         migrations.AddField(
-            model_name='category',
-            name='inspiration_es',
+            model_name="category",
+            name="inspiration_es",
             field=models.CharField(max_length=600, null=True),
         ),
         migrations.AlterField(
-            model_name='category',
-            name='genre',
-            field=models.CharField(choices=[('PR', 'Praise'), ('RQ', 'Request'), ('CF', 'Confession'), ('TG', 'Thanksgiving')], max_length=2),
+            model_name="category",
+            name="genre",
+            field=models.CharField(
+                choices=[
+                    ("PR", "Praise"),
+                    ("RQ", "Request"),
+                    ("CF", "Confession"),
+                    ("TG", "Thanksgiving"),
+                ],
+                max_length=2,
+            ),
         ),
     ]

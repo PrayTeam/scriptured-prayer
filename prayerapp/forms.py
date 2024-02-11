@@ -1,5 +1,6 @@
 from django import forms
-from .models import UserProfile, UserCard, UserCardNote, UserCategoryOptions
+
+from .models import UserCard, UserCardNote, UserCategoryOptions, UserProfile
 
 
 class UserCategoryOptionsForm(forms.ModelForm):
@@ -8,7 +9,7 @@ class UserCategoryOptionsForm(forms.ModelForm):
         fields = ["enabled", "pray_all_cards"]
 
     def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request', None)
+        self.request = kwargs.pop("request", None)
         super().__init__(*args, **kwargs)
 
     def save(self, commit=True):
@@ -19,9 +20,8 @@ class UserCategoryOptionsForm(forms.ModelForm):
         return instance
 
 
-UserCategoryOptionsFormSet = forms.modelformset_factory(
-    UserCategoryOptions, form=UserCategoryOptionsForm, extra=0
-)
+UserCategoryOptionsFormSet = forms.modelformset_factory(UserCategoryOptions, form=UserCategoryOptionsForm, extra=0)
+
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
@@ -29,7 +29,7 @@ class UserProfileForm(forms.ModelForm):
         fields = ["cards_per_day"]
 
     def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request', None)
+        self.request = kwargs.pop("request", None)
         super().__init__(*args, **kwargs)
 
     def save(self, commit=True):
@@ -44,18 +44,19 @@ class UserCardNoteForm(forms.ModelForm):
     class Meta:
         model = UserCardNote
         fields = ["note"]
-        
+
     def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request', None)
+        self.request = kwargs.pop("request", None)
         super().__init__(*args, **kwargs)
-    
+
     def save(self, commit=True):
         instance = super().save(commit=False)
         instance.modified_by = self.request.user
         if commit:
             instance.save()
         return instance
-    
+
+
 UserCardNoteFormSet = forms.inlineformset_factory(
     UserCard, UserCardNote, fields=("note",), form=UserCardNoteForm, extra=1
 )

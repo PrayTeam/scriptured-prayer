@@ -16,16 +16,14 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         version = options["version"]
         ebible_language = options["language"]
-        language = "en" # default to english
+        language = "en"  # default to english
         match options["language"]:
-            case "eng": language = "en"
-            case "spa": language = "es"
+            case "eng":
+                language = "en"
+            case "spa":
+                language = "es"
 
-        self.stdout.write(
-            self.style.SUCCESS(
-                f'Loading bible version "{version}" in language "{language}"'
-            )
-        )
+        self.stdout.write(self.style.SUCCESS(f'Loading bible version "{version}" in language "{language}"'))
 
         zip_url = f"https://ebible.org/Scriptures/{ebible_language}{version}_readaloud.zip"
 
@@ -48,8 +46,9 @@ class Command(BaseCommand):
                             "abbreviation": version.upper(),
                             "language_code": language,
                             "copyright_notice": "<replace me>",
-                        })
-                    
+                        },
+                    )
+
                     with zip_files.open(zipinfo) as file:
                         book = zip_match.group(1)
                         chapter = int(zip_match.group(2))
@@ -65,9 +64,5 @@ class Command(BaseCommand):
                                     verse=verse,
                                     text=line.strip(),
                                 )
-                    
-                    self.stdout.write(
-                        self.style.SUCCESS(
-                            f'Successfully loaded {book} {chapter}'
-                        )
-                    )
+
+                    self.stdout.write(self.style.SUCCESS(f"Successfully loaded {book} {chapter}"))
