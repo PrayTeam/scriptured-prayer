@@ -8,13 +8,6 @@ import { useLocalStorage } from "./hooks";
 import { ProfileContext } from "./hooks";
 import PrayerDeck from "./components/PrayerDeck";
 
-// todo: after MVP
-/*
-function translateRoute(key: string, language: string) {
-
-}
-*/
-
 const getRouter = (language: string) =>
   createBrowserRouter(
     [
@@ -26,7 +19,7 @@ const getRouter = (language: string) =>
         children: [
           { path: "/settings", element: <Settings /> },
           { path: "/home", element: <Home /> },
-          { path: "/prayer-decks", element: <PrayerDeck /> },
+          { path: "/prayer-decks/:name", element: <PrayerDeck /> },
         ],
       },
       { path: "*", element: <NotFound /> },

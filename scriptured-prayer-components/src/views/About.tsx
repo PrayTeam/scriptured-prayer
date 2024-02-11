@@ -1,4 +1,4 @@
-import { Button } from "~/components/advertise";
+import { Button } from "~/components/form";
 import dryGrass from "~/assets/images/dry-grass.jpg";
 
 export function About() {

@@ -1,11 +1,13 @@
 import Cookies from "js-cookie";
 
 import { Profile } from "~/types";
-import { LoginRequest } from "~/api/models/requests";
+import { CardsRequest, LoginRequest } from "~/api/models/requests";
 import {
   UserCardResponse,
   LogoutResponse,
   UserResponse,
+  CategoryResponse,
+  CardResponse,
 } from "~/api/models/responses";
 
 const profile: Profile = JSON.parse(localStorage.getItem("profile")!);
@@ -55,6 +57,21 @@ function withCsrf(options: RequestInit) {
   };
 }
 
+// todo: grab from open api schema
+export const controllers = {
+  auth: "auth",
+  cards: "cards",
+  categories: "categories",
+  userCards: "usercards",
+};
+
+// eslint-disable-next-line
+const parameterizeRequest = (url: string, request?: Record<string, any>) =>
+  `${url}?${(request
+    ? Object.entries(request).map((e) => `${e[0]}=${e[1]}`)
+    : []
+  ).join("&")}`;
+
 export function useApi() {
   const options: RequestInit = {
     headers: {},
@@ -62,10 +79,24 @@ export function useApi() {
   };
 
   return {
-    login: (loginRequest: LoginRequest) =>
-      post("auth/login/", toJson(options, loginRequest)),
-    user: () => get<UserResponse>("auth/user/", options),
-    logout: () => post<LogoutResponse>("auth/logout/", withCsrf(options)),
-    usercards: () => get<UserCardResponse[]>("usercards/?format=json", options),
+    auth: {
+      login: (loginRequest: LoginRequest) =>
+        post("auth/login/", toJson(options, loginRequest)),
+      getUser: () => get<UserResponse>("auth/user/", options),
+      logout: () => post<LogoutResponse>("auth/logout/", withCsrf(options)),
+    },
+    cards: {
+      all: (cardsRequest?: CardsRequest) =>
+        get<CardResponse[]>(
+          parameterizeRequest("cards/", cardsRequest),
+          options,
+        ),
+    },
+    categories: {
+      all: () => get<CategoryResponse[]>("categories/", options),
+    },
+    userCards: {
+      all: () => get<UserCardResponse[]>("usercards/?format=json", options),
+    },
   };
 }
