@@ -10,7 +10,7 @@ class Command(BaseCommand):
     def handle(self, *args: Any, **options: Any) -> str | None:
         all_profiles = UserProfile.objects.all()
         
-        if all_profiles.count == 0:
+        if all_profiles.count() == 0:
             raise CommandError("There are no profiles in the db yet. Create a user first.")
 
         users = [profile.user for profile in all_profiles]
