@@ -42,7 +42,7 @@ function PrayerDeck() {
           modules={[Navigation, Pagination, Keyboard, A11y]}
           spaceBetween="14rem"
           slidesPerView={1}
-          pagination={{ clickable: true }}
+          pagination={{ clickable: true, el: ".pagination-container" }}
           keyboard
         >
           {cards.map((card) => (
@@ -51,6 +51,8 @@ function PrayerDeck() {
             </SwiperSlide>
           ))}
         </Swiper>
+
+        <div className="pagination-container w-full items-center  m-auto px-8"></div>
 
         <Button size="4" className="w-80 mx-auto mt-4 bg-lichen">
           <CheckIcon width="24" height="24" />

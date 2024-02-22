@@ -12,12 +12,13 @@ import clouds from "~/assets/images/clouds.jpg";
 import galaxy from "~/assets/images/galaxy.jpg";
 import dryGrass from "~/assets/images/dry-grass.jpg";
 import readingBible from "~/assets/images/reading-bible.jpg";
-import { theme } from "~/tailwind.config";
+//import { theme } from "~/tailwind.config";
 
 // todo: delete this. it is just a placeholder
 const deckImages = [mountains, forest, galaxy, clouds, dryGrass, readingBible];
 
-const deckColors: (keyof typeof theme.colors)[] = [
+//const deckColors: (keyof typeof theme.colors)[] = [
+const deckColors: string[] = [
   "ocean",
   "olive",
   "obsidian",

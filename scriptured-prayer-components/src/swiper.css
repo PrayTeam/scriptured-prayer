@@ -3,12 +3,12 @@
 .swiper-pagination-custom,
 .swiper-horizontal > .swiper-pagination-bullets,
 .swiper-pagination-bullets.swiper-pagination-horizontal {
-  position: absolute;
+  /* position: absolute;
   bottom: 10px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); */
   /* border:1px solid salmon; */
-  width: 80%;
+  /* width: 80%; */
 }
 
 /* Add your custom styles for pagination bullets */

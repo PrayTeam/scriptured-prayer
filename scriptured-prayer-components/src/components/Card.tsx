@@ -3,7 +3,7 @@ import { CardResponse } from "~/api/models/responses";
 
 export function Card(props: CardResponse) {
   return (
-    <div className="bg-white h-50 py-8 md:py-12 px-6 md:px-16 rounded-md">
+    <div className="bg-white py-8 md:py-12 px-6 md:px-16 my-8 rounded-md min-h-[500px]">
       <Badge
         radius="small"
         size="2"
