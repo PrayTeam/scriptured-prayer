@@ -1,1 +1,3 @@
-export interface LogoutResponse {}
+export interface LogoutResponse {
+  detail: string;
+}

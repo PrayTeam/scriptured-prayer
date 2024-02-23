@@ -4,6 +4,6 @@
  * and more specifically the note on using https://github.com/kentcdodds/babel-plugin-preval
  */
 import resolveConfig from "tailwindcss/resolveConfig";
-import tailwindConfig from "../tailwind.config.js";
+import tailwindConfig from "../tailwind.config";
 
 export const { theme } = resolveConfig(tailwindConfig);

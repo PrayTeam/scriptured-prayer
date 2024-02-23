@@ -1,5 +1,6 @@
 export * from "./PrayerDeck";
-export * from "./UserCard";
+export * from "./Card";
 export * from "./Link";
 export * from "./ProtectedRoutes";
 export * from "./Container";
+export * from "./Deck";

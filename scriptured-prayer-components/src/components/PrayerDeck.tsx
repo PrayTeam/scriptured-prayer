@@ -1,58 +1,63 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Button, Flex, Heading } from "@radix-ui/themes";
 import { CheckIcon } from "@radix-ui/react-icons";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Keyboard, A11y } from "swiper/modules";
+import { Navigation, Pagination, Keyboard, A11y } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 import "~/swiper.css";
-import UserCard from "./UserCard";
 import { useApi } from "~/hooks";
-import { UserCardResponse } from "~/api/models/responses";
+import { CardResponse } from "~/api/models/responses";
+import { Card } from "./Card";
 
 function PrayerDeck() {
   const api = useApi();
-  const [userCards, setUserCards] = useState<UserCardResponse[]>([]);
+  const { name } = useParams();
+  const [cards, setCards] = useState<CardResponse[]>([]);
 
   useEffect(() => {
     (async () => {
-      api
-        .usercards()
+      api.cards
+        .all({ category__name: name })
         .then((cards) => {
-          setUserCards(cards);
+          setCards(cards);
+          console.log(cards);
         })
         .catch((error) => console.error(error));
     })();
   }, []);
 
   return (
-    <>
+    <div className="bg-ocean h-full">
       <Flex direction="column">
-        <Heading size="7" my="4" className="text-black text-center">
-          Today's Prayers
+        <Heading size="7" my="4" className="text-white text-center">
+          {cards.length > 0 ? cards[0].category : "Loading..."}
         </Heading>
 
         <Swiper
-          className="px-2 w-full"
-          modules={[Navigation, Keyboard, A11y]}
+          className="px-2 md:px-12 w-full"
+          modules={[Navigation, Pagination, Keyboard, A11y]}
           spaceBetween="14rem"
           slidesPerView={1}
+          pagination={{ clickable: true }}
           keyboard
         >
-          {userCards.map((userCard) => (
-            <SwiperSlide key={userCard.id}>
-              <UserCard {...userCard} />
+          {cards.map((card) => (
+            <SwiperSlide key={card.id}>
+              <Card {...card} />
             </SwiperSlide>
           ))}
         </Swiper>
 
-        <Button color="blue" size="4" className="w-80 mx-auto mt-4">
+        <Button size="4" className="w-80 mx-auto mt-4 bg-lichen">
           <CheckIcon width="24" height="24" />
           Finish Prayer Session
         </Button>
       </Flex>
-    </>
+    </div>
   );
 }
 

@@ -21,13 +21,13 @@ export function Login() {
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     (async () => {
-      api
+      api.auth
         .login({
           username,
           password,
         })
         .then(() => {
-          api.user().then((user) => {
+          api.auth.getUser().then((user) => {
             setProfile({
               ...profile,
               ...{
