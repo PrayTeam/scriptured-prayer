@@ -11,7 +11,7 @@ export function Settings() {
   const navigate = useNavigate();
 
   const logout = async () => {
-    api
+    api.auth
       .logout()
       .then(() => {
         setProfile({ ...profile, authenticated: false });

@@ -1,41 +1,48 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { ProfilePicture } from "~/components/ProfilePicture";
-import { useProfile } from "~/hooks";
-import forest from "~/assets/images/forest.png";
-import { Container } from "~/components";
+import { useApi, useProfile } from "~/hooks";
+import { Container, Deck } from "~/components";
+import { CategoryResponse } from "~/api/models/responses";
 
-interface PrayerDeckInfoProps {
-  name: string;
-}
+import forest from "~/assets/images/forest.jpg";
+import mountains from "~/assets/images/mountains.jpg";
+import clouds from "~/assets/images/clouds.jpg";
+import galaxy from "~/assets/images/galaxy.jpg";
+import dryGrass from "~/assets/images/dry-grass.jpg";
+import readingBible from "~/assets/images/reading-bible.jpg";
+import { theme } from "~/tailwind.config";
 
-function PrayerDeckInfo(props: PrayerDeckInfoProps) {
-  const navigate = useNavigate();
+// todo: delete this. it is just a placeholder
+const deckImages = [mountains, forest, galaxy, clouds, dryGrass, readingBible];
 
-  return (
-    <div
-      onClick={() => navigate("/prayer-decks")}
-      className="flex-[0_0_auto] w-[250px] h-[250px] md:w-[350px] md:h-[350px] mb-4 bg-no-repeat bg-center bg-cover rounded relative overflow-clip cursor-pointer"
-      style={{ backgroundImage: `url('${forest}')` }}
-    >
-      <div className="absolute w-full h-full bg-gradient-to-br from-indigo from-10% via-sky via-30% to-emerald to-90% opacity-50"></div>
-      <div className="text-white text-3xl font-bold relative z-10 p-6">
-        {props.name}
-      </div>
-    </div>
-  );
-}
+const deckColors: (keyof typeof theme.colors)[] = [
+  "ocean",
+  "olive",
+  "obsidian",
+  "leaf",
+  "indigo",
+  "sky",
+];
 
 export function Home() {
   const navigate = useNavigate();
   const { profile } = useProfile();
-  // todo
-  const [prayerDecks] = useState([
-    { title: "Names of God" },
-    { title: "Names of Jesus" },
-    { title: "Names of the Holy Spirit" },
-  ]);
+
+  const api = useApi();
+  const [categories, setCategories] = useState<CategoryResponse[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      api.categories
+        .all()
+        .then((categories) => {
+          setCategories(categories);
+        })
+        .catch((error) => console.error(error));
+    })();
+  }, []);
 
   return (
     <div className="w-full h-full bg-gradient-to-br from-purple from-10% via-purple via-30% to-blue to-90%">
@@ -52,8 +59,16 @@ export function Home() {
               Prayer Decks
             </h2>
             <div className="flex flex-nowrap md:flex-wrap overflow-x-auto gap-x-4 -mx-6 md:mx-0 px-6 md:px-0">
-              {prayerDecks.map((deck, i) => (
-                <PrayerDeckInfo key={i} name={deck.title} />
+              {categories.map((category, i) => (
+                <Deck
+                  key={i}
+                  title={category.name}
+                  description={"Lorem ipsum dolor sit amet"}
+                  image={deckImages[i]}
+                  color={deckColors[i]}
+                  // todo: use an id instead of category name to retrieve cards
+                  onClick={() => navigate(`/prayer-decks/${category.name}`)}
+                />
               ))}
             </div>
           </div>
