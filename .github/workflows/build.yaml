@@ -1,0 +1,42 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 20.x
+    - name: Run yarn build
+      uses: borales/actions-yarn@v5
+      with:
+        cmd: --build
+
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+        cache: pip
+    - name: Install poetry
+      uses: abatilo/actions-poetry@v3
+    - name: Install dependencies
+      run: |
+        poetry install --no-root
+    - name: Run collectstatic
+      run: poetry run python manage.py collectstatic --noinput
+
+      # Files included in the release are managed in pyproject.toml
+    - name: Create Release
+      uses: python-semantic-release/python-semantic-release@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
