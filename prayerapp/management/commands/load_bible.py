@@ -54,7 +54,7 @@ class Command(BaseCommand):
                         chapter = int(zip_match.group(2))
                         text = file.read().decode("utf-8")
                         # Find and replace Strong's numbers
-                        strongs_pattern = r'|strong=".*"|\|'
+                        strongs_pattern = r'\|strong=".*"'
                         text = re.sub(strongs_pattern, "", text)
                         verse = 0
                         for line in text.splitlines()[2:]:
