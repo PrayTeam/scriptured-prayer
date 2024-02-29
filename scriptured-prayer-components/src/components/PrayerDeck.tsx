@@ -17,6 +17,7 @@ function PrayerDeck() {
   const api = useApi();
   const { name } = useParams();
   const [cards, setCards] = useState<CardResponse[]>([]);
+  const [focus, setFocus] = useState<string>(""); // focus/preamble/inspiration
 
   useEffect(() => {
     (async () => {
@@ -25,6 +26,22 @@ function PrayerDeck() {
         .then((cards) => {
           setCards(cards);
           console.log(cards);
+        })
+        .catch((error) => console.error(error));
+    })();
+
+    // get focus/preamble/inspiration
+    (async () => {
+      api.categories
+        .all() // because api.categories only gets all categories
+        .then((cats) => {
+          const cat = cats.find((cat) => {
+            return cat.name === name;
+          }); // find the category we clicked on
+          const f = cat ? cat.inspiration : "none"; // make sure category exists (it will but tsx be stubborn), get focus f from it
+          // todo: parse f to get rid of weird characters (or change the ' " chars in the spreadsheet)
+          setFocus(f);
+          console.log(cats);
         })
         .catch((error) => console.error(error));
     })();
@@ -45,6 +62,11 @@ function PrayerDeck() {
           pagination={{ clickable: true }}
           keyboard
         >
+          {/* focus card */}
+          <SwiperSlide>
+            <p className="text-white">{focus}</p>
+            {/* todo: make a focus card so we can just pass the whole CategoryResponse in */}
+          </SwiperSlide>
           {cards.map((card) => (
             <SwiperSlide key={card.id}>
               <Card {...card} />
