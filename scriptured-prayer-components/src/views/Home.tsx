@@ -6,6 +6,7 @@ import { useApi, useProfile } from "~/hooks";
 import { Container, Deck } from "~/components";
 import { CategoryResponse } from "~/api/models/responses";
 
+import { Footer } from "~/components";
 import forest from "~/assets/images/forest.jpg";
 import mountains from "~/assets/images/mountains.jpg";
 import clouds from "~/assets/images/clouds.jpg";
@@ -74,6 +75,7 @@ export function Home() {
           </div>
         </div>
       </Container>
+      <Footer></Footer>
     </div>
   );
 }
