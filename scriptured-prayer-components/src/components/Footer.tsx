@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { Button } from "~/components/form";
 
 export function Footer() {
   const navigate = useNavigate();
@@ -24,17 +25,20 @@ export function Footer() {
           </div>
         </div>
         <div className="flex flex-col space-y-4">
-          <h2 className="font-medium">More</h2>
+          <h2 className="font-medium">Support</h2>
           <div className="flex flex-col space-y-2 text-sm dark:text-gray-400">
-            <span>
-              <button onClick={() => navigate("/donate")}>Donate</button>
-            </span>
+            <Button
+              className="bg-blue color-black w-40 border"
+              onClick={() => navigate("/donate")}
+            >
+              Donate
+            </Button>
           </div>
         </div>
         <div className="flex flex-col space-y-4">
           <h2 className="font-medium">Contact Us</h2>
           <div className="flex flex-col space-y-2 text-sm dark:text-gray-400">
-            <a rel="noopener noreferrer" href="#">
+            <a rel="noopener noreferrer" href="https://github.com/PrayTeam">
               GitHub
             </a>
             <a rel="noopener noreferrer" href="#">
@@ -54,12 +58,12 @@ export function Footer() {
           © Copyright 2024. All Rights Reserved.
         </span>
         <span>
-          <a rel="noopener noreferrer" href="#" className="text-gray">
+          <a rel="noopener noreferrer" href="/en/privacy" className="text-gray">
             Privacy Policy
           </a>
         </span>
         <span>
-          <a rel="noopener noreferrer" href="#" className="text-gray">
+          <a rel="noopener noreferrer" href="/en/terms" className="text-gray">
             Terms of Service
           </a>
         </span>
