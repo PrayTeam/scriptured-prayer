@@ -19,7 +19,7 @@ const getRouter = (language: string) =>
         children: [
           { path: "/settings", element: <Settings /> },
           { path: "/home", element: <Home /> },
-          { path: "/prayer-decks/:name", element: <PrayerDeck /> },
+          { path: "/prayer-decks/:id", element: <PrayerDeck /> },
         ],
       },
       { path: "*", element: <NotFound /> },
