@@ -13,16 +13,15 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 
 from django.utils.translation import gettext_lazy as _
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-823e65i1f(y#@jghqoy5f0ee*7q8$ghe7_7eww$i5ha9obfa@b"
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -104,8 +103,12 @@ WSGI_APPLICATION = "scriptured_prayer.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": env('DB_NAME'),
+        "USER": env('DB_USER'),
+        "PASSWORD": env('DB_PASSWORD'),
+        "HOST": "localhost",
+        "PORT": env('DB_PORT'),
     }
 }
 
