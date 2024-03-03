@@ -67,7 +67,7 @@ export function Home() {
                   image={deckImages[i]}
                   color={deckColors[i]}
                   // todo: use an id instead of category name to retrieve cards
-                  onClick={() => navigate(`/prayer-decks/${category.name}`)}
+                  onClick={() => navigate(`/prayer-decks/${category.id}`)}
                 />
               ))}
             </div>
