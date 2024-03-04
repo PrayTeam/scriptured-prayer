@@ -39,14 +39,14 @@ jobs:
     - name: Install poetry
       uses: abatilo/actions-poetry@v3
     - name: Install dependencies
-      run: /root/.local/bin/poetry install --no-root
+      run: poetry install --no-root
     - name: Run collectstatic
-      run: /root/.local/bin/poetry run python manage.py collectstatic --noinput
+      run: poetry run python manage.py collectstatic --noinput
     - name: Generate Requirements file
-      run: /root/.local/bin/poetry export -f requirements.txt --output requirements.txt --without-hashes
+      run: poetry export -f requirements.txt --output requirements.txt --without-hashes
     - name: Get version
       id: semantic-release
-      run: /root/.local/bin/poetry run semantic-release version --print
+      run: poetry run semantic-release version --print
     - name: package the release
       run: |
         mkdir dist
@@ -56,4 +56,4 @@ jobs:
     - name: Upload Release
       env:
         GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-      run: /root/.local/bin/poetry run semantic-release version && /root/.local/bin/poetry run semantic-release publish
+      run: poetry run semantic-release version && poetry run semantic-release publish
