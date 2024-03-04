@@ -2,6 +2,13 @@
 
 
 
+## v0.1.1 (2024-03-04)
+
+### Fix
+
+* fix: include requirements file in release ([`4f8dbf9`](https://github.com/PrayTeam/scriptured-prayer/commit/4f8dbf92e415220bf90fba503a1f2e0f94bb8563))
+
+
 ## v0.1.0 (2024-03-04)
 
 ### Chore
