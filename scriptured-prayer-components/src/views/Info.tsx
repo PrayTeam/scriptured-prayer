@@ -16,19 +16,18 @@ export function Info() {
         className="w-full bg-no-repeat bg-center bg-cover"
       >
         <div className="flex flex-col justify-center items-center">
-          <div className="pt-48 pb-48 px-8 text-white text-center">
+          <div className="flex flex-col md:flex-row uppercase text-white font-bold p-8 md:text-xl lg:text-2xl text-center tracking-widest">
+            <div className="md:mr-2">Guided.</div>
+            <div className="md:mr-2">Consistent.</div>
+            <div className="md:mr-2">Focused.</div>
+          </div>
+          <div className="pt-48 pb-64 px-8 text-white text-center">
             <h1 className="uppercase font-bold text-5xl md:text-6xl lg:text-8xl mb-4">
               Scriptured Prayer
             </h1>
             <p className="text-2xl font-semibold">
               A tool to help maximize your prayer life.
             </p>
-          </div>
-
-          <div className="flex justify-center flex-row uppercase text-white bg-olive w-full opacity-75 font-bold p-8 md:text-xl lg:text-2xl text-center tracking-widest">
-            <div className="mr-4">Guided.</div>
-            <div className="mr-4">Consistent.</div>
-            <div className="mr-4">Focused.</div>
           </div>
         </div>
       </div>
