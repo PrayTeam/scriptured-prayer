@@ -22,6 +22,7 @@ pytest = "^7.4.3"
 django-debug-toolbar = "^4.2.0"
 django-extensions = "^3.2.3"
 radon = "^6.0.1"
+python-semantic-release = "^9.1.1"
 
 [tool.poetry.group.pygraphviz]
 optional = true
@@ -41,6 +42,3 @@ version_variable = [
     "scriptured_prayer/__init__.py:__version__",
     "pyproject.toml:version"
 ]
-
-[tool.semantic_release.publish]
-dist_glob_patterns = ["staticfiles/*", "prayerapp/*", "scriptured_prayer/*", "LICENSE.md", "manage.py", "requirements.txt", "pyproject.toml", "README.md"]
