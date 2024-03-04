@@ -39,19 +39,21 @@ jobs:
     - name: Install poetry
       uses: abatilo/actions-poetry@v3
     - name: Install dependencies
-      run: poetry install --no-root
+      run: /root/.local/bin/poetry install --no-root
     - name: Run collectstatic
-      run: poetry run python manage.py collectstatic --noinput
+      run: /root/.local/bin/poetry run python manage.py collectstatic --noinput
     - name: Generate Requirements file
-      run: poetry export -f requirements.txt --output requirements.txt --without-hashes
+      run: /root/.local/bin/poetry export -f requirements.txt --output requirements.txt --without-hashes
     - name: Get version
       id: semantic-release
-      run: poetry run semantic-release version --print
+      run: /root/.local/bin/poetry run semantic-release version --print
     - name: package the release
       run: |
         mkdir dist
-        tar -czvf dist/scriptured-prayer-${{ steps.semantic-release.outputs.tag }}.tar.gz "prayerapp" "scriptured_prayer" "LICENSE.md" "manage.py" "requirements.txt" "pyproject.toml" "README.md"
+        mkdir scriptured-prayer-${{ steps.semantic-release.outputs.tag }}
+        mv "prayerapp" "scriptured_prayer" "LICENSE.md" "manage.py" "requirements.txt" "README.md" scriptured-prayer-${{ steps.semantic-release.outputs.tag }}
+        tar -czvf dist/scriptured-prayer-${{ steps.semantic-release.outputs.tag }}.tar.gz scriptured-prayer-${{ steps.semantic-release.outputs.tag }}
     - name: Upload Release
       env:
         GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-      run: poetry run semantic-release version && poetry run semantic-release publish
+      run: /root/.local/bin/poetry run semantic-release version && /root/.local/bin/poetry run semantic-release publish
