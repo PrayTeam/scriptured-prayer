@@ -42,6 +42,8 @@ jobs:
       run: poetry install --no-root
     - name: Run collectstatic
       run: poetry run python manage.py collectstatic --noinput
+    - name: Generate Requirements file
+      run: poetry export -f requirements.txt --output requirements.txt --without-hashes
 
       # Files included in the release are managed in pyproject.toml
     - name: Create Release

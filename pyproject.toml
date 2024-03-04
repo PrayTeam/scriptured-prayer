@@ -43,4 +43,4 @@ version_variable = [
 ]
 
 [tool.semantic_release.publish]
-dist_glob_patterns = ["staticfiles/*", "prayerapp/*", "scriptured_prayer/*", "LICENSE.md", "manage.py", "poetry.lock", "pyproject.toml", "README.md"]
+dist_glob_patterns = ["staticfiles/*", "prayerapp/*", "scriptured_prayer/*", "LICENSE.md", "manage.py", "requirements.txt", "pyproject.toml", "README.md"]
