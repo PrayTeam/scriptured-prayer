@@ -51,7 +51,7 @@ jobs:
       run: |
         mkdir dist
         mkdir scriptured-prayer-${{ steps.semantic-release.outputs.tag }}
-        mv "prayerapp" "scriptured_prayer" "LICENSE.md" "manage.py" "requirements.txt" "README.md" scriptured-prayer-${{ steps.semantic-release.outputs.tag }}
+        mv "prayerapp" "scriptured_prayer" "staticfiles" "LICENSE.md" "manage.py" "requirements.txt" "README.md" scriptured-prayer-${{ steps.semantic-release.outputs.tag }}
         tar -czvf dist/scriptured-prayer-${{ steps.semantic-release.outputs.tag }}.tar.gz scriptured-prayer-${{ steps.semantic-release.outputs.tag }}
     - name: Upload Release
       env:
