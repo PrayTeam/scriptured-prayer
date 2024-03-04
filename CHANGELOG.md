@@ -2,6 +2,29 @@
 
 
 
+## v0.1.3 (2024-03-04)
+
+### Chore
+
+* chore: poetry update ([`9239708`](https://github.com/PrayTeam/scriptured-prayer/commit/92397088524c30a5087caa783d1bf3fc11b9735f))
+
+### Ci
+
+* ci: remove full path to poetry ([`d610ba4`](https://github.com/PrayTeam/scriptured-prayer/commit/d610ba43d1d17319a20a1f0a67875d64b11fddc2))
+
+* ci: add tld in the release tarball ([`0c85581`](https://github.com/PrayTeam/scriptured-prayer/commit/0c85581833f341f3aaccfdf667e6c6e76798b246))
+
+* ci: run semantic-release publish with version ([`806ad25`](https://github.com/PrayTeam/scriptured-prayer/commit/806ad25f212a82e67ac2023536fb14358f753860))
+
+### Fix
+
+* fix: add static files to release ([`745fd5e`](https://github.com/PrayTeam/scriptured-prayer/commit/745fd5eb3d5227f736ddbfd8dad53ce4818613fa))
+
+### Unknown
+
+* Merge branch &#39;main&#39; of github.com:PrayTeam/scriptured-prayer ([`938d050`](https://github.com/PrayTeam/scriptured-prayer/commit/938d0508a8e1edb2190e135475e047180232cf64))
+
+
 ## v0.1.2 (2024-03-04)
 
 ### Ci
