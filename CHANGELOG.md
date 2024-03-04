@@ -2,7 +2,7 @@
 
 
 
-## v0.1.0 (2024-02-27)
+## v0.1.0 (2024-03-04)
 
 ### Chore
 
@@ -22,7 +22,13 @@
 
 * chore: add husky commit lint hook ([`a05b841`](https://github.com/PrayTeam/scriptured-prayer/commit/a05b84187a946978e57bb9ac26145fcf616cb741))
 
+### Ci
+
+* ci: initial build workflow ([`7969ad8`](https://github.com/PrayTeam/scriptured-prayer/commit/7969ad88076120d384debaf7c088659b36db6f9b))
+
 ### Feature
+
+* feat: use category ID instead of name for card filter in api ([`54a99eb`](https://github.com/PrayTeam/scriptured-prayer/commit/54a99eb40b6ed1dcf6df73aedf7c1522a3d864b2))
 
 * feat: add improved visuals and routing for mvp pages ([`02cdc24`](https://github.com/PrayTeam/scriptured-prayer/commit/02cdc24f467573586fc94666e1c9b2c3ee64a1e9))
 
@@ -57,6 +63,20 @@
 * feat: add README.md ([`61533cb`](https://github.com/PrayTeam/scriptured-prayer/commit/61533cb63a287348a666bacb3782de54ef631be7))
 
 ### Fix
+
+* fix: use PAT as release token ([`c2e2391`](https://github.com/PrayTeam/scriptured-prayer/commit/c2e2391fcb210ae181936ab97832487b1887ee99))
+
+* fix: install/build from scriptured-prayer-components subdir ([`9b178e4`](https://github.com/PrayTeam/scriptured-prayer/commit/9b178e4c878f16252ab7159fef227e29829a0f0f))
+
+* fix: switch cards request to use category id instead of name (#80) ([`ccd654b`](https://github.com/PrayTeam/scriptured-prayer/commit/ccd654be57edeac20448e91159ad2c519106a163))
+
+* fix: add regex replace to remove strong&#39;s numbers from verses (#71)
+
+* fix: add regex replace to remove strong&#39;s numbers from verses
+
+* fix: fix error in regex string for strong&#39;s number removal ([`f40d398`](https://github.com/PrayTeam/scriptured-prayer/commit/f40d3980e33ebd2132285d739ae2e7b66dac9daf))
+
+* fix: correct visual oddities and make styles more mobile-friendly (#79) ([`b7aabc5`](https://github.com/PrayTeam/scriptured-prayer/commit/b7aabc50e4437916f1b0848301efec856ffd2527))
 
 * fix: resolve tailwind typescript errors ([`ff18652`](https://github.com/PrayTeam/scriptured-prayer/commit/ff18652ee3d285ccd5654d6562adea4f2b3ebfc5))
 
@@ -104,7 +124,31 @@
 
 * refactor: rename spa-prototype to scriptured-prayer-components ([`a4c0925`](https://github.com/PrayTeam/scriptured-prayer/commit/a4c0925fccb3f848a09cb633843174b60b74f6f1))
 
+### Style
+
+* style: change keyword styling
+
+Also a test commit ([`389912b`](https://github.com/PrayTeam/scriptured-prayer/commit/389912b2146bcdd09aa00f347405a894748a9099))
+
 ### Unknown
+
+* Merge pull request #82 from PrayTeam/fix-postinstall
+
+bug: remove components package.json postinstall script ([`db90cba`](https://github.com/PrayTeam/scriptured-prayer/commit/db90cba1a90c9a93cd0bbc338a9549dc55f6d51b))
+
+* Revert &#34;style: change keyword styling&#34;
+
+This reverts commit 389912b2146bcdd09aa00f347405a894748a9099. ([`a5843a0`](https://github.com/PrayTeam/scriptured-prayer/commit/a5843a07681b83d087024c260141694bb10b54fc))
+
+* bug: remove components package.json postinstall script ([`3841bef`](https://github.com/PrayTeam/scriptured-prayer/commit/3841bef10f2c6565bd3ea6f77b6808ad29c77c70))
+
+* Merge pull request #72 from PrayTeam/ci-build
+
+ci: initial build workflow ([`4b83b3d`](https://github.com/PrayTeam/scriptured-prayer/commit/4b83b3ddafcdff6ee070aeadc4682b0466084672))
+
+* Merge pull request #70 from PrayTeam/card-category-id-filter
+
+feat: use category ID instead of name for card filter in api ([`cd67cf1`](https://github.com/PrayTeam/scriptured-prayer/commit/cd67cf1156012aae1eed268300f0dc779eaffe48))
 
 * Merge pull request #66 from PrayTeam/feat/advertisement-visuals
 
