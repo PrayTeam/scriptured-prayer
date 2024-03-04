@@ -44,9 +44,12 @@ jobs:
       run: poetry run python manage.py collectstatic --noinput
     - name: Generate Requirements file
       run: poetry export -f requirements.txt --output requirements.txt --without-hashes
-
-      # Files included in the release are managed in pyproject.toml
-    - name: Create Release
-      uses: python-semantic-release/python-semantic-release@master
-      with:
-        github_token: ${{ secrets.RELEASE_TOKEN }}
+    - name: Get version
+      id: semantic-release
+      run: echo ::set-output name=version::$(semantic-release version --print)
+    - name: package the release
+      run: tar -czvf dist/scriptured-prayer-v{{ tasks.semantic-release.version}}.tar.gz "prayerapp/*" "scriptured_prayer/*" "LICENSE.md" "manage.py" "requirements.txt" "pyproject.toml" "README.md"
+    - name: Upload Release
+      env:
+        GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      run: semantic-release version
