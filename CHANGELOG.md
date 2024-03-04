@@ -2,6 +2,21 @@
 
 
 
+## v0.1.2 (2024-03-04)
+
+### Ci
+
+* ci: run semantic-release from poetry ([`e2efc75`](https://github.com/PrayTeam/scriptured-prayer/commit/e2efc75d309c0f42e0aaa41544da5ed82771420a))
+
+### Fix
+
+* fix: replace github action for semantic-release with script ([`0c93006`](https://github.com/PrayTeam/scriptured-prayer/commit/0c9300672c39fd92b0907ff2b2ce758deec604bf))
+
+### Unknown
+
+* Merge branch &#39;main&#39; of github.com:PrayTeam/scriptured-prayer ([`fbdacb1`](https://github.com/PrayTeam/scriptured-prayer/commit/fbdacb1aee5781b8723fc31d9bf31fea9c3b37e6))
+
+
 ## v0.1.1 (2024-03-04)
 
 ### Fix
