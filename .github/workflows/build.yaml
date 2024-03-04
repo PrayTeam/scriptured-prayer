@@ -54,4 +54,4 @@ jobs:
     - name: Upload Release
       env:
         GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-      run: poetry run semantic-release version
+      run: poetry run semantic-release version && poetry run semantic-release publish
