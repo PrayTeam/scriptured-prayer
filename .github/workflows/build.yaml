@@ -46,10 +46,12 @@ jobs:
       run: poetry export -f requirements.txt --output requirements.txt --without-hashes
     - name: Get version
       id: semantic-release
-      run: echo ::set-output name=version::$(semantic-release version --print)
+      run: poetry run semantic-release version --print
     - name: package the release
-      run: tar -czvf dist/scriptured-prayer-v{{ tasks.semantic-release.version}}.tar.gz "prayerapp/*" "scriptured_prayer/*" "LICENSE.md" "manage.py" "requirements.txt" "pyproject.toml" "README.md"
+      run: |
+        mkdir dist
+        tar -czvf dist/scriptured-prayer-${{ steps.semantic-release.outputs.tag }}.tar.gz "prayerapp" "scriptured_prayer" "LICENSE.md" "manage.py" "requirements.txt" "pyproject.toml" "README.md"
     - name: Upload Release
       env:
         GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-      run: semantic-release version
+      run: poetry run semantic-release version
