@@ -2,6 +2,24 @@
 
 
 
+## v0.3.0 (2024-03-05)
+
+### Feature
+
+* feat: hard code links to Prayer Decks on Info view (#81)
+
+* feat: hard code link to Prayer Decks on Info view
+
+Removed prayer decks from protected routes.
+This gives guest (un-authenticated) users access to the 6 pre-made prayer decks.
+
+* refactor: split demo prayer deck logic into hook and effect
+
+---------
+
+Co-authored-by: Asher Lloyd &lt;asher.jo.lloyd@gmail.com&gt; ([`b0062ad`](https://github.com/PrayTeam/scriptured-prayer/commit/b0062ade933b8579017946a5bd2d35df6d77f5f6))
+
+
 ## v0.2.0 (2024-03-05)
 
 ### Feature
