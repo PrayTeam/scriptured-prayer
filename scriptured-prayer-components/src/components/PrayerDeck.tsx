@@ -11,13 +11,15 @@ import "swiper/css/pagination";
 import "~/swiper.css";
 import { useApi } from "~/hooks";
 import { CardResponse } from "~/api/models/responses";
+import { CategoryResponse } from "~/api/models/responses";
 import { Card } from "./Card";
+import { FocusCard } from "./FocusCard";
 
 function PrayerDeck() {
   const api = useApi();
   const { name } = useParams();
   const [cards, setCards] = useState<CardResponse[]>([]);
-  const [focus, setFocus] = useState<string>(""); // focus/preamble/inspiration
+  const [category, setCategory] = useState<CategoryResponse>();
 
   useEffect(() => {
     (async () => {
@@ -35,17 +37,20 @@ function PrayerDeck() {
       api.categories
         .all() // because api.categories only gets all categories
         .then((cats) => {
-          const cat = cats.find((cat) => {
-            return cat.name === name;
-          }); // find the category we clicked on
-          const f = cat ? cat.inspiration : "none"; // make sure category exists (it will but tsx be stubborn), get focus f from it
-          // todo: parse f to get rid of weird characters (or change the ' " chars in the spreadsheet)
-          setFocus(f);
+          // const cat = cats.find((cat) => {
+          //   return cat.name === name;
+          // }); // find the category we clicked on
+          const cat = cats.find((catitem) => {
+            return catitem.name === name;
+          });
+          //const check = cat[0];
+          console.log(cat);
+          setCategory(cat);
           console.log(cats);
         })
         .catch((error) => console.error(error));
     })();
-  }, []);
+  }, [name]);
 
   return (
     <div className="bg-ocean h-full">
@@ -64,7 +69,7 @@ function PrayerDeck() {
         >
           {/* focus card */}
           <SwiperSlide>
-            <p className="text-white">{focus}</p>
+            <FocusCard {...(category as CategoryResponse)} />
             {/* todo: make a focus card so we can just pass the whole CategoryResponse in */}
           </SwiperSlide>
           {cards.map((card) => (
