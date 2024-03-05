@@ -1,0 +1,213 @@
+---
+
+- name: Install OS Packages
+  become: true
+  dnf:
+    name:
+      - nginx
+      - postgresql-server
+      - postgresql-contrib
+      - supervisor
+      - python-pip
+      - python-virtualenv
+      - https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm
+    state: latest
+    disable_gpg_check: yes
+
+- name: "Find out if PostgreSQL is initialized"
+  become: true
+  become_user: postgres
+  stat:
+    path: "/var/lib/pgsql/data/pg_hba.conf"
+  register: postgres_data
+
+- name: "Initialize PostgreSQL"
+  become: true
+  become_user: postgres
+  command: "postgresql-setup --initdb --unit postgresql"
+  when: not postgres_data.stat.exists
+
+- name: Ensure the PostgreSQL service is running
+  become: true
+  service: name=postgresql state=started enabled=yes
+
+- name: Setup the PostgreSQL database
+  become: true
+  become_user: postgres
+  postgresql_db:
+    name: "{{ db_name }}"
+    encoding: UTF-8
+    state: present
+  register: db_created
+
+- name: Configure the PostgreSQL server timezone
+  become: true
+  become_user: postgres
+  postgresql_set:
+    name: TimeZone
+    value: 'UTC'
+
+- name: Configure the PostgreSQL server transaction isolation
+  become: true
+  become_user: postgres
+  postgresql_set:
+    name: default_transaction_isolation
+    value: 'read committed'
+
+- name: Create the DB password
+  when: db_created.changed
+  set_fact:
+    db_password: "{{ lookup('password', '/dev/null length=15 chars=ascii_letters') }}"
+
+- name: Setup the PostgreSQL user
+  when: db_created.changed
+  become: true
+  become_user: postgres
+  postgresql_user:
+    db: "{{ db_name }}"
+    name: "{{ db_user }}"
+    password: "{{ db_password }}"
+    state: present
+
+- name: Create pg_service.conf
+  become: true
+  become_user: "{{ gunicorn_user }}"
+  template:
+    src: pg_service_conf.j2
+    dest: /home/{{ gunicorn_user }}/.pg_service.conf
+    mode: 0600
+
+- name: Create the PostgreSQL .pgpass file
+  when: db_created.changed
+  become: true
+  become_user: "{{ gunicorn_user }}"
+  template:
+    src: pgpass.j2
+    dest: /home/{{ gunicorn_user }}/.scriptured_prayer_pgpass #We may need to change the location of this file in settings.py
+    mode: 0600
+
+- name: Upgrade/Install Python packages (CI/CD requirements)
+  pip: 
+    name:
+      - pip
+      - github3.py
+    state: latest
+
+- name: Upgrade/Install Python packages (postgres requirements)
+  become: true
+  become_user: postgres
+  pip: 
+    name:
+      - psycopg2-binary
+    state: latest
+
+- name: Create the Gunicorn user
+  become: true
+  user:
+    name: "{{ gunicorn_user }}"
+    state: present
+    shell: /bin/bash
+    createhome: yes
+
+- name: Check if the virtual environment exists
+  become: true
+  become_user: "{{ gunicorn_user }}"
+  stat:
+    path: "{{ virtualenv_path }}"
+  register: virtualenv
+
+- name: Create a virtual environment
+  become: true
+  become_user: "{{ gunicorn_user }}"
+  when: not virtualenv.stat.exists
+  command: virtualenv {{ virtualenv_path }}
+
+- name: Get Scriptured Prayer Latest Release
+  become: true
+  become_user: "{{ gunicorn_user }}"
+  register: release_version
+  community.general.github_release:
+    user: "{{ github_user }}"
+    repo: "{{ github_repo }}"
+    action: latest_release
+
+- name: Set project_path to the latest release
+  set_fact:
+    project_path: "/home/{{ gunicorn_user }}/scriptured-prayer-{{ release_version.tag }}"
+
+- name: Download the latest release
+  become: true
+  become_user: "{{ gunicorn_user }}"
+  get_url:
+    url: "https://github.com/{{ github_user }}/{{ github_repo }}/releases/download/{{ release_version.tag }}/scriptured-prayer-{{ release_version.tag }}.tar.gz"
+    dest: "/home/{{ gunicorn_user }}/"
+
+- name: Extract the latest release
+  become: true
+  become_user: "{{ gunicorn_user }}"
+  unarchive:
+    src: "/home/{{ gunicorn_user }}/scriptured-prayer-{{ release_version.tag }}.tar.gz"
+    dest: "/home/{{ gunicorn_user }}"
+    remote_src: yes
+    creates: "{{ project_path }}"
+
+- name: Install Python packages (app requirements)
+  become: true
+  become_user: "{{ gunicorn_user }}"
+  pip:
+    name:
+      - gunicorn
+      - pip
+    virtualenv: "{{ virtualenv_path }}"
+    state: latest
+
+- name: Install Python packages (app requirements)
+  become: true
+  become_user: "{{ gunicorn_user }}"
+  pip:
+    requirements: "/home/{{ gunicorn_user }}/scriptured-prayer-{{ release_version.tag }}/requirements.txt"
+    virtualenv: "{{ virtualenv_path }}"
+
+- name: Ensure the Supervisord service is running
+  become: true
+  service: name=supervisord state=started enabled=yes
+
+- name: Create the Supervisor config file
+  become: true
+  template: src=supervisor_config.j2
+            dest="{{ supervisor_app_config }}"
+            backup=yes
+  notify: 
+    - Re-read the Supervisor config files
+    - Restart Supervisor
+
+- name: Create or ensure database exists
+  become: true
+  become_user: postgres
+  postgresql_db:
+      db: "{{ db_name }}"
+      encoding: 'UTF-8'
+      lc_collate: 'en_US.UTF-8'
+      lc_ctype: 'en_US.UTF-8'
+      template: 'template0'
+      state: present
+
+- name: Create the Nginx default config file
+  become: true
+  template: src=nginx_site_config.j2
+            dest=/etc/nginx/default.d/{{ project_name }}.conf
+            backup=yes
+  notify: reload nginx
+  tags: nginx
+
+- name: Create the Nginx site config file
+  become: true
+  template: src=nginx_config.j2
+            dest=/etc/nginx/conf.d/{{ project_name }}.conf
+            backup=yes
+  notify: reload nginx
+  tags: nginx
+
+- name: Ensure Nginx service is started
+  service: name=nginx state=started enabled=yes
+  tags: nginx
