@@ -1,30 +1,25 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import forest from "~/assets/images/forest.jpg";
-import mountains from "~/assets/images/mountains.jpg";
-import clouds from "~/assets/images/clouds.jpg";
-import galaxy from "~/assets/images/galaxy.jpg";
-import dryGrass from "~/assets/images/dry-grass.jpg";
-import readingBible from "~/assets/images/reading-bible.jpg";
-
-import { theme } from "~/tailwind.config";
-
-// todo: delete this. it is just a placeholder
-const deckImages = [mountains, forest, galaxy, clouds, dryGrass, readingBible];
-
-const deckColors: (keyof typeof theme.colors)[] = [
-  "ocean",
-  "olive",
-  "obsidian",
-  "leaf",
-  "indigo",
-  "sky",
-];
-
 import { Deck } from "~/components";
+import { DemoPrayerDeck } from "~/types";
+import { useDemoPrayerDecks } from "~/hooks";
+import forest from "~/assets/images/forest.jpg";
 
 export function Info() {
   const navigate = useNavigate();
+  const demoPrayerDecks = useDemoPrayerDecks();
+  const [prayerDecks, setPrayerDecks] = useState<DemoPrayerDeck[][]>([]);
+
+  useEffect(() => {
+    (async () => {
+      demoPrayerDecks
+        .then((decks) => {
+          setPrayerDecks(decks);
+        })
+        .catch((error) => console.error(error));
+    })();
+  }, []);
 
   return (
     <>
@@ -96,66 +91,23 @@ export function Info() {
         </div>
       </div>
       <div className="bg-lichen">
-        <div className="px-6 pt-8  md:space-x-12 max-w-screen-xl mx-auto">
-          <div className="flex flex-col lg:flex-row w-full lg:space-x-12 justify-center ">
-            <Deck
-              title="God Is"
-              description={
-                '"God" is verses act as a checkup for your relationship...'
-              }
-              image={deckImages[2 - 1]}
-              color={deckColors[2 - 1]}
-              scaleOnHover
-              onClick={() => navigate("/prayer-decks/2")}
-            />
-            <Deck
-              title="In Christ"
-              description="When we become Christians, it's not simply a label..."
-              image={deckImages[5 - 1]}
-              color={deckColors[5 - 1]}
-              scaleOnHover
-              onClick={() => navigate("/prayer-decks/5")}
-            />
-            <Deck
-              title="Promises of God"
-              description="Believing God's promises is how the men and women..."
-              image={deckImages[6 - 1]}
-              color={deckColors[6 - 1]}
-              scaleOnHover
-              onClick={() => navigate("/prayer-decks/6")}
-            />
+        {prayerDecks.map((row, i) => (
+          <div
+            key={i}
+            className="px-6 pt-8  md:space-x-12 max-w-screen-xl mx-auto"
+          >
+            <div className="flex flex-col lg:flex-row w-full lg:space-x-12 justify-center">
+              {row.map(({ id, ...c }, j) => (
+                <Deck
+                  key={j}
+                  {...c}
+                  scaleOnHover
+                  onClick={() => navigate(`/prayer-decks/${id}`)}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-        <div className="px-6 pb-8 md:py-8 md:space-x-12 max-w-screen-xl mx-auto">
-          <div className="flex flex-col lg:flex-row w-full lg:space-x-12 justify-center ">
-            <Deck
-              title="Names of God"
-              description="Look upon God and grow in love with Him..."
-              image={deckImages[1 - 1]}
-              color={deckColors[1 - 1]}
-              scaleOnHover
-              onClick={() => navigate("/prayer-decks/1")}
-            />
-
-            <Deck
-              title="Names of Jesus"
-              description="Meditate on the names of Jesus and see the overflow of God’s heart..."
-              image={deckImages[3 - 1]}
-              color={deckColors[3 - 1]}
-              scaleOnHover
-              onClick={() => navigate("/prayer-decks/3")}
-            />
-
-            <Deck
-              title="Names of the Holy Spirit"
-              description="When you meditate on these verses and see what the Spirit does for you..."
-              image={deckImages[4 - 1]}
-              color={deckColors[4 - 1]}
-              scaleOnHover
-              onClick={() => navigate("/prayer-decks/4")}
-            />
-          </div>
-        </div>
+        ))}
       </div>
     </>
   );
