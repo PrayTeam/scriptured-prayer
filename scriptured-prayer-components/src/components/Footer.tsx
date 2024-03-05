@@ -5,8 +5,9 @@ export function Footer() {
   const navigate = useNavigate();
 
   return (
-    <footer className="p-6 dark:bg-gray-800 dark:text-gray-100 bg-olive text-white">
-      <div className="container grid grid-cols-2 mx-auto gap-x-3 gap-y-8 sm:grid-cols-3 md:grid-cols-4">
+    <footer className="p-6 dark:bg-gray-800 dark:text-gray-100 bg-lichen text-white">
+      <div className="p-3 text-obsidian font-semibold">___________________</div>
+      <div className="p-3 container grid grid-cols-2 mx-auto gap-x-3 gap-y-8 sm:grid-cols-3 md:grid-cols-4">
         <div className="flex flex-col space-y-4">
           <h1 className="text-2xl font-bold">Scriptured Prayer</h1>
           <h2 className="font-medium">Logo placeholder</h2>
@@ -15,7 +16,7 @@ export function Footer() {
           <h2 className="font-semibold text-base">Useful Links</h2>
           <div className="flex flex-col space-y-2 font-light dark:text-gray-400">
             {/* TODO: fix these links to work with Spanish */}
-            <a href="/en/about" className="hover:underline ">
+            <a href="/en/about" className="hover:underline">
               About Us
             </a>
             <a href="/en/info" className="hover:underline">
@@ -30,16 +31,16 @@ export function Footer() {
         <div className="flex flex-col space-y-4">
           <h2 className="font-semibold text-base">Contact Us</h2>
           <div className="flex flex-col space-y-2 dark:text-gray-400">
-            <a rel="noopener noreferrer" href="https://github.com/PrayTeam">
+            <a rel="noopener noreferrer" href="https://github.com/PrayTeam" className="hover:underline">
               GitHub
             </a>
-            <a rel="noopener noreferrer" href="#">
+            <a rel="noopener noreferrer" href="#" className="hover:underline">
               Discord
             </a>
-            <a rel="noopener noreferrer" href="#">
+            <a rel="noopener noreferrer" href="#" className="hover:underline">
               Facebook
             </a>
-            <a rel="noopener noreferrer" href="#">
+            <a rel="noopener noreferrer" href="#" className="hover:underline">
               Email
             </a>
           </div>
