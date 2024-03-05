@@ -75,7 +75,9 @@ export function Home() {
           </div>
         </div>
       </Container>
-      <Footer></Footer>
+      <Footer
+      color="olive"
+      />
     </div>
   );
 }
