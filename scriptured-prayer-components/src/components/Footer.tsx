@@ -1,12 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "~/components/form";
+import { theme } from "~/tailwind.config";
 
-export function Footer() {
+interface footProps {
+  color: keyof typeof theme.colors;
+}
+
+export function Footer({ color }: footProps) {
   const navigate = useNavigate();
 
   return (
-    <footer className="p-6 dark:bg-gray-800 dark:text-gray-100 bg-lichen text-white">
-      <div className="p-3 text-obsidian font-semibold">___________________</div>
+    <footer
+      className="p-6 dark:bg-gray-800 dark:text-gray-100 text-white"
+      style={{ backgroundColor: theme.colors[color] }}
+    >
       <div className="p-3 container grid grid-cols-2 mx-auto gap-x-3 gap-y-8 sm:grid-cols-3 md:grid-cols-4">
         <div className="flex flex-col space-y-4">
           <h1 className="text-2xl font-bold">Scriptured Prayer</h1>
@@ -31,7 +38,11 @@ export function Footer() {
         <div className="flex flex-col space-y-4">
           <h2 className="font-semibold text-base">Contact Us</h2>
           <div className="flex flex-col space-y-2 dark:text-gray-400">
-            <a rel="noopener noreferrer" href="https://github.com/PrayTeam" className="hover:underline">
+            <a
+              rel="noopener noreferrer"
+              href="https://github.com/PrayTeam"
+              className="hover:underline"
+            >
               GitHub
             </a>
             <a rel="noopener noreferrer" href="#" className="hover:underline">
