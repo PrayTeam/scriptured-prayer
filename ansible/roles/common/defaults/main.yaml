@@ -1,0 +1,17 @@
+---
+
+github_repo: "scriptured-prayer"
+github_user: "PrayTeam"
+project_name: scriptured_prayer
+application_name: prayerapp
+application_log_file: /var/log/supervisor/{{ project_name }}.log
+virtualenv_path: /home/gunicorn/.virtualenvs/scriptured-prayer
+gunicorn_user: gunicorn
+gunicorn_group: gunicorn
+gunicorn_num_workers: 3
+gunicorn_max_requests: 0
+supervisor_app_config: "/etc/supervisord.d/{{ project_name }}.ini"
+db_host: localhost
+db_name: scriptured_prayer_db
+db_user: scriptured_prayer_user
+db_port: 5432
