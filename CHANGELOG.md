@@ -2,6 +2,25 @@
 
 
 
+## v0.2.0 (2024-03-05)
+
+### Feature
+
+* feat: separate dev settings ([`02cf6db`](https://github.com/PrayTeam/scriptured-prayer/commit/02cf6db022d419a33a2d85e53fae9f4b9652a9c9))
+
+### Fix
+
+* fix: collect static error in ci ([`9868201`](https://github.com/PrayTeam/scriptured-prayer/commit/9868201257c7dfd71d4b7de1252770044fce1a7e))
+
+* fix: poetry error in ci ([`50951f8`](https://github.com/PrayTeam/scriptured-prayer/commit/50951f897020fac49588057cc0033df855d0294c))
+
+### Unknown
+
+* Merge pull request #83 from PrayTeam/separate-django-dev-settigns
+
+feat: separate dev settings ([`774e7cb`](https://github.com/PrayTeam/scriptured-prayer/commit/774e7cb0496457f38b69b812b25e08daeae15571))
+
+
 ## v0.1.3 (2024-03-04)
 
 ### Chore
