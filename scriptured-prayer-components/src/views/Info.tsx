@@ -1,13 +1,25 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import forest from "~/assets/images/forest.jpg";
-import mountains from "~/assets/images/mountains.jpg";
-import clouds from "~/assets/images/clouds.jpg";
-import galaxy from "~/assets/images/galaxy.jpg";
 import { Deck } from "~/components";
+import { DemoPrayerDeck } from "~/types";
+import { useDemoPrayerDecks } from "~/hooks";
+import forest from "~/assets/images/forest.jpg";
 
 export function Info() {
   const navigate = useNavigate();
+  const demoPrayerDecks = useDemoPrayerDecks();
+  const [prayerDecks, setPrayerDecks] = useState<DemoPrayerDeck[][]>([]);
+
+  useEffect(() => {
+    (async () => {
+      demoPrayerDecks
+        .then((decks) => {
+          setPrayerDecks(decks);
+        })
+        .catch((error) => console.error(error));
+    })();
+  }, []);
 
   return (
     <>
@@ -79,36 +91,23 @@ export function Info() {
         </div>
       </div>
       <div className="bg-lichen">
-        <div className="px-6 py-8 md:py-16 md:space-x-12 max-w-screen-xl mx-auto">
-          <div className="flex flex-col lg:flex-row w-full lg:space-x-12 justify-between">
-            <Deck
-              title="God Is"
-              description={
-                '"God" is verses act as a checkup for your relationship...'
-              }
-              image={mountains}
-              color="stone"
-              scaleOnHover
-              onClick={() => navigate("/home")}
-            />
-            <Deck
-              title="In Christ"
-              description="When we become Christians, it's not simply a label..."
-              image={clouds}
-              color="leaf"
-              scaleOnHover
-              onClick={() => navigate("/home")}
-            />
-            <Deck
-              title="Promises of God"
-              description="Believing God's promises is how the men and women..."
-              image={galaxy}
-              color="obsidian"
-              scaleOnHover
-              onClick={() => navigate("/home")}
-            />
+        {prayerDecks.map((row, i) => (
+          <div
+            key={i}
+            className="px-6 pt-8  md:space-x-12 max-w-screen-xl mx-auto"
+          >
+            <div className="flex flex-col lg:flex-row w-full lg:space-x-12 justify-center">
+              {row.map(({ id, ...c }, j) => (
+                <Deck
+                  key={j}
+                  {...c}
+                  scaleOnHover
+                  onClick={() => navigate(`/prayer-decks/${id}`)}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     </>
   );
