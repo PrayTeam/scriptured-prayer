@@ -60,9 +60,9 @@ export function Footer({ color, text }: footProps) {
 
         <div className="flex flex-col space-y-4">
           <h2 className="font-semibold text-base">Support</h2>
-          <div className="flex flex-col space-y-2 dark:text-gray-400">
+          <div className="flex flex-col space-y-2 dark:text-gray-400 w-24">
             <Button
-              className="w-24 border border-stone bg-leaf hover:scale-105 transition duration-150"
+              className="border border-stone bg-leaf hover:scale-105 transition duration-150"
               onClick={() => navigate("/donate")}
             >
               Donate
@@ -70,18 +70,13 @@ export function Footer({ color, text }: footProps) {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-left pt-12 text-sm flex-row space-x-8">
+      <div className="flex items-center justify-center pt-12 text-sm flex-row space-x-8">
         <span className="dark:text-gray-400">
           © Copyright 2024. All Rights Reserved.
         </span>
         <span>
           <a href="/en/privacy" className="text-gray hover:underline">
             Privacy Policy
-          </a>
-        </span>
-        <span>
-          <a href="/en/terms" className="text-gray hover:underline">
-            Terms of Service
           </a>
         </span>
       </div>
