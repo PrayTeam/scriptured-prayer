@@ -7,6 +7,7 @@ import { ProtectedRoutes } from "./components";
 import { useLocalStorage } from "./hooks";
 import { ProfileContext } from "./hooks";
 import PrayerDeck from "./components/PrayerDeck";
+import Privacy from "./views/Privacy";
 
 const getRouter = (language: string) =>
   createBrowserRouter(
@@ -14,6 +15,7 @@ const getRouter = (language: string) =>
       { path: "/", element: <Info /> },
       { path: "/login", element: <Login /> },
       { path: "/about", element: <About /> },
+      { path: "/privacy", element: <Privacy /> },
       {
         element: <ProtectedRoutes />,
         children: [
