@@ -76,7 +76,7 @@ export function Home() {
         </div>
       </Container>
       <Footer
-      color="olive"
+      color="bg-gradient-to-br from-purple from-10% via-purple via-30% to-blue to-90%"
       />
     </div>
   );
