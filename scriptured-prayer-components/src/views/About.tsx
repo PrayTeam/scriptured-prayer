@@ -1,7 +1,9 @@
 import { Button } from "~/components/form";
-import dryGrass from "~/assets/images/dry-grass.jpg";
-import blueSunset from "~/assets/images/blue-sunset.jpg";
-import genericMan from "~/assets/images/generic-man.png";
+// import dryGrass from "~/assets/images/dry-grass.jpg";
+// import blueSunset from "~/assets/images/blue-sunset.jpg";
+// import genericMan from "~/assets/images/generic-man.png";
+import randomGuy from "~/assets/images/random-guy.jpg";
+import randomGirl from "~/assets/images/random-girl.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Keyboard, A11y } from "swiper/modules";
 import "swiper/css";
@@ -50,8 +52,8 @@ export function About() {
             <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col">
               <div className="relative">
                 <img
-                  src={dryGrass}
-                  className="md:block flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
+                  src={randomGuy}
+                  className="md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
                 ></img>
                 <div className="bg-opacity-50 bg-white absolute w-full h-1/6 bottom-0 flex items-center place-content-center">
                   <h1 className="text-center text-3xl">Judah Rininger</h1>
@@ -66,8 +68,8 @@ export function About() {
             <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col">
               <div className="relative">
                 <img
-                  src={blueSunset}
-                  className="md:block flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
+                  src={randomGirl}
+                  className="md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
                 ></img>
                 <div className="bg-opacity-50 bg-white absolute w-full h-1/6 bottom-0 flex items-center place-content-center">
                   <h1 className="text-center text-3xl">Judah Rininger</h1>
@@ -82,8 +84,8 @@ export function About() {
             <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col">
               <div className="relative">
                 <img
-                  src={dryGrass}
-                  className="md:block flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
+                  src={randomGuy}
+                  className="md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
                 ></img>
                 <div className="bg-opacity-50 bg-white absolute w-full h-1/6 bottom-0 flex items-center place-content-center">
                   <h1 className="text-center text-3xl">Judah Rininger</h1>
@@ -97,8 +99,8 @@ export function About() {
             </SwiperSlide>
             <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col">
               <img
-                src={dryGrass}
-                className=" md:block flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
+                src={randomGirl}
+                className=" md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
               ></img>
               <div className=" flex flex-col  place-items-center shadow-inner bg-[#9da1a1] text-lg w-full rounded-b-3xl">
                 <h1 className="text-center text-3xl p-3 border-b w-2/3">
@@ -113,8 +115,8 @@ export function About() {
             </SwiperSlide>
             <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col">
               <img
-                src={genericMan}
-                className=" md:block flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
+                src={randomGuy}
+                className=" md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
               ></img>
               <div className=" flex flex-col  place-items-center shadow-inner bg-[#9da1a1] text-lg w-full rounded-b-3xl">
                 <h1 className="text-center text-3xl p-3 border-b w-2/3">
@@ -129,8 +131,8 @@ export function About() {
             </SwiperSlide>
             <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col">
               <img
-                src={dryGrass}
-                className=" md:block flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
+                src={randomGirl}
+                className=" md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
               ></img>
               <div className=" flex flex-col  place-items-center shadow-inner bg-[#9da1a1] text-lg w-full rounded-b-3xl">
                 <h1 className="text-center text-3xl p-3 border-b w-2/3">
