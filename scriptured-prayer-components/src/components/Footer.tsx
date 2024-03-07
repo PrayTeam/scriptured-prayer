@@ -4,15 +4,16 @@ import { theme } from "~/tailwind.config";
 
 interface footProps {
   color: keyof typeof theme.colors;
+  text?: keyof typeof theme.colors;
 }
 
-export function Footer({ color }: footProps) {
+export function Footer({ color, text }: footProps) {
   const navigate = useNavigate();
 
   return (
     <footer
       className="p-6 dark:bg-gray-800 dark:text-gray-100 text-white"
-      style={{ backgroundColor: theme.colors[color] }}
+      style={{ backgroundColor: theme.colors[color], color: text }}
     >
       <div className="p-3 container grid grid-cols-2 mx-auto gap-x-3 gap-y-8 sm:grid-cols-3 md:grid-cols-4">
         <div className="flex flex-col space-y-4">
