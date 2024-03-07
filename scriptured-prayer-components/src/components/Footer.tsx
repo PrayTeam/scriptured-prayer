@@ -15,12 +15,15 @@ export function Footer({ color, text }: footProps) {
       className="p-6 dark:bg-gray-800 dark:text-gray-100 text-white"
       style={{ backgroundColor: theme.colors[color], color: text }}
     >
+      <div className="flex items-center justify-center">
+        _________________________
+      </div>
       <div className="p-3 container grid grid-cols-2 mx-auto gap-x-3 gap-y-8 sm:grid-cols-3 md:grid-cols-4">
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-4 items-center ">
           <h1 className="text-2xl font-bold">Scriptured Prayer</h1>
           <h2 className="font-medium">Logo placeholder</h2>
         </div>
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-4 items-center ">
           <h2 className="font-semibold text-base">Useful Links</h2>
           <div className="flex flex-col space-y-2 font-light dark:text-gray-400">
             {/* TODO: fix these links to work with Spanish */}
@@ -36,7 +39,7 @@ export function Footer({ color, text }: footProps) {
           </div>
         </div>
 
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-4 items-center ">
           <h2 className="font-semibold text-base">Contact Us</h2>
           <div className="flex flex-col space-y-2 dark:text-gray-400">
             <a
@@ -58,7 +61,7 @@ export function Footer({ color, text }: footProps) {
           </div>
         </div>
 
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-4 items-center ">
           <h2 className="font-semibold text-base">Support</h2>
           <div className="flex flex-col space-y-2 dark:text-gray-400 w-24">
             <Button
