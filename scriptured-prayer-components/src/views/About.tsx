@@ -20,7 +20,7 @@ export function About() {
           <Button>Our Privacy Policy</Button>
         </div>
       </div>
-      <Footer color="snowgrass"></Footer>
+      <Footer color="snowgrass" text="black"></Footer>
     </div>
   );
 }
