@@ -111,7 +111,7 @@ export function Info() {
           </div>
         </div>
       </div>
-      <Footer></Footer>
+      <Footer color="lichen"></Footer>
     </>
   );
 }

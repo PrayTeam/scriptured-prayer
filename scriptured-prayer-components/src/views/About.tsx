@@ -1,5 +1,6 @@
 import { Button } from "~/components/form";
 import dryGrass from "~/assets/images/dry-grass.jpg";
+import { Footer } from "~/components";
 
 export function About() {
   return (
@@ -19,6 +20,7 @@ export function About() {
           <Button>Our Privacy Policy</Button>
         </div>
       </div>
+      <Footer color="snowgrass"></Footer>
     </div>
   );
 }
