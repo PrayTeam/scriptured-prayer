@@ -35,18 +35,13 @@ function PrayerDeck() {
     // get focus/preamble/inspiration
     (async () => {
       api.categories
-        .all() // because api.categories only gets all categories
+        .all()
         .then((cats) => {
-          // const cat = cats.find((cat) => {
-          //   return cat.name === name;
-          // }); // find the category we clicked on
-          const cat = cats.find((catitem) => {
-            return catitem.name === name;
+          const cat = cats.find((c) => {
+            return c.name === name; // will find by id instead of name eventually
           });
-          //const check = cat[0];
-          console.log(cat);
           setCategory(cat);
-          console.log(cats);
+          console.log(cat);
         })
         .catch((error) => console.error(error));
     })();
