@@ -1,0 +1,117 @@
+---
+
+- name: Install OS Packages
+  become: true
+  dnf:
+    name:
+      - postgresql-server
+      - postgresql-contrib
+      - python-pip
+      - oidentd
+    state: latest
+    disable_gpg_check: yes
+
+- name: Upgrade/Install Python packages (Ansible requirements)
+  become: true
+  become_user: postgres
+  pip: 
+    name:
+      - psycopg2-binary
+    state: latest
+
+- name: Start/Enable oidentd
+  become: true
+  service: name=oidentd state=started enabled=yes
+
+- name: Create the database user
+  become: true
+  user:
+    name: "{{ db_user }}"
+    state: present
+    shell: /bin/bash
+    createhome: yes
+
+- name: "Find out if PostgreSQL is initialized"
+  become: true
+  become_user: postgres
+  stat:
+    path: "/var/lib/pgsql/data/pg_hba.conf"
+  register: postgres_data
+
+- name: "Initialize PostgreSQL"
+  become: true
+  become_user: postgres
+  command: "postgresql-setup --initdb --unit postgresql"
+  when: not postgres_data.stat.exists
+
+- name: Ensure the PostgreSQL service is running
+  become: true
+  service: name=postgresql state=started enabled=yes
+
+- name: Setup the PostgreSQL database
+  become: true
+  become_user: postgres
+  postgresql_db:
+    name: "{{ db_name }}"
+    encoding: UTF-8
+    state: present
+  register: db_created
+
+- name: Configure the PostgreSQL server timezone
+  become: true
+  become_user: postgres
+  postgresql_set:
+    name: TimeZone
+    value: 'UTC'
+
+- name: Configure the PostgreSQL server transaction isolation
+  become: true
+  become_user: postgres
+  postgresql_set:
+    name: default_transaction_isolation
+    value: 'read committed'
+
+- name: Create the DB password
+  when: db_created.changed
+  set_fact:
+    db_password: "{{ lookup('password', '/dev/null length=15 chars=ascii_letters') }}"
+
+- name: Setup the PostgreSQL user
+  when: db_created.changed
+  become: true
+  become_user: postgres
+  postgresql_user:
+    db: "{{ db_name }}"
+    name: "{{ db_user }}"
+    password: "{{ db_password }}"
+    state: present
+
+- name: Set Database Permissions
+  become: true
+  become_user: postgres
+  postgresql_privs:
+    db: "{{ db_name }}"
+    privs: "ALL"
+    type: database
+    role: "{{ db_user }}"
+    state: present
+
+- name: Set Schema Permissions
+  become: true
+  become_user: postgres
+  postgresql_privs:
+    db: "{{ db_name }}"
+    privs: "CREATE"
+    type: schema
+    role: "{{ db_user }}"
+    objs: "public"
+    state: present
+
+- name: Create pg_service.conf
+  when: db_created.changed
+  become: true
+  become_user: "{{ gunicorn_user }}"
+  template:
+    src: pg_service_conf.j2
+    dest: /home/{{ gunicorn_user }}/.pg_service.conf
+    mode: 0600

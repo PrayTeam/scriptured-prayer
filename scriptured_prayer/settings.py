@@ -28,8 +28,7 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
+    ".scripturedprayer.com"
 ]
 
 
@@ -153,29 +152,21 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-# For debug_toolbar
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
-
-GRAPH_MODELS = {
-    "all_applications": True,
-    "group_models": True,
-}
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework.authentication.SessionAuthentication",),
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly",
     ],
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DEFAULT_THROTTLE_CLASSES": [
         "rest_framework.throttling.AnonRateThrottle",
         "rest_framework.throttling.UserRateThrottle",
@@ -186,28 +177,20 @@ REST_FRAMEWORK = {
     },
 }
 
-SPECTACULAR_SETTINGS = {
-    "TITLE": "Scriptured Prayer API",
-    "DESCRIPTION": "Easy access to the backend for the Scriptured Prayer app.",
-    "VERSION": "0.4.0",
-    "SERVE_INCLUDE_SCHEMA": False,
-    "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
-}
-
-# for when we go to prod
-# CSRF_COOKIE_SECURE = True
-# SESSION_COOKIE_SECURE = True
-
-# disable everything below when we go to prod
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-]
-
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOWED_ORIGINS = [
-    # current React app dev server
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-]
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "WARNING",
+    },
+}

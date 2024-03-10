@@ -1,0 +1,9 @@
+[Unit]
+Description=gunicorn socket
+
+[Socket]
+ListenStream=/run/gunicorn-{{ project_name }}.sock
+SocketUser=nginx
+
+[Install]
+WantedBy=sockets.target
