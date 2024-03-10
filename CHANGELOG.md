@@ -2,6 +2,23 @@
 
 
 
+## v0.3.1 (2024-03-10)
+
+### Ci
+
+* ci: run build on PR and prevent running on main when tagged (by semantic release) ([`3cf6813`](https://github.com/PrayTeam/scriptured-prayer/commit/3cf6813f0e74f22d5208a02af42669973d718273))
+
+### Fix
+
+* fix: remove reference to localhost in production env ([`d21dc25`](https://github.com/PrayTeam/scriptured-prayer/commit/d21dc256349bb9258b44a735f9386b0267d8de59))
+
+### Unknown
+
+* Merge pull request #86 from PrayTeam/fix/deployment-urls
+
+fix: remove reference to localhost in production env ([`098e6fe`](https://github.com/PrayTeam/scriptured-prayer/commit/098e6fe75008735b2ad008c6d63198d22224dad2))
+
+
 ## v0.3.0 (2024-03-05)
 
 ### Feature
