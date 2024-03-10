@@ -1,0 +1,5 @@
+---
+db_host: localhost
+db_name: scriptured_prayer_db
+db_user: gunicorn
+db_port: 5432
