@@ -2,6 +2,13 @@
 
 
 
+## v0.4.1 (2024-03-11)
+
+### Fix
+
+* fix: dev urls in production ([`7d6a5d8`](https://github.com/PrayTeam/scriptured-prayer/commit/7d6a5d88f6e95a88be065a26396f56777c2feeb9))
+
+
 ## v0.4.0 (2024-03-11)
 
 ### Unknown
