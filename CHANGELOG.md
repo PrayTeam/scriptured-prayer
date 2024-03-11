@@ -2,21 +2,38 @@
 
 
 
+## v0.4.0 (2024-03-11)
+
+### Unknown
+
+* Merge pull request #87 from PrayTeam/add-ansible
+
+Add ansible and update for production ([`6f2c13e`](https://github.com/PrayTeam/scriptured-prayer/commit/6f2c13eb575bb77ad7cf841e68a077e575b5d2f1))
+
+
 ## v0.3.1 (2024-03-10)
 
 ### Ci
+
+* ci: fix the double run on release ([`4862595`](https://github.com/PrayTeam/scriptured-prayer/commit/48625959ed5bf86d60a177632b86fa0ff35eb643))
 
 * ci: run build on PR and prevent running on main when tagged (by semantic release) ([`3cf6813`](https://github.com/PrayTeam/scriptured-prayer/commit/3cf6813f0e74f22d5208a02af42669973d718273))
 
 ### Fix
 
+* fix: ansible and django code for prod ([`1063378`](https://github.com/PrayTeam/scriptured-prayer/commit/1063378321d847de1d916f2a6b05b2e736dc8bc4))
+
 * fix: remove reference to localhost in production env ([`d21dc25`](https://github.com/PrayTeam/scriptured-prayer/commit/d21dc256349bb9258b44a735f9386b0267d8de59))
 
 ### Unknown
 
+* Merge branch &#39;main&#39; into add-ansible ([`e502fa3`](https://github.com/PrayTeam/scriptured-prayer/commit/e502fa335a5f7d08b1a77aeb65c7daeeaa52ad40))
+
 * Merge pull request #86 from PrayTeam/fix/deployment-urls
 
 fix: remove reference to localhost in production env ([`098e6fe`](https://github.com/PrayTeam/scriptured-prayer/commit/098e6fe75008735b2ad008c6d63198d22224dad2))
+
+* Merge branch &#39;main&#39; into add-ansible ([`379c642`](https://github.com/PrayTeam/scriptured-prayer/commit/379c642c7e453970074c0759d9b27e6878d4d9fa))
 
 
 ## v0.3.0 (2024-03-05)
@@ -40,6 +57,8 @@ Co-authored-by: Asher Lloyd &lt;asher.jo.lloyd@gmail.com&gt; ([`b0062ad`](https:
 ## v0.2.0 (2024-03-05)
 
 ### Feature
+
+* feat: add ansible automation for deployments ([`2d16221`](https://github.com/PrayTeam/scriptured-prayer/commit/2d16221f07c439fcb53cdbf4976e076b62499014))
 
 * feat: separate dev settings ([`02cf6db`](https://github.com/PrayTeam/scriptured-prayer/commit/02cf6db022d419a33a2d85e53fae9f4b9652a9c9))
 
