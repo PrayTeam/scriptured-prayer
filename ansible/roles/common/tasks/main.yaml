@@ -1,0 +1,41 @@
+---
+
+- name: Install OS Packages
+  become: true
+  dnf:
+    name:
+      - nginx
+      - python-pip
+      - https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm
+    state: latest
+    disable_gpg_check: yes
+
+- name: Upgrade/Install Python packages (Ansible requirements)
+  pip: 
+    name:
+      - github3.py
+    state: latest
+    
+- name: Get Scriptured Prayer Latest Release
+  register: release_version
+  community.general.github_release:
+    user: "{{ github_user }}"
+    repo: "{{ github_repo }}"
+    action: latest_release
+
+- name: Set project_path to the latest release
+  set_fact:
+    project_path: "/var/gunicorn/scriptured-prayer-{{ release_version.tag }}"
+
+- name: Create the Nginx site config file
+  become: true
+  template: src=nginx_config.j2
+            dest=/etc/nginx/conf.d/{{ project_name }}.conf
+            backup=yes
+  notify: reload nginx
+  tags: nginx
+
+- name: Ensure Nginx service is restarted
+  become: true
+  service: name=nginx state=started enabled=yes
+  tags: nginx
