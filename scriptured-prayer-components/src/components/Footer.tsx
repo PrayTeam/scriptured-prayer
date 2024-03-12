@@ -15,7 +15,7 @@ export function Footer({ color, text }: FooterProps) {
       className="p-12 py-10 dark:bg-gray-800 dark:text-gray-100 text-white"
       style={{ backgroundColor: theme.colors[color], color: text }}
     >
-      <div className="p-3 container grid grid-cols-2 mx-auto gap-x-3 gap-y-8 sm:grid-cols-3 md:grid-cols-4 justify-items-center">
+      <div className="p-5 container grid grid-cols-2 mx-auto gap-x-3 gap-y-8 sm:grid-cols-3 md:grid-cols-4 sm:justify-items-center md:justify-items-center">
         <div className="flex flex-col space-y-4">
           <h1 className="text-2xl font-bold">Scriptured Prayer</h1>
           <h2 className="font-medium">Logo placeholder</h2>
