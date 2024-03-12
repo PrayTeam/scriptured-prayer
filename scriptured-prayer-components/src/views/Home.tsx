@@ -46,10 +46,10 @@ export function Home() {
   }, []);
 
   return (
-    <div className="w-full h-full bg-gradient-to-br from-purple from-10% via-purple via-30% to-blue to-90%">
-      <Container>
-        <div className="flex flex-col">
-          <div className="flex items-center justify-between mb-4">
+    <div className="flex flex-col w-full h-full bg-gradient-to-br from-purple from-10% via-purple via-30% to-blue to-90%">
+      <Container className="grow flex w-4/5">
+        <div className="flex flex-col w-full px-8">
+          <div className="flex items-center w-full justify-between mb-4">
             <h1 className="text-2xl text-white">
               Welcome, {profile.username}!
             </h1>
@@ -75,9 +75,7 @@ export function Home() {
           </div>
         </div>
       </Container>
-      <Footer
-      color="ocean"
-      />
+      <Footer color="ocean" />
     </div>
   );
 }

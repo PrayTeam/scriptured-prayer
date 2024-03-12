@@ -7,17 +7,14 @@ interface FooterProps {
   text?: keyof typeof theme.colors;
 }
 
-export function Footer({ color, text }: footProps) {
+export function Footer({ color, text }: FooterProps) {
   const navigate = useNavigate();
 
   return (
     <footer
-      className="p-6 dark:bg-gray-800 dark:text-gray-100 text-white"
+      className="p-6 py-10 dark:bg-gray-800 dark:text-gray-100 text-white"
       style={{ backgroundColor: theme.colors[color], color: text }}
     >
-      <div className="flex items-center justify-center">
-        _________________________
-      </div>
       <div className="p-3 container grid grid-cols-2 mx-auto gap-x-3 gap-y-8 sm:grid-cols-3 md:grid-cols-4">
         <div className="flex flex-col space-y-4 items-center ">
           <h1 className="text-2xl font-bold">Scriptured Prayer</h1>
