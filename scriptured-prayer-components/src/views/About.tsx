@@ -16,7 +16,7 @@ export function About() {
       <div className="h-3/4 flex px-6 py-8 md:py-16 md:space-x-12 w-full mx-auto bg-[url('~/assets/images/dry-grass.jpg')]">
         {/* <img src={dryGrass} className="hidden md:block max-w-[700px]" /> */}
         <div>
-          <div className="">
+          <div className="w-">
             <h2 className="uppercase font-bold text-4xl">About us</h2>
             <div className="my-8 text-xl">
               <h3 className="font-bold uppercase">Phone Number</h3>
@@ -26,12 +26,12 @@ export function About() {
               <h3 className="font-bold uppercase">Email Address</h3>
               <div className="my-2">hello@scripturedprayer.com</div>
             </div>
-            <Button>Our Privacy Policy</Button>
+            <Button className="bg-lichen">Our Privacy Policy</Button>
           </div>
         </div>
       </div>
       {/* <div className="h-full bg-cover bg-[url('~/assets/images/blue-sunset.jpg')]"> */}
-      <div className="h-4/5 bg-cover bg-[#f2f2f2]">
+      <div className="h-4/5 bg-cover bg-lichen">
         <h1 className="w-full bg-opacity-20  text-3xl text-center pt-3">
           Meet The Team
         </h1>
@@ -57,7 +57,7 @@ export function About() {
                   <h1 className="text-center text-3xl">Judah Rininger</h1>
                 </div>
               </div>
-              <div className="shadow-inner bg-[#9da1a1] text-center text-lg w-full p-5 rounded-b-3xl">
+              <div className="shadow-inner bg-gray text-center text-lg w-full p-5 rounded-b-3xl">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                 Reprehenderit facere deleniti officiis non vero repellendus
                 dignissimos, praesentium esse explicabo.
@@ -73,7 +73,7 @@ export function About() {
                   <h1 className="text-center text-3xl">Judah Rininger</h1>
                 </div>
               </div>
-              <div className="shadow-inner bg-[#9da1a1] text-center text-lg w-full p-5 rounded-b-3xl">
+              <div className="shadow-inner bg-gray text-center text-lg w-full p-5 rounded-b-3xl">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                 Reprehenderit facere deleniti officiis non vero repellendus
                 dignissimos, praesentium esse explicabo.
@@ -89,7 +89,7 @@ export function About() {
                   <h1 className="text-center text-3xl">Judah Rininger</h1>
                 </div>
               </div>
-              <div className="shadow-inner bg-[#9da1a1] text-center text-lg w-full p-5 rounded-b-3xl">
+              <div className="shadow-inner bg-gray text-center text-lg w-full p-5 rounded-b-3xl">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                 Reprehenderit facere deleniti officiis non vero repellendus
                 dignissimos, praesentium esse explicabo.
@@ -114,9 +114,9 @@ export function About() {
             <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col">
               <img
                 src={genericMan}
-                className=" md:block flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
+                className=" md:block flex aspect-square w-full place-content-center place-items-center items-center bg-white pb-0 rounded-t-3xl"
               ></img>
-              <div className=" flex flex-col  place-items-center shadow-inner bg-[#9da1a1] text-lg w-full rounded-b-3xl">
+              <div className=" flex flex-col  place-items-center shadow-inner bg-gray text-lg w-full rounded-b-3xl">
                 <h1 className="text-center text-3xl p-3 border-b w-2/3">
                   Judah Rininger
                 </h1>
@@ -130,9 +130,9 @@ export function About() {
             <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col">
               <img
                 src={dryGrass}
-                className=" md:block flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
+                className=" md:block flex aspect-square w-full place-content-center place-items-center items-center bg-white pb-0 rounded-t-3xl"
               ></img>
-              <div className=" flex flex-col  place-items-center shadow-inner bg-[#9da1a1] text-lg w-full rounded-b-3xl">
+              <div className=" flex flex-col  place-items-center shadow-inner bg-gray text-lg w-full rounded-b-3xl">
                 <h1 className="text-center text-3xl p-3 border-b w-2/3">
                   Judah Rininger
                 </h1>

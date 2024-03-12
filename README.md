@@ -56,6 +56,8 @@ poetry run python manage.py load_bible spa RV1909
 poetry run python manage.py load_cards
 poetry run python manage.py createsuperuser
 poetry run python manage.py runserver
+yarn 
+yarn dev
 ```
 
 If you want to be able to generate the database ERD, you'll need to install Graphviz:
