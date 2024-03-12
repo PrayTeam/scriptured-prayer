@@ -20,7 +20,7 @@ export function Footer({ color, text }: FooterProps) {
           <h1 className="text-2xl font-bold">Scriptured Prayer</h1>
           <h2 className="font-medium">Logo placeholder</h2>
         </div>
-        <div className="flex flex-col space-y-4 items-center ">
+        <div className="flex flex-col space-y-4 items-center">
           <h2 className="font-semibold text-base">Useful Links</h2>
           <div className="flex flex-col space-y-2 font-light dark:text-gray-400">
             {/* TODO: fix these links to work with Spanish */}
@@ -58,7 +58,7 @@ export function Footer({ color, text }: FooterProps) {
           </div>
         </div>
 
-        <div className="flex flex-col space-y-4 items-center ">
+        <div className="flex flex-col space-y-4 items-center">
           <h2 className="font-semibold text-base">Support</h2>
           <div className="flex flex-col space-y-2 dark:text-gray-400 w-24">
             <Button
