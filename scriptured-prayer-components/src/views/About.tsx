@@ -1,7 +1,9 @@
 import { Button } from "~/components/form";
-import dryGrass from "~/assets/images/dry-grass.jpg";
-import blueSunset from "~/assets/images/blue-sunset.jpg";
-import genericMan from "~/assets/images/generic-man.png";
+// import dryGrass from "~/assets/images/dry-grass.jpg";
+// import blueSunset from "~/assets/images/blue-sunset.jpg";
+// import genericMan from "~/assets/images/generic-man.png";
+import randomGuy from "~/assets/images/random-guy.jpg";
+import randomGirl from "~/assets/images/random-girl.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Keyboard, A11y } from "swiper/modules";
 import "swiper/css";
@@ -31,30 +33,39 @@ export function About() {
         </div>
       </div>
       {/* <div className="h-full bg-cover bg-[url('~/assets/images/blue-sunset.jpg')]"> */}
-      <div className="h-4/5 bg-cover bg-lichen">
+      <div className="h-auto bg-cover bg-lichen">
         <h1 className="w-full bg-opacity-20  text-3xl text-center pt-3">
           Meet The Team
         </h1>
-        <div className="w-full bg-center flex items-center justify-center bg-opacity-2">
+        <div className="w-full bg-cente flex items-center justify-center bg-opacity-2">
           {/* <div className="bg-white w-full flex justify-center"> */}
           <Swiper
             className="w-full p-10 pt-5"
             modules={[Navigation, Pagination, Keyboard, A11y]}
             loop={true}
-            spaceBetween="100"
-            slidesPerView={3}
+            spaceBetween={100}
+            slidesPerView={1}
             slidesPerGroup={1}
             pagination={{ clickable: true }}
             keyboard
+            breakpoints={{
+              1100: {
+                slidesPerView: 3,
+              },
+              730: {
+                slidesPerView: 2,
+              },
+              // Add more breakpoints as needed
+            }}
           >
-            <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col">
+            <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col w-full">
               <div className="relative">
                 <img
-                  src={dryGrass}
-                  className="md:block flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
+                  src={randomGuy}
+                  className="md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
                 ></img>
-                <div className="bg-opacity-50 bg-white absolute w-full h-1/6 bottom-0 flex items-center place-content-center">
-                  <h1 className="text-center text-3xl">Judah Rininger</h1>
+                <div className="bg-opacity-70 bg-white absolute w-full h-1/6 bottom-0 flex items-center place-content-center">
+                  <h1 className="text-center text-3xl">The Rock</h1>
                 </div>
               </div>
               <div className="shadow-inner bg-gray text-center text-lg w-full p-5 rounded-b-3xl">
@@ -63,14 +74,14 @@ export function About() {
                 dignissimos, praesentium esse explicabo.
               </div>
             </SwiperSlide>
-            <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col">
+            <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col w-full">
               <div className="relative">
                 <img
-                  src={blueSunset}
-                  className="md:block flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
+                  src={randomGirl}
+                  className="md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
                 ></img>
-                <div className="bg-opacity-50 bg-white absolute w-full h-1/6 bottom-0 flex items-center place-content-center">
-                  <h1 className="text-center text-3xl">Judah Rininger</h1>
+                <div className="bg-opacity-70 bg-white absolute w-full h-1/6 bottom-0 flex items-center place-content-center">
+                  <h1 className="text-center text-3xl">Amanda Jamanda</h1>
                 </div>
               </div>
               <div className="shadow-inner bg-gray text-center text-lg w-full p-5 rounded-b-3xl">
@@ -79,14 +90,14 @@ export function About() {
                 dignissimos, praesentium esse explicabo.
               </div>
             </SwiperSlide>
-            <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col">
+            <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col w-full">
               <div className="relative">
                 <img
-                  src={dryGrass}
-                  className="md:block flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
+                  src={randomGuy}
+                  className="md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
                 ></img>
-                <div className="bg-opacity-50 bg-white absolute w-full h-1/6 bottom-0 flex items-center place-content-center">
-                  <h1 className="text-center text-3xl">Judah Rininger</h1>
+                <div className="bg-opacity-70 bg-white absolute w-full h-1/6 bottom-0 flex items-center place-content-center">
+                  <h1 className="text-center text-3xl">Dwayne Johnson</h1>
                 </div>
               </div>
               <div className="shadow-inner bg-gray text-center text-lg w-full p-5 rounded-b-3xl">
@@ -95,14 +106,14 @@ export function About() {
                 dignissimos, praesentium esse explicabo.
               </div>
             </SwiperSlide>
-            <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col">
+            <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col w-full">
               <img
-                src={dryGrass}
-                className=" md:block flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
+                src={randomGirl}
+                className=" md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
               ></img>
               <div className=" flex flex-col  place-items-center shadow-inner bg-[#9da1a1] text-lg w-full rounded-b-3xl">
                 <h1 className="text-center text-3xl p-3 border-b w-2/3">
-                  Judah Rininger
+                  Sadison
                 </h1>
                 <p className="text-center p-2">
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -111,14 +122,14 @@ export function About() {
                 </p>
               </div>
             </SwiperSlide>
-            <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col">
+            <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col w-full">
               <img
-                src={genericMan}
-                className=" md:block flex aspect-square w-full place-content-center place-items-center items-center bg-white pb-0 rounded-t-3xl"
+                src={randomGuy}
+                className=" md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
               ></img>
               <div className=" flex flex-col  place-items-center shadow-inner bg-gray text-lg w-full rounded-b-3xl">
                 <h1 className="text-center text-3xl p-3 border-b w-2/3">
-                  Judah Rininger
+                  The Brahma Bull
                 </h1>
                 <p className="text-center p-2">
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -127,14 +138,14 @@ export function About() {
                 </p>
               </div>
             </SwiperSlide>
-            <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col">
+            <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col w-full">
               <img
-                src={dryGrass}
-                className=" md:block flex aspect-square w-full place-content-center place-items-center items-center bg-white pb-0 rounded-t-3xl"
+                src={randomGirl}
+                className=" md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
               ></img>
               <div className=" flex flex-col  place-items-center shadow-inner bg-gray text-lg w-full rounded-b-3xl">
                 <h1 className="text-center text-3xl p-3 border-b w-2/3">
-                  Judah Rininger
+                  Evil Knievel
                 </h1>
                 <p className="text-center p-2">
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
