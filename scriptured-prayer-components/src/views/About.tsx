@@ -34,7 +34,7 @@ export function About() {
       </div>
       {/* <div className="h-full bg-cover bg-[url('~/assets/images/blue-sunset.jpg')]"> */}
       <div className="h-auto bg-cover bg-lichen">
-        <h1 className="w-full bg-opacity-20  text-3xl text-center pt-3">
+        <h1 className="w-full bg-opacity-20  text-4xl text-center pt-5 pb-3">
           Meet The Team
         </h1>
         <div className="w-full bg-cente flex items-center justify-center bg-opacity-2">
