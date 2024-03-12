@@ -16,7 +16,7 @@ export function Footer({ color, text }: FooterProps) {
       style={{ backgroundColor: theme.colors[color], color: text }}
     >
       <div className="p-3 container grid grid-cols-2 mx-auto gap-x-3 gap-y-8 sm:grid-cols-3 md:grid-cols-4">
-        <div className="flex flex-col space-y-4 items-center ">
+        <div className="flex flex-col space-y-4 items-center">
           <h1 className="text-2xl font-bold">Scriptured Prayer</h1>
           <h2 className="font-medium">Logo placeholder</h2>
         </div>
@@ -36,7 +36,7 @@ export function Footer({ color, text }: FooterProps) {
           </div>
         </div>
 
-        <div className="flex flex-col space-y-4 items-center ">
+        <div className="flex flex-col space-y-4 items-center">
           <h2 className="font-semibold text-base">Contact Us</h2>
           <div className="flex flex-col space-y-2 dark:text-gray-400">
             <a
