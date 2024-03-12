@@ -28,13 +28,15 @@ export function About() {
               <h3 className="font-bold uppercase">Email Address</h3>
               <div className="my-2">hello@scripturedprayer.com</div>
             </div>
-            <Button className="bg-lichen">Our Privacy Policy</Button>
+            <Button className="bg-lichen">
+              <h1 className="text-night">Our Privacy Policy</h1>
+            </Button>
           </div>
         </div>
       </div>
       {/* <div className="h-full bg-cover bg-[url('~/assets/images/blue-sunset.jpg')]"> */}
       <div className="h-auto bg-cover bg-lichen">
-        <h1 className="w-full bg-opacity-20  text-4xl text-center pt-5 pb-3">
+        <h1 className="w-full bg-opacity-20  text-4xl text-center pt-5 pb-3 text-night">
           Meet The Team
         </h1>
         <div className="w-full bg-cente flex items-center justify-center bg-opacity-2">
