@@ -15,10 +15,10 @@ import "~/swiper.css";
 export function About() {
   return (
     <div className="bg-snowgrass h-full">
-      <div className="h-3/4 flex px-6 py-8 md:py-16 md:space-x-12 w-full mx-auto bg-[url('~/assets/images/dry-grass.jpg')]">
+      <div className="h-3/4 min-h-96 flex px-6 py-8 md:py-16 md:space-x-12 w-full mx-auto bg-[url('~/assets/images/dry-grass.jpg')]">
         {/* <img src={dryGrass} className="hidden md:block max-w-[700px]" /> */}
         <div>
-          <div className="w-">
+          <div className="">
             <h2 className="uppercase font-bold text-4xl">About us</h2>
             <div className="my-8 text-xl">
               <h3 className="font-bold uppercase">Phone Number</h3>
@@ -68,7 +68,7 @@ export function About() {
                   <h1 className="text-center text-3xl">The Rock</h1>
                 </div>
               </div>
-              <div className="shadow-inner bg-gray text-center text-lg w-full p-5 rounded-b-3xl">
+              <div className="shadow-inner bg-darkGray text-center text-lg w-full p-5 rounded-b-3xl">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                 Reprehenderit facere deleniti officiis non vero repellendus
                 dignissimos, praesentium esse explicabo.
@@ -84,7 +84,7 @@ export function About() {
                   <h1 className="text-center text-3xl">Amanda Jamanda</h1>
                 </div>
               </div>
-              <div className="shadow-inner bg-gray text-center text-lg w-full p-5 rounded-b-3xl">
+              <div className="shadow-inner bg-darkGray text-center text-lg w-full p-5 rounded-b-3xl">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                 Reprehenderit facere deleniti officiis non vero repellendus
                 dignissimos, praesentium esse explicabo.
@@ -100,45 +100,61 @@ export function About() {
                   <h1 className="text-center text-3xl">Dwayne Johnson</h1>
                 </div>
               </div>
-              <div className="shadow-inner bg-gray text-center text-lg w-full p-5 rounded-b-3xl">
+              <div className="shadow-inner bg-darkGray text-center text-lg w-full p-5 rounded-b-3xl">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                 Reprehenderit facere deleniti officiis non vero repellendus
                 dignissimos, praesentium esse explicabo.
               </div>
             </SwiperSlide>
             <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col w-full">
-              <img
-                src={randomGirl}
-                className=" md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
-              ></img>
-              <div className=" flex flex-col  place-items-center shadow-inner bg-[#9da1a1] text-lg w-full rounded-b-3xl">
-                <h1 className="text-center text-3xl p-3 border-b w-2/3">
-                  Sadison
-                </h1>
-                <p className="text-center p-2">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Reprehenderit facere deleniti officiis non vero repellendus
-                  dignissimos, praesentium esse explicabo.
-                </p>
+              <div className="relative">
+                <img
+                  src={randomGirl}
+                  className="md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
+                ></img>
+                <div className="bg-opacity-70 bg-white absolute w-full h-1/6 bottom-0 flex items-center place-content-center">
+                  <h1 className="text-center text-3xl">Sadison</h1>
+                </div>
+              </div>
+              <div className="shadow-inner bg-darkGray text-center text-lg w-full p-5 rounded-b-3xl">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Reprehenderit facere deleniti officiis non vero repellendus
+                dignissimos, praesentium esse explicabo.
               </div>
             </SwiperSlide>
             <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col w-full">
-              <img
-                src={randomGuy}
-                className=" md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
-              ></img>
-              <div className=" flex flex-col  place-items-center shadow-inner bg-gray text-lg w-full rounded-b-3xl">
-                <h1 className="text-center text-3xl p-3 border-b w-2/3">
-                  The Brahma Bull
-                </h1>
-                <p className="text-center p-2">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Reprehenderit facere deleniti officiis non vero repellendus
-                  dignissimos, praesentium esse explicabo.
-                </p>
+              <div className="relative">
+                <img
+                  src={randomGuy}
+                  className="md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
+                ></img>
+                <div className="bg-opacity-70 bg-white absolute w-full h-1/6 bottom-0 flex items-center place-content-center">
+                  <h1 className="text-center text-3xl">The Brahma Bull</h1>
+                </div>
+              </div>
+              <div className="shadow-inner bg-darkGray text-center text-lg w-full p-5 rounded-b-3xl">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Reprehenderit facere deleniti officiis non vero repellendus
+                dignissimos, praesentium esse explicabo.
               </div>
             </SwiperSlide>
             <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col w-full">
+              <div className="relative">
+                <img
+                  src={randomGirl}
+                  className="md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
+                ></img>
+                <div className="bg-opacity-70 bg-white absolute w-full h-1/6 bottom-0 flex items-center place-content-center">
+                  <h1 className="text-center text-3xl">Evil Knieval</h1>
+                </div>
+              </div>
+              <div className="shadow-inner bg-darkGray text-center text-lg w-full p-5 rounded-b-3xl">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Reprehenderit facere deleniti officiis non vero repellendus
+                dignissimos, praesentium esse explicabo.
+              </div>
+            </SwiperSlide>
+            {/* <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col w-full">
               <img
                 src={randomGirl}
                 className=" md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
@@ -153,7 +169,7 @@ export function About() {
                   dignissimos, praesentium esse explicabo.
                 </p>
               </div>
-            </SwiperSlide>
+            </SwiperSlide> */}
           </Swiper>
         </div>
       </div>
