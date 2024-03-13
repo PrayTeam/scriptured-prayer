@@ -3,6 +3,7 @@ import { Button } from "~/components/form";
 import { theme } from "~/tailwind.config";
 import { FooterColumn } from "~/components";
 import { FooterLinks } from "~/components";
+import { FooterLink } from "~/components";
 
 interface FooterProps {
   color: keyof typeof theme.colors;
@@ -26,37 +27,19 @@ export function Footer({ color, text }: FooterProps) {
           <h2 className="font-semibold text-base">Useful Links</h2>
           <FooterLinks>
             {/* TODO: fix these links to work with Spanish */}
-            <a href="/en/about" className="hover:underline">
-              About Us
-            </a>
-            <a href="/en/info" className="hover:underline">
-              Info
-            </a>
-            <a href="/en/FAQ" className="hover:underline">
-              FAQ
-            </a>
+            <FooterLink link="/en/about">About Us</FooterLink>
+            <FooterLink link="/en/info">Info</FooterLink>
+            <FooterLink link="/en/FAQ">FAQ</FooterLink>
           </FooterLinks>
         </FooterColumn>
 
         <FooterColumn>
           <h2 className="font-semibold text-base">Contact Us</h2>
           <FooterLinks>
-            <a
-              rel="noopener noreferrer"
-              href="https://github.com/PrayTeam"
-              className="hover:underline"
-            >
-              GitHub
-            </a>
-            <a rel="noopener noreferrer" href="#" className="hover:underline">
-              Discord
-            </a>
-            <a rel="noopener noreferrer" href="#" className="hover:underline">
-              Facebook
-            </a>
-            <a rel="noopener noreferrer" href="#" className="hover:underline">
-              Email
-            </a>
+            <FooterLink link="https://github.com/PrayTeam">GitHub</FooterLink>
+            <FooterLink link="#">Discord</FooterLink>
+            <FooterLink link="#">Facebook</FooterLink>
+            <FooterLink link="#">Email</FooterLink>
           </FooterLinks>
         </FooterColumn>
 
@@ -77,9 +60,9 @@ export function Footer({ color, text }: FooterProps) {
           © Copyright 2024. All Rights Reserved.
         </span>
         <span>
-          <a href="/en/privacy" className="text-gray hover:underline">
+          <FooterLink link="/en/privacy" className="text-gray hover:underline">
             Privacy Policy
-          </a>
+          </FooterLink>
         </span>
       </div>
     </footer>
