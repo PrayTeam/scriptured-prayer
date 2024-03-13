@@ -3,6 +3,7 @@ import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
 
 import { Info, About, Home, Login, NotFound, Settings } from "./views";
+import { Faq } from "./views/Faq";
 import { ProtectedRoutes } from "./components";
 import { useLocalStorage } from "./hooks";
 import { ProfileContext } from "./hooks";
@@ -14,6 +15,7 @@ const getRouter = (language: string) =>
       { path: "/", element: <Info /> },
       { path: "/login", element: <Login /> },
       { path: "/about", element: <About /> },
+      { path: "/Faq", element: <Faq /> },
       {
         element: <ProtectedRoutes />,
         children: [
