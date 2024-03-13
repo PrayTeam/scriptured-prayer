@@ -5,9 +5,11 @@ import { FooterColumn } from "~/components";
 import { FooterLinks } from "~/components";
 import { FooterLink } from "~/components";
 
+type ThemeColor = keyof typeof theme.colors;
+
 interface FooterProps {
-  color: keyof typeof theme.colors;
-  text?: keyof typeof theme.colors;
+  color: ThemeColor
+  text?: ThemeColor
 }
 
 export function Footer({ color, text }: FooterProps) {
