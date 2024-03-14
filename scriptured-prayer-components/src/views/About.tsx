@@ -4,8 +4,8 @@ import { Footer } from "~/components";
 
 export function About() {
   return (
-    <div className="bg-snowgrass h-full">
-      <div className="flex px-6 py-8 md:py-16 md:space-x-12 max-w-screen-xl mx-auto">
+    <div className="bg-snowgrass h-full flex flex-col">
+      <div className="flex px-6 py-8 md:py-16 md:space-x-12 max-w-screen-xl mx-auto grow">
         <img src={dryGrass} className="hidden md:block max-w-[700px]" />
         <div>
           <h2 className="uppercase font-bold text-4xl">About us</h2>
@@ -20,7 +20,7 @@ export function About() {
           <Button>Our Privacy Policy</Button>
         </div>
       </div>
-      <Footer color="blue"></Footer>
+      <Footer color="blue" />
     </div>
   );
 }
