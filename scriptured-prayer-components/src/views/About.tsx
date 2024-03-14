@@ -2,13 +2,11 @@ import { Button } from "~/components/form";
 // import dryGrass from "~/assets/images/dry-grass.jpg";
 // import blueSunset from "~/assets/images/blue-sunset.jpg";
 // import genericMan from "~/assets/images/generic-man.png";
-import randomGuy from "~/assets/images/random-guy.jpg";
-import randomGirl from "~/assets/images/random-girl.jpg";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Keyboard, A11y } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import TeamContainer from "../components/teamContainer";
+// import teamCard from '../components/teamCard';
 
 import "~/swiper.css";
 
@@ -16,7 +14,6 @@ export function About() {
   return (
     <div className="bg-snowgrass h-full">
       <div className="h-3/4 min-h-96 flex px-6 py-8 md:py-16 md:space-x-12 w-full mx-auto bg-[url('~/assets/images/dry-grass.jpg')]">
-        {/* <img src={dryGrass} className="hidden md:block max-w-[700px]" /> */}
         <div>
           <div className="">
             <h2 className="uppercase font-bold text-4xl">About us</h2>
@@ -34,145 +31,12 @@ export function About() {
           </div>
         </div>
       </div>
-      {/* <div className="h-full bg-cover bg-[url('~/assets/images/blue-sunset.jpg')]"> */}
       <div className="h-auto bg-cover bg-lichen">
         <h1 className="w-full bg-opacity-20  text-4xl text-center pt-5 pb-3 text-night">
           Meet The Team
         </h1>
         <div className="w-full bg-cente flex items-center justify-center bg-opacity-2">
-          {/* <div className="bg-white w-full flex justify-center"> */}
-          <Swiper
-            className="w-full p-10 pt-5"
-            modules={[Navigation, Pagination, Keyboard, A11y]}
-            loop={true}
-            spaceBetween={100}
-            slidesPerView={1}
-            slidesPerGroup={1}
-            pagination={{ clickable: true }}
-            keyboard
-            breakpoints={{
-              1100: {
-                slidesPerView: 3,
-              },
-              730: {
-                slidesPerView: 2,
-              },
-              // Add more breakpoints as needed
-            }}
-          >
-            <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col w-full">
-              <div className="relative">
-                <img
-                  src={randomGuy}
-                  className="md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
-                ></img>
-                <div className="bg-opacity-70 bg-white absolute w-full h-1/6 bottom-0 flex items-center place-content-center">
-                  <h1 className="text-center text-3xl">The Rock</h1>
-                </div>
-              </div>
-              <div className="shadow-inner bg-darkGray text-center text-lg w-full p-5 rounded-b-3xl">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Reprehenderit facere deleniti officiis non vero repellendus
-                dignissimos, praesentium esse explicabo.
-              </div>
-            </SwiperSlide>
-            <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col w-full">
-              <div className="relative">
-                <img
-                  src={randomGirl}
-                  className="md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
-                ></img>
-                <div className="bg-opacity-70 bg-white absolute w-full h-1/6 bottom-0 flex items-center place-content-center">
-                  <h1 className="text-center text-3xl">Amanda Jamanda</h1>
-                </div>
-              </div>
-              <div className="shadow-inner bg-darkGray text-center text-lg w-full p-5 rounded-b-3xl">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Reprehenderit facere deleniti officiis non vero repellendus
-                dignissimos, praesentium esse explicabo.
-              </div>
-            </SwiperSlide>
-            <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col w-full">
-              <div className="relative">
-                <img
-                  src={randomGuy}
-                  className="md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
-                ></img>
-                <div className="bg-opacity-70 bg-white absolute w-full h-1/6 bottom-0 flex items-center place-content-center">
-                  <h1 className="text-center text-3xl">Dwayne Johnson</h1>
-                </div>
-              </div>
-              <div className="shadow-inner bg-darkGray text-center text-lg w-full p-5 rounded-b-3xl">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Reprehenderit facere deleniti officiis non vero repellendus
-                dignissimos, praesentium esse explicabo.
-              </div>
-            </SwiperSlide>
-            <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col w-full">
-              <div className="relative">
-                <img
-                  src={randomGirl}
-                  className="md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
-                ></img>
-                <div className="bg-opacity-70 bg-white absolute w-full h-1/6 bottom-0 flex items-center place-content-center">
-                  <h1 className="text-center text-3xl">Sadison</h1>
-                </div>
-              </div>
-              <div className="shadow-inner bg-darkGray text-center text-lg w-full p-5 rounded-b-3xl">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Reprehenderit facere deleniti officiis non vero repellendus
-                dignissimos, praesentium esse explicabo.
-              </div>
-            </SwiperSlide>
-            <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col w-full">
-              <div className="relative">
-                <img
-                  src={randomGuy}
-                  className="md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
-                ></img>
-                <div className="bg-opacity-70 bg-white absolute w-full h-1/6 bottom-0 flex items-center place-content-center">
-                  <h1 className="text-center text-3xl">The Brahma Bull</h1>
-                </div>
-              </div>
-              <div className="shadow-inner bg-darkGray text-center text-lg w-full p-5 rounded-b-3xl">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Reprehenderit facere deleniti officiis non vero repellendus
-                dignissimos, praesentium esse explicabo.
-              </div>
-            </SwiperSlide>
-            <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col w-full">
-              <div className="relative">
-                <img
-                  src={randomGirl}
-                  className="md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
-                ></img>
-                <div className="bg-opacity-70 bg-white absolute w-full h-1/6 bottom-0 flex items-center place-content-center">
-                  <h1 className="text-center text-3xl">Evil Knieval</h1>
-                </div>
-              </div>
-              <div className="shadow-inner bg-darkGray text-center text-lg w-full p-5 rounded-b-3xl">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Reprehenderit facere deleniti officiis non vero repellendus
-                dignissimos, praesentium esse explicabo.
-              </div>
-            </SwiperSlide>
-            {/* <SwiperSlide className="flex place-items-center pb-5 rounded-3xl flex-col w-full">
-              <img
-                src={randomGirl}
-                className=" md:block object-cover flex aspect-square w-full place-content-center place-items-center items-center bg-gray pb-0 rounded-t-3xl"
-              ></img>
-              <div className=" flex flex-col  place-items-center shadow-inner bg-gray text-lg w-full rounded-b-3xl">
-                <h1 className="text-center text-3xl p-3 border-b w-2/3">
-                  Evil Knievel
-                </h1>
-                <p className="text-center p-2">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Reprehenderit facere deleniti officiis non vero repellendus
-                  dignissimos, praesentium esse explicabo.
-                </p>
-              </div>
-            </SwiperSlide> */}
-          </Swiper>
+          <TeamContainer />
         </div>
       </div>
     </div>
