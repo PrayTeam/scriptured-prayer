@@ -6,3 +6,6 @@ project_name: scriptured_prayer
 virtualenv_path: /var/gunicorn/.virtualenvs/scriptured-prayer
 gunicorn_user: gunicorn
 gunicorn_group: gunicorn
+static_path: /var/www/html/staticfiles
+nginx_user: nginx
+nginx_group: nginx

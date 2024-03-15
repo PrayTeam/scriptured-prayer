@@ -1,5 +1,5 @@
 upstream {{ project_name }}_wsgi_server {
-  server unix:/run/gunicorn-{{ project_name }}.sock fail_timeout=0;
+  server unix:/var/run/wsgi.gunicorn-{{ project_name }}.sock fail_timeout=0;
 }
 
 server {
@@ -12,7 +12,7 @@ server {
   error_log /var/log/nginx/{{ project_name }}_error.log;
 
   location /static/ {
-      alias {{ project_path }}/staticfiles/;
+      alias /var/www/html/staticfiles/;
   }
 
   location / {
