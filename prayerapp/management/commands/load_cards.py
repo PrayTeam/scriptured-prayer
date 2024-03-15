@@ -40,8 +40,10 @@ class Command(BaseCommand):
                         category=category,
                         title=line[0].strip(),
                         scripture=line[1].strip(),
-                        title_es=line[2].strip(),
-                        scripture_es=line[3].strip(),
+                        description=line[3].strip(),
+                        title_es=line[4].strip(),
+                        scripture_es=line[5].strip(),
+                        description_es=line[7].strip(),
                     )
                     card.save()
                     self.stdout.write(self.style.SUCCESS('Successfully loaded card "%s"' % line[0]))
