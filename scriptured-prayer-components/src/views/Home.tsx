@@ -59,7 +59,7 @@ export function Home() {
             <h2 className="text-xl uppercase text-white font-semibold mb-4">
               Prayer Decks
             </h2>
-            <div className="flex flex-nowrap md:flex-wrap overflow-x-auto gap-x-4 -mx-6 md:mx-0 px-6 md:px-0">
+            <div className="flex flex-wrap md:flex-wrap overflow-x-auto gap-x-4 -mx-6 md:mx-0 px-6 md:px-0">
               {categories.map((category, i) => (
                 <Deck
                   key={i}
