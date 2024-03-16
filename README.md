@@ -67,7 +67,7 @@ poetry install --no-root --with pygraphviz
 poetry run python manage.py graph_models -o erd.png
 ```
 
-## Manually deployment
+## Manual deployment
 
 The application is deployed to a fedora server using the following steps:
 - Install ansible on the computer from which you are going to run the deployment
