@@ -110,8 +110,6 @@
 - name: Create pg_service.conf
   when: db_created.changed
   become: true
-  become_user: "{{ gunicorn_user }}"
   template:
     src: pg_service_conf.j2
-    dest: /home/{{ gunicorn_user }}/.pg_service.conf
-    mode: 0600
+    dest: /etc/pg_service.conf
