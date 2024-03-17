@@ -13,15 +13,55 @@
   become: true
   user:
     name: "{{ gunicorn_user }}"
+    group: "{{ gunicorn_group }}"
+    groups: "{{ nginx_group }}"
     state: present
     shell: /bin/bash
-    createhome: yes
+    createhome: no
+
+- name: Create static files directory
+  become: true
+  file:
+    path: "{{ static_path }}"
+    state: directory
+    mode: 0770
+    owner: "{{ nginx_user }}"
+    group: "{{ nginx_group }}"
 
 - name: Upgrade/Install Python packages (Ansible requirements)
   pip: 
     name:
       - github3.py
     state: latest
+
+- name: Set SELinux policy for gunicorn virtualenv
+  become: true
+  sefcontext:
+    target: "{{ virtualenv_path }}(/.*)?"
+    setype: httpd_exec_t
+    ftype: f 
+    state: present
+
+- name: Set SELinux policy for gunicorn python files
+  become: true
+  sefcontext:
+    target: "{{ project_path }}(/.*)?.py"
+    setype: httpd_exec_t
+    state: present
+
+- name: Set SELinux policy for gunicorn python compiled files
+  become: true
+  sefcontext:
+    target: "{{ project_path }}(/.*)?.pyc"
+    setype: httpd_sys_rw_content_t
+    state: present
+
+- name: Set SELinux policy for gunicorn project files
+  become: true
+  sefcontext:
+    target: "{{ project_path }}(/.*)?"
+    setype: httpd_sys_content_t
+    state: present
 
 - name: Check if the virtual environment exists
   become: true
@@ -102,8 +142,16 @@
     DJANGO_SETTINGS_MODULE: "{{ project_name }}.settings"
   command: "{{ virtualenv_path }}/bin/python {{ project_path }}/manage.py migrate --noinput"
 
-- name: Load starting data - bible
-  when: db_created.changed
+- name: Run Django Collectstatic
+  become: true
+  become_user: "{{ gunicorn_user }}"
+  environment: 
+    DJANGO_SECRET_KEY: "{{ django_secret }}"
+    DJANGO_SETTINGS_MODULE: "{{ project_name }}.settings"
+  command: "{{ virtualenv_path }}/bin/python {{ project_path }}/manage.py collectstatic --noinput" # Update the nginx configuration file and the location for static files in settings.py
+
+- name: Load starting data - NET bible
+  #when: db_created.changed
   become: true
   become_user: "{{ gunicorn_user }}"
   environment: 
@@ -112,7 +160,7 @@
   command: "{{ virtualenv_path }}/bin/python {{ project_path }}/manage.py load_bible eng net"
 
 - name: Load starting data - cards
-  when: db_created.changed
+  #when: db_created.changed
   become: true
   become_user: "{{ gunicorn_user }}"
   environment: 
@@ -138,3 +186,15 @@
     name: "gunicorn-{{ project_name }}.socket"
     state: started
     enabled: yes
+
+- name: Restore SELinux Contexts for the virtual environment
+  become: true
+  command: restorecon -R "{{ virtualenv_path }}"
+
+- name: Restore SELinux Contexts for the html directory
+  become: true
+  command: restorecon -R "{{ static_path }}"
+
+- name: Restore SELinux Contexts for the project directory
+  become: true
+  command: restorecon -R "{{ project_path }}"
