@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Deck } from "~/components";
+import { Footer } from "~/components";
 import { DemoPrayerDeck } from "~/types";
 import { useDemoPrayerDecks } from "~/hooks";
 import forest from "~/assets/images/forest.jpg";
@@ -109,6 +110,7 @@ export function Info() {
           </div>
         ))}
       </div>
+      <Footer color="night" />
     </>
   );
 }
