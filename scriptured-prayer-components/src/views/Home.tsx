@@ -47,7 +47,7 @@ export function Home() {
 
   return (
     <div className="flex flex-col w-full h-full bg-gradient-to-br from-purple from-10% via-purple via-30% to-blue to-90%">
-      <Container className="grow flex">
+      <Container className="grow flex w-full">
         <div className="flex flex-col w-full">
           <div className="flex items-center w-full justify-between mb-4">
             <h1 className="text-2xl text-white">
@@ -59,7 +59,7 @@ export function Home() {
             <h2 className="text-xl uppercase text-white font-semibold mb-4">
               Prayer Decks
             </h2>
-            <div className="flex flex-wrap md:flex-wrap overflow-x-auto gap-x-4 -mx-6 md:mx-0 px-6 md:px-0">
+            <div className="flex flex-nowrap md:flex-wrap overflow-x-auto gap-x-4 -mx-6 md:mx-0 px-6 md:px-0">
               {categories.map((category, i) => (
                 <Deck
                   key={i}
