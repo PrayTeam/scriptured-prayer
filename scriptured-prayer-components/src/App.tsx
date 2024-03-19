@@ -2,8 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
 
-import { Info, About, Home, Login, NotFound, Settings } from "./views";
-import { Faq } from "./views/Faq";
+import { Info, About, Home, Login, NotFound, Settings, Faq } from "./views";
 import { ProtectedRoutes } from "./components";
 import { useLocalStorage } from "./hooks";
 import { ProfileContext } from "./hooks";

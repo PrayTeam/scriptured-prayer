@@ -1,13 +1,23 @@
-import React from "react";
+import React, { ReactNode, forwardRef, HTMLAttributes } from "react";
 import classNames from "classnames";
 import * as Accordion from "@radix-ui/react-accordion";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 
+interface AccordionTriggerProps extends HTMLAttributes<HTMLButtonElement> {
+  children: ReactNode;
+  className?: string;
+}
+
+interface AccordionItemProps extends Accordion.AccordionItemProps {
+  value: string; // Add the value prop here
+  children: ReactNode;
+  className?: string;
+}
+
 export function Faq() {
   return (
-    <div className="bg-snowgrass h-full py-12">
+    <div className="bg-snowgrass py-12">
       <div className="container mx-auto flex flex-col items-center">
-        {" "}
         {/* Use flexbox layout */}
         <h1 className="text-center text-violet11 text-3xl font-bold mb-8">
           Frequently Asked Questions
@@ -18,7 +28,7 @@ export function Faq() {
   );
 }
 
-const AccordionDemo = () => (
+const AccordionDemo: React.FC = () => (
   <Accordion.Root
     className="md:w-[800px] md:rounded-md md:shadow-[0 2px 10px] md:shadow-black/5 md:text-[25px]"
     type="single"
@@ -78,25 +88,67 @@ const AccordionDemo = () => (
         information provided on the app's website or within the app itself.
       </AccordionContent>
     </AccordionItem>
+
+    <AccordionItem value="item-6">
+      <AccordionTrigger>
+        How do I reset my password for Scriptured Prayer?
+      </AccordionTrigger>
+      <AccordionContent>
+        If you've forgotten your password or need to reset it for any reason,
+        simply navigate to the login screen of the Scriptured Prayer app and
+        select the "Forgot Password" option. Follow the prompts to reset your
+        password securely. If you encounter any issues during this process,
+        don't hesitate to contact our support team for assistance.
+      </AccordionContent>
+    </AccordionItem>
+
+    {/* FAQ item 2 */}
+    <AccordionItem value="item-7">
+      <AccordionTrigger>Can I use Scriptured Prayer offline?</AccordionTrigger>
+      <AccordionContent>
+        Yes, Scriptured Prayer offers offline functionality for users who may
+        not have constant internet access. Once you've downloaded the necessary
+        content for offline use, you can engage in prayer sessions, read
+        scripture, and access other features without an active internet
+        connection. However, please note that certain features, such as syncing
+        data across devices, may require an internet connection.
+      </AccordionContent>
+    </AccordionItem>
+
+    {/* FAQ item 3 */}
+    <AccordionItem value="item-8">
+      <AccordionTrigger>
+        Is my personal data secure with Scriptured Prayer?
+      </AccordionTrigger>
+      <AccordionContent>
+        Absolutely. At Scriptured Prayer, we take the security and privacy of
+        our users' data very seriously. We employ robust measures to safeguard
+        your personal information, including encryption protocols and strict
+        access controls. Rest assured that your data is kept confidential and
+        used only in accordance with our privacy policy. If you have any
+        concerns about data security or privacy, please reach out to our support
+        team for further clarification.
+      </AccordionContent>
+    </AccordionItem>
   </Accordion.Root>
 );
 
-const AccordionItem = React.forwardRef(
+const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
   ({ children, className, ...props }, forwardedRef) => (
     <Accordion.Item
-      className={classNames(
-        "focus-within:shadow-mauve12 mt-px overflow-hidden first:mt-0 first:rounded-t last:rounded-b focus-within:relative focus-within:z-10 ",
-        className,
-      )}
       {...props}
       ref={forwardedRef}
+      className={classNames(
+        "focus-within:shadow-mauve12 mt-px overflow-hidden first:mt-0 first:rounded-t last:rounded-b focus-within:relative focus-within:z-10",
+        className,
+      )}
     >
       {children}
     </Accordion.Item>
   ),
 );
 
-const AccordionTrigger = React.forwardRef(
+const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerProps>(
   ({ children, className, ...props }, forwardedRef) => (
     <Accordion.Header className="flex">
       <Accordion.Trigger
@@ -107,7 +159,7 @@ const AccordionTrigger = React.forwardRef(
         {...props}
         ref={forwardedRef}
       >
-        {children}
+        <span>{children}</span>
         <ChevronDownIcon
           className=" ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[state=open]:rotate-180"
           aria-hidden
@@ -117,17 +169,20 @@ const AccordionTrigger = React.forwardRef(
   ),
 );
 
-const AccordionContent = React.forwardRef(
-  ({ children, className, ...props }, forwardedRef) => (
-    <Accordion.Content
-      className={classNames(
-        " bg-white data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp overflow-hidden ",
-        className,
-      )}
-      {...props}
-      ref={forwardedRef}
-    >
-      <div className="py-[15px] px-5">{children}</div>
-    </Accordion.Content>
-  ),
-);
+const AccordionContent = forwardRef<
+  HTMLDivElement,
+  HTMLAttributes<HTMLDivElement>
+>(({ children, className, ...props }, forwardedRef) => (
+  <Accordion.Content
+    className={classNames(
+      "bg-white data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp overflow-hidden",
+      className,
+    )}
+    {...props}
+    ref={forwardedRef}
+  >
+    <div className="py-[15px] px-5">{children}</div>
+  </Accordion.Content>
+));
+
+export default Faq;
