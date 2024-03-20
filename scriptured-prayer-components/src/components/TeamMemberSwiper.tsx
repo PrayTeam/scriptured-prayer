@@ -42,6 +42,7 @@ const TeamMemberSwiper = () => {
         <TeamMemberCard
           image={randomGirl}
           name="Ben Clark"
+          position="Co-Creator"
           description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit facere deleniti officiis non vero repellendus dignissimos, praesentium esse explicabo."
         />
       </SwiperSlide>
