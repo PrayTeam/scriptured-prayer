@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
 
+import { Deck } from "~/components";
+import { Footer } from "~/components";
 import forest from "~/assets/images/forest.jpg";
 import mountains from "~/assets/images/mountains.jpg";
 import clouds from "~/assets/images/clouds.jpg";
 import galaxy from "~/assets/images/galaxy.jpg";
-import { Deck } from "~/components";
 
 export function Info() {
   const navigate = useNavigate();
@@ -110,6 +111,7 @@ export function Info() {
           </div>
         </div>
       </div>
+      <Footer color="night" />
     </>
   );
 }
