@@ -1,9 +1,0 @@
----
-
-github_repo: "scriptured-prayer"
-github_user: "PrayTeam"
-project_name: scriptured_prayer
-virtualenv_path: /home/gunicorn/.virtualenvs/scriptured-prayer
-gunicorn_user: gunicorn
-gunicorn_group: gunicorn
-domain_name: ".scripturedprayer.com localhost"
