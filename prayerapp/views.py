@@ -126,7 +126,7 @@ class CardFilter(django_filters.FilterSet):
     class Meta:
         model = Card
         fields = {
-            "category__id": ["exact"],
+            "category__name": ["exact"],
             "category__genre": ["exact"],
         }
 

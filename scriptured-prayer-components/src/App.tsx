@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
 
-import { Info, About, Home, Login, NotFound, Settings } from "./views";
+import { Info, About, Home, Login, NotFound, Settings, Faq } from "./views";
 import { ProtectedRoutes } from "./components";
 import { useLocalStorage } from "./hooks";
 import { ProfileContext } from "./hooks";
@@ -14,12 +14,13 @@ const getRouter = (language: string) =>
       { path: "/", element: <Info /> },
       { path: "/login", element: <Login /> },
       { path: "/about", element: <About /> },
-      { path: "/prayer-decks/:id", element: <PrayerDeck /> },
+      { path: "/Faq", element: <Faq /> },
       {
         element: <ProtectedRoutes />,
         children: [
           { path: "/settings", element: <Settings /> },
           { path: "/home", element: <Home /> },
+          { path: "/prayer-decks/:name", element: <PrayerDeck /> },
         ],
       },
       { path: "*", element: <NotFound /> },

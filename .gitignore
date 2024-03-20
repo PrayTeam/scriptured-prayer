@@ -143,6 +143,3 @@ node_modules
 prayerapp/static/prayerapp/*
 
 .DS_Store
-
-# Django collectstatic
-staticfiles/*

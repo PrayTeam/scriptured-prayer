@@ -27,6 +27,7 @@ export default {
       purple: '#6c4565',
       red: '#d10000',
       blue: '#33335d',
+      
     },
     screens: {
       sm: '640px',
@@ -35,6 +36,21 @@ export default {
       xl: '1280px',
       '2xl': '1536px',
     },
+      keyframes: {
+        slideDown: {
+          from: { height: '0px' },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        slideUp: {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0px' },
+        },
+      },
+      animation: {
+        slideDown: 'slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1)',
+        slideUp: 'slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1)',
+      },
   },
+
   plugins: [],
 };
