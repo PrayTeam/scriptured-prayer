@@ -10,8 +10,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 );
 
 // TeamContainer
-import SwiperContainer from "./components/teamContainer.tsx";
-import SwiperItem from "./components/teamCard.tsx";
+import SwiperContainer from "./components/TeamMemberSwiper.tsx";
+import SwiperItem from "./components/TeamMemberCard.tsx";
 import randomGuy from "./assets/images/random-guy.jpg"; // Import your image paths
 import randomGirl from "./assets/images/random-girl.jpg"; // Import your image paths
 
