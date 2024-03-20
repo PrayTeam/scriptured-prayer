@@ -15,12 +15,12 @@ const getRouter = (language: string) =>
       { path: "/login", element: <Login /> },
       { path: "/about", element: <About /> },
       { path: "/Faq", element: <Faq /> },
-      { path: "/prayer-decks/:id", element: <PrayerDeck /> },
       {
         element: <ProtectedRoutes />,
         children: [
           { path: "/settings", element: <Settings /> },
           { path: "/home", element: <Home /> },
+          { path: "/prayer-decks/:name", element: <PrayerDeck /> },
         ],
       },
       { path: "*", element: <NotFound /> },
