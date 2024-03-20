@@ -1,14 +1,6 @@
 import { Button } from "~/components/form";
-// import dryGrass from "~/assets/images/dry-grass.jpg";
-// import blueSunset from "~/assets/images/blue-sunset.jpg";
-// import genericMan from "~/assets/images/generic-man.png";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import TeamContainer from "../components/teamContainer";
-// import teamCard from '../components/teamCard';
 
-import "~/swiper.css";
+import TeamContainer from "../components/TeamMemberSwiper";
 
 export function About() {
   return (
@@ -33,9 +25,9 @@ export function About() {
       </div>
       <div className="h-auto bg-cover bg-lichen">
         <h1 className="w-full bg-opacity-20  text-4xl text-center pt-5 pb-3 text-night">
-          Meet The Team
+          Meet the Pray Team
         </h1>
-        <div className="w-full bg-cente flex items-center justify-center bg-opacity-2">
+        <div className="w-full flex items-center justify-center">
           <TeamContainer />
         </div>
       </div>
