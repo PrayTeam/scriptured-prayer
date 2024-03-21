@@ -1,4 +1,4 @@
-import fallbackimage from "~/assets/images/No_image_available.svg";
+import fallbackimage from "~/assets/images/No_image_available_white.svg";
 
 interface Props {
   image?: string;
@@ -10,11 +10,11 @@ interface Props {
 const TeamMemberCard = ({ image, name, position, description }: Props) => {
   return (
     <div>
-      <div className="relative w-full bg-snowgrass rounded-t-3xl">
+      <div className="relative w-full bg-gray rounded-t-3xl object-cover">
         <img
           src={image ? image : fallbackimage}
           alt={name}
-          className="w-full bg-gray rounded-t-3xl"
+          className={`w-full bg-gray rounded-t-3xl object-cover ${image ? "fallback-image-class" : "p-16 scale-50"}`}
         />
         <div className="bg-opacity-90 bg-white absolute w-full h-1/6 bottom-0 flex items-center place-content-center">
           <h1 className="text-3xl">{name}</h1>
