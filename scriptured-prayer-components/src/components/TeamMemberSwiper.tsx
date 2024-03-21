@@ -23,7 +23,7 @@ const TeamMemberSwiper = () => {
         1100: {
           slidesPerView: 3,
         },
-        730: {
+        680: {
           slidesPerView: 2,
         },
       }}
