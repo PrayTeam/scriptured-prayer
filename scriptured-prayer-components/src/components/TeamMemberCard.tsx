@@ -20,7 +20,7 @@ const TeamMemberCard = ({ image, name, position, description }: Props) => {
           <h1 className="text-3xl">{name}</h1>
         </div>
       </div>
-      <div className="bg-snowgrass text-center text-lg w-full pt-3 rounded-b-3xl">
+      <div className="bg-snowgrass text-center text-lg w-full pt-3 rounded-b-3xl min-h-40">
         <p className="text-2xl font-semibold">{position}</p>
         <p className="p-3 md:text-lg text-base">{description}</p>
       </div>
