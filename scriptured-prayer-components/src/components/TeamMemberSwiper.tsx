@@ -6,7 +6,6 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "~/swiper.css";
 import follin from "~/assets/images/clark_follin.jpg";
-import randomGirl from "~/assets/images/random-girl.jpg";
 import TeamMemberCard from "./TeamMemberCard";
 
 const TeamMemberSwiper = () => {
@@ -27,7 +26,6 @@ const TeamMemberSwiper = () => {
         730: {
           slidesPerView: 2,
         },
-        // Add more breakpoints as needed
       }}
     >
       <SwiperSlide>
@@ -40,7 +38,6 @@ const TeamMemberSwiper = () => {
       </SwiperSlide>
       <SwiperSlide>
         <TeamMemberCard
-          image={randomGirl}
           name="Ben Clark"
           position="Co-Creator"
           description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit facere deleniti officiis non vero repellendus dignissimos, praesentium esse explicabo."
@@ -48,33 +45,32 @@ const TeamMemberSwiper = () => {
       </SwiperSlide>
       <SwiperSlide>
         <TeamMemberCard
-          image={randomGirl}
-          name="Dwayne Johnson"
+          name="Temp Name"
+          position="N/A"
           description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit facere deleniti officiis non vero repellendus dignissimos, praesentium esse explicabo."
         />
       </SwiperSlide>
       <SwiperSlide>
         <TeamMemberCard
-          image={randomGirl}
-          name="Sadison"
+          name="Temp Name"
+          position="N/A"
           description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit facere deleniti officiis non vero repellendus dignissimos, praesentium esse explicabo."
         />
       </SwiperSlide>
       <SwiperSlide>
         <TeamMemberCard
-          image={randomGirl}
-          name="The Brahma Bull"
+          name="Temp Name"
+          position="N/A"
           description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit facere deleniti officiis non vero repellendus dignissimos, praesentium esse explicabo."
         />
       </SwiperSlide>
       <SwiperSlide>
         <TeamMemberCard
-          image={randomGirl}
-          name="Evil Kneival"
+          name="Temp Name"
+          position="N/A"
           description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit facere deleniti officiis non vero repellendus dignissimos, praesentium esse explicabo."
         />
       </SwiperSlide>
-      {/* Add more Slide components with different information */}
     </Swiper>
   );
 };
