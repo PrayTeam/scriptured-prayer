@@ -3,7 +3,7 @@ import TeamContainer from "../components/TeamMemberSwiper";
 
 export function About() {
   return (
-    <div className="bg-snowgrass h-full">
+    <div className="bg-snowgrass h-full min-w-72">
       <div className="h-3/4 min-h-96 flex px-6 py-8 md:py-16 md:space-x-12 w-full mx-auto bg-[url('~/assets/images/dry-grass.jpg')]">
         <div>
           <div className="">
