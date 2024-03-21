@@ -1,5 +1,4 @@
 import { Button } from "~/components/form";
-
 import TeamContainer from "../components/TeamMemberSwiper";
 
 export function About() {
@@ -11,10 +10,12 @@ export function About() {
             <h2 className="uppercase font-bold text-4xl">About us</h2>
             <div className="my-8 text-xl">
               <h3 className="font-bold uppercase">Phone Number</h3>
+              {/* change number */}
               <div className="my-2">(123) 456-7890</div>
             </div>
             <div className="my-8 text-xl">
               <h3 className="font-bold uppercase">Email Address</h3>
+              {/* change email */}
               <div className="my-2">hello@scripturedprayer.com</div>
             </div>
             <Button className="bg-lichen">
