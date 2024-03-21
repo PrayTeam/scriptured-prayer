@@ -24,13 +24,11 @@ export function About() {
           </div>
         </div>
       </div>
-      <div className="h-auto bg-cover bg-lichen">
-        <h1 className="w-full bg-opacity-20  text-4xl text-center pt-5 pb-3 text-night">
+      <div className="bg-lichen">
+        <h1 className="text-4xl text-center pt-5 pb-3 text-night">
           Meet the Pray Team
         </h1>
-        <div className="w-full flex items-center justify-center">
-          <TeamContainer />
-        </div>
+        <TeamContainer />
       </div>
     </div>
   );
