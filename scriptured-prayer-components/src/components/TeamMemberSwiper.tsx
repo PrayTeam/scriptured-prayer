@@ -6,6 +6,8 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "~/swiper.css";
 import follin from "~/assets/images/clark_follin.jpg";
+import ben from "~/assets/images/clark_ben.jpg";
+import kenan from "~/assets/images/casey_kenan.jpg";
 import TeamMemberCard from "./TeamMemberCard";
 
 const TeamMemberSwiper = () => {
@@ -23,54 +25,115 @@ const TeamMemberSwiper = () => {
         1100: {
           slidesPerView: 3,
         },
-        680: {
+        730: {
           slidesPerView: 2,
         },
+        // Add more breakpoints as needed
       }}
     >
       <SwiperSlide>
         <TeamMemberCard
           image={follin}
           name="Follin Clark"
-          position="Creator"
-          description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit facere deleniti officiis non vero repellendus dignissimos, praesentium esse explicabo."
+          position="Visionary"
+          description="Contributed heartfelt content and spiritual guidance to Scriptured Prayer"
         />
       </SwiperSlide>
       <SwiperSlide>
         <TeamMemberCard
+          image={ben}
           name="Ben Clark"
           position="Co-Creator"
-          description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit facere deleniti officiis non vero repellendus dignissimos, praesentium esse explicabo."
+          description="Co-Creator of Scriptured Prayer"
         />
       </SwiperSlide>
       <SwiperSlide>
         <TeamMemberCard
-          name="Temp Name"
-          position="N/A"
-          description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit facere deleniti officiis non vero repellendus dignissimos, praesentium esse explicabo."
+          name="Asher Lloyd"
+          position="Front-End Developer"
+          description="Designs and manages the user interface of Scriptured Prayer"
         />
       </SwiperSlide>
       <SwiperSlide>
         <TeamMemberCard
-          name="Temp Name"
-          position="N/A"
-          description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit facere deleniti officiis non vero repellendus dignissimos, praesentium esse explicabo."
+          name="Robbie Nichols"
+          description="Freed Hardeman Alumn"
+          position="Back-End Developer"
         />
       </SwiperSlide>
       <SwiperSlide>
         <TeamMemberCard
-          name="Temp Name"
-          position="N/A"
-          description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit facere deleniti officiis non vero repellendus dignissimos, praesentium esse explicabo."
+          image={kenan}
+          name="Kenan Casey"
+          description="Professor at FHU"
+          position="Developer"
         />
       </SwiperSlide>
       <SwiperSlide>
         <TeamMemberCard
-          name="Temp Name"
-          position="N/A"
-          description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit facere deleniti officiis non vero repellendus dignissimos, praesentium esse explicabo."
+          name="Sean Janiec"
+          description="Freed Hardemen Student"
+          position="Developer"
         />
       </SwiperSlide>
+      <SwiperSlide>
+        <TeamMemberCard
+          name="Judah Rininger"
+          description="Freed Hardemen Student"
+          position="Developer"
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <TeamMemberCard
+          name="Louviers Joseph"
+          description="Freed Hardemen Student"
+          position="Developer"
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <TeamMemberCard
+          name="Jaydon Dulgar"
+          description="Freed Hardemen Student"
+          position="Developer"
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <TeamMemberCard
+          name="Madison Cagle"
+          description="Freed Hardemen Student"
+          position="Developer"
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <TeamMemberCard
+          name="Lauren Taylor"
+          description="Freed Hardemen Student"
+          position="Developer"
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <TeamMemberCard
+          name="Savannah Martin"
+          description="Freed Hardemen Student"
+          position="Developer"
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <TeamMemberCard
+          name="Bryce Green"
+          description="Freed Hardemen Student"
+          position="Developer"
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <TeamMemberCard
+          name="Samuel Flowers"
+          description="Freed Hardemen Student"
+          position="Developer"
+        />
+      </SwiperSlide>
+
+      {/* Add more Slide components with different information */}
     </Swiper>
   );
 };
