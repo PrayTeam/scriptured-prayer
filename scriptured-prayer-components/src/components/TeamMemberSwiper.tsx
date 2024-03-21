@@ -28,7 +28,6 @@ const TeamMemberSwiper = () => {
         730: {
           slidesPerView: 2,
         },
-        // Add more breakpoints as needed
       }}
     >
       <SwiperSlide>
@@ -71,69 +70,67 @@ const TeamMemberSwiper = () => {
       </SwiperSlide>
       <SwiperSlide>
         <TeamMemberCard
-          name="Sean Janiec"
-          description="Freed Hardemen Student"
-          position="Developer"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <TeamMemberCard
-          name="Judah Rininger"
-          description="Freed Hardemen Student"
-          position="Developer"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <TeamMemberCard
-          name="Louviers Joseph"
-          description="Freed Hardemen Student"
-          position="Developer"
+          name="Madison Cagle"
+          description="2024 Freed-Hardeman student developer"
+          position="Student Developer"
         />
       </SwiperSlide>
       <SwiperSlide>
         <TeamMemberCard
           name="Jaydon Dulgar"
-          description="Freed Hardemen Student"
-          position="Developer"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <TeamMemberCard
-          name="Madison Cagle"
-          description="Freed Hardemen Student"
-          position="Developer"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <TeamMemberCard
-          name="Lauren Taylor"
-          description="Freed Hardemen Student"
-          position="Developer"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <TeamMemberCard
-          name="Savannah Martin"
-          description="Freed Hardemen Student"
-          position="Developer"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <TeamMemberCard
-          name="Bryce Green"
-          description="Freed Hardemen Student"
-          position="Developer"
+          description="2024 Freed-Hardeman student developert"
+          position="Student Developer"
         />
       </SwiperSlide>
       <SwiperSlide>
         <TeamMemberCard
           name="Samuel Flowers"
-          description="Freed Hardemen Student"
-          position="Developer"
+          description="2024 Freed-Hardeman student developer"
+          position="Student Developer"
         />
       </SwiperSlide>
-
-      {/* Add more Slide components with different information */}
+      <SwiperSlide>
+        <TeamMemberCard
+          name="Bryce Green"
+          description="2024 Freed-Hardeman student developer"
+          position="Student Developer"
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <TeamMemberCard
+          name="Sean Janiec"
+          description="2024 Freed-Hardeman student developer"
+          position="Student Developer"
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <TeamMemberCard
+          name="Louviers Joseph"
+          description="2024 Freed-Hardeman student developer"
+          position="Student Developer"
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <TeamMemberCard
+          name="Savannah Martin"
+          description="2024 Freed-Hardeman student developer"
+          position="Student Developer"
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <TeamMemberCard
+          name="Judah Rininger"
+          description="2024 Freed-Hardeman student developer"
+          position="Student Developer"
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <TeamMemberCard
+          name="Lauren Taylor"
+          description="2024 Freed-Hardeman student developer"
+          position="Student Developer"
+        />
+      </SwiperSlide>
     </Swiper>
   );
 };
