@@ -11,20 +11,25 @@ import "swiper/css/pagination";
 import "~/swiper.css";
 import { useApi } from "~/hooks";
 import { CardResponse } from "~/api/models/responses";
+import { CategoryResponse } from "~/api/models/responses";
 import { Card } from "./Card";
 
 function PrayerDeck() {
   const api = useApi();
   const { name } = useParams();
   const [cards, setCards] = useState<CardResponse[]>([]);
+  const [category, setCategory] = useState<CategoryResponse>();
 
   useEffect(() => {
     (async () => {
-      api.cards
-        .all({ category__name: name })
-        .then((cards) => {
-          setCards(cards);
-          console.log(cards);
+      Promise.all([
+        api.cards.all({ category__name: name }),
+        api.categories.all(),
+      ])
+        .then(([_cards, categories]) => {
+          setCards(_cards);
+          // todo: find by id instead of name
+          setCategory(categories.find((c) => c.name === name));
         })
         .catch((error) => console.error(error));
     })();
@@ -45,11 +50,30 @@ function PrayerDeck() {
           pagination={{ clickable: true }}
           keyboard
         >
-          {cards.map((card) => (
-            <SwiperSlide key={card.id}>
-              <Card {...card} />
-            </SwiperSlide>
-          ))}
+          {category && (
+            <>
+              <SwiperSlide>
+                <Card
+                  focus
+                  category={category.name}
+                  title="Inspiration"
+                  body={category.inspiration}
+                  cardCount={category.card_count}
+                />
+              </SwiperSlide>
+              {cards.map((card) => (
+                <SwiperSlide key={card.id}>
+                  <Card
+                    category={card.category}
+                    title={card.title}
+                    body={card.scripture_text.map((st) => st.text).join(" ")}
+                    scripture={card.scripture}
+                    instruction={card.instruction}
+                  />
+                </SwiperSlide>
+              ))}
+            </>
+          )}
         </Swiper>
 
         <Button size="4" className="w-80 mx-auto mt-4 bg-lichen">
