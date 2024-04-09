@@ -15,8 +15,7 @@ import { Card } from "./Card";
 function PrayerDeck() {
   const api = useApi();
   const id = useRouteId();
-  const [cards, setCards] = useState<CardResponse[]>([]);
-  const [userCards, setUserCards] = useState<UserCardResponse[]>([]);
+  const [cards, setCards] = useState<CardResponse[] | UserCardResponse[]>([]);
   const { profile } = useProfile();
   const [activeCardId, setActiveCardId] = useState<number>();
 
@@ -27,12 +26,9 @@ function PrayerDeck() {
           ? api.userCards
               .all({ card__category__id: id })
               .then((userCards) => {
-                setUserCards(userCards);
-                setActiveCardId(userCards[0].id);
+                setCards(userCards);
+                setActiveCardId(cards[0].id);
                 return userCards;
-              })
-              .then((userCards) => {
-                console.log(userCards);
               })
               .catch((error) => console.error(error))
           : api.cards
@@ -73,17 +69,11 @@ function PrayerDeck() {
               : () => {}
           }
         >
-          {profile && profile.authenticated
-            ? userCards.map((userCard) => (
-                <SwiperSlide key={userCard.id} data-id={userCard.id}>
-                  <Card {...userCard} />
-                </SwiperSlide>
-              ))
-            : cards.map((card) => (
-                <SwiperSlide key={card.id} data-id={card.id}>
-                  <Card {...card} />
-                </SwiperSlide>
-              ))}
+          {cards.map((card) => (
+            <SwiperSlide key={card.id} data-id={card.id}>
+              <Card {...card} />
+            </SwiperSlide>
+          ))}
         </Swiper>
 
         <Button size="4" className="w-80 mx-auto mt-4 bg-lichen">
