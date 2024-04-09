@@ -103,9 +103,9 @@ export function useApi() {
       all: (userCardsRequest?: UserCardsRequest) =>
         get<UserCardResponse[]>(
           parameterizeRequest("usercards/", userCardsRequest),
-          options,
+          withCsrf(options),
         ),
-      logCard: (pk: number) => post(`usercards/?pk=${pk}`),
+      logCard: (pk: number) => post(`usercards/?pk=${pk}`, withCsrf(options)),
     },
   };
 }
