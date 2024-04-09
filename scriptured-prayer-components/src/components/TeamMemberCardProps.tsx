@@ -17,7 +17,7 @@ const TeamMemberCard = ({ image, name, position, description }: Props) => {
           className={`w-full bg-gray rounded-t-xl sm:rounded-t-3xl object-cover ${image ? "fallback-image-class" : "p-16 sm:scale-50"}`}
         />
         <div className="bg-opacity-90 bg-white absolute w-full h-1/6 bottom-0 flex items-center place-content-center">
-          <h1 className="text-m sm:text-3xl">{name}</h1>
+          <h1 className="text-base sm:text-3xl">{name}</h1>
         </div>
       </div>
       <div className="bg-snowgrass text-center text-lg w-full pt-3 rounded-b-xl sm:rounded-b-3xl min-h-40">
