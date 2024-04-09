@@ -8,24 +8,39 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import "~/swiper.css";
-import { useApi, useRouteId } from "~/hooks";
-import { CardResponse } from "~/api/models/responses";
+import { useApi, useProfile, useRouteId } from "~/hooks";
+import { CardResponse, UserCardResponse } from "~/api/models/responses";
 import { Card } from "./Card";
 
 function PrayerDeck() {
   const api = useApi();
   const id = useRouteId();
   const [cards, setCards] = useState<CardResponse[]>([]);
+  const [userCards, setUserCards] = useState<UserCardResponse[]>([]);
+  const { profile } = useProfile();
+  const [activeCardId, setActiveCardId] = useState<number>();
 
   useEffect(() => {
     if (id) {
       (async () => {
-        api.cards
-          .all({ category__id: id })
-          .then((cards) => {
-            setCards(cards);
-          })
-          .catch((error) => console.error(error));
+        profile && profile.authenticated
+          ? api.userCards
+              .all({ card__category__id: id })
+              .then((userCards) => {
+                setUserCards(userCards);
+                setActiveCardId(userCards[0].id);
+                return userCards;
+              })
+              .then((userCards) => {
+                console.log(userCards);
+              })
+              .catch((error) => console.error(error))
+          : api.cards
+              .all({ category__id: id })
+              .then((cards) => {
+                setCards(cards);
+              })
+              .catch((error) => console.error(error));
       })();
     }
   }, []);
@@ -46,12 +61,29 @@ function PrayerDeck() {
           slidesPerView={1}
           pagination={{ clickable: true }}
           keyboard
+          onActiveIndexChange={
+            profile && profile.authenticated
+              ? (swiper) => {
+                  activeCardId && api.userCards.logCard(activeCardId);
+
+                  const new_card = swiper.slides[swiper.activeIndex];
+                  new_card.dataset.id &&
+                    setActiveCardId(parseInt(new_card.dataset.id));
+                }
+              : () => {}
+          }
         >
-          {cards.map((card) => (
-            <SwiperSlide key={card.id}>
-              <Card {...card} />
-            </SwiperSlide>
-          ))}
+          {profile && profile.authenticated
+            ? userCards.map((userCard) => (
+                <SwiperSlide key={userCard.id} data-id={userCard.id}>
+                  <Card {...userCard} />
+                </SwiperSlide>
+              ))
+            : cards.map((card) => (
+                <SwiperSlide key={card.id} data-id={card.id}>
+                  <Card {...card} />
+                </SwiperSlide>
+              ))}
         </Swiper>
 
         <Button size="4" className="w-80 mx-auto mt-4 bg-lichen">
