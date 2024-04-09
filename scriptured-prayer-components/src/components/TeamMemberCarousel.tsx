@@ -11,6 +11,84 @@ import kenan from "~/assets/images/casey_kenan.jpg";
 import TeamMemberCard from "./TeamMemberCardProps";
 
 const TeamMemberCarousel = () => {
+  const members = [
+    {
+      image: `${follin}`,
+      name: "Follin Clark",
+      position: "Visionary",
+      description:
+        "Contributed heartfelt content and spiritual guidance to Scriptured Prayer",
+    },
+    {
+      image: `${ben}`,
+      name: "Ben Clark",
+      position: "Co-Creator",
+      description: "Co-Creator of Scriptured Prayer",
+    },
+    {
+      name: "Asher Lloyd",
+      position: "Front-End Developer",
+      description:
+        "Designs and manages the user interface of Scriptured Prayer",
+    },
+    {
+      name: "Robbie Nichols",
+      position: "Freed Hardeman Alumn",
+      description: "Back-End Developer",
+    },
+    {
+      image: `${kenan}`,
+      name: "Kenan Casey",
+      position: "Developer",
+      description: "Professor at FHU",
+    },
+    {
+      name: "Madison Cagle",
+      position: "Student Developer",
+      description: "2024 Freed-Hardeman student developer",
+    },
+    {
+      name: "Jaydon Dulgar",
+      position: "Student Developer",
+      description: "2024 Freed-Hardeman student developer",
+    },
+    {
+      name: "Samuel Flowers",
+      position: "Student Developer",
+      description: "2024 Freed-Hardeman student developer",
+    },
+    {
+      name: "Bryce Green",
+      position: "Student Developer",
+      description: "2024 Freed-Hardeman student developer",
+    },
+    {
+      name: "Sean Janiec",
+      position: "Student Developer",
+      description: "2024 Freed-Hardeman student developer",
+    },
+    {
+      name: "Louviers Joseph",
+      position: "Student Developer",
+      description: "2024 Freed-Hardeman student developer",
+    },
+    {
+      name: "Savannah Martin",
+      position: "Student Developer",
+      description: "2024 Freed-Hardeman student developer",
+    },
+    {
+      name: "Judah Rininger",
+      position: "Student Developer",
+      description: "2024 Freed-Hardeman student developer",
+    },
+    {
+      name: "Lauren Taylor",
+      position: "Student Developer",
+      description: "2024 Freed-Hardeman student developer",
+    },
+  ];
+
   return (
     <Swiper
       className="w-full p-10 pt-5"
@@ -30,107 +108,16 @@ const TeamMemberCarousel = () => {
         },
       }}
     >
-      <SwiperSlide>
-        <TeamMemberCard
-          image={follin}
-          name="Follin Clark"
-          position="Visionary"
-          description="Contributed heartfelt content and spiritual guidance to Scriptured Prayer"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <TeamMemberCard
-          image={ben}
-          name="Ben Clark"
-          position="Co-Creator"
-          description="Co-Creator of Scriptured Prayer"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <TeamMemberCard
-          name="Asher Lloyd"
-          position="Front-End Developer"
-          description="Designs and manages the user interface of Scriptured Prayer"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <TeamMemberCard
-          name="Robbie Nichols"
-          description="Freed Hardeman Alumn"
-          position="Back-End Developer"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <TeamMemberCard
-          image={kenan}
-          name="Kenan Casey"
-          description="Professor at FHU"
-          position="Developer"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <TeamMemberCard
-          name="Madison Cagle"
-          description="2024 Freed-Hardeman student developer"
-          position="Student Developer"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <TeamMemberCard
-          name="Jaydon Dulgar"
-          description="2024 Freed-Hardeman student developert"
-          position="Student Developer"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <TeamMemberCard
-          name="Samuel Flowers"
-          description="2024 Freed-Hardeman student developer"
-          position="Student Developer"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <TeamMemberCard
-          name="Bryce Green"
-          description="2024 Freed-Hardeman student developer"
-          position="Student Developer"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <TeamMemberCard
-          name="Sean Janiec"
-          description="2024 Freed-Hardeman student developer"
-          position="Student Developer"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <TeamMemberCard
-          name="Louviers Joseph"
-          description="2024 Freed-Hardeman student developer"
-          position="Student Developer"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <TeamMemberCard
-          name="Savannah Martin"
-          description="2024 Freed-Hardeman student developer"
-          position="Student Developer"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <TeamMemberCard
-          name="Judah Rininger"
-          description="2024 Freed-Hardeman student developer"
-          position="Student Developer"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <TeamMemberCard
-          name="Lauren Taylor"
-          description="2024 Freed-Hardeman student developer"
-          position="Student Developer"
-        />
-      </SwiperSlide>
+      {members.map((member) => (
+        <SwiperSlide>
+          <TeamMemberCard
+            image={member.image}
+            name={member.name}
+            position={member.position}
+            description={member.description}
+          />
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 };
