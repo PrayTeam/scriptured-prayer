@@ -8,9 +8,9 @@ import "~/swiper.css";
 import follin from "~/assets/images/clark_follin.jpg";
 import ben from "~/assets/images/clark_ben.jpg";
 import kenan from "~/assets/images/casey_kenan.jpg";
-import TeamMemberCard from "./TeamMemberCard";
+import TeamMemberCard from "./TeamMemberCardProps";
 
-const TeamMemberSwiper = () => {
+const TeamMemberCarousel = () => {
   return (
     <Swiper
       className="w-full p-10 pt-5"
@@ -135,4 +135,4 @@ const TeamMemberSwiper = () => {
   );
 };
 
-export default TeamMemberSwiper;
+export default TeamMemberCarousel;
