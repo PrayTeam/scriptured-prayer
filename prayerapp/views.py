@@ -92,6 +92,7 @@ class UserCardFilter(django_filters.FilterSet):
         fields = {
             "card__category__name": ["exact"],
             "card__category__genre": ["exact"],
+            "card__category__id": ["exact"],
             "answered": ["exact"],
             "hidden": ["exact"],
             "in_prayer_deck": ["exact"],
