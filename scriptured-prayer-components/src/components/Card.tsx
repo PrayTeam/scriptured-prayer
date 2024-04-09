@@ -1,7 +1,7 @@
 import { Badge, Text } from "@radix-ui/themes";
-import { CardResponse } from "~/api/models/responses";
+import { CardResponse, UserCardResponse } from "~/api/models/responses";
 
-export function Card(props: CardResponse) {
+export function Card(props: CardResponse | UserCardResponse) {
   return (
     <div className="bg-white h-50 py-8 md:py-12 px-6 md:px-16 rounded-md">
       <Badge
