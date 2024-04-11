@@ -59,6 +59,14 @@ export function Home() {
               Prayer Decks
             </h2>
             <div className="flex flex-nowrap md:flex-wrap overflow-x-auto gap-x-4 -mx-6 md:mx-0 px-6 md:px-0">
+              <Deck
+                key={"daily"}
+                title="Daily Deck"
+                description={"Lorem ipsum dolor sit amet"}
+                image={deckImages[0]}
+                color={deckColors[0]}
+                onClick={() => navigate(`/prayer-decks/daily`)}
+              />
               {categories.map((category, i) => (
                 <Deck
                   key={i}
