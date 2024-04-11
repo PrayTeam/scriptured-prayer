@@ -105,7 +105,8 @@ export function useApi() {
           parameterizeRequest("usercards/", userCardsRequest),
           withCsrf(options),
         ),
-      logCard: (pk: number) => post(`usercards/?pk=${pk}`, withCsrf(options)),
+      logCard: (pk: number) =>
+        post(`usercards/${pk}/log_prayer/`, withCsrf(options)),
     },
   };
 }
