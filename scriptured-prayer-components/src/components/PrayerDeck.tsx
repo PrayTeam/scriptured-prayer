@@ -22,16 +22,24 @@ function PrayerDeck() {
 
   useEffect(() => {
     (async () => {
-      Promise.all([
-        api.cards.all({ category__name: name }),
-        api.categories.all(),
-      ])
-        .then(([_cards, categories]) => {
-          setCards(_cards);
-          // todo: find by id instead of name
-          setCategory(categories.find((c) => c.name === name));
-        })
-        .catch((error) => console.error(error));
+      if (name == "daily") {
+        Promise.all([api.cards.daily()])
+          .then(([_cards]) => {
+            setCards(_cards);
+          })
+          .catch((error) => console.error(error));
+      } else {
+        Promise.all([
+          api.cards.all({ category__name: name }),
+          api.categories.all(),
+        ])
+          .then(([_cards, categories]) => {
+            setCards(_cards);
+            // todo: find by id instead of name
+            setCategory(categories.find((c) => c.name === name));
+          })
+          .catch((error) => console.error(error));
+      }
     })();
   }, []);
 
@@ -39,7 +47,11 @@ function PrayerDeck() {
     <div className="bg-ocean h-full">
       <Flex direction="column">
         <Heading size="7" my="4" className="text-white text-center">
-          {cards.length > 0 ? cards[0].category : "Loading..."}
+          {cards.length > 0
+            ? name == "daily"
+              ? "Daily Deck"
+              : cards[0].category
+            : "Loading..."}
         </Heading>
 
         <Swiper
@@ -61,19 +73,19 @@ function PrayerDeck() {
                   cardCount={category.card_count}
                 />
               </SwiperSlide>
-              {cards.map((card) => (
-                <SwiperSlide key={card.id}>
-                  <Card
-                    category={card.category}
-                    title={card.title}
-                    body={card.scripture_text.map((st) => st.text).join(" ")}
-                    scripture={card.scripture}
-                    instruction={card.instruction}
-                  />
-                </SwiperSlide>
-              ))}
             </>
           )}
+          {cards.map((card) => (
+            <SwiperSlide key={card.id}>
+              <Card
+                category={card.category}
+                title={card.title}
+                body={card.scripture_text.map((st) => st.text).join(" ")}
+                scripture={card.scripture}
+                instruction={card.instruction}
+              />
+            </SwiperSlide>
+          ))}
         </Swiper>
 
         <Button size="4" className="w-80 mx-auto mt-4 bg-lichen">

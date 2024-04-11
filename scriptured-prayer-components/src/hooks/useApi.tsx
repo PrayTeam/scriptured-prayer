@@ -91,6 +91,7 @@ export function useApi() {
           parameterizeRequest("cards/", cardsRequest),
           options,
         ),
+      daily: () => get<CardResponse[]>("cards/?limit=10", options),
     },
     categories: {
       all: () => get<CategoryResponse[]>("categories/", options),
