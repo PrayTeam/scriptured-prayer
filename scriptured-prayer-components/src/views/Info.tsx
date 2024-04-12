@@ -6,6 +6,7 @@ import { Footer } from "~/components";
 import { DemoPrayerDeck } from "~/types";
 import { useDemoPrayerDecks } from "~/hooks";
 import forest from "~/assets/images/forest.jpg";
+import { Faq } from "~/components/Faq";
 
 export function Info() {
   const navigate = useNavigate();
@@ -109,6 +110,16 @@ export function Info() {
             </div>
           </div>
         ))}
+      </div>
+      <div>
+        <div className="bg-[#a2aa8a] px-6 py-8 md:py-16 md:space-x-12 mx-auto">
+          <h2 className="uppercase font-bold text-4xl text-center text-white">
+            Frequently Asked Questions
+          </h2>
+          <div className="container mx-auto flex flex-col items-center">
+            <Faq />
+          </div>
+        </div>
       </div>
       <Footer color="night" />
     </>
