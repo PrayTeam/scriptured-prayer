@@ -8,5 +8,8 @@
     "@commitlint/cli": "^18.4.4",
     "@commitlint/config-conventional": "^18.4.4",
     "husky": "^8.0.3"
+  },
+  "dependencies": {
+    "@radix-ui/react-navigation-menu": "^1.1.4"
   }
 }
