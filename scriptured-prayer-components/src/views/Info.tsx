@@ -13,6 +13,41 @@ export function Info() {
   const demoPrayerDecks = useDemoPrayerDecks();
   const [prayerDecks, setPrayerDecks] = useState<DemoPrayerDeck[][]>([]);
 
+  const today = new Date();
+  const date = today.getDate();
+  const ones_digit = date % 10;
+  const date_suffix =
+    ([11, 12, 13].includes(date) && "th") ||
+    (ones_digit === 1 && "st") ||
+    (ones_digit === 2 && "nd") ||
+    (ones_digit === 3 && "rd") ||
+    "th";
+  const month_names = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const day_names = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  const date_string = `${day_names[today.getDay()]}, ${month_names[today.getMonth()]} ${date}${date_suffix}, ${today.getFullYear()}`;
+
   useEffect(() => {
     (async () => {
       demoPrayerDecks
@@ -100,7 +135,7 @@ export function Info() {
             alt="Image of Nature"
           />
           <div className="w-1/2 flex flex-col gap-1 font-medium">
-            <p className="mb-3">{new Date().toString()}</p>
+            <p className="mb-3">{date_string}</p>
             <h2 className="font-bold text-3xl">Today's Daily Deck</h2>
             <p className="text-lg">
               A group of verses that encourage praise and thanksgiving.
