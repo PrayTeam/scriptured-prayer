@@ -5,6 +5,7 @@ import { Deck } from "~/components";
 import { DemoPrayerDeck } from "~/types";
 import { useDemoPrayerDecks } from "~/hooks";
 import forest from "~/assets/images/forest.jpg";
+import NavigationMenu from "~/components/NavigationBar";
 
 export function Info() {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ export function Info() {
 
   return (
     <>
+      <NavigationMenu></NavigationMenu>
       <div
         style={{ backgroundImage: `url('${forest}')` }}
         className="w-full bg-no-repeat bg-center bg-cover"
