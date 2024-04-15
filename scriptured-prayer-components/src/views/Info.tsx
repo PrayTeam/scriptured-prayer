@@ -140,10 +140,13 @@ export function Info() {
             <p className="text-lg">
               A group of verses that encourage praise and thanksgiving.
             </p>
-            <button className="bg-leaf rounded-lg text-white shadow-md shadow-night w-52 mt-8 p-2">
+            <a
+              href="/prayer-decks/daily"
+              className="bg-leaf rounded-lg text-center text-white shadow-md shadow-night w-52 mt-8 p-2"
+            >
               <p className="text-lg font">Pray</p>
               <p>2 min | 5 cards</p>
-            </button>
+            </a>
           </div>
         </div>
       </div>
