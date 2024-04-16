@@ -1,7 +1,7 @@
 import React, { ReactNode, forwardRef, HTMLAttributes } from "react";
 import classNames from "classnames";
 import * as Accordion from "@radix-ui/react-accordion";
-import { Cross1Icon } from "@radix-ui/react-icons";
+import { PlusIcon } from "@radix-ui/react-icons";
 
 interface AccordionTriggerProps extends HTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
@@ -155,8 +155,8 @@ const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerProps>(
         ref={forwardedRef}
       >
         <span>{children}</span>
-        <Cross1Icon
-          className=" ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[state=open]:rotate-180"
+        <PlusIcon
+          className=" ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[ group-data-[state=open]:rotate-45"
           aria-hidden
         />
       </Accordion.Trigger>
