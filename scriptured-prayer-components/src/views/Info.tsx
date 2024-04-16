@@ -132,7 +132,7 @@ export function Info() {
           <img
             className="absolute h-44 sm:h-52 lg:h-64 aspect-[11/8] sm:aspect-[13/7] lg:aspect-square rounded-lg left-auto -top-24 sm:-top-32 lg:top-auto lg:-left-32"
             src={nature}
-            alt="Image of Nature"
+            alt="Man on mountain peak with forest backdrop and sunlight"
           />
           <div className="w-full lg:w-1/2 flex flex-col gap-1 lg:items-start items-center font-medium">
             <p className="mb-3">{date_string}</p>
