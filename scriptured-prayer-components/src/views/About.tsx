@@ -1,9 +1,11 @@
 import { Button } from "~/components/form";
 import dryGrass from "~/assets/images/dry-grass.jpg";
+import NavigationMenu from "~/components/NavigationBar";
 
 export function About() {
   return (
     <div className="bg-snowgrass h-full">
+      <NavigationMenu></NavigationMenu>
       <div className="flex px-6 py-8 md:py-16 md:space-x-12 max-w-screen-xl mx-auto">
         <img src={dryGrass} className="hidden md:block max-w-[700px]" />
         <div>
