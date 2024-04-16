@@ -127,17 +127,17 @@ export function Info() {
           </div>
         </div>
       </div>
-      <div className="bg-lichen bg-opacity-80 max-h-fit py-36 flex justify-center items-center">
-        <div className="bg-gray pl-10 rounded-3xl flex flex-col justify-center items-center h-[400px] aspect-[13/8] relative shadow-lg">
+      <div className="bg-lichen bg-opacity-80 max-h-fit py-36 flex justify-center items-center pl-0 lg:pl-20 pt-52 pb-20 lg:pt-32 lg:pb-32">
+        <div className="bg-gray px-8 lg:pl-10 pt-10 lg:pt-0 rounded-3xl flex flex-col justify-center items-center h-[400px] min-w-[350px] w-2/3 lg:w-auto lg:aspect-[13/8] relative shadow-lg">
           <img
-            className="absolute h-64 aspect-square rounded-lg -left-32"
+            className="absolute h-44 sm:h-52 lg:h-64 aspect-[11/8] sm:aspect-[13/7] lg:aspect-square rounded-lg left-auto -top-24 sm:-top-32 lg:top-auto lg:-left-32"
             src={nature}
             alt="Image of Nature"
           />
-          <div className="w-1/2 flex flex-col gap-1 font-medium">
+          <div className="w-full lg:w-1/2 flex flex-col gap-1 lg:items-start items-center font-medium">
             <p className="mb-3">{date_string}</p>
             <h2 className="font-bold text-3xl">Today's Daily Deck</h2>
-            <p className="text-lg">
+            <p className="text-lg text-center lg:text-left">
               A group of verses that encourage praise and thanksgiving.
             </p>
             <a
