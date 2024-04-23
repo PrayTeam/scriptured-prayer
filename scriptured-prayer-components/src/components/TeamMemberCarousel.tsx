@@ -34,7 +34,7 @@ const TeamMemberCarousel = () => {
     {
       name: "Robbie Nichols",
       position: "Freed Hardeman Alumn",
-      description: "Back-End Developer",
+      description: "Backend Developer",
     },
     {
       image: `${kenan}`,
