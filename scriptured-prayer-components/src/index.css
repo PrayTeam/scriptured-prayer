@@ -2,8 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  height: 100%;
+}
+
+:root {
+  color-scheme: dark;
+}
+
 html,
-body,
+body {
+  background-color: var(--color-page-background);
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  flex-grow: 1;
+}
+
 #root {
   height: 100%;
 }
