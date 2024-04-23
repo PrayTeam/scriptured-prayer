@@ -6,6 +6,7 @@ import { useApi, useProfile } from "~/hooks";
 import { Container, Deck } from "~/components";
 import { CategoryResponse } from "~/api/models/responses";
 
+import { Footer } from "~/components";
 import forest from "~/assets/images/forest.jpg";
 import mountains from "~/assets/images/mountains.jpg";
 import clouds from "~/assets/images/clouds.jpg";
@@ -45,10 +46,10 @@ export function Home() {
   }, []);
 
   return (
-    <div className="w-full h-full bg-gradient-to-br from-purple from-10% via-purple via-30% to-blue to-90%">
-      <Container>
-        <div className="flex flex-col">
-          <div className="flex items-center justify-between mb-4">
+    <div className="flex flex-col w-full h-full bg-gradient-to-br from-purple from-10% via-purple via-30% to-blue to-90%">
+      <Container className="grow flex w-full">
+        <div className="flex flex-col w-full">
+          <div className="flex items-center w-full justify-between mb-4">
             <h1 className="text-2xl text-white">
               Welcome, {profile.username}!
             </h1>
@@ -67,13 +68,14 @@ export function Home() {
                   image={deckImages[i]}
                   color={deckColors[i]}
                   // todo: use an id instead of category name to retrieve cards
-                  onClick={() => navigate(`/prayer-decks/${category.name}`)}
+                  onClick={() => navigate(`/prayer-decks/${category.id}`)}
                 />
               ))}
             </div>
           </div>
         </div>
       </Container>
+      <Footer color="night" />
     </div>
   );
 }
