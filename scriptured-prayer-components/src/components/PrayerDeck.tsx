@@ -48,6 +48,7 @@ function PrayerDeck() {
             clickable: true,
             type: "fraction",
           }}
+          navigation
           keyboard
         >
           {cards.map((card) => (
