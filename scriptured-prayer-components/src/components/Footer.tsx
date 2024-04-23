@@ -8,8 +8,8 @@ import { FooterLink } from "~/components";
 type ThemeColor = keyof typeof theme.colors;
 
 interface FooterProps {
-  color: ThemeColor
-  text?: ThemeColor
+  color: ThemeColor;
+  text?: ThemeColor;
 }
 
 export function Footer({ color, text }: FooterProps) {
@@ -50,7 +50,7 @@ export function Footer({ color, text }: FooterProps) {
             <h2 className="font-semibold text-base">Support</h2>
             <FooterLinks>
               <Button
-                className="border border-stone bg-leaf hover:scale-105 transition duration-150"
+                className="bg-leaf hover:scale-105 transition duration-150"
                 onClick={() => navigate("/donate")}
               >
                 Donate
@@ -63,7 +63,10 @@ export function Footer({ color, text }: FooterProps) {
             © Copyright 2024. All Rights Reserved.
           </span>
           <span>
-            <FooterLink link="/en/privacy" className="text-gray hover:underline">
+            <FooterLink
+              link="/en/privacy"
+              className="text-gray hover:underline"
+            >
               Privacy Policy
             </FooterLink>
           </span>
