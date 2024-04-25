@@ -113,10 +113,10 @@ export function Info() {
       </div>
       <div>
         <div className="bg-[#a2aa8a] px-6 py-8 md:py-16 md:space-x-12 mx-auto">
-          <h2 className="uppercase font-bold text-4xl text-center text-white">
-            Frequently Asked Questions
-          </h2>
           <div className="container mx-auto flex flex-col items-center">
+            <h2 className="uppercase font-bold lg:text-4xl text-center text-white md:text-2xl text-xl">
+              Frequently Asked Questions
+            </h2>
             <Faq />
           </div>
         </div>
