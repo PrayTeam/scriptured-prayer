@@ -148,7 +148,7 @@ const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerProps>(
     <Accordion.Header className="flex">
       <Accordion.Trigger
         className={classNames(
-          "group flex h-[55px] flex-1 items-center justify-between bg-[#f0f7f0] hover:bg-[#e3eae1] px-5 leading-none shadow-[0_1px_0] outline-none",
+          "group flex h-[55px] flex-1 items-center justify-between bg-[#f0f7f0] hover:bg-[#e3eae1] px-5 leading-none shadow-[0_1px_0] outline-none font-medium",
           className,
         )}
         {...props}
