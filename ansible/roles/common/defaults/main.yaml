@@ -7,3 +7,4 @@ virtualenv_path: /home/gunicorn/.virtualenvs/scriptured-prayer
 gunicorn_user: gunicorn
 gunicorn_group: gunicorn
 domain_name: ".scripturedprayer.com localhost"
+new_db: false
