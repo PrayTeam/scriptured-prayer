@@ -158,7 +158,7 @@
   command: "{{ virtualenv_path }}/bin/python {{ project_path }}/manage.py collectstatic --noinput" # Update the nginx configuration file and the location for static files in settings.py
 
 - name: Load starting data - NET bible
-  when: new_db == True
+  when: new_db
   become: true
   become_user: "{{ gunicorn_user }}"
   environment: 
@@ -167,7 +167,7 @@
   command: "{{ virtualenv_path }}/bin/python {{ project_path }}/manage.py load_bible eng net"
 
 - name: Load starting data - cards
-  when: new_db == True
+  when: new_db
   become: true
   become_user: "{{ gunicorn_user }}"
   environment: 
