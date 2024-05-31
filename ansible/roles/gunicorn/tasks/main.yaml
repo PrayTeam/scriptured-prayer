@@ -1,11 +1,16 @@
 ---
 
+- include_role:
+    name: common
+    public: true
+
 - name: Install OS Packages
   become: true
   dnf:
     name:
-      - python-pip
       - python-virtualenv
+      - nginx
+      - https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm
     state: latest
     disable_gpg_check: yes
 
@@ -33,6 +38,19 @@
     name:
       - github3.py
     state: latest
+
+- name: Create the Nginx site config file
+  become: true
+  template: src=nginx_config.j2
+            dest=/etc/nginx/conf.d/{{ project_name }}.conf
+            backup=yes
+  notify: reload nginx
+  tags: nginx
+
+- name: Ensure Nginx service is restarted
+  become: true
+  service: name=nginx state=started enabled=yes
+  tags: nginx
 
 - name: Set SELinux policy for gunicorn virtualenv
   become: true
@@ -85,17 +103,6 @@
   become_user: "{{ gunicorn_user }}"
   when: not virtualenv.stat.exists
   command: virtualenv {{ virtualenv_path }}
-
-- name: Get Scriptured Prayer Latest Release
-  register: release_version
-  community.general.github_release:
-    user: "{{ github_user }}"
-    repo: "{{ github_repo }}"
-    action: latest_release
-
-- name: Set project_path to the latest release
-  set_fact:
-    project_path: "/var/gunicorn/scriptured-prayer-{{ release_version.tag }}"
 
 - name: Download the latest release
   become: true
@@ -151,7 +158,7 @@
   command: "{{ virtualenv_path }}/bin/python {{ project_path }}/manage.py collectstatic --noinput" # Update the nginx configuration file and the location for static files in settings.py
 
 - name: Load starting data - NET bible
-  #when: db_created.changed
+  when: new_db == True
   become: true
   become_user: "{{ gunicorn_user }}"
   environment: 
@@ -160,7 +167,7 @@
   command: "{{ virtualenv_path }}/bin/python {{ project_path }}/manage.py load_bible eng net"
 
 - name: Load starting data - cards
-  #when: db_created.changed
+  when: new_db == True
   become: true
   become_user: "{{ gunicorn_user }}"
   environment: 
