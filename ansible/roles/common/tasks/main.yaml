@@ -1,21 +1,5 @@
 ---
 
-- name: Install OS Packages
-  become: true
-  dnf:
-    name:
-      - nginx
-      - python-pip
-      - https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm
-    state: latest
-    disable_gpg_check: yes
-
-- name: Upgrade/Install Python packages (Ansible requirements)
-  pip: 
-    name:
-      - github3.py
-    state: latest
-    
 - name: Get Scriptured Prayer Latest Release
   register: release_version
   community.general.github_release:
@@ -27,15 +11,21 @@
   set_fact:
     project_path: "/var/gunicorn/scriptured-prayer-{{ release_version.tag }}"
 
-- name: Create the Nginx site config file
+- name: Install Pip
   become: true
-  template: src=nginx_config.j2
-            dest=/etc/nginx/conf.d/{{ project_name }}.conf
-            backup=yes
-  notify: reload nginx
-  tags: nginx
+  dnf:
+    name:
+      - python-pip
+    state: latest
 
-- name: Ensure Nginx service is restarted
+- name: "Find out if PostgreSQL is initialized"
   become: true
-  service: name=nginx state=started enabled=yes
-  tags: nginx
+  become_user: postgres
+  stat:
+    path: "/var/lib/pgsql/data/pg_hba.conf"
+  register: postgres_data
+
+- name: Set new_db
+  set_fact:
+    new_db: True
+  when: not postgres_data.stat.exists

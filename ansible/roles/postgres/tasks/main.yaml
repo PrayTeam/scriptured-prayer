@@ -1,12 +1,15 @@
 ---
 
+- include_role:
+    name: common
+    public: true
+
 - name: Install OS Packages
   become: true
   dnf:
     name:
       - postgresql-server
       - postgresql-contrib
-      - python-pip
       - oidentd
     state: latest
     disable_gpg_check: yes
@@ -31,12 +34,13 @@
     shell: /bin/bash
     createhome: yes
 
-- name: "Find out if PostgreSQL is initialized"
+- name: Drop the PostgreSQL database
   become: true
   become_user: postgres
-  stat:
-    path: "/var/lib/pgsql/data/pg_hba.conf"
-  register: postgres_data
+  postgresql_db:
+    name: "{{ db_name }}"
+    state: absent
+  when: new_db and postgres_data.stat.exists
 
 - name: "Initialize PostgreSQL"
   become: true
@@ -72,12 +76,12 @@
     value: 'read committed'
 
 - name: Create the DB password
-  when: db_created.changed
+  when: new_db
   set_fact:
     db_password: "{{ lookup('password', '/dev/null length=15 chars=ascii_letters') }}"
 
 - name: Setup the PostgreSQL user
-  when: db_created.changed
+  when: new_db
   become: true
   become_user: postgres
   postgresql_user:
@@ -108,8 +112,17 @@
     state: present
 
 - name: Create pg_service.conf
-  when: db_created.changed
   become: true
+  become_user: "{{ db_user }}"
   template:
     src: pg_service_conf.j2
-    dest: /etc/pg_service.conf
+    dest: ~/.pg_service.conf
+
+- name: Create pgpass file
+  when: new_db
+  become: true
+  become_user: "{{ db_user }}"
+  template:
+    src: pgpass.j2
+    dest: "~/.pgpass"
+    mode: "0600"
