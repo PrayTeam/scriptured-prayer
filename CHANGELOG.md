@@ -2,6 +2,65 @@
 
 
 
+## v0.5.0 (2024-06-01)
+
+### Chore
+
+* chore(deps): poetry update ([`9f214e6`](https://github.com/PrayTeam/scriptured-prayer/commit/9f214e624bfeb510757d0a8d0156fc4ce833d4b9))
+
+### Ci
+
+* ci: add ssh with cloudflared tunnel ([`898ee9a`](https://github.com/PrayTeam/scriptured-prayer/commit/898ee9aac79ac4622bde4e59f1df388f57c16c58))
+
+* ci: move the staticfiles dir to /var/ww/html in production ([`7e2cd68`](https://github.com/PrayTeam/scriptured-prayer/commit/7e2cd6891050ea99ff6acd520ab81d8194dbd8be))
+
+### Documentation
+
+* docs: update readme for manual deployment ([`264c23f`](https://github.com/PrayTeam/scriptured-prayer/commit/264c23ffc3393ec28cce90d1ea8a3a50a6f76404))
+
+### Feature
+
+* feat: ansible add option for staticroot ([`9cd7177`](https://github.com/PrayTeam/scriptured-prayer/commit/9cd71775d28a1ff770c9a2c3bd352674facfeda9))
+
+* feat: use pgpass from user&#39;s home dir ([`35b0c70`](https://github.com/PrayTeam/scriptured-prayer/commit/35b0c70ddae07c19add0096cd33850976dae13e0))
+
+### Fix
+
+* fix: release on merge (for real this time) ([`4b50e45`](https://github.com/PrayTeam/scriptured-prayer/commit/4b50e4574850d4d65e2824f9852301d868cf7567))
+
+* fix: release on merge ([`75ebce0`](https://github.com/PrayTeam/scriptured-prayer/commit/75ebce0ce6109bc726328d4321cc0d9ef60107dc))
+
+* fix: use /var/gunicorn for venv ([`a0d8328`](https://github.com/PrayTeam/scriptured-prayer/commit/a0d8328f2886adb7d02185291d8c4edd4843ebc9))
+
+* fix: swagger using wrong schema url (#98) ([`35ab0ca`](https://github.com/PrayTeam/scriptured-prayer/commit/35ab0ca8a8cdd8e474fc7739d32a7f4108826c02))
+
+* fix: update ansible to deploy to fedora ([`fd16b98`](https://github.com/PrayTeam/scriptured-prayer/commit/fd16b98139c2170cacfa0499569f4f86b559263d))
+
+* fix: load_cards descriptions ([`d7b41da`](https://github.com/PrayTeam/scriptured-prayer/commit/d7b41da0042c69f3acdb8cefa125458a0fa62a33))
+
+### Unknown
+
+* Merge pull request #118 from PrayTeam/staticroot-option
+
+feat: ansible add option for staticroot ([`4772dc7`](https://github.com/PrayTeam/scriptured-prayer/commit/4772dc7db3725f700add6a6e6ada530e14e453b9))
+
+* Merge pull request #117 from PrayTeam/Soyokaze-42-patch-1
+
+fix: release on merge ([`60d0ba3`](https://github.com/PrayTeam/scriptured-prayer/commit/60d0ba3b3c60c40ea52f9be342f685348be8732d))
+
+* Merge pull request #116 from PrayTeam/deploy-with-cloudflared
+
+Deploy-with-cloudflared ([`f51421e`](https://github.com/PrayTeam/scriptured-prayer/commit/f51421eb3d114e094285630879305d049f1da8d6))
+
+* Merge pull request #92 from PrayTeam/deploy-update
+
+Deploy update ([`591010f`](https://github.com/PrayTeam/scriptured-prayer/commit/591010f6a20628f1c9cd6f524697462200067499))
+
+* Update README.md
+
+Co-authored-by: Asher Lloyd &lt;asher.jo.lloyd@gmail.com&gt; ([`f749267`](https://github.com/PrayTeam/scriptured-prayer/commit/f749267da49dc84ae23a8d9cacc349cff4a99a82))
+
+
 ## v0.4.1 (2024-03-11)
 
 ### Fix
