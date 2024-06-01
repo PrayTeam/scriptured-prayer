@@ -51,7 +51,7 @@ jobs:
         mv "prayerapp" "scriptured_prayer" "LICENSE.md" "manage.py" "requirements.txt" "README.md" scriptured-prayer-${{ steps.semantic-release.outputs.tag }}
         tar -czvf dist/scriptured-prayer-${{ steps.semantic-release.outputs.tag }}.tar.gz scriptured-prayer-${{ steps.semantic-release.outputs.tag }}
     - name: Upload Release
-      if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
+      if: github.event.pull_request.merged == true
       env:
         GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
       run: poetry run semantic-release version && poetry run semantic-release publish
