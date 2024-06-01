@@ -12,7 +12,7 @@ server {
   error_log /var/log/nginx/{{ project_name }}_error.log;
 
   location /static/ {
-      alias /var/www/html/staticfiles/;
+      alias {{ static_path }}/;
   }
 
   location / {
