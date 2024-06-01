@@ -30,6 +30,7 @@ jobs:
         echo "${{ secrets.CLOUDFLARED_AUTH_CERT }} > ~/.cloudflared/cert.pem"
     - name: setup SSH
       run: |
+        mkdir -p ~/.ssh
         echo "Host ${{ vars.SERVER_HOSTNAME }}" > ~/.ssh/config
         echo "  ProxyCommand /usr/bin/cloudflared access ssh --hostname %h" >> ~/.ssh/config
         echo "${{ vars.SERVER_HOSTNAME }} ssh-ed25519 ${{ vars.SERVER_ED25519_HASH }}" >> ~/.ssh/known_hosts
