@@ -155,6 +155,7 @@
   environment: 
     DJANGO_SECRET_KEY: "{{ django_secret }}"
     DJANGO_SETTINGS_MODULE: "{{ project_name }}.settings"
+    DJANGO_STATIC_ROOT: "{{ static_path }}"
   command: "{{ virtualenv_path }}/bin/python {{ project_path }}/manage.py collectstatic --noinput" # Update the nginx configuration file and the location for static files in settings.py
 
 - name: Load starting data - NET bible
