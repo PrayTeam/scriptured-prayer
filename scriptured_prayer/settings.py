@@ -102,6 +102,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "OPTIONS": {
             "service": "scriptured_prayer_pg_service",
+            "passfile": ".pgpass",
         }
     }
 }
