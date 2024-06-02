@@ -2,6 +2,29 @@
 
 
 
+## v0.5.1 (2024-06-02)
+
+### Ci
+
+* ci: fix database access in deployment ([`76f6c75`](https://github.com/PrayTeam/scriptured-prayer/commit/76f6c755e0a2465b33113c0defb9104d843feeb3))
+
+* ci: make ssh dir for deployment ([`641447c`](https://github.com/PrayTeam/scriptured-prayer/commit/641447c9536f0fcd7123a5d9d1351221c1adb372))
+
+### Fix
+
+* fix: use pgpass in project root ([`27e0753`](https://github.com/PrayTeam/scriptured-prayer/commit/27e0753d95c5e84dff2129fb2049d39a46274168))
+
+### Unknown
+
+* Merge pull request #120 from PrayTeam/staticroot-option
+
+Staticroot option ([`9568407`](https://github.com/PrayTeam/scriptured-prayer/commit/9568407f78ba8577d59bcf184f3cfc7f61213533))
+
+* Merge pull request #119 from PrayTeam/staticroot-option
+
+ci: make ssh dir for deployment ([`d434cd5`](https://github.com/PrayTeam/scriptured-prayer/commit/d434cd517725120fc741e3b28d3389f3c48b333a))
+
+
 ## v0.5.0 (2024-06-01)
 
 ### Chore
