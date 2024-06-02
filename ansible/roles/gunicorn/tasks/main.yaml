@@ -29,7 +29,7 @@
   file:
     path: "{{ static_path }}"
     state: directory
-    mode: 0770
+    mode: "0770"
     owner: "{{ nginx_user }}"
     group: "{{ nginx_group }}"
 
@@ -81,6 +81,12 @@
     setype: httpd_sys_content_t
     state: present
 
+- name: Set SELinux policy for httpd to connect to the database
+  become: true
+  seboolean:
+    name: httpd_can_network_connect_db
+    state: on
+
 - name: Check if the virtual environment exists
   become: true
   become_user: "{{ gunicorn_user }}"
@@ -95,7 +101,7 @@
     state: directory
     owner: "{{ gunicorn_user }}"
     group: "{{ gunicorn_group }}"
-    mode: 0700
+    mode: "0700"
   when: not virtualenv.stat.exists
 
 - name: Create a virtual environment
@@ -151,12 +157,20 @@
 
 - name: Run Django Collectstatic
   become: true
-  become_user: "{{ gunicorn_user }}"
   environment: 
     DJANGO_SECRET_KEY: "{{ django_secret }}"
     DJANGO_SETTINGS_MODULE: "{{ project_name }}.settings"
     DJANGO_STATIC_ROOT: "{{ static_path }}"
   command: "{{ virtualenv_path }}/bin/python {{ project_path }}/manage.py collectstatic --noinput" # Update the nginx configuration file and the location for static files in settings.py
+
+- name: Set permissions for static files
+  become: true
+  file:
+    path: "{{ static_path }}"
+    mode: u=rwX,g=rX
+    owner: "{{ nginx_user }}"
+    group: "{{ nginx_group }}"
+    recurse: yes
 
 - name: Load starting data - NET bible
   when: new_db
@@ -192,7 +206,7 @@
   become: true
   systemd:
     name: "gunicorn-{{ project_name }}.socket"
-    state: started
+    state: restarted
     enabled: yes
 
 - name: Restore SELinux Contexts for the virtual environment
