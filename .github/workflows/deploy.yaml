@@ -20,7 +20,7 @@ jobs:
         sudo apt update
         sudo apt install -y cloudflared pip
         sudo pip install ansible-core
-        sudo ansible-galaxy collection install community.general community.postgresql
+        sudo ansible-galaxy collection install community.general community.postgresql ansible.posix
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
@@ -36,5 +36,5 @@ jobs:
         echo "${{ vars.SERVER_HOSTNAME }} ssh-ed25519 ${{ vars.SERVER_ED25519_HASH }}" >> ~/.ssh/known_hosts
         echo "${{ secrets.DEPLOYMENT_SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
         chmod 600 ~/.ssh/id_ed25519
-    - name: Deploy to Staging
+    - name: Deploy the application
       run: ansible-playbook ansible/deploy.yaml -i "${{ vars.SERVER_HOSTNAME }}," --private-key ~/.ssh/id_ed25519 --user deploy
