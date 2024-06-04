@@ -1,0 +1,136 @@
+---
+
+- include_role:
+    name: common
+    public: true
+
+- name: Install OS Packages
+  become: true
+  dnf:
+    name:
+      - postgresql-server
+      - postgresql-contrib
+      - oidentd
+    state: latest
+    disable_gpg_check: yes
+
+- name: Upgrade/Install Python packages (Ansible requirements)
+  become: true
+  become_user: postgres
+  pip: 
+    name:
+      - psycopg2-binary
+    state: latest
+
+- name: Start/Enable oidentd
+  become: true
+  service: name=oidentd state=started enabled=yes
+
+- name: Create the database user
+  become: true
+  user:
+    name: "{{ db_user }}"
+    state: present
+    shell: /bin/bash
+    createhome: yes
+
+- name: Drop the PostgreSQL database
+  become: true
+  become_user: postgres
+  postgresql_db:
+    name: "{{ db_name }}"
+    state: absent
+  when: new_db and postgres_data.stat.exists
+
+- name: "Initialize PostgreSQL"
+  become: true
+  become_user: postgres
+  command: "postgresql-setup --initdb --unit postgresql"
+  when: not postgres_data.stat.exists
+
+- name: Ensure the PostgreSQL service is running
+  become: true
+  service: name=postgresql state=started enabled=yes
+
+- name: Setup the PostgreSQL database
+  become: true
+  become_user: postgres
+  postgresql_db:
+    name: "{{ db_name }}"
+    encoding: UTF-8
+    state: present
+  register: db_created
+
+- name: Configure the PostgreSQL server timezone
+  become: true
+  become_user: postgres
+  postgresql_set:
+    name: TimeZone
+    value: 'UTC'
+
+- name: Configure the PostgreSQL server transaction isolation
+  become: true
+  become_user: postgres
+  postgresql_set:
+    name: default_transaction_isolation
+    value: 'read committed'
+
+- name: Create the DB password
+  when: new_db
+  set_fact:
+    db_password: "{{ lookup('password', '/dev/null length=15 chars=ascii_letters') }}"
+
+- name: Setup the PostgreSQL user
+  when: new_db
+  become: true
+  become_user: postgres
+  postgresql_user:
+    db: "{{ db_name }}"
+    name: "{{ db_user }}"
+    password: "{{ db_password }}"
+    state: present
+
+- name: Set Database Permissions
+  become: true
+  become_user: postgres
+  postgresql_privs:
+    db: "{{ db_name }}"
+    privs: "ALL"
+    type: database
+    role: "{{ db_user }}"
+    state: present
+
+- name: Set Schema Permissions
+  become: true
+  become_user: postgres
+  postgresql_privs:
+    db: "{{ db_name }}"
+    privs: "CREATE"
+    type: schema
+    role: "{{ db_user }}"
+    objs: "public"
+    state: present
+
+- name: Create pg_service.conf
+  become: true
+  template:
+    src: pg_service_conf.j2
+    dest: /etc/pg_service.conf
+
+- name: Create pgpass file
+  when: new_db
+  become: true
+  become_user: "{{ gunicorn_user }}"
+  template:
+    src: pgpass.j2
+    dest: "~/.pgpass"
+    mode: "0600"
+
+- name: Copy the pgpass file for Django
+  become: true
+  become_user: "{{ gunicorn_user }}"
+  copy:
+    remote_src: true
+    src: "~/.pgpass"
+    dest: "{{ project_path }}/.pgpass"
+    mode: "0600"

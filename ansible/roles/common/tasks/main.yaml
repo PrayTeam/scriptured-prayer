@@ -1,0 +1,31 @@
+---
+
+- name: Get Scriptured Prayer Latest Release
+  register: release_version
+  community.general.github_release:
+    user: "{{ github_user }}"
+    repo: "{{ github_repo }}"
+    action: latest_release
+
+- name: Set project_path to the latest release
+  set_fact:
+    project_path: "/var/gunicorn/scriptured-prayer-{{ release_version.tag }}"
+
+- name: Install Pip
+  become: true
+  dnf:
+    name:
+      - python-pip
+    state: latest
+
+- name: "Find out if PostgreSQL is initialized"
+  become: true
+  become_user: postgres
+  stat:
+    path: "/var/lib/pgsql/data/pg_hba.conf"
+  register: postgres_data
+
+- name: Set new_db
+  set_fact:
+    new_db: True
+  when: not postgres_data.stat.exists
