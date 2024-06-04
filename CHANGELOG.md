@@ -2,6 +2,32 @@
 
 
 
+## v0.6.0 (2024-06-04)
+
+### Feature
+
+* feat: add focus card (#88) (#121)
+
+* feat: display inspiration text with each deck
+
+* feat: create focus card
+
+* fix: focus card bugs
+
+* style: differentiate focus card from prompts
+
+* refactor: incorporate inspiration into card component
+
+Every dynamic part of the card displays conditionally, based on the type of response passed in.
+
+* refactor: implement CardProps interface
+
+---------
+
+Co-authored-by: Madison Cagle &lt;78162094+madisoncagle@users.noreply.github.com&gt;
+Co-authored-by: LTsoccer &lt;77810494+LTsoccer@users.noreply.github.com&gt; ([`f02f7cd`](https://github.com/PrayTeam/scriptured-prayer/commit/f02f7cd684d0cfa3d3777a8241aa66b04408d86f))
+
+
 ## v0.5.1 (2024-06-02)
 
 ### Ci
