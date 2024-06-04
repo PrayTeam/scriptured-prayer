@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { Button, Flex, Heading } from "@radix-ui/themes";
 import { CheckIcon } from "@radix-ui/react-icons";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -9,31 +8,31 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import "~/swiper.css";
-import { useApi } from "~/hooks";
+import { useApi, useRouteId } from "~/hooks";
 import { CardResponse } from "~/api/models/responses";
 import { CategoryResponse } from "~/api/models/responses";
 import { Card } from "./Card";
 
 function PrayerDeck() {
   const api = useApi();
-  const { name } = useParams();
+  const id = useRouteId();
   const [cards, setCards] = useState<CardResponse[]>([]);
   const [category, setCategory] = useState<CategoryResponse>();
 
   useEffect(() => {
-    (async () => {
-      Promise.all([
-        api.cards.all({ category__name: name }),
-        api.categories.all(),
-      ])
-        .then(([_cards, categories]) => {
-          setCards(_cards);
-          // todo: find by id instead of name
-          setCategory(categories.find((c) => c.name === name));
-        })
-        .catch((error) => console.error(error));
-    })();
+    if (id) {
+      (async () => {
+        Promise.all([api.cards.all({ category__id: id }), api.categories.all()])
+          .then(([_cards, categories]) => {
+            setCards(_cards);
+            setCategory(categories.find((c) => c.id === id));
+          })
+          .catch((error) => console.error(error));
+      })();
+    }
   }, []);
+
+  if (!id) return <>Error: an id must be provided.</>;
 
   return (
     <div className="bg-ocean h-full">
