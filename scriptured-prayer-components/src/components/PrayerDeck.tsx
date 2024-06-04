@@ -38,7 +38,7 @@ function PrayerDeck() {
     <div className="bg-ocean h-full">
       <Flex direction="column">
         <Heading size="7" my="4" className="text-white text-center">
-          {cards.length > 0 ? cards[0].category : "Loading..."}
+          {cards.length > 0 ? "Now Praying" : "Loading..."}
         </Heading>
 
         <Swiper
