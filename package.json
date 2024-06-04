@@ -1,8 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "pre-commit": "cd scriptured-prayer-components && yarn lint-staged",
-    "postinstall": "husky install && cd scriptured-prayer-components && yarn"
+    "pre-commit": "cd frontend && yarn lint-staged",
+    "postinstall": "husky install && cd frontend && yarn"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.4",
