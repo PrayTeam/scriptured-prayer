@@ -82,7 +82,6 @@ TEMPLATES = [
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
-                "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
@@ -100,10 +99,7 @@ WSGI_APPLICATION = "scriptured_prayer.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "OPTIONS": {
-            "service": "scriptured_prayer_pg_service",
-            "passfile": ".pgpass",
-        }
+        "NAME": os.environ.get('DJANGO_DB_NAME'),
     }
 }
 

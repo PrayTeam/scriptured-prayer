@@ -33,6 +33,13 @@
     owner: "{{ nginx_user }}"
     group: "{{ nginx_group }}"
 
+- name: Create environment files directory
+  become: true
+  file:
+    path: "/etc/gunicorn"
+    state: directory
+    mode: "0700"
+
 - name: Upgrade/Install Python packages (Ansible requirements)
   pip: 
     name:
@@ -47,7 +54,7 @@
   notify: reload nginx
   tags: nginx
 
-- name: Ensure Nginx service is restarted
+- name: Ensure Nginx service is started
   become: true
   service: name=nginx state=started enabled=yes
   tags: nginx
@@ -81,11 +88,11 @@
     setype: httpd_sys_content_t
     state: present
 
-- name: Set SELinux policy for httpd to connect to the database
-  become: true
-  seboolean:
-    name: httpd_can_network_connect_db
-    state: on
+#- name: Set SELinux policy for httpd to connect to the database
+#  become: true
+#  seboolean:
+#    name: httpd_can_network_connect_db
+#    state: on
 
 - name: Check if the virtual environment exists
   become: true
@@ -124,7 +131,7 @@
     src: "/home/{{ gunicorn_user }}/scriptured-prayer-{{ release_version.tag }}.tar.gz"
     dest: "/var/gunicorn/"
     remote_src: yes
-    creates: "{{ project_path }}"
+    creates: "{{ project_path }}/manage.py"
 
 - name: Install Python packages (app requirements)
   become: true
@@ -147,19 +154,56 @@
   set_fact:
     django_secret: "{{ lookup('password', '/dev/null length=75 chars=ascii_letters,digits') }}"
 
+- name: Create Environment File for Service
+  become: true
+  template: 
+    src: env.j2
+    dest: "/etc/gunicorn/{{ project_name }}.env"
+    backup: yes
+    mode: "0600"
+
+- name: Create the Gunicorn systemd service file
+  become: true
+  template: 
+    src: gunicorn.service.j2
+    dest: "/etc/systemd/system/gunicorn-{{ project_name }}.service"
+    backup: yes
+
+- name: Create the Gunicorn socket file
+  become: true
+  template: 
+    src: gunicorn.socket.j2
+    dest: "/etc/systemd/system/gunicorn-{{ project_name }}.socket"
+    backup: yes
+
+- name: Restore SELinux Contexts for the virtual environment
+  become: true
+  command: restorecon -R "{{ virtualenv_path }}"
+
+- name: Restore SELinux Contexts for the html directory
+  become: true
+  command: restorecon -R "{{ static_path }}"
+
+- name: Restore SELinux Contexts for the project directory
+  become: true
+  command: restorecon -R "{{ project_path }}"
+
 - name: Run Django Migrations
   become: true
   become_user: "{{ gunicorn_user }}"
   environment: 
     DJANGO_SECRET_KEY: "{{ django_secret }}"
-    DJANGO_SETTINGS_MODULE: "{{ project_name }}.settings"
+    DJANGO_SETTINGS_MODULE: "scriptured_prayer.settings"
+    DJANGO_DB_NAME: "{{ db_name }}"
+    DJANGO_STATIC_ROOT: "{{ static_path }}"
   command: "{{ virtualenv_path }}/bin/python {{ project_path }}/manage.py migrate --noinput"
 
 - name: Run Django Collectstatic
   become: true
   environment: 
     DJANGO_SECRET_KEY: "{{ django_secret }}"
-    DJANGO_SETTINGS_MODULE: "{{ project_name }}.settings"
+    DJANGO_SETTINGS_MODULE: "scriptured_prayer.settings"
+    DJANGO_DB_NAME: "{{ db_name }}"
     DJANGO_STATIC_ROOT: "{{ static_path }}"
   command: "{{ virtualenv_path }}/bin/python {{ project_path }}/manage.py collectstatic --noinput" # Update the nginx configuration file and the location for static files in settings.py
 
@@ -178,7 +222,9 @@
   become_user: "{{ gunicorn_user }}"
   environment: 
     DJANGO_SECRET_KEY: "{{ django_secret }}"
-    DJANGO_SETTINGS_MODULE: "{{ project_name }}.settings"
+    DJANGO_SETTINGS_MODULE: "scriptured_prayer.settings"
+    DJANGO_DB_NAME: "{{ db_name }}"
+    DJANGO_STATIC_ROOT: "{{ static_path }}"
   command: "{{ virtualenv_path }}/bin/python {{ project_path }}/manage.py load_bible eng net"
 
 - name: Load starting data - cards
@@ -187,20 +233,10 @@
   become_user: "{{ gunicorn_user }}"
   environment: 
     DJANGO_SECRET_KEY: "{{ django_secret }}"
-    DJANGO_SETTINGS_MODULE: "{{ project_name }}.settings"
+    DJANGO_SETTINGS_MODULE: "scriptured_prayer.settings"
+    DJANGO_DB_NAME: "{{ db_name }}"
+    DJANGO_STATIC_ROOT: "{{ static_path }}"
   command: "{{ virtualenv_path }}/bin/python {{ project_path }}/manage.py load_cards"
-
-- name: Create the Gunicorn systemd service file
-  become: true
-  template: src=gunicorn.service.j2
-            dest="/etc/systemd/system/gunicorn-{{ project_name }}.service"
-            backup=yes
-
-- name: Create the Gunicorn socket file
-  become: true
-  template: src=gunicorn.socket.j2
-            dest="/etc/systemd/system/gunicorn-{{ project_name }}.socket"
-            backup=yes
 
 - name: Start the Gunicorn socket
   become: true
@@ -208,15 +244,3 @@
     name: "gunicorn-{{ project_name }}.socket"
     state: restarted
     enabled: yes
-
-- name: Restore SELinux Contexts for the virtual environment
-  become: true
-  command: restorecon -R "{{ virtualenv_path }}"
-
-- name: Restore SELinux Contexts for the html directory
-  become: true
-  command: restorecon -R "{{ static_path }}"
-
-- name: Restore SELinux Contexts for the project directory
-  become: true
-  command: restorecon -R "{{ project_path }}"
