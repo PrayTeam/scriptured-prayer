@@ -40,7 +40,7 @@
   postgresql_db:
     name: "{{ db_name }}"
     state: absent
-  when: new_db and postgres_data.stat.exists
+  when: new_db and db_name in postgres_db_info.databases
 
 - name: "Initialize PostgreSQL"
   become: true
@@ -75,19 +75,12 @@
     name: default_transaction_isolation
     value: 'read committed'
 
-- name: Create the DB password
-  when: new_db
-  set_fact:
-    db_password: "{{ lookup('password', '/dev/null length=15 chars=ascii_letters') }}"
-
 - name: Setup the PostgreSQL user
-  when: new_db
   become: true
   become_user: postgres
   postgresql_user:
     db: "{{ db_name }}"
     name: "{{ db_user }}"
-    password: "{{ db_password }}"
     state: present
 
 - name: Set Database Permissions
@@ -99,6 +92,7 @@
     type: database
     role: "{{ db_user }}"
     state: present
+  when: db_created.changed
 
 - name: Set Schema Permissions
   become: true
@@ -110,27 +104,4 @@
     role: "{{ db_user }}"
     objs: "public"
     state: present
-
-- name: Create pg_service.conf
-  become: true
-  template:
-    src: pg_service_conf.j2
-    dest: /etc/pg_service.conf
-
-- name: Create pgpass file
-  when: new_db
-  become: true
-  become_user: "{{ gunicorn_user }}"
-  template:
-    src: pgpass.j2
-    dest: "~/.pgpass"
-    mode: "0600"
-
-- name: Copy the pgpass file for Django
-  become: true
-  become_user: "{{ gunicorn_user }}"
-  copy:
-    remote_src: true
-    src: "~/.pgpass"
-    dest: "{{ project_path }}/.pgpass"
-    mode: "0600"
+  when: db_created.changed
