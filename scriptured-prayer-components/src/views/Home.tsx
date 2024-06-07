@@ -3,10 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 import { ProfilePicture } from "~/components/ProfilePicture";
 import { useApi, useProfile } from "~/hooks";
-import { Container, Deck } from "~/components";
+import { Container, Deck, Footer } from "~/components";
 import { CategoryResponse } from "~/api/models/responses";
 
-import { Footer } from "~/components";
 import forest from "~/assets/images/forest.jpg";
 import mountains from "~/assets/images/mountains.jpg";
 import clouds from "~/assets/images/clouds.jpg";
