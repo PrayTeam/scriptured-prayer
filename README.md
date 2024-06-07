@@ -66,3 +66,12 @@ then run:
 poetry install --no-root --with pygraphviz
 poetry run python manage.py graph_models -o erd.png
 ```
+
+## Manual deployment
+
+The application is deployed to a fedora server using the following steps:
+- Install ansible on the computer from which you are going to run the deployment
+- Install fedora on the server
+- Be able to ssh into the server (preferably with a key) with a user in the wheel group (that can use sudo)
+- Run the following command from the root of the project, replacing "(server hostname or IP)" with the hostname or IP of the server, and entering the sudo password when prompted:
+```ansible-playbook ansible/deploy.yaml -i "(server hostname or IP)," --ask-become-pass```

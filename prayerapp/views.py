@@ -162,7 +162,6 @@ class UserCardViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=["post"])
     def log_prayer(self, request, pk=None, **kwargs):
-        print("hello from usercardviewset")
         usercard = self.get_object()
         if usercard.user != request.user:
             return Response(status=status.HTTP_403_FORBIDDEN)

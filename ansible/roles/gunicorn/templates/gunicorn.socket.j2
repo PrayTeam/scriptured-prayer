@@ -1,0 +1,11 @@
+[Unit]
+Description=gunicorn socket
+
+[Socket]
+ListenStream=/var/run/wsgi.gunicorn-{{ project_name }}.sock
+SocketUser=gunicorn
+SocketGroup=nginx
+SocketMode=660
+
+[Install]
+WantedBy=sockets.target
