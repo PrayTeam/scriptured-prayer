@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Deck } from "~/components";
-import { Footer } from "~/components";
+import { Deck, Footer, Faq } from "~/components";
 import { DemoPrayerDeck } from "~/types";
 import { useDemoPrayerDecks } from "~/hooks";
 import forest from "~/assets/images/forest.jpg";
@@ -79,8 +78,8 @@ export function Info() {
         </div>
       </div>
       <div className="bg-olive">
-        <div className="px-6 py-8 md:py-16 md:space-x-12 max-w-screen-xl mx-auto">
-          <h2 className="text-white text-center uppercase font-bold text-4xl mb-6">
+        <div className="px-6 py-8 md:py-16 max-w-screen-xl mx-auto">
+          <h2 className="text-white text-center uppercase font-bold text-2xl md:text-4xl mb-6">
             How to use Scriptured Prayer
           </h2>
           <div className="py-6">
@@ -95,7 +94,7 @@ export function Info() {
         {prayerDecks.map((row, i) => (
           <div
             key={i}
-            className="px-6 pt-8  md:space-x-12 max-w-screen-xl mx-auto"
+            className="px-6 pt-8 md:space-x-12 max-w-screen-xl mx-auto"
           >
             <div className="flex flex-col lg:flex-row w-full lg:space-x-12 justify-center">
               {row.map(({ id, ...c }, j) => (
@@ -109,6 +108,16 @@ export function Info() {
             </div>
           </div>
         ))}
+      </div>
+      <div className="bg-olive">
+        <div className="px-6 py-8 md:py-16 max-w-screen-xl mx-auto">
+          <h2 className="text-white text-center uppercase font-bold text-2xl md:text-4xl mb-6">
+            Frequently Asked Questions
+          </h2>
+          <div className="py-6">
+            <Faq />
+          </div>
+        </div>
       </div>
       <Footer color="night" />
     </>
