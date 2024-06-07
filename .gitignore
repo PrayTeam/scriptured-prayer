@@ -146,21 +146,3 @@ prayerapp/static/prayerapp/*
 
 # Django collectstatic
 staticfiles/*
-
-# yarn react-project
-scriptured-prayer-components/.pnp.*
-scriptured-prayer-components/.yarn/*
-!scriptured-prayer-components/.yarn/patches
-!scriptured-prayer-components/.yarn/plugins
-!scriptured-prayer-components/.yarn/releases
-!scriptured-prayer-components/.yarn/sdks
-!scriptured-prayer-components/.yarn/versions
-
-#yarn root
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
