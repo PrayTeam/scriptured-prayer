@@ -92,6 +92,7 @@ class UserCardFilter(django_filters.FilterSet):
         fields = {
             "card__category__name": ["exact"],
             "card__category__genre": ["exact"],
+            "card__category__id": ["exact"],
             "answered": ["exact"],
             "hidden": ["exact"],
             "in_prayer_deck": ["exact"],
@@ -161,7 +162,6 @@ class UserCardViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=["post"])
     def log_prayer(self, request, pk=None, **kwargs):
-        print("hello from usercardviewset")
         usercard = self.get_object()
         if usercard.user != request.user:
             return Response(status=status.HTTP_403_FORBIDDEN)
