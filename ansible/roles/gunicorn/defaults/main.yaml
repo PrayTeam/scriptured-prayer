@@ -1,0 +1,5 @@
+---
+
+static_path: /var/www/html/staticfiles
+nginx_user: nginx
+nginx_group: nginx
