@@ -2,6 +2,41 @@
 
 
 
+## v0.6.1 (2024-06-07)
+
+### Fix
+
+* fix: remove redundant category title in prayer deck (#107) ([`676d751`](https://github.com/PrayTeam/scriptured-prayer/commit/676d75145e3b5d84cb96b1bd2624e0c9fd662b4e))
+
+### Unknown
+
+* Feat/logging swipes (#109)
+
+* chore: create UserCardsRequest and export it
+
+* chore: fix user card response interface
+
+* chore: update Card component to accept UserCardResponse props
+
+* chore: add add field to filter UserCards by card category id
+
+* chore: write useApi method to get usercards and log usercard swipes
+
+* feat: add swipe logging when user is authenticated
+
+* fix: fix &#39;loading...&#39; text not being replaced after cards loaded
+
+* fix: add csrf token to logCard api method
+
+* fix: correct request url for logging card swipes
+
+* fix: fix __str__ method for UserCardPrayedLog
+
+---------
+
+Co-authored-by: Asher Lloyd &lt;asher.jo.lloyd@gmail.com&gt; ([`b4f9302`](https://github.com/PrayTeam/scriptured-prayer/commit/b4f9302501827f4a611c4a7c9d0adf427a4ee01f))
+
+
 ## v0.6.0 (2024-06-04)
 
 ### Feature
