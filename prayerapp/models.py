@@ -211,7 +211,7 @@ class UserCardPrayedLog(models.Model):
     date_prayed = models.DateTimeField(_("date prayed"), blank=True, null=True, auto_now_add=True)
 
     def __str__(self) -> str:
-        return f"{self.usercard.user.username} - {self.usercard.card.title} in prayer on {self.prayerdeck.date}"
+        return f"{self.usercard.user.username} - {self.usercard.card.title} in prayer on {self.date_prayed}"
 
 
 class CardScriptureJson(models.Model):
