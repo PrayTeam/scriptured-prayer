@@ -1,7 +1,11 @@
 import Cookies from "js-cookie";
 
 import { Profile } from "~/types";
-import { CardsRequest, LoginRequest } from "~/api/models/requests";
+import {
+  CardsRequest,
+  LoginRequest,
+  UserCardsRequest,
+} from "~/api/models/requests";
 import {
   UserCardResponse,
   LogoutResponse,
@@ -96,7 +100,13 @@ export function useApi() {
       all: () => get<CategoryResponse[]>("categories/", options),
     },
     userCards: {
-      all: () => get<UserCardResponse[]>("usercards/?format=json", options),
+      all: (userCardsRequest?: UserCardsRequest) =>
+        get<UserCardResponse[]>(
+          parameterizeRequest("usercards/", userCardsRequest),
+          withCsrf(options),
+        ),
+      logCard: (pk: number) =>
+        post(`usercards/${pk}/log_prayer/`, withCsrf(options)),
     },
   };
 }
