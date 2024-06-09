@@ -34,7 +34,7 @@ jobs:
         echo "${{ secrets.DEPLOYMENT_SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
         chmod 600 ~/.ssh/id_ed25519
     - name: setup SSH Tunnel for non-production environments
-      if: ${{ github.event_name != 'workflow_dispatch' }}
+      if: ${{ github.event_name != 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
       run: |
         echo "Host ${{ vars.SERVER_HOSTNAME }}" > ~/.ssh/config
         echo "  ProxyCommand /usr/bin/cloudflared access ssh --hostname %h" >> ~/.ssh/config
