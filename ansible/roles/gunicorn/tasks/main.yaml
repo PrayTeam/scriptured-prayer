@@ -88,11 +88,6 @@
     setype: httpd_sys_content_t
     state: present
 
-#- name: Set SELinux policy for httpd to connect to the database
-#  become: true
-#  seboolean:
-#    name: httpd_can_network_connect_db
-#    state: on
 
 - name: Check if the virtual environment exists
   become: true
