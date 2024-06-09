@@ -32,7 +32,6 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ vars.SERVER_HOSTNAME }} ssh-ed25519 ${{ vars.SERVER_ED25519_HASH }}" >> ~/.ssh/known_hosts
         echo "${{ secrets.DEPLOYMENT_SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
-        cp deploy ~/.ssh/id_ed25519
         chmod 600 ~/.ssh/id_ed25519
     - name: setup SSH Tunnel for non-production environments
       if: ${{ github.event_name != 'workflow_dispatch' }}
