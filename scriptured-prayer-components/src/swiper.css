@@ -11,6 +11,13 @@
   width: 80%;
 }
 
+.swiper-pagination-fraction {
+  font-size: 32px; /* Adjust font size */
+  color: #ffffff; /* Set desired color */
+  position: relative;
+  margin-top: 20px;
+}
+
 /* Add your custom styles for pagination bullets */
 .swiper-pagination-bullet {
   width: 12px;

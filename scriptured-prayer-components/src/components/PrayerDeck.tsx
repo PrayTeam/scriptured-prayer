@@ -44,7 +44,11 @@ function PrayerDeck() {
           modules={[Navigation, Pagination, Keyboard, A11y]}
           spaceBetween="14rem"
           slidesPerView={1}
-          pagination={{ clickable: true }}
+          pagination={{
+            clickable: true,
+            type: "fraction",
+          }}
+          navigation
           keyboard
         >
           {cards.map((card) => (
