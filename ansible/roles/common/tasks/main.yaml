@@ -38,4 +38,4 @@
 - name: Set new_db
   set_fact:
     new_db: True
-  when: not postgres_data.stat.exists or (db_name not in postgres_db_info.databases)"
+  when: not postgres_data.stat.exists or (db_name not in postgres_db_info.databases)
