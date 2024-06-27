@@ -6,18 +6,18 @@ interface ScriptureText {
 }
 
 export interface UserCardResponse {
-  id: number;
-  title: string;
-  scripture: string;
-  version: string;
-  scripture_text: ScriptureText[];
-  descriptions: string;
-  copyright_notice: string;
-  category: string;
-  genre: string;
-  usercardnote_set: [];
   answered: boolean;
+  category: string;
+  copyright_notice: string;
+  description: string;
+  genre: string;
   hidden: boolean;
+  id: number;
   in_prayer_deck: boolean;
-  last_prayed: Date | null;
+  instruction: string;
+  scripture: string;
+  scripture_text: ScriptureText[];
+  title: string;
+  usercardnote_set: string[];
+  version: string;
 }
