@@ -15,7 +15,7 @@ ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
 TimeoutStopSec=5
 PrivateTmp=true
-Environment="DJANGO_SECRET_KEY={{ django_secret }}"
+EnvironmentFile=/etc/gunicorn/{{ project_name }}.env
 
 [Install]
 WantedBy=multi-user.target

@@ -7,7 +7,7 @@
     repo: "{{ github_repo }}"
     action: latest_release
 
-- name: Set project_path to the latest release
+- name: Set project_path to the latest release # eventually or current branch
   set_fact:
     project_path: "/var/gunicorn/scriptured-prayer-{{ release_version.tag }}"
 
@@ -25,7 +25,17 @@
     path: "/var/lib/pgsql/data/pg_hba.conf"
   register: postgres_data
 
+- name: Check if the PostgreSQL database exists
+  become: true
+  become_user: postgres
+  postgresql_info:
+    filter: databases
+  register: postgres_db_info
+  when: postgres_data.stat.exists
+
+# The organization of this ansible playbook makes this tricky. This will always skip when it runs for the gunicorn role
+# but new_db will be set to true when it runs for the postgres role. This is because the postgres role runs first and sets new_db to true
 - name: Set new_db
   set_fact:
     new_db: True
-  when: not postgres_data.stat.exists
+  when: not postgres_data.stat.exists or (db_name not in postgres_db_info.databases)

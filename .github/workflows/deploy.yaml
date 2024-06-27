@@ -3,8 +3,7 @@ name: Deploy
 on:
   release:
     types: [published]
-  workflow_dispatch:
-
+  workflow_dispatch: # Only used for production deployments
 
 jobs:
   deploy:
@@ -31,10 +30,13 @@ jobs:
     - name: setup SSH
       run: |
         mkdir -p ~/.ssh
-        echo "Host ${{ vars.SERVER_HOSTNAME }}" > ~/.ssh/config
-        echo "  ProxyCommand /usr/bin/cloudflared access ssh --hostname %h" >> ~/.ssh/config
         echo "${{ vars.SERVER_HOSTNAME }} ssh-ed25519 ${{ vars.SERVER_ED25519_HASH }}" >> ~/.ssh/known_hosts
         echo "${{ secrets.DEPLOYMENT_SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
         chmod 600 ~/.ssh/id_ed25519
+    - name: setup SSH Tunnel for non-production environments
+      if: ${{ github.event_name != 'workflow_dispatch' || github.ref != 'refs/heads/main' }}
+      run: |
+        echo "Host ${{ vars.SERVER_HOSTNAME }}" > ~/.ssh/config
+        echo "  ProxyCommand /usr/bin/cloudflared access ssh --hostname %h" >> ~/.ssh/config
     - name: Deploy the application
       run: ansible-playbook ansible/deploy.yaml -i "${{ vars.SERVER_HOSTNAME }}," --private-key ~/.ssh/id_ed25519 --user deploy
