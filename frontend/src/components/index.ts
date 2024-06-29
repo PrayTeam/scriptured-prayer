@@ -4,3 +4,8 @@ export * from "./Link";
 export * from "./ProtectedRoutes";
 export * from "./Container";
 export * from "./Deck";
+export * from "./Footer";
+export * from "./FooterColumn";
+export * from "./FooterLinks";
+export * from "./FooterLink";
+export * from "./Faq";
