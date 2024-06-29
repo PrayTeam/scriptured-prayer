@@ -26,7 +26,7 @@ const deckColors: (keyof typeof theme.colors)[] = [
   "sky",
 ];
 
-export function Home() {
+export function Dashboard() {
   const navigate = useNavigate();
   const { profile } = useProfile();
 
