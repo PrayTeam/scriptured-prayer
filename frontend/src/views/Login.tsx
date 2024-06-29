@@ -15,7 +15,7 @@ export function Login() {
 
   // already logged in, navigate back to home
   useEffect(() => {
-    if (profile.authenticated) navigate("/home");
+    if (profile.authenticated) navigate("/dashboard");
   }, [profile]);
 
   const handleSubmit = (event: { preventDefault: () => void }) => {

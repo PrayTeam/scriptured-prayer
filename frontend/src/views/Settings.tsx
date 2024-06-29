@@ -25,7 +25,7 @@ export function Settings() {
         <div className="flex gap-4 items-center mb-4">
           <LeftArrowIcon
             className="cursor-pointer"
-            onClick={() => navigate("/home")}
+            onClick={() => navigate("/dashboard")}
             color="#fff"
           />
           <h1 className="text-2xl text-white">Settings</h1>

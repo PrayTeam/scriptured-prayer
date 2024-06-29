@@ -9,7 +9,7 @@ export function NotFound() {
         exist.
       </p>
       <p className="mb-4">
-        Take me <Link href="/home">home</Link>.
+        Take me to the <Link href="/dashboard">dashboard</Link>.
       </p>
     </Container>
   );
