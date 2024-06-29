@@ -2,6 +2,190 @@
 
 
 
+## v0.6.1 (2024-06-07)
+
+### Fix
+
+* fix: remove redundant category title in prayer deck (#107) ([`676d751`](https://github.com/PrayTeam/scriptured-prayer/commit/676d75145e3b5d84cb96b1bd2624e0c9fd662b4e))
+
+### Unknown
+
+* Feat/logging swipes (#109)
+
+* chore: create UserCardsRequest and export it
+
+* chore: fix user card response interface
+
+* chore: update Card component to accept UserCardResponse props
+
+* chore: add add field to filter UserCards by card category id
+
+* chore: write useApi method to get usercards and log usercard swipes
+
+* feat: add swipe logging when user is authenticated
+
+* fix: fix &#39;loading...&#39; text not being replaced after cards loaded
+
+* fix: add csrf token to logCard api method
+
+* fix: correct request url for logging card swipes
+
+* fix: fix __str__ method for UserCardPrayedLog
+
+---------
+
+Co-authored-by: Asher Lloyd &lt;asher.jo.lloyd@gmail.com&gt; ([`b4f9302`](https://github.com/PrayTeam/scriptured-prayer/commit/b4f9302501827f4a611c4a7c9d0adf427a4ee01f))
+
+
+## v0.6.0 (2024-06-04)
+
+### Feature
+
+* feat: add focus card (#88) (#121)
+
+* feat: display inspiration text with each deck
+
+* feat: create focus card
+
+* fix: focus card bugs
+
+* style: differentiate focus card from prompts
+
+* refactor: incorporate inspiration into card component
+
+Every dynamic part of the card displays conditionally, based on the type of response passed in.
+
+* refactor: implement CardProps interface
+
+---------
+
+Co-authored-by: Madison Cagle &lt;78162094+madisoncagle@users.noreply.github.com&gt;
+Co-authored-by: LTsoccer &lt;77810494+LTsoccer@users.noreply.github.com&gt; ([`f02f7cd`](https://github.com/PrayTeam/scriptured-prayer/commit/f02f7cd684d0cfa3d3777a8241aa66b04408d86f))
+
+
+## v0.5.1 (2024-06-02)
+
+### Ci
+
+* ci: fix database access in deployment ([`76f6c75`](https://github.com/PrayTeam/scriptured-prayer/commit/76f6c755e0a2465b33113c0defb9104d843feeb3))
+
+* ci: make ssh dir for deployment ([`641447c`](https://github.com/PrayTeam/scriptured-prayer/commit/641447c9536f0fcd7123a5d9d1351221c1adb372))
+
+### Fix
+
+* fix: use pgpass in project root ([`27e0753`](https://github.com/PrayTeam/scriptured-prayer/commit/27e0753d95c5e84dff2129fb2049d39a46274168))
+
+### Unknown
+
+* Merge pull request #120 from PrayTeam/staticroot-option
+
+Staticroot option ([`9568407`](https://github.com/PrayTeam/scriptured-prayer/commit/9568407f78ba8577d59bcf184f3cfc7f61213533))
+
+* Merge pull request #119 from PrayTeam/staticroot-option
+
+ci: make ssh dir for deployment ([`d434cd5`](https://github.com/PrayTeam/scriptured-prayer/commit/d434cd517725120fc741e3b28d3389f3c48b333a))
+
+
+## v0.5.0 (2024-06-01)
+
+### Chore
+
+* chore(deps): poetry update ([`9f214e6`](https://github.com/PrayTeam/scriptured-prayer/commit/9f214e624bfeb510757d0a8d0156fc4ce833d4b9))
+
+### Ci
+
+* ci: add ssh with cloudflared tunnel ([`898ee9a`](https://github.com/PrayTeam/scriptured-prayer/commit/898ee9aac79ac4622bde4e59f1df388f57c16c58))
+
+* ci: move the staticfiles dir to /var/ww/html in production ([`7e2cd68`](https://github.com/PrayTeam/scriptured-prayer/commit/7e2cd6891050ea99ff6acd520ab81d8194dbd8be))
+
+### Documentation
+
+* docs: update readme for manual deployment ([`264c23f`](https://github.com/PrayTeam/scriptured-prayer/commit/264c23ffc3393ec28cce90d1ea8a3a50a6f76404))
+
+### Feature
+
+* feat: ansible add option for staticroot ([`9cd7177`](https://github.com/PrayTeam/scriptured-prayer/commit/9cd71775d28a1ff770c9a2c3bd352674facfeda9))
+
+* feat: use pgpass from user&#39;s home dir ([`35b0c70`](https://github.com/PrayTeam/scriptured-prayer/commit/35b0c70ddae07c19add0096cd33850976dae13e0))
+
+### Fix
+
+* fix: release on merge (for real this time) ([`4b50e45`](https://github.com/PrayTeam/scriptured-prayer/commit/4b50e4574850d4d65e2824f9852301d868cf7567))
+
+* fix: release on merge ([`75ebce0`](https://github.com/PrayTeam/scriptured-prayer/commit/75ebce0ce6109bc726328d4321cc0d9ef60107dc))
+
+* fix: use /var/gunicorn for venv ([`a0d8328`](https://github.com/PrayTeam/scriptured-prayer/commit/a0d8328f2886adb7d02185291d8c4edd4843ebc9))
+
+* fix: swagger using wrong schema url (#98) ([`35ab0ca`](https://github.com/PrayTeam/scriptured-prayer/commit/35ab0ca8a8cdd8e474fc7739d32a7f4108826c02))
+
+* fix: update ansible to deploy to fedora ([`fd16b98`](https://github.com/PrayTeam/scriptured-prayer/commit/fd16b98139c2170cacfa0499569f4f86b559263d))
+
+* fix: load_cards descriptions ([`d7b41da`](https://github.com/PrayTeam/scriptured-prayer/commit/d7b41da0042c69f3acdb8cefa125458a0fa62a33))
+
+### Unknown
+
+* Merge pull request #118 from PrayTeam/staticroot-option
+
+feat: ansible add option for staticroot ([`4772dc7`](https://github.com/PrayTeam/scriptured-prayer/commit/4772dc7db3725f700add6a6e6ada530e14e453b9))
+
+* Merge pull request #117 from PrayTeam/Soyokaze-42-patch-1
+
+fix: release on merge ([`60d0ba3`](https://github.com/PrayTeam/scriptured-prayer/commit/60d0ba3b3c60c40ea52f9be342f685348be8732d))
+
+* Merge pull request #116 from PrayTeam/deploy-with-cloudflared
+
+Deploy-with-cloudflared ([`f51421e`](https://github.com/PrayTeam/scriptured-prayer/commit/f51421eb3d114e094285630879305d049f1da8d6))
+
+* Merge pull request #92 from PrayTeam/deploy-update
+
+Deploy update ([`591010f`](https://github.com/PrayTeam/scriptured-prayer/commit/591010f6a20628f1c9cd6f524697462200067499))
+
+* Update README.md
+
+Co-authored-by: Asher Lloyd &lt;asher.jo.lloyd@gmail.com&gt; ([`f749267`](https://github.com/PrayTeam/scriptured-prayer/commit/f749267da49dc84ae23a8d9cacc349cff4a99a82))
+
+
+## v0.4.1 (2024-03-11)
+
+### Fix
+
+* fix: dev urls in production ([`7d6a5d8`](https://github.com/PrayTeam/scriptured-prayer/commit/7d6a5d88f6e95a88be065a26396f56777c2feeb9))
+
+
+## v0.4.0 (2024-03-11)
+
+### Unknown
+
+* Merge pull request #87 from PrayTeam/add-ansible
+
+Add ansible and update for production ([`6f2c13e`](https://github.com/PrayTeam/scriptured-prayer/commit/6f2c13eb575bb77ad7cf841e68a077e575b5d2f1))
+
+
+## v0.3.1 (2024-03-10)
+
+### Ci
+
+* ci: fix the double run on release ([`4862595`](https://github.com/PrayTeam/scriptured-prayer/commit/48625959ed5bf86d60a177632b86fa0ff35eb643))
+
+* ci: run build on PR and prevent running on main when tagged (by semantic release) ([`3cf6813`](https://github.com/PrayTeam/scriptured-prayer/commit/3cf6813f0e74f22d5208a02af42669973d718273))
+
+### Fix
+
+* fix: ansible and django code for prod ([`1063378`](https://github.com/PrayTeam/scriptured-prayer/commit/1063378321d847de1d916f2a6b05b2e736dc8bc4))
+
+* fix: remove reference to localhost in production env ([`d21dc25`](https://github.com/PrayTeam/scriptured-prayer/commit/d21dc256349bb9258b44a735f9386b0267d8de59))
+
+### Unknown
+
+* Merge branch &#39;main&#39; into add-ansible ([`e502fa3`](https://github.com/PrayTeam/scriptured-prayer/commit/e502fa335a5f7d08b1a77aeb65c7daeeaa52ad40))
+
+* Merge pull request #86 from PrayTeam/fix/deployment-urls
+
+fix: remove reference to localhost in production env ([`098e6fe`](https://github.com/PrayTeam/scriptured-prayer/commit/098e6fe75008735b2ad008c6d63198d22224dad2))
+
+* Merge branch &#39;main&#39; into add-ansible ([`379c642`](https://github.com/PrayTeam/scriptured-prayer/commit/379c642c7e453970074c0759d9b27e6878d4d9fa))
+
+
 ## v0.3.0 (2024-03-05)
 
 ### Feature
@@ -23,6 +207,8 @@ Co-authored-by: Asher Lloyd &lt;asher.jo.lloyd@gmail.com&gt; ([`b0062ad`](https:
 ## v0.2.0 (2024-03-05)
 
 ### Feature
+
+* feat: add ansible automation for deployments ([`2d16221`](https://github.com/PrayTeam/scriptured-prayer/commit/2d16221f07c439fcb53cdbf4976e076b62499014))
 
 * feat: separate dev settings ([`02cf6db`](https://github.com/PrayTeam/scriptured-prayer/commit/02cf6db022d419a33a2d85e53fae9f4b9652a9c9))
 

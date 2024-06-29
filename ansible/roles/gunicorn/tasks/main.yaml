@@ -1,0 +1,241 @@
+---
+
+- include_role:
+    name: common
+    public: true
+
+- name: Install OS Packages
+  become: true
+  dnf:
+    name:
+      - python-virtualenv
+      - nginx
+      - https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm
+    state: latest
+    disable_gpg_check: yes
+
+- name: Create the Gunicorn user
+  become: true
+  user:
+    name: "{{ gunicorn_user }}"
+    group: "{{ gunicorn_group }}"
+    groups: "{{ nginx_group }}"
+    state: present
+    shell: /bin/bash
+    createhome: no
+
+- name: Create static files directory
+  become: true
+  file:
+    path: "{{ static_path }}"
+    state: directory
+    mode: "0770"
+    owner: "{{ nginx_user }}"
+    group: "{{ nginx_group }}"
+
+- name: Create environment files directory
+  become: true
+  file:
+    path: "/etc/gunicorn"
+    state: directory
+    mode: "0700"
+
+- name: Upgrade/Install Python packages (Ansible requirements)
+  pip: 
+    name:
+      - github3.py
+    state: latest
+
+- name: Create the Nginx site config file
+  become: true
+  template: src=nginx_config.j2
+            dest=/etc/nginx/conf.d/{{ project_name }}.conf
+            backup=yes
+  notify: reload nginx
+  tags: nginx
+
+- name: Ensure Nginx service is started
+  become: true
+  service: name=nginx state=started enabled=yes
+  tags: nginx
+
+- name: Set SELinux policy for gunicorn virtualenv
+  become: true
+  sefcontext:
+    target: "{{ virtualenv_path }}(/.*)?"
+    setype: httpd_exec_t
+    ftype: f 
+    state: present
+
+- name: Set SELinux policy for gunicorn python files
+  become: true
+  sefcontext:
+    target: "{{ project_path }}(/.*)?.py"
+    setype: httpd_exec_t
+    state: present
+
+- name: Set SELinux policy for gunicorn python compiled files
+  become: true
+  sefcontext:
+    target: "{{ project_path }}(/.*)?.pyc"
+    setype: httpd_sys_rw_content_t
+    state: present
+
+- name: Set SELinux policy for gunicorn project files
+  become: true
+  sefcontext:
+    target: "{{ project_path }}(/.*)?"
+    setype: httpd_sys_content_t
+    state: present
+
+
+- name: Check if the virtual environment exists
+  become: true
+  become_user: "{{ gunicorn_user }}"
+  stat:
+    path: "{{ virtualenv_path }}"
+  register: virtualenv
+
+- name: Create the virtual environment directory
+  become: true
+  file:
+    path: "{{ virtualenv_path }}"
+    state: directory
+    owner: "{{ gunicorn_user }}"
+    group: "{{ gunicorn_group }}"
+    mode: "0700"
+  when: not virtualenv.stat.exists
+
+- name: Create a virtual environment
+  become: true
+  become_user: "{{ gunicorn_user }}"
+  when: not virtualenv.stat.exists
+  command: virtualenv {{ virtualenv_path }}
+
+- name: Download the latest release
+  become: true
+  become_user: "{{ gunicorn_user }}"
+  get_url:
+    url: "https://github.com/{{ github_user }}/{{ github_repo }}/releases/download/{{ release_version.tag }}/scriptured-prayer-{{ release_version.tag }}.tar.gz"
+    dest: "/home/{{ gunicorn_user }}/"
+
+- name: Extract the latest release
+  become: true
+  become_user: "{{ gunicorn_user }}"
+  unarchive:
+    src: "/home/{{ gunicorn_user }}/scriptured-prayer-{{ release_version.tag }}.tar.gz"
+    dest: "/var/gunicorn/"
+    remote_src: yes
+    creates: "{{ project_path }}/manage.py"
+
+- name: Install Python packages (app requirements)
+  become: true
+  become_user: "{{ gunicorn_user }}"
+  pip:
+    name:
+      - gunicorn
+      - pip
+    virtualenv: "{{ virtualenv_path }}"
+    state: latest
+
+- name: Install Python packages (app requirements)
+  become: true
+  become_user: "{{ gunicorn_user }}"
+  pip:
+    requirements: "/var/gunicorn/scriptured-prayer-{{ release_version.tag }}/requirements.txt"
+    virtualenv: "{{ virtualenv_path }}"
+
+- name: Create Django Secret Key
+  set_fact:
+    django_secret: "{{ lookup('password', '/dev/null length=75 chars=ascii_letters,digits') }}"
+
+- name: Create Environment File for Service
+  become: true
+  template: 
+    src: env.j2
+    dest: "/etc/gunicorn/{{ project_name }}.env"
+    backup: yes
+    mode: "0600"
+
+- name: Create the Gunicorn systemd service file
+  become: true
+  template: 
+    src: gunicorn.service.j2
+    dest: "/etc/systemd/system/gunicorn-{{ project_name }}.service"
+    backup: yes
+
+- name: Create the Gunicorn socket file
+  become: true
+  template: 
+    src: gunicorn.socket.j2
+    dest: "/etc/systemd/system/gunicorn-{{ project_name }}.socket"
+    backup: yes
+
+- name: Restore SELinux Contexts for the virtual environment
+  become: true
+  command: restorecon -R "{{ virtualenv_path }}"
+
+- name: Restore SELinux Contexts for the html directory
+  become: true
+  command: restorecon -R "{{ static_path }}"
+
+- name: Restore SELinux Contexts for the project directory
+  become: true
+  command: restorecon -R "{{ project_path }}"
+
+- name: Run Django Migrations
+  become: true
+  become_user: "{{ gunicorn_user }}"
+  environment: 
+    DJANGO_SECRET_KEY: "{{ django_secret }}"
+    DJANGO_SETTINGS_MODULE: "scriptured_prayer.settings"
+    DJANGO_DB_NAME: "{{ db_name }}"
+    DJANGO_STATIC_ROOT: "{{ static_path }}"
+  command: "{{ virtualenv_path }}/bin/python {{ project_path }}/manage.py migrate --noinput"
+
+- name: Run Django Collectstatic
+  become: true
+  environment: 
+    DJANGO_SECRET_KEY: "{{ django_secret }}"
+    DJANGO_SETTINGS_MODULE: "scriptured_prayer.settings"
+    DJANGO_DB_NAME: "{{ db_name }}"
+    DJANGO_STATIC_ROOT: "{{ static_path }}"
+  command: "{{ virtualenv_path }}/bin/python {{ project_path }}/manage.py collectstatic --noinput" # Update the nginx configuration file and the location for static files in settings.py
+
+- name: Set permissions for static files
+  become: true
+  file:
+    path: "{{ static_path }}"
+    mode: u=rwX,g=rX
+    owner: "{{ nginx_user }}"
+    group: "{{ nginx_group }}"
+    recurse: yes
+
+- name: Load starting data - NET bible
+  when: new_db
+  become: true
+  become_user: "{{ gunicorn_user }}"
+  environment: 
+    DJANGO_SECRET_KEY: "{{ django_secret }}"
+    DJANGO_SETTINGS_MODULE: "scriptured_prayer.settings"
+    DJANGO_DB_NAME: "{{ db_name }}"
+    DJANGO_STATIC_ROOT: "{{ static_path }}"
+  command: "{{ virtualenv_path }}/bin/python {{ project_path }}/manage.py load_bible eng net"
+
+- name: Load starting data - cards
+  when: new_db
+  become: true
+  become_user: "{{ gunicorn_user }}"
+  environment: 
+    DJANGO_SECRET_KEY: "{{ django_secret }}"
+    DJANGO_SETTINGS_MODULE: "scriptured_prayer.settings"
+    DJANGO_DB_NAME: "{{ db_name }}"
+    DJANGO_STATIC_ROOT: "{{ static_path }}"
+  command: "{{ virtualenv_path }}/bin/python {{ project_path }}/manage.py load_cards"
+
+- name: Start the Gunicorn socket
+  become: true
+  systemd:
+    name: "gunicorn-{{ project_name }}.socket"
+    state: restarted
+    enabled: yes
