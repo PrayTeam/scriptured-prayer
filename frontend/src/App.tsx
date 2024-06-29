@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
 
-import { Info, About, Home, Login, NotFound, Settings } from "./views";
+import { Home, About, Dashboard, Login, NotFound, Settings } from "./views";
 import { ProtectedRoutes } from "./components";
 import { useLocalStorage } from "./hooks";
 import { ProfileContext } from "./hooks";
@@ -11,7 +11,7 @@ import PrayerDeck from "./components/PrayerDeck";
 const getRouter = (language: string) =>
   createBrowserRouter(
     [
-      { path: "/", element: <Info /> },
+      { path: "/", element: <Home /> },
       { path: "/login", element: <Login /> },
       { path: "/about", element: <About /> },
       { path: "/prayer-decks/:id", element: <PrayerDeck /> },
@@ -19,7 +19,7 @@ const getRouter = (language: string) =>
         element: <ProtectedRoutes />,
         children: [
           { path: "/settings", element: <Settings /> },
-          { path: "/home", element: <Home /> },
+          { path: "/dashboard", element: <Dashboard /> },
         ],
       },
       { path: "*", element: <NotFound /> },

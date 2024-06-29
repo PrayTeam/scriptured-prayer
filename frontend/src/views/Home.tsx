@@ -6,7 +6,7 @@ import { DemoPrayerDeck } from "~/types";
 import { useDemoPrayerDecks } from "~/hooks";
 import forest from "~/assets/images/forest.jpg";
 
-export function Info() {
+export function Home() {
   const navigate = useNavigate();
   const demoPrayerDecks = useDemoPrayerDecks();
   const [prayerDecks, setPrayerDecks] = useState<DemoPrayerDeck[][]>([]);

@@ -28,13 +28,13 @@ jobs:
       uses: borales/actions-yarn@v5
       with:
         cmd: install
-        dir: scriptured-prayer-components
+        dir: frontend
   
     - name: Run yarn build
       uses: borales/actions-yarn@v5
       with:
         cmd: build
-        dir: scriptured-prayer-components
+        dir: frontend
 
     - uses: actions/setup-python@v5
       with:
