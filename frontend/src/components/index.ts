@@ -9,3 +9,4 @@ export * from "./FooterColumn";
 export * from "./FooterLinks";
 export * from "./FooterLink";
 export * from "./Faq";
+export * from "./Navigation";
