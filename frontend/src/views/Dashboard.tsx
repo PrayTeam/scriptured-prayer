@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { ProfilePicture } from "~/components/ProfilePicture";
 import { useApi, useProfile } from "~/hooks";
-import { Container, Deck } from "~/components";
+import { Container, Deck, Footer } from "~/components";
 import { CategoryResponse } from "~/api/models/responses";
 
 import forest from "~/assets/images/forest.jpg";
@@ -45,10 +45,10 @@ export function Dashboard() {
   }, []);
 
   return (
-    <div className="w-full h-full bg-gradient-to-br from-purple from-10% via-purple via-30% to-blue to-90%">
-      <Container>
-        <div className="flex flex-col">
-          <div className="flex items-center justify-between mb-4">
+    <div className="flex flex-col w-full h-full bg-gradient-to-br from-purple from-10% via-purple via-30% to-blue to-90%">
+      <Container className="grow flex w-full">
+        <div className="flex flex-col w-full">
+          <div className="flex items-center w-full justify-between mb-4">
             <h1 className="text-2xl text-white">
               Welcome, {profile.username}!
             </h1>
@@ -74,6 +74,7 @@ export function Dashboard() {
           </div>
         </div>
       </Container>
+      <Footer color="night" />
     </div>
   );
 }
