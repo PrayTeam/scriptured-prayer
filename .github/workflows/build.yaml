@@ -2,11 +2,12 @@ name: Build and Release
 
 on:
   push:
-    branches:
-      - main
-    tags-ignore:
-      - '*'
   pull_request:
+    types: 
+      - opened
+      - reopened
+      - synchronize
+      - closed
 
 jobs:
   build:
@@ -27,13 +28,13 @@ jobs:
       uses: borales/actions-yarn@v5
       with:
         cmd: install
-        dir: scriptured-prayer-components
+        dir: frontend
   
     - name: Run yarn build
       uses: borales/actions-yarn@v5
       with:
         cmd: build
-        dir: scriptured-prayer-components
+        dir: frontend
 
     - uses: actions/setup-python@v5
       with:
@@ -43,8 +44,6 @@ jobs:
       uses: abatilo/actions-poetry@v3
     - name: Install dependencies
       run: poetry install --no-root
-    - name: Run collectstatic
-      run: poetry run python manage.py collectstatic --noinput
     - name: Generate Requirements file
       run: poetry export -f requirements.txt --output requirements.txt --without-hashes
     - name: Get version
@@ -54,9 +53,10 @@ jobs:
       run: |
         mkdir dist
         mkdir scriptured-prayer-${{ steps.semantic-release.outputs.tag }}
-        mv "prayerapp" "scriptured_prayer" "staticfiles" "LICENSE.md" "manage.py" "requirements.txt" "README.md" scriptured-prayer-${{ steps.semantic-release.outputs.tag }}
+        mv "prayerapp" "scriptured_prayer" "LICENSE.md" "manage.py" "requirements.txt" "README.md" scriptured-prayer-${{ steps.semantic-release.outputs.tag }}
         tar -czvf dist/scriptured-prayer-${{ steps.semantic-release.outputs.tag }}.tar.gz scriptured-prayer-${{ steps.semantic-release.outputs.tag }}
     - name: Upload Release
+      if: github.event.pull_request.merged == true
       env:
         GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
       run: poetry run semantic-release version && poetry run semantic-release publish
