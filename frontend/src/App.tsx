@@ -1,42 +1,34 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
 
 import { Home, About, Dashboard, Login, NotFound, Settings } from "./views";
-import { ProtectedRoutes } from "./components";
+import { Navigation, ProtectedRoutes } from "./components";
 import { useLocalStorage } from "./hooks";
 import { ProfileContext } from "./hooks";
 import PrayerDeck from "./components/PrayerDeck";
 
-const getRouter = (language: string) =>
-  createBrowserRouter(
-    [
-      { path: "/", element: <Home /> },
-      { path: "/login", element: <Login /> },
-      { path: "/about", element: <About /> },
-      { path: "/prayer-decks/:id", element: <PrayerDeck /> },
-      {
-        element: <ProtectedRoutes />,
-        children: [
-          { path: "/settings", element: <Settings /> },
-          { path: "/dashboard", element: <Dashboard /> },
-        ],
-      },
-      { path: "*", element: <NotFound /> },
-    ],
-    {
-      basename: `/${language}`,
-    },
-  );
-
 function App() {
   const [profile, setProfile] = useLocalStorage("profile");
-  const router = getRouter(profile.language);
 
   return (
     <ProfileContext.Provider value={{ profile, setProfile }}>
       <Theme className="h-full">
-        <RouterProvider router={router} />
+        <BrowserRouter basename={`/${profile.language}`}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/about" element={<About />} />
+            <Route element={<Navigation />}>
+              <Route path="prayer-decks/:id" element={<PrayerDeck />} />
+              <Route element={<ProtectedRoutes />}>
+                <Route path="settings" element={<Settings />} />
+                <Route path="dashboard" element={<Dashboard />} />
+              </Route>
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
       </Theme>
     </ProfileContext.Provider>
   );
