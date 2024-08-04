@@ -2,7 +2,52 @@
 
 
 
+## v0.7.0 (2024-08-04)
+
+### Ci
+
+* ci: remove httpd network connect db sebool option ([`d07a52f`](https://github.com/PrayTeam/scriptured-prayer/commit/d07a52f424c589406acd5e6e290292a625384278))
+
+### Feature
+
+* feat: add app navigation (#127) ([`a257e0d`](https://github.com/PrayTeam/scriptured-prayer/commit/a257e0dcdee207c6cd097c0f04b810f4fe45306c))
+
+### Unknown
+
+* Student content (#124)
+
+* feat: merge student content ([`3e5ab97`](https://github.com/PrayTeam/scriptured-prayer/commit/3e5ab971693c2137bc2a614a6e3edf2a82084b1d))
+
+* Various naming improvements (#122)
+
+* chore: improve component and route names
+
+* chore: rename scriptured-prayer-components dir to frontend ([`15aa07a`](https://github.com/PrayTeam/scriptured-prayer/commit/15aa07aeb39ed9c73c79165c63a53fad2ba7fc32))
+
+* Fix CI Bugs (#125)
+
+* ci: remove local copy step from deploy workflow
+
+* Update deploy.yaml
+
+* ci: == -&gt; !=
+
+* ci: &amp;&amp; -&gt; ||
+
+* ci: remove quote symbol bug ([`1fc4fec`](https://github.com/PrayTeam/scriptured-prayer/commit/1fc4fec59fe3130b412adb36d992728ca4df7969))
+
+* Merge pull request #123 from PrayTeam/ansible-update
+
+ci: use database socket instead of port ([`1dbe123`](https://github.com/PrayTeam/scriptured-prayer/commit/1dbe1233798dfe9fe7de247bf00a919876d6b574))
+
+* Merge remote-tracking branch &#39;origin/main&#39; into ansible-update ([`8759ed0`](https://github.com/PrayTeam/scriptured-prayer/commit/8759ed09a16c782d323d079bbd1e3a255a93665c))
+
+
 ## v0.6.1 (2024-06-07)
+
+### Ci
+
+* ci: use database socket instead of port ([`ea6af24`](https://github.com/PrayTeam/scriptured-prayer/commit/ea6af24d40a6c950574901019a8fba7b8a51829e))
 
 ### Fix
 
