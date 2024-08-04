@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { ProfilePicture } from "~/components/ProfilePicture";
 import { useApi, useProfile } from "~/hooks";
-import { Container, Deck, Footer } from "~/components";
+import { Container, Deck } from "~/components";
 import { CategoryResponse } from "~/api/models/responses";
 
 import forest from "~/assets/images/forest.jpg";
@@ -74,7 +74,6 @@ export function Dashboard() {
           </div>
         </div>
       </Container>
-      <Footer color="night" />
     </div>
   );
 }
