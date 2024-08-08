@@ -40,12 +40,6 @@
     state: directory
     mode: "0700"
 
-- name: Upgrade/Install Python packages (Ansible requirements)
-  pip: 
-    name:
-      - github3.py
-    state: latest
-
 - name: Create the Nginx site config file
   become: true
   template: src=nginx_config.j2

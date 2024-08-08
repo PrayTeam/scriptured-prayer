@@ -1,5 +1,18 @@
 ---
 
+- name: Install Pip
+  become: true
+  dnf:
+    name:
+      - python-pip
+    state: latest
+
+- name: Upgrade/Install Python packages (Ansible requirements)
+  pip: 
+    name:
+      - github3.py
+    state: latest
+
 - name: Get Scriptured Prayer Latest Release
   register: release_version
   community.general.github_release:
@@ -10,13 +23,6 @@
 - name: Set project_path to the latest release # eventually or current branch
   set_fact:
     project_path: "/var/gunicorn/scriptured-prayer-{{ release_version.tag }}"
-
-- name: Install Pip
-  become: true
-  dnf:
-    name:
-      - python-pip
-    state: latest
 
 - name: "Find out if PostgreSQL is initialized"
   become: true
