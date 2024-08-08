@@ -40,6 +40,10 @@
   command: "postgresql-setup --initdb --unit postgresql"
   when: not postgres_data.stat.exists
 
+- name: Ensure the PostgreSQL service is running
+  become: true
+  service: name=postgresql state=started enabled=yes
+
 - name: Drop the PostgreSQL database
   become: true
   become_user: postgres
@@ -47,10 +51,6 @@
     name: "{{ db_name }}"
     state: absent
   when: new_db
-
-- name: Ensure the PostgreSQL service is running
-  become: true
-  service: name=postgresql state=started enabled=yes
 
 - name: Setup the PostgreSQL database
   become: true
