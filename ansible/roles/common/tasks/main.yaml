@@ -26,7 +26,6 @@
 
 - name: "Find out if PostgreSQL is initialized"
   become: true
-  become_user: postgres
   stat:
     path: "/var/lib/pgsql/data/pg_hba.conf"
   register: postgres_data
