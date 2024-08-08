@@ -18,7 +18,7 @@ jobs:
         echo "deb [signed-by=/usr/share/keyrings/cloudflare-archive-keyring.gpg] https://pkg.cloudflare.com/cloudflared $(lsb_release -cs) main" | sudo tee  /etc/apt/sources.list.d/cloudflared.list
         sudo apt update
         sudo apt install -y cloudflared pip
-        sudo pip install ansible-core
+        sudo pip install ansible-core github3
         sudo ansible-galaxy collection install community.general community.postgresql ansible.posix
     - uses: actions/checkout@v4
       with:
