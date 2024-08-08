@@ -30,6 +30,11 @@
     path: "/var/lib/pgsql/data/pg_hba.conf"
   register: postgres_data
 
+- name: Ensure the PostgreSQL service is running
+  become: true
+  service: name=postgresql state=started enabled=yes
+  when: postgres_data.stat.exists
+
 - name: Check if the PostgreSQL database exists
   become: true
   become_user: postgres
