@@ -34,19 +34,19 @@
     shell: /bin/bash
     createhome: yes
 
+- name: "Initialize PostgreSQL"
+  become: true
+  become_user: postgres
+  command: "postgresql-setup --initdb --unit postgresql"
+  when: not postgres_data.stat.exists
+
 - name: Drop the PostgreSQL database
   become: true
   become_user: postgres
   postgresql_db:
     name: "{{ db_name }}"
     state: absent
-  when: new_db and db_name in postgres_db_info.databases
-
-- name: "Initialize PostgreSQL"
-  become: true
-  become_user: postgres
-  command: "postgresql-setup --initdb --unit postgresql"
-  when: not postgres_data.stat.exists
+  when: new_db
 
 - name: Ensure the PostgreSQL service is running
   become: true
