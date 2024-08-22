@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
 
-import { Home, About, Dashboard, Login, NotFound, Settings } from "./views";
+import { Home, About, Dashboard, Login, NotFound, Settings, Prayers, PrayerDetail } from "./views";
 import { Navigation, ProtectedRoutes } from "./components";
 import { useLocalStorage } from "./hooks";
 import { ProfileContext } from "./hooks";
@@ -24,6 +24,10 @@ function App() {
               <Route element={<ProtectedRoutes />}>
                 <Route path="settings" element={<Settings />} />
                 <Route path="dashboard" element={<Dashboard />} />
+              </Route>
+              <Route path="prayers">
+                <Route index element={<Prayers />} />
+                <Route path=":id" element={<PrayerDetail />} />
               </Route>
               <Route path="*" element={<NotFound />} />
             </Route>
