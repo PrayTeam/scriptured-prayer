@@ -102,11 +102,11 @@ export function PrayerDeck() {
                 </SwiperSlide>
               ))}
               <SwiperSlide>
-                <div className="">
+                <div className="flex h-full justify-center items-center">
                   <Button
                     onClick={() => navigate("/dashboard")}
                     size="4"
-                    className="w-80 mx-auto mt-4 bg-lichen transition-opacity ease-in"
+                    className="w-[100px] mx-auto mt-4 bg-lichen transition-opacity ease-in"
                   >
                     Done
                   </Button>
