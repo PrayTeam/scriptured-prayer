@@ -3,4 +3,7 @@ export * from "./About";
 export * from "./Dashboard";
 export * from "./Login";
 export * from "./NotFound";
-export * from "./Settings";
+export * from "./Profile";
+export * from "./Search";
+export * from "./DailyDeck";
+export * from "./Prayers";

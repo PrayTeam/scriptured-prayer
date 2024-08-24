@@ -5,6 +5,7 @@ import { Deck, Footer, Faq } from "~/components";
 import { DemoPrayerDeck } from "~/types";
 import { useDemoPrayerDecks } from "~/hooks";
 import forest from "~/assets/images/forest.jpg";
+import { Button } from "~/components/form";
 
 export function Home() {
   const navigate = useNavigate();
@@ -40,6 +41,12 @@ export function Home() {
             <p className="text-2xl font-semibold">
               A tool to help maximize your prayer life.
             </p>
+            <Button
+              className="bg-sky max-w-[200px] mt-6"
+              onClick={() => navigate("/daily-deck")}
+            >
+              PRAY NOW
+            </Button>
           </div>
         </div>
       </div>

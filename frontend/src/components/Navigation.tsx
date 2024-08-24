@@ -1,7 +1,6 @@
-import { DeckIcon, DashboardIcon, PrayerIcon } from "./Icons";
-import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { DashboardIcon, PrayerIcon, SearchIcon } from "./Icons";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { theme } from "~/tailwind.config";
-import { useProfile } from "~/hooks";
 
 interface NavigationItem {
   path: string;
@@ -20,7 +19,7 @@ interface NavigationBarProps extends React.ComponentPropsWithRef<"div"> {
 
 const navigationItems: NavigationItem[] = [
   { path: "/dashboard", label: "Dashboard", icon: DashboardIcon },
-  { path: "/decks", label: "Decks", icon: DeckIcon },
+  { path: "/search", label: "Search", icon: SearchIcon },
   { path: "/prayers", label: "Prayers", icon: PrayerIcon },
 ];
 
@@ -41,10 +40,11 @@ function BottomNavigationItem({
       onClick={() => navigate(path)}
       className="flex flex-col w-full cursor-pointer items-center"
     >
-      <Icon width={25} fill={selected ? theme.colors.sky : theme.colors.gray} />
-      <div
-        className={`text-xs font-light ${selected ? "text-sky" : "text-gray"}`}
-      >
+      <Icon
+        width={25}
+        color={selected ? theme.colors.indigo : theme.colors.gray}
+      />
+      <div className={`text-xs ${selected ? "text-indigo" : "text-gray"}`}>
         {label}
       </div>
     </div>
@@ -53,7 +53,7 @@ function BottomNavigationItem({
 
 function BottomNavigationBar(props: NavigationBarProps) {
   return (
-    <div className="lg:hidden fixed bottom-0 z-10 flex w-full justify-between bg-obsidian p-1">
+    <div className="lg:hidden fixed bottom-0 z-10 flex w-full justify-between bg-white p-1 border-t border-t-gray">
       {navigationItems.map((n, i) => (
         <BottomNavigationItem
           key={i}
@@ -77,7 +77,7 @@ function TopNavigationItem({
   return (
     <div
       onClick={() => navigate(path)}
-      className={`cursor-pointer ${selected ? "text-sky" : "text-gray"}`}
+      className={`cursor-pointer ${selected ? "text-white" : "text-gray"}`}
     >
       {label}
     </div>
@@ -86,7 +86,7 @@ function TopNavigationItem({
 
 function TopNavigationBar(props: NavigationBarProps) {
   return (
-    <div className="hidden lg:flex bg-obsidian">
+    <div className="hidden lg:flex bg-indigo">
       <div className="flex space-x-12 w-[1280px] mx-auto text-white px-6 py-4">
         <div className="mr-8">Scriptured Prayer</div>
         {navigationItems.map((n, i) => (
@@ -103,17 +103,14 @@ function TopNavigationBar(props: NavigationBarProps) {
 }
 
 export function Navigation() {
-  const { profile } = useProfile();
   const location = useLocation();
   const routeIndex = getCurrentRouteIndex(location.pathname);
 
-  return profile.authenticated ? (
+  return (
     <div className="h-full">
       <TopNavigationBar routeIndex={routeIndex} />
       <Outlet />
       <BottomNavigationBar routeIndex={routeIndex} />
     </div>
-  ) : (
-    <Navigate to="/login" />
   );
 }

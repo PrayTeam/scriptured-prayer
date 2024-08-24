@@ -21,17 +21,19 @@ export function Card({
 }: CardProps) {
   return (
     <div
-      className={`h-50 py-8 md:py-12 px-6 md:px-16 rounded-md ${focus ? "bg-snowgrass" : "bg-white"}`}
+      className={`h-full mt-4 py-8 md:py-12 px-6 md:px-16 rounded-md shadow-xl ${focus ? "bg-snowgrass" : "bg-white"}`}
     >
-      <Badge
-        radius="small"
-        size="2"
-        mb="4"
-        variant="soft"
-        className={`uppercase ${focus ? "text-white bg-ocean/50" : "text-ocean bg-gray"}`}
-      >
-        {category}
-      </Badge>
+      <div className="flex justify-between">
+        <Badge
+          radius="small"
+          size="2"
+          mb="4"
+          variant="soft"
+          className={`uppercase ${focus ? "text-white bg-ocean/50" : "text-ocean bg-gray"}`}
+        >
+          {category}
+        </Badge>
+      </div>
 
       <h3 className="text-3xl pb-8 text-ocean">{title}</h3>
 
