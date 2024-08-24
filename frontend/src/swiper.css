@@ -1,3 +1,7 @@
+.swiper {
+  height: 100%;
+}
+
 /* Add your custom styles for pagination container */
 .swiper-pagination-fraction,
 .swiper-pagination-custom,
@@ -13,9 +17,9 @@
 
 .swiper-pagination-fraction {
   font-size: 32px; /* Adjust font size */
-  color: #ffffff; /* Set desired color */
+  color: #000; /* Set desired color */
   position: relative;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 /* Add your custom styles for pagination bullets */
@@ -52,4 +56,8 @@
 .swiper-button-prev:hover {
   color: rgb(13, 148, 136);
   opacity: 1;
+}
+
+.swiper-slide {
+  height: auto;
 }

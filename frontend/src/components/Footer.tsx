@@ -47,10 +47,7 @@ export function Footer({ color, text }: FooterProps) {
           <FooterColumn>
             <h2 className="font-semibold text-base">Support</h2>
             <FooterLinks>
-              <Button
-                className="bg-leaf hover:scale-105 transition duration-150"
-                onClick={() => navigate("/donate")}
-              >
+              <Button className="bg-leaf" onClick={() => navigate("/donate")}>
                 Donate
               </Button>
             </FooterLinks>
