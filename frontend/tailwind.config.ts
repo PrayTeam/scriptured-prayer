@@ -21,6 +21,7 @@ export default {
       leaf: '#3c4a20',
       obsidian: '#2a3258',
       gray: '#c3c7cc',
+      ghost: '#f1f1f1',
       indigo: '#6366f1',
       sky: '#0ea5e9',
       emerald: '#10b981',

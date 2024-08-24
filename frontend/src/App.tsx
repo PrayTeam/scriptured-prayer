@@ -2,11 +2,20 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
 
-import { Home, About, Dashboard, Login, NotFound, Settings } from "./views";
-import { Navigation, ProtectedRoutes } from "./components";
-import { useLocalStorage } from "./hooks";
-import { ProfileContext } from "./hooks";
-import PrayerDeck from "./components/PrayerDeck";
+import {
+  Home,
+  About,
+  Dashboard,
+  Login,
+  NotFound,
+  Profile,
+  Search,
+  DailyDeck,
+  Prayers,
+  PrayerDetail,
+} from "./views";
+import { Navigation, ProtectedRoutes, PrayerDeck } from "./components";
+import { useLocalStorage, ProfileContext } from "./hooks";
 
 function App() {
   const [profile, setProfile] = useLocalStorage("profile");
@@ -20,10 +29,16 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/about" element={<About />} />
             <Route element={<Navigation />}>
+              <Route path="daily-deck" element={<DailyDeck />} />
               <Route path="prayer-decks/:id" element={<PrayerDeck />} />
+              <Route path="search" element={<Search />} />
               <Route element={<ProtectedRoutes />}>
-                <Route path="settings" element={<Settings />} />
+                <Route path="profile" element={<Profile />} />
                 <Route path="dashboard" element={<Dashboard />} />
+                <Route path="prayers">
+                  <Route index element={<Prayers />} />
+                  <Route path=":id" element={<PrayerDetail />} />
+                </Route>
               </Route>
               <Route path="*" element={<NotFound />} />
             </Route>
