@@ -3,7 +3,6 @@ from typing import Any
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
-from modeltranslation.admin import TranslationAdmin
 
 from .models import (
     Category,
@@ -98,7 +97,7 @@ admin.site.register(User, UserAdmin)
 
 
 @admin.register(Card)
-class CardAdmin(TranslationAdmin):
+class CardAdmin(admin.ModelAdmin):
     list_display = (
         "title",
         "scripture",
@@ -183,7 +182,7 @@ class UserCardPrayedLogAdmin(admin.ModelAdmin):
 
 
 @admin.register(BibleVersion)
-class BibleVersionAdmin(TranslationAdmin):
+class BibleVersionAdmin(admin.ModelAdmin):
     list_display = ("name", "abbreviation", "language_code")
     list_filter = ("language_code",)
     sortable_by = ("name", "abbreviation", "language_code")
@@ -194,7 +193,7 @@ class BibleVersionAdmin(TranslationAdmin):
 
 
 @admin.register(Category)
-class CategoryAdmin(TranslationAdmin):
+class CategoryAdmin(admin.ModelAdmin):
     list_display = ("name", "genre", "modified_by", "modified_date")
     list_filter = ("genre", "modified_by")
     sortable_by = ("name", "genre", "modified_date")
