@@ -176,7 +176,7 @@ def get_scripture_text(card: Card, bible_version: BibleVersion) -> Any:
     """
 
     verses = BibleVerse.objects.none()
-    for ref in card.scripture_en.split(";"):
+    for ref in card.scripture.split(";"):
         if ref.strip():
             if ref_match := re.match(r"^([1-3]? ?[a-zA-Z]+)\.? ?([0-9]+):([0-9]+)$", ref.strip()):
                 book = get_book_abbreviation(ref_match.group(1))
