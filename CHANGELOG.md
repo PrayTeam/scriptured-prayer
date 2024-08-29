@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v0.8.1 (2024-08-29)
+
+### Fix
+
+* fix: load cards and serializer issues after removing modeltranslation ([`0ebe53f`](https://github.com/PrayTeam/scriptured-prayer/commit/0ebe53ff87c3a18f343de5d7bd041be9216bf243))
+
+* fix: cardApi is using the wrong filter ([`0b6e92f`](https://github.com/PrayTeam/scriptured-prayer/commit/0b6e92f199d3844e3314f0012d3b40f28d24e326))
+
+### Unknown
+
+* Merge pull request #138 from PrayTeam/fix-ansible-DB-encoding
+
+Minor fixes from modeltranslation removal and fix cardApi filter ([`8db716a`](https://github.com/PrayTeam/scriptured-prayer/commit/8db716a5d24b37011764d11183fbaaea27cdfa30))
+
 ## v0.8.0 (2024-08-29)
 
 ### Feature
