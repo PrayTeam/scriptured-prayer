@@ -45,7 +45,7 @@ export function PrayerDeck() {
         const cardsApi = authenticated ? api.userCards : api.cards;
 
         Promise.all([
-          cardsApi.all({ card__category__id: routeId }),
+          cardsApi.all({ category__id: routeId }),
           api.categories.all(),
         ])
           .then(([_cards, categories]) => {
