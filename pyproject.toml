@@ -7,8 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-Django = "^5"
-django-modeltranslation = "^0.18.11"
+Django = "^5.1"
 whitenoise = "^6.6.0"
 requests = "^2.31.0"
 django-rest-framework = "^0.1.0"

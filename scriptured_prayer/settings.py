@@ -36,7 +36,6 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     "prayerapp.apps.PrayerappConfig",
-    "modeltranslation",
     "django.contrib.admin",
     "rest_framework",
     "rest_framework.authtoken",
