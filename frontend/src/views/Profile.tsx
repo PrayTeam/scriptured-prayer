@@ -67,9 +67,7 @@ export function Profile() {
           label="Notifications"
         />
         <Option
-          onClick={() => {
-            /*todo*/
-          }}
+          onClick={() => navigate("/privacy")}
           icon={PrivacyIcon}
           label="Privacy Policy"
         />
