@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.8.2 (2024-09-18)
+
+### Fix
+
+* fix: remove the locale from the react app basename (#139) ([`7ea08ef`](https://github.com/PrayTeam/scriptured-prayer/commit/7ea08ef1938637e14ec565bb8206fe17164481b3))
+
 ## v0.8.1 (2024-08-29)
 
 ### Fix
