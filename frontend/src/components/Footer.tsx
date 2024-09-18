@@ -28,9 +28,9 @@ export function Footer({ color, text }: FooterProps) {
             <h2 className="font-semibold text-base">Useful Links</h2>
             <FooterLinks>
               {/* TODO: fix these links to work with Spanish */}
-              <FooterLink link="/en/about">About Us</FooterLink>
-              <FooterLink link="/en/info">Info</FooterLink>
-              <FooterLink link="/en/FAQ">FAQ</FooterLink>
+              <FooterLink link="/about">About Us</FooterLink>
+              <FooterLink link="/info">Info</FooterLink>
+              <FooterLink link="/FAQ">FAQ</FooterLink>
             </FooterLinks>
           </FooterColumn>
 
@@ -58,10 +58,7 @@ export function Footer({ color, text }: FooterProps) {
             © Copyright 2024. All Rights Reserved.
           </span>
           <span>
-            <FooterLink
-              link="/en/privacy"
-              className="text-gray hover:underline"
-            >
+            <FooterLink link="/privacy" className="text-gray hover:underline">
               Privacy Policy
             </FooterLink>
           </span>

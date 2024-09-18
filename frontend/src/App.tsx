@@ -23,7 +23,7 @@ function App() {
   return (
     <ProfileContext.Provider value={{ profile, setProfile }}>
       <Theme className="h-full">
-        <BrowserRouter basename={`/${profile.language}`}>
+        <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
