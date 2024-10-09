@@ -80,6 +80,7 @@ class CategoryGenre(models.TextChoices):
     REQUEST = "RQ", _("Request")
     CONFESSION = "CF", _("Confession")
     THANKSGIVING = "TG", ("Thanksgiving")
+    UTILITY = "UT", ("Utility")
 
 
 class AuditModel(models.Model):

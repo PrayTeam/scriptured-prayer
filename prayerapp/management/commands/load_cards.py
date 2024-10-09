@@ -41,6 +41,7 @@ class Command(BaseCommand):
                         title=line[0].strip(),
                         scripture=line[1].strip(),
                         description=line[3].strip(),
+                        instruction=line[8].strip(),
                         #title_es=line[4].strip(),
                         #scripture_es=line[5].strip(),
                         #description_es=line[7].strip(),
