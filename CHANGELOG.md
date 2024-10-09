@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.9.0 (2024-10-09)
+
+### Feature
+
+* feat: add privacy policy and copyright info (#141) ([`37199fb`](https://github.com/PrayTeam/scriptured-prayer/commit/37199fb549e531a170565c8112025687acbba8cb))
+
 ## v0.8.2 (2024-09-18)
 
 ### Fix
