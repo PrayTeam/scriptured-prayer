@@ -13,6 +13,7 @@ import {
   DailyDeck,
   Prayers,
   PrayerDetail,
+  Privacy,
 } from "./views";
 import { Navigation, ProtectedRoutes, PrayerDeck } from "./components";
 import { useLocalStorage, ProfileContext } from "./hooks";
@@ -28,6 +29,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/about" element={<About />} />
+            <Route path="/privacy" element={<Privacy />} />
             <Route element={<Navigation />}>
               <Route path="daily-deck" element={<DailyDeck />} />
               <Route path="prayer-decks/:id" element={<PrayerDeck />} />
