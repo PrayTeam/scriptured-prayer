@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.10.0 (2024-10-09)
+
+### Feature
+
+* feat: add request starters (#142) ([`af03bfe`](https://github.com/PrayTeam/scriptured-prayer/commit/af03bfee08c64896d93a1f7a4d610174f4ed4bc1))
+
 ## v0.9.0 (2024-10-09)
 
 ### Feature
