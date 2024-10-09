@@ -7,3 +7,4 @@ export * from "./Profile";
 export * from "./Search";
 export * from "./DailyDeck";
 export * from "./Prayers";
+export * from "./Privacy";
