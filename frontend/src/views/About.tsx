@@ -1,8 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 import { Button } from "~/components/form";
 import dryGrass from "~/assets/images/dry-grass.jpg";
 import { Footer } from "~/components";
 
 export function About() {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-snowgrass h-full flex flex-col">
       <div className="lg:flex px-6 py-8 lg:py-16 lg:space-x-12 lg:items-center max-w-screen-xl mx-auto grow">
@@ -19,7 +23,9 @@ export function About() {
             <h3 className="font-bold uppercase">Email Address</h3>
             <div className="my-2">hello@scripturedprayer.com</div>
           </div>
-          <Button>Our Privacy Policy</Button>
+          <Button onClick={() => navigate("/privacy")}>
+            Our Privacy Policy
+          </Button>
         </div>
       </div>
       <Footer color="blue" />
