@@ -232,4 +232,5 @@
   systemd:
     name: "gunicorn-{{ project_name }}.socket"
     state: restarted
+    daemon_reload: true
     enabled: yes
