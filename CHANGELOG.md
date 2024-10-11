@@ -1,6 +1,13 @@
 # CHANGELOG
 
 
+## v0.10.2 (2024-10-11)
+
+### Fixes
+
+* fix: correct missing slash in static files path (#144) ([`d97fc23`](https://github.com/PrayTeam/scriptured-prayer/commit/d97fc2379079e3538bc5da942809f4530b24c21f))
+
+
 ## v0.10.1 (2024-10-11)
 
 ### Chores
