@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Flex } from "@radix-ui/themes";
+import { Button } from "@radix-ui/themes";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Keyboard, A11y } from "swiper/modules";
 import "swiper/css";
@@ -13,6 +13,7 @@ import { CardResponse } from "~/api/models/responses";
 import { CategoryResponse } from "~/api/models/responses";
 import { Card } from "./Card";
 import { Loader } from "./Loader";
+import { NestedScreen } from "./NestedScreen";
 
 export function PrayerDeck() {
   const api = useApi();
@@ -43,11 +44,11 @@ export function PrayerDeck() {
     if (routeId) {
       (async () => {
         const cardsApi = authenticated ? api.userCards : api.cards;
+        const cardsApiRequest = authenticated
+          ? { card__category__id: routeId }
+          : { category__id: routeId };
 
-        Promise.all([
-          cardsApi.all({ category__id: routeId }),
-          api.categories.all(),
-        ])
+        Promise.all([cardsApi.all(cardsApiRequest), api.categories.all()])
           .then(([_cards, categories]) => {
             setCards(_cards);
             setCategory(categories.find((c) => c.id === routeId));
@@ -65,64 +66,70 @@ export function PrayerDeck() {
   if (!routeId) return <>Error: an id must be provided.</>;
 
   return (
-    <div className="bg-ghost h-full relative">
-      <Flex direction="column">
-        <Swiper
-          className="px-4 md:px-12 w-full"
-          modules={[Navigation, Pagination, Keyboard, A11y]}
-          spaceBetween="14rem"
-          slidesPerView={1}
-          pagination={{
-            clickable: true,
-            type: "fraction",
-          }}
-          keyboard
-          onActiveIndexChange={handleSwipe}
-        >
-          {category && (
-            <>
-              <SwiperSlide>
-                <Card
-                  focus
-                  category={category.name}
-                  title="Inspiration"
-                  body={category.inspiration}
-                  cardCount={category.card_count}
-                />
-              </SwiperSlide>
-              {cards.map((card) => (
-                <SwiperSlide key={card.id}>
-                  <Card
-                    category={card.category}
-                    title={card.title}
-                    body={card.scripture_text.map((st) => st.text).join(" ")}
-                    scripture={card.scripture}
-                    instruction={card.instruction}
-                  />
-                </SwiperSlide>
-              ))}
-              <SwiperSlide>
-                <div className="flex h-full justify-center items-center">
-                  <Button
-                    onClick={() => navigate("/dashboard")}
-                    size="4"
-                    className="w-[100px] mx-auto mt-4 bg-lichen transition-opacity ease-in"
-                  >
-                    Done
-                  </Button>
-                </div>
-              </SwiperSlide>
-            </>
-          )}
-        </Swiper>
-      </Flex>
+    <>
+      <NestedScreen title="Prayer Deck">
+        <div className="bg-ghost h-full">
+          <div className="flex flex-col">
+            <Swiper
+              className="px-4 md:px-12 w-full"
+              modules={[Navigation, Pagination, Keyboard, A11y]}
+              spaceBetween="14rem"
+              slidesPerView={1}
+              pagination={{
+                clickable: true,
+                type: "fraction",
+              }}
+              keyboard
+              onActiveIndexChange={handleSwipe}
+            >
+              {category && (
+                <>
+                  <SwiperSlide>
+                    <Card
+                      focus
+                      category={category.name}
+                      title="Inspiration"
+                      body={category.inspiration}
+                      cardCount={category.card_count}
+                    />
+                  </SwiperSlide>
+                  {cards.map((card) => (
+                    <SwiperSlide key={card.id}>
+                      <Card
+                        category={card.category}
+                        title={card.title}
+                        body={card.scripture_text
+                          .map((st) => st.text)
+                          .join(" ")}
+                        scripture={card.scripture}
+                        instruction={card.instruction}
+                      />
+                    </SwiperSlide>
+                  ))}
+                  <SwiperSlide>
+                    <div className="flex justify-center items-center">
+                      <Button
+                        onClick={() => navigate("/dashboard")}
+                        size="4"
+                        className="w-[100px] mx-auto mt-4 bg-lichen transition-opacity ease-in"
+                      >
+                        Done
+                      </Button>
+                    </div>
+                  </SwiperSlide>
+                </>
+              )}
+            </Swiper>
+          </div>
+        </div>
+      </NestedScreen>
       <div
         style={{ opacity: loading || !countdownElapsed ? 1 : 0 }}
-        className="absolute flex flex-col w-full h-full bg-black text-white justify-center items-center transition-opacity ease-in top-0 left-0 z-10 pointer-events-none"
+        className="fixed flex flex-col w-full h-full bg-black text-white justify-center items-center transition-opacity ease-in top-0 left-0 bottom-0 right-0 z-10 pointer-events-none"
       >
         <h1 className="text-lg font-bold mb-4">Loading prayers</h1>
         <Loader className="animate-spin" />
       </div>
-    </div>
+    </>
   );
 }
