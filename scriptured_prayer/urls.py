@@ -22,10 +22,10 @@ from django.utils.translation import gettext_lazy as _
 
 urlpatterns = [
     path("api-auth/", include("rest_framework.urls")),
+    path("admin/", admin.site.urls),
+    path("accounts/", include("django.contrib.auth.urls")),
 ]
 
 urlpatterns += i18n_patterns(
-    path(_("admin/"), admin.site.urls),
-    path(_("accounts/"), include("django.contrib.auth.urls")),
     path("", include("prayerapp.urls")),  # Keep this last
 )
