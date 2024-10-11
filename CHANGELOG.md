@@ -1,26 +1,49 @@
 # CHANGELOG
 
+
+## v0.10.1 (2024-10-11)
+
+### Chores
+
+* chore(ci/cd): daemon_reload before restarting gunicorn ([`5b75f82`](https://github.com/PrayTeam/scriptured-prayer/commit/5b75f829e443b8629bb66a3db146249a5f632a4c))
+
+### Fixes
+
+* fix: space ([`18971a2`](https://github.com/PrayTeam/scriptured-prayer/commit/18971a2ac70dde0b25e000adca19b15562c098ea))
+
+* fix: move admin route to / (from /en) ([`a1f4e9d`](https://github.com/PrayTeam/scriptured-prayer/commit/a1f4e9d6de920961f9c34031e593b86815f4d85b))
+
+### Unknown
+
+* Merge pull request #143 from PrayTeam/temp
+
+fix: space ([`6f2d1a2`](https://github.com/PrayTeam/scriptured-prayer/commit/6f2d1a2b218e7a7f796636cc488b6c97358a7cfa))
+
+
 ## v0.10.0 (2024-10-09)
 
-### Feature
+### Features
 
 * feat: add request starters (#142) ([`af03bfe`](https://github.com/PrayTeam/scriptured-prayer/commit/af03bfee08c64896d93a1f7a4d610174f4ed4bc1))
 
+
 ## v0.9.0 (2024-10-09)
 
-### Feature
+### Features
 
 * feat: add privacy policy and copyright info (#141) ([`37199fb`](https://github.com/PrayTeam/scriptured-prayer/commit/37199fb549e531a170565c8112025687acbba8cb))
 
+
 ## v0.8.2 (2024-09-18)
 
-### Fix
+### Fixes
 
 * fix: remove the locale from the react app basename (#139) ([`7ea08ef`](https://github.com/PrayTeam/scriptured-prayer/commit/7ea08ef1938637e14ec565bb8206fe17164481b3))
 
+
 ## v0.8.1 (2024-08-29)
 
-### Fix
+### Fixes
 
 * fix: load cards and serializer issues after removing modeltranslation ([`0ebe53f`](https://github.com/PrayTeam/scriptured-prayer/commit/0ebe53ff87c3a18f343de5d7bd041be9216bf243))
 
@@ -32,13 +55,14 @@
 
 Minor fixes from modeltranslation removal and fix cardApi filter ([`8db716a`](https://github.com/PrayTeam/scriptured-prayer/commit/8db716a5d24b37011764d11183fbaaea27cdfa30))
 
+
 ## v0.8.0 (2024-08-29)
 
-### Feature
+### Features
 
 * feat: remove modeltranslation and update django ([`e3ee243`](https://github.com/PrayTeam/scriptured-prayer/commit/e3ee24374c6930485a83135290aa234d47575ff1))
 
-### Fix
+### Fixes
 
 * fix: use /api instead of /en/api for the api endpoint ([`65c8123`](https://github.com/PrayTeam/scriptured-prayer/commit/65c8123c4e9c1d25bda1647fc6510288852ea2f9))
 
@@ -50,31 +74,32 @@ Minor fixes from modeltranslation removal and fix cardApi filter ([`8db716a`](ht
 
 Remove modeltranslation from django ([`fff5457`](https://github.com/PrayTeam/scriptured-prayer/commit/fff54572092aea3ade7f8dd2c4b2fc7556de938a))
 
+
 ## v0.7.1 (2024-08-28)
 
-### Ci
+### Continuous Integration
 
 * ci: start and enable postgres in common if it has been initialized ([`9b499d5`](https://github.com/PrayTeam/scriptured-prayer/commit/9b499d52849185b039b1ed247771487e4e049e20))
 
 * ci: start postgres before attempting to drop the database ([`a306d84`](https://github.com/PrayTeam/scriptured-prayer/commit/a306d84802695fc04ad8aca8d966ca26e9bb662d))
 
-* ci: remove db_name check from &#34;Drop the PostgreSQL database&#34;. ([`597b79f`](https://github.com/PrayTeam/scriptured-prayer/commit/597b79f794fcad479da1af734f1e73415fe977b7))
+* ci: remove db_name check from "Drop the PostgreSQL database". ([`597b79f`](https://github.com/PrayTeam/scriptured-prayer/commit/597b79f794fcad479da1af734f1e73415fe977b7))
 
 * ci: remove the become user for checking if postgres is installed ([`f034008`](https://github.com/PrayTeam/scriptured-prayer/commit/f03400817369644f491682952a1681be28b8ebb1))
 
 * ci: install github3.py earlier in Ansible common. ([`018195b`](https://github.com/PrayTeam/scriptured-prayer/commit/018195b0c2caeec02fb1537ed4d23385e2473e20))
 
-* ci: github3 -&gt; github3.py ([`f092f41`](https://github.com/PrayTeam/scriptured-prayer/commit/f092f418585435433134181daee2ee3b59d416ea))
+* ci: github3 -> github3.py ([`f092f41`](https://github.com/PrayTeam/scriptured-prayer/commit/f092f418585435433134181daee2ee3b59d416ea))
 
 * ci: add github3 module install for the runner
 
-I&#39;m surprised this is no longer part of the runner image. ([`8c79982`](https://github.com/PrayTeam/scriptured-prayer/commit/8c799824e5cd2dda5b23b10c03f8fa030dfec2a1))
+I'm surprised this is no longer part of the runner image. ([`8c79982`](https://github.com/PrayTeam/scriptured-prayer/commit/8c799824e5cd2dda5b23b10c03f8fa030dfec2a1))
 
-### Feature
+### Features
 
 * feat: general ui cleanup and tweaks ([`9c87746`](https://github.com/PrayTeam/scriptured-prayer/commit/9c877467ae4abdf21039ad7cc5f31e3c7b727dbc))
 
-### Fix
+### Fixes
 
 * fix: correct styles on done button for prayer deck ([`0522acb`](https://github.com/PrayTeam/scriptured-prayer/commit/0522acba9c4d45407a23c8a26eb3e88c51710604))
 
@@ -88,15 +113,16 @@ I&#39;m surprised this is no longer part of the runner image. ([`8c79982`](https
 
 * Merge pull request #128 from PrayTeam/Soyokaze-42-patch-2
 
-ci: github3 -&gt; github3.py ([`7fbb161`](https://github.com/PrayTeam/scriptured-prayer/commit/7fbb1618ff7f5f6afba0b8736e99d25ce9f2b6ed))
+ci: github3 -> github3.py ([`7fbb161`](https://github.com/PrayTeam/scriptured-prayer/commit/7fbb1618ff7f5f6afba0b8736e99d25ce9f2b6ed))
+
 
 ## v0.7.0 (2024-08-04)
 
-### Ci
+### Continuous Integration
 
 * ci: remove httpd network connect db sebool option ([`d07a52f`](https://github.com/PrayTeam/scriptured-prayer/commit/d07a52f424c589406acd5e6e290292a625384278))
 
-### Feature
+### Features
 
 * feat: add app navigation (#127) ([`a257e0d`](https://github.com/PrayTeam/scriptured-prayer/commit/a257e0dcdee207c6cd097c0f04b810f4fe45306c))
 
@@ -118,9 +144,9 @@ ci: github3 -&gt; github3.py ([`7fbb161`](https://github.com/PrayTeam/scriptured
 
 * Update deploy.yaml
 
-* ci: == -&gt; !=
+* ci: == -> !=
 
-* ci: &amp;&amp; -&gt; ||
+* ci: && -> ||
 
 * ci: remove quote symbol bug ([`1fc4fec`](https://github.com/PrayTeam/scriptured-prayer/commit/1fc4fec59fe3130b412adb36d992728ca4df7969))
 
@@ -128,15 +154,16 @@ ci: github3 -&gt; github3.py ([`7fbb161`](https://github.com/PrayTeam/scriptured
 
 ci: use database socket instead of port ([`1dbe123`](https://github.com/PrayTeam/scriptured-prayer/commit/1dbe1233798dfe9fe7de247bf00a919876d6b574))
 
-* Merge remote-tracking branch &#39;origin/main&#39; into ansible-update ([`8759ed0`](https://github.com/PrayTeam/scriptured-prayer/commit/8759ed09a16c782d323d079bbd1e3a255a93665c))
+* Merge remote-tracking branch 'origin/main' into ansible-update ([`8759ed0`](https://github.com/PrayTeam/scriptured-prayer/commit/8759ed09a16c782d323d079bbd1e3a255a93665c))
+
 
 ## v0.6.1 (2024-06-07)
 
-### Ci
+### Continuous Integration
 
 * ci: use database socket instead of port ([`ea6af24`](https://github.com/PrayTeam/scriptured-prayer/commit/ea6af24d40a6c950574901019a8fba7b8a51829e))
 
-### Fix
+### Fixes
 
 * fix: remove redundant category title in prayer deck (#107) ([`676d751`](https://github.com/PrayTeam/scriptured-prayer/commit/676d75145e3b5d84cb96b1bd2624e0c9fd662b4e))
 
@@ -156,7 +183,7 @@ ci: use database socket instead of port ([`1dbe123`](https://github.com/PrayTeam
 
 * feat: add swipe logging when user is authenticated
 
-* fix: fix &#39;loading...&#39; text not being replaced after cards loaded
+* fix: fix 'loading...' text not being replaced after cards loaded
 
 * fix: add csrf token to logCard api method
 
@@ -166,11 +193,12 @@ ci: use database socket instead of port ([`1dbe123`](https://github.com/PrayTeam
 
 ---------
 
-Co-authored-by: Asher Lloyd &lt;asher.jo.lloyd@gmail.com&gt; ([`b4f9302`](https://github.com/PrayTeam/scriptured-prayer/commit/b4f9302501827f4a611c4a7c9d0adf427a4ee01f))
+Co-authored-by: Asher Lloyd <asher.jo.lloyd@gmail.com> ([`b4f9302`](https://github.com/PrayTeam/scriptured-prayer/commit/b4f9302501827f4a611c4a7c9d0adf427a4ee01f))
+
 
 ## v0.6.0 (2024-06-04)
 
-### Feature
+### Features
 
 * feat: add focus card (#88) (#121)
 
@@ -190,18 +218,19 @@ Every dynamic part of the card displays conditionally, based on the type of resp
 
 ---------
 
-Co-authored-by: Madison Cagle &lt;78162094+madisoncagle@users.noreply.github.com&gt;
-Co-authored-by: LTsoccer &lt;77810494+LTsoccer@users.noreply.github.com&gt; ([`f02f7cd`](https://github.com/PrayTeam/scriptured-prayer/commit/f02f7cd684d0cfa3d3777a8241aa66b04408d86f))
+Co-authored-by: Madison Cagle <78162094+madisoncagle@users.noreply.github.com>
+Co-authored-by: LTsoccer <77810494+LTsoccer@users.noreply.github.com> ([`f02f7cd`](https://github.com/PrayTeam/scriptured-prayer/commit/f02f7cd684d0cfa3d3777a8241aa66b04408d86f))
+
 
 ## v0.5.1 (2024-06-02)
 
-### Ci
+### Continuous Integration
 
 * ci: fix database access in deployment ([`76f6c75`](https://github.com/PrayTeam/scriptured-prayer/commit/76f6c755e0a2465b33113c0defb9104d843feeb3))
 
 * ci: make ssh dir for deployment ([`641447c`](https://github.com/PrayTeam/scriptured-prayer/commit/641447c9536f0fcd7123a5d9d1351221c1adb372))
 
-### Fix
+### Fixes
 
 * fix: use pgpass in project root ([`27e0753`](https://github.com/PrayTeam/scriptured-prayer/commit/27e0753d95c5e84dff2129fb2049d39a46274168))
 
@@ -215,13 +244,14 @@ Staticroot option ([`9568407`](https://github.com/PrayTeam/scriptured-prayer/com
 
 ci: make ssh dir for deployment ([`d434cd5`](https://github.com/PrayTeam/scriptured-prayer/commit/d434cd517725120fc741e3b28d3389f3c48b333a))
 
+
 ## v0.5.0 (2024-06-01)
 
-### Chore
+### Chores
 
 * chore(deps): poetry update ([`9f214e6`](https://github.com/PrayTeam/scriptured-prayer/commit/9f214e624bfeb510757d0a8d0156fc4ce833d4b9))
 
-### Ci
+### Continuous Integration
 
 * ci: add ssh with cloudflared tunnel ([`898ee9a`](https://github.com/PrayTeam/scriptured-prayer/commit/898ee9aac79ac4622bde4e59f1df388f57c16c58))
 
@@ -231,13 +261,13 @@ ci: make ssh dir for deployment ([`d434cd5`](https://github.com/PrayTeam/scriptu
 
 * docs: update readme for manual deployment ([`264c23f`](https://github.com/PrayTeam/scriptured-prayer/commit/264c23ffc3393ec28cce90d1ea8a3a50a6f76404))
 
-### Feature
+### Features
 
 * feat: ansible add option for staticroot ([`9cd7177`](https://github.com/PrayTeam/scriptured-prayer/commit/9cd71775d28a1ff770c9a2c3bd352674facfeda9))
 
-* feat: use pgpass from user&#39;s home dir ([`35b0c70`](https://github.com/PrayTeam/scriptured-prayer/commit/35b0c70ddae07c19add0096cd33850976dae13e0))
+* feat: use pgpass from user's home dir ([`35b0c70`](https://github.com/PrayTeam/scriptured-prayer/commit/35b0c70ddae07c19add0096cd33850976dae13e0))
 
-### Fix
+### Fixes
 
 * fix: release on merge (for real this time) ([`4b50e45`](https://github.com/PrayTeam/scriptured-prayer/commit/4b50e4574850d4d65e2824f9852301d868cf7567))
 
@@ -271,25 +301,27 @@ Deploy update ([`591010f`](https://github.com/PrayTeam/scriptured-prayer/commit/
 
 * Update README.md
 
-Co-authored-by: Asher Lloyd &lt;asher.jo.lloyd@gmail.com&gt; ([`f749267`](https://github.com/PrayTeam/scriptured-prayer/commit/f749267da49dc84ae23a8d9cacc349cff4a99a82))
+Co-authored-by: Asher Lloyd <asher.jo.lloyd@gmail.com> ([`f749267`](https://github.com/PrayTeam/scriptured-prayer/commit/f749267da49dc84ae23a8d9cacc349cff4a99a82))
+
 
 ## v0.4.1 (2024-03-11)
 
-### Fix
+### Fixes
 
 * fix: dev urls in production ([`7d6a5d8`](https://github.com/PrayTeam/scriptured-prayer/commit/7d6a5d88f6e95a88be065a26396f56777c2feeb9))
 
+
 ## v0.4.0 (2024-03-11)
 
-### Ci
+### Continuous Integration
 
 * ci: fix the double run on release ([`4862595`](https://github.com/PrayTeam/scriptured-prayer/commit/48625959ed5bf86d60a177632b86fa0ff35eb643))
 
-### Feature
+### Features
 
 * feat: add ansible automation for deployments ([`2d16221`](https://github.com/PrayTeam/scriptured-prayer/commit/2d16221f07c439fcb53cdbf4976e076b62499014))
 
-### Fix
+### Fixes
 
 * fix: ansible and django code for prod ([`1063378`](https://github.com/PrayTeam/scriptured-prayer/commit/1063378321d847de1d916f2a6b05b2e736dc8bc4))
 
@@ -299,17 +331,18 @@ Co-authored-by: Asher Lloyd &lt;asher.jo.lloyd@gmail.com&gt; ([`f749267`](https:
 
 Add ansible and update for production ([`6f2c13e`](https://github.com/PrayTeam/scriptured-prayer/commit/6f2c13eb575bb77ad7cf841e68a077e575b5d2f1))
 
-* Merge branch &#39;main&#39; into add-ansible ([`e502fa3`](https://github.com/PrayTeam/scriptured-prayer/commit/e502fa335a5f7d08b1a77aeb65c7daeeaa52ad40))
+* Merge branch 'main' into add-ansible ([`e502fa3`](https://github.com/PrayTeam/scriptured-prayer/commit/e502fa335a5f7d08b1a77aeb65c7daeeaa52ad40))
 
-* Merge branch &#39;main&#39; into add-ansible ([`379c642`](https://github.com/PrayTeam/scriptured-prayer/commit/379c642c7e453970074c0759d9b27e6878d4d9fa))
+* Merge branch 'main' into add-ansible ([`379c642`](https://github.com/PrayTeam/scriptured-prayer/commit/379c642c7e453970074c0759d9b27e6878d4d9fa))
+
 
 ## v0.3.1 (2024-03-10)
 
-### Ci
+### Continuous Integration
 
 * ci: run build on PR and prevent running on main when tagged (by semantic release) ([`3cf6813`](https://github.com/PrayTeam/scriptured-prayer/commit/3cf6813f0e74f22d5208a02af42669973d718273))
 
-### Fix
+### Fixes
 
 * fix: remove reference to localhost in production env ([`d21dc25`](https://github.com/PrayTeam/scriptured-prayer/commit/d21dc256349bb9258b44a735f9386b0267d8de59))
 
@@ -319,9 +352,10 @@ Add ansible and update for production ([`6f2c13e`](https://github.com/PrayTeam/s
 
 fix: remove reference to localhost in production env ([`098e6fe`](https://github.com/PrayTeam/scriptured-prayer/commit/098e6fe75008735b2ad008c6d63198d22224dad2))
 
+
 ## v0.3.0 (2024-03-05)
 
-### Feature
+### Features
 
 * feat: hard code links to Prayer Decks on Info view (#81)
 
@@ -334,15 +368,16 @@ This gives guest (un-authenticated) users access to the 6 pre-made prayer decks.
 
 ---------
 
-Co-authored-by: Asher Lloyd &lt;asher.jo.lloyd@gmail.com&gt; ([`b0062ad`](https://github.com/PrayTeam/scriptured-prayer/commit/b0062ade933b8579017946a5bd2d35df6d77f5f6))
+Co-authored-by: Asher Lloyd <asher.jo.lloyd@gmail.com> ([`b0062ad`](https://github.com/PrayTeam/scriptured-prayer/commit/b0062ade933b8579017946a5bd2d35df6d77f5f6))
+
 
 ## v0.2.0 (2024-03-05)
 
-### Feature
+### Features
 
 * feat: separate dev settings ([`02cf6db`](https://github.com/PrayTeam/scriptured-prayer/commit/02cf6db022d419a33a2d85e53fae9f4b9652a9c9))
 
-### Fix
+### Fixes
 
 * fix: collect static error in ci ([`9868201`](https://github.com/PrayTeam/scriptured-prayer/commit/9868201257c7dfd71d4b7de1252770044fce1a7e))
 
@@ -354,29 +389,31 @@ Co-authored-by: Asher Lloyd &lt;asher.jo.lloyd@gmail.com&gt; ([`b0062ad`](https:
 
 feat: separate dev settings ([`774e7cb`](https://github.com/PrayTeam/scriptured-prayer/commit/774e7cb0496457f38b69b812b25e08daeae15571))
 
+
 ## v0.1.3 (2024-03-04)
 
-### Chore
+### Chores
 
 * chore: poetry update ([`9239708`](https://github.com/PrayTeam/scriptured-prayer/commit/92397088524c30a5087caa783d1bf3fc11b9735f))
 
-### Ci
+### Continuous Integration
 
 * ci: remove full path to poetry ([`d610ba4`](https://github.com/PrayTeam/scriptured-prayer/commit/d610ba43d1d17319a20a1f0a67875d64b11fddc2))
 
 * ci: add tld in the release tarball ([`0c85581`](https://github.com/PrayTeam/scriptured-prayer/commit/0c85581833f341f3aaccfdf667e6c6e76798b246))
 
-### Fix
+### Fixes
 
 * fix: add static files to release ([`745fd5e`](https://github.com/PrayTeam/scriptured-prayer/commit/745fd5eb3d5227f736ddbfd8dad53ce4818613fa))
 
 ### Unknown
 
-* Merge branch &#39;main&#39; of github.com:PrayTeam/scriptured-prayer ([`938d050`](https://github.com/PrayTeam/scriptured-prayer/commit/938d0508a8e1edb2190e135475e047180232cf64))
+* Merge branch 'main' of github.com:PrayTeam/scriptured-prayer ([`938d050`](https://github.com/PrayTeam/scriptured-prayer/commit/938d0508a8e1edb2190e135475e047180232cf64))
+
 
 ## v0.1.2 (2024-03-04)
 
-### Ci
+### Continuous Integration
 
 * ci: run semantic-release publish with version ([`806ad25`](https://github.com/PrayTeam/scriptured-prayer/commit/806ad25f212a82e67ac2023536fb14358f753860))
 
@@ -384,19 +421,21 @@ feat: separate dev settings ([`774e7cb`](https://github.com/PrayTeam/scriptured-
 
 ### Unknown
 
-* Merge branch &#39;main&#39; of github.com:PrayTeam/scriptured-prayer ([`fbdacb1`](https://github.com/PrayTeam/scriptured-prayer/commit/fbdacb1aee5781b8723fc31d9bf31fea9c3b37e6))
+* Merge branch 'main' of github.com:PrayTeam/scriptured-prayer ([`fbdacb1`](https://github.com/PrayTeam/scriptured-prayer/commit/fbdacb1aee5781b8723fc31d9bf31fea9c3b37e6))
+
 
 ## v0.1.1 (2024-03-04)
 
-### Fix
+### Fixes
 
 * fix: replace github action for semantic-release with script ([`0c93006`](https://github.com/PrayTeam/scriptured-prayer/commit/0c9300672c39fd92b0907ff2b2ce758deec604bf))
 
 * fix: include requirements file in release ([`4f8dbf9`](https://github.com/PrayTeam/scriptured-prayer/commit/4f8dbf92e415220bf90fba503a1f2e0f94bb8563))
 
+
 ## v0.1.0 (2024-03-04)
 
-### Chore
+### Chores
 
 * chore: blacken the python code ([`9bb17b4`](https://github.com/PrayTeam/scriptured-prayer/commit/9bb17b4c32ed971553ddae5f0627874f38ccccc6))
 
@@ -414,11 +453,17 @@ feat: separate dev settings ([`774e7cb`](https://github.com/PrayTeam/scriptured-
 
 * chore: add husky commit lint hook ([`a05b841`](https://github.com/PrayTeam/scriptured-prayer/commit/a05b84187a946978e57bb9ac26145fcf616cb741))
 
-### Ci
+### Code Style
+
+* style: change keyword styling
+
+Also a test commit ([`389912b`](https://github.com/PrayTeam/scriptured-prayer/commit/389912b2146bcdd09aa00f347405a894748a9099))
+
+### Continuous Integration
 
 * ci: initial build workflow ([`7969ad8`](https://github.com/PrayTeam/scriptured-prayer/commit/7969ad88076120d384debaf7c088659b36db6f9b))
 
-### Feature
+### Features
 
 * feat: use category ID instead of name for card filter in api ([`54a99eb`](https://github.com/PrayTeam/scriptured-prayer/commit/54a99eb40b6ed1dcf6df73aedf7c1522a3d864b2))
 
@@ -454,7 +499,7 @@ feat: separate dev settings ([`774e7cb`](https://github.com/PrayTeam/scriptured-
 
 * feat: add README.md ([`61533cb`](https://github.com/PrayTeam/scriptured-prayer/commit/61533cb63a287348a666bacb3782de54ef631be7))
 
-### Fix
+### Fixes
 
 * fix: use PAT as release token ([`c2e2391`](https://github.com/PrayTeam/scriptured-prayer/commit/c2e2391fcb210ae181936ab97832487b1887ee99))
 
@@ -462,11 +507,11 @@ feat: separate dev settings ([`774e7cb`](https://github.com/PrayTeam/scriptured-
 
 * fix: switch cards request to use category id instead of name (#80) ([`ccd654b`](https://github.com/PrayTeam/scriptured-prayer/commit/ccd654be57edeac20448e91159ad2c519106a163))
 
-* fix: add regex replace to remove strong&#39;s numbers from verses (#71)
+* fix: add regex replace to remove strong's numbers from verses (#71)
 
-* fix: add regex replace to remove strong&#39;s numbers from verses
+* fix: add regex replace to remove strong's numbers from verses
 
-* fix: fix error in regex string for strong&#39;s number removal ([`f40d398`](https://github.com/PrayTeam/scriptured-prayer/commit/f40d3980e33ebd2132285d739ae2e7b66dac9daf))
+* fix: fix error in regex string for strong's number removal ([`f40d398`](https://github.com/PrayTeam/scriptured-prayer/commit/f40d3980e33ebd2132285d739ae2e7b66dac9daf))
 
 * fix: correct visual oddities and make styles more mobile-friendly (#79) ([`b7aabc5`](https://github.com/PrayTeam/scriptured-prayer/commit/b7aabc50e4437916f1b0848301efec856ffd2527))
 
@@ -508,7 +553,7 @@ feat: separate dev settings ([`774e7cb`](https://github.com/PrayTeam/scriptured-
 
 * fix: add missing README.md ([`4bdb331`](https://github.com/PrayTeam/scriptured-prayer/commit/4bdb3319b8404e625c5622d20379cc8326909d5a))
 
-### Refactor
+### Refactoring
 
 * refactor: addresses review feedback for authentication ([`91ded6d`](https://github.com/PrayTeam/scriptured-prayer/commit/91ded6d815521a667ee3ed0e46ac5bec3ba79cbb))
 
@@ -516,19 +561,13 @@ feat: separate dev settings ([`774e7cb`](https://github.com/PrayTeam/scriptured-
 
 * refactor: rename spa-prototype to scriptured-prayer-components ([`a4c0925`](https://github.com/PrayTeam/scriptured-prayer/commit/a4c0925fccb3f848a09cb633843174b60b74f6f1))
 
-### Style
-
-* style: change keyword styling
-
-Also a test commit ([`389912b`](https://github.com/PrayTeam/scriptured-prayer/commit/389912b2146bcdd09aa00f347405a894748a9099))
-
 ### Unknown
 
 * Merge pull request #82 from PrayTeam/fix-postinstall
 
 bug: remove components package.json postinstall script ([`db90cba`](https://github.com/PrayTeam/scriptured-prayer/commit/db90cba1a90c9a93cd0bbc338a9549dc55f6d51b))
 
-* Revert &#34;style: change keyword styling&#34;
+* Revert "style: change keyword styling"
 
 This reverts commit 389912b2146bcdd09aa00f347405a894748a9099. ([`a5843a0`](https://github.com/PrayTeam/scriptured-prayer/commit/a5843a07681b83d087024c260141694bb10b54fc))
 
@@ -570,7 +609,7 @@ feat: add api documentation and add limits for cards/usercards ([`49c324e`](http
 
 * Merge pull request #47 from PrayTeam/feat/templates-and-guidelines ([`765195c`](https://github.com/PrayTeam/scriptured-prayer/commit/765195c61767f8bb29880495558deeab8818d03f))
 
-* Merge branch &#39;main&#39; into feat/templates-and-guidelines ([`bc8ded6`](https://github.com/PrayTeam/scriptured-prayer/commit/bc8ded669e6df03e41a82f27ca65c189d0ff9329))
+* Merge branch 'main' into feat/templates-and-guidelines ([`bc8ded6`](https://github.com/PrayTeam/scriptured-prayer/commit/bc8ded669e6df03e41a82f27ca65c189d0ff9329))
 
 * Merge pull request #45 from PrayTeam/Backend-MVP-Update
 
@@ -582,7 +621,7 @@ Update issue templates ([`babed5f`](https://github.com/PrayTeam/scriptured-praye
 
 * Update issue templates
 
-The template builder wouldn&#39;t let me save these without another PR :( ([`fcabd5d`](https://github.com/PrayTeam/scriptured-prayer/commit/fcabd5d15e4196594765c05e94244a8ba68cbb2d))
+The template builder wouldn't let me save these without another PR :( ([`fcabd5d`](https://github.com/PrayTeam/scriptured-prayer/commit/fcabd5d15e4196594765c05e94244a8ba68cbb2d))
 
 * Merge pull request #36 from PrayTeam/refactor/spa-prototype
 
@@ -590,7 +629,7 @@ Refactor spa prototype ([`5a3b24b`](https://github.com/PrayTeam/scriptured-praye
 
 * Add Finish button. Add new schema. ([`bbb7179`](https://github.com/PrayTeam/scriptured-prayer/commit/bbb7179af1da4bafc6e04c9315f74808022598e9))
 
-* Merge branch &#39;new-schema-drf&#39; into spa-prototype ([`72d6ebb`](https://github.com/PrayTeam/scriptured-prayer/commit/72d6ebb3ff24bab4fa75fbb9eaae560cdcb63648))
+* Merge branch 'new-schema-drf' into spa-prototype ([`72d6ebb`](https://github.com/PrayTeam/scriptured-prayer/commit/72d6ebb3ff24bab4fa75fbb9eaae560cdcb63648))
 
 * Improve styling and swiper ([`487e937`](https://github.com/PrayTeam/scriptured-prayer/commit/487e9371eac032b57376434f82de4c97d98a4c00))
 
@@ -612,7 +651,7 @@ Add bibles ([`a478189`](https://github.com/PrayTeam/scriptured-prayer/commit/a47
 
 * update readme with scripture reference notes ([`f9d4ed6`](https://github.com/PrayTeam/scriptured-prayer/commit/f9d4ed6c984c2bb1bab23ffdc6b59fb2f0dc5175))
 
-* Merge branch &#39;main&#39; into add_bibles ([`51b397d`](https://github.com/PrayTeam/scriptured-prayer/commit/51b397df007b279856451d4e3fc8fc0df74c8c40))
+* Merge branch 'main' into add_bibles ([`51b397d`](https://github.com/PrayTeam/scriptured-prayer/commit/51b397df007b279856451d4e3fc8fc0df74c8c40))
 
 * Merge pull request #37 from PrayTeam/add-description
 
@@ -656,7 +695,7 @@ Schema-update ([`dd2aa55`](https://github.com/PrayTeam/scriptured-prayer/commit/
 
 * remove AuditModel from UserCardPrayedLog ([`19588f2`](https://github.com/PrayTeam/scriptured-prayer/commit/19588f2fd95cb995a9c687f08668c950ba1691fd))
 
-* Merge branch &#39;main&#39; into schema-update ([`0116d3a`](https://github.com/PrayTeam/scriptured-prayer/commit/0116d3a5d16dfab7e86e8a2305ea327cc9274a1e))
+* Merge branch 'main' into schema-update ([`0116d3a`](https://github.com/PrayTeam/scriptured-prayer/commit/0116d3a5d16dfab7e86e8a2305ea327cc9274a1e))
 
 * Merge pull request #21 from PrayTeam/rename-prayer_box
 
