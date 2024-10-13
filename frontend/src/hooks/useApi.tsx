@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 
+import { Profile } from "~/types";
 import {
   CardsRequest,
   LoginRequest,
@@ -13,7 +14,9 @@ import {
   CardResponse,
 } from "~/api/models/responses";
 
-const apiUrl = `${import.meta.env.VITE_PRAYERAPP_API}/api/`;
+const profile: Profile = JSON.parse(localStorage.getItem("profile")!);
+const language = profile ? profile.language : "en";
+const apiUrl = `${import.meta.env.VITE_PRAYERAPP_API}/${language}/api/`;
 
 // generic request function
 async function req<T>(url: RequestInfo, options: RequestInit): Promise<T> {
