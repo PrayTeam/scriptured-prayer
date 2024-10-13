@@ -1,6 +1,13 @@
 # CHANGELOG
 
 
+## v0.11.0 (2024-10-13)
+
+### Features
+
+* feat: add improved instructions on homepage (#147) ([`84b32ea`](https://github.com/PrayTeam/scriptured-prayer/commit/84b32ea38256746c5f8749d9c3cfa4692da84261))
+
+
 ## v0.10.4 (2024-10-13)
 
 ### Fixes
