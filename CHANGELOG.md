@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v0.10.3 (2024-10-13)
+
+### Fixes
+
+* fix: correct visual bugs and requests associated with prayer decks (#145)
+
+* fix: correct visual bugs and requests associated with prayer decks
+
+* fix: correct incorrect padding value on nested screens ([`7cffbf8`](https://github.com/PrayTeam/scriptured-prayer/commit/7cffbf856b8df4f902a1b8cfecd1d637729a2de8))
+
+* fix: remove root route from dev_urls ([`a6533b0`](https://github.com/PrayTeam/scriptured-prayer/commit/a6533b03eb0a3f92fd41334d24657f82835ca0ad))
+
+
 ## v0.10.2 (2024-10-11)
 
 ### Fixes
