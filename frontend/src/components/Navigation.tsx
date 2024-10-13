@@ -107,7 +107,7 @@ export function Navigation() {
   const routeIndex = getCurrentRouteIndex(location.pathname);
 
   return (
-    <div className="h-full">
+    <div className="flex flex-col grow mb-[50px] lg:mb-0">
       <TopNavigationBar routeIndex={routeIndex} />
       <Outlet />
       <BottomNavigationBar routeIndex={routeIndex} />

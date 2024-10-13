@@ -11,3 +11,4 @@ export * from "./FooterLink";
 export * from "./Faq";
 export * from "./Navigation";
 export * from "./Loader";
+export * from "./ContextualNavigation";
