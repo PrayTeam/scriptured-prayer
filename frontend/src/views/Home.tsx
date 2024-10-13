@@ -34,7 +34,7 @@ export function Home() {
             <div className="md:mr-2">Consistent.</div>
             <div className="md:mr-2">Focused.</div>
           </div>
-          <div className="pt-48 pb-64 px-8 text-white text-center">
+          <div className="pt-48 pb-64 text-white text-center">
             <h1 className="uppercase font-bold text-5xl md:text-6xl lg:text-8xl mb-4">
               Scriptured Prayer
             </h1>
@@ -52,33 +52,43 @@ export function Home() {
       </div>
       <div className="bg-snowgrass">
         <div className="px-6 py-8 md:py-16 md:space-x-12 max-w-screen-xl mx-auto">
-          <div className="max-w-[800px]">
+          <div className="max-w-[1000px] mx-auto">
             <div className="mb-8">
-              <h2 className="uppercase font-bold text-4xl">Know Him better.</h2>
-              <p className="my-4 text-xl">
-                God invites us to know Him. He reveals His character through His
-                glorious works and the inspired Word. Scriptured Prayer directs
-                your thoughts to God's attributes, allowing you to grow in
-                knowledge of the Father.
+              <p className="text-md md:text-xl text-justify">
+                Scriptured Prayer is a conversation with God. God speaks to you
+                through the scriptures you are reading and you answer in 1 of 3
+                ways:
               </p>
             </div>
-            <div className="mb-8">
-              <h2 className="uppercase font-bold text-4xl">Trust Him more.</h2>
-              <p className="my-4 text-xl">
-                Trust isn't automatic. It's a process. Just like we have to earn
-                the trust of others, we have to learn how to trust in God. Daily
-                prayer focused on God's Word helps prepare us for the storms of
-                life. When trials come, we fall back on our habits. Make praise
-                a habit through Scriptured prayer.
-              </p>
+            <div className="flex flex-col md:flex-row space-between md:space-x-8">
+              <div className="flex flex-col mb-8 text-center text-blue">
+                <h2 className="uppercase font-bold text-4xl">Repeat</h2>
+                <p className="my-4 text-md">
+                  If the scripture is already in a prayer format, you can simply
+                  repeat the scripture.
+                </p>
+              </div>
+              <div className="flex flex-col mb-8 text-center text-blue">
+                <h2 className="uppercase font-bold text-4xl">Reword</h2>
+                <p className="my-4 text-md">
+                  You only need to change a few words to turn this scripture
+                  into a personalized prayer.
+                </p>
+              </div>
+              <div className="flex flex-col mb-8 text-center text-blue">
+                <h2 className="uppercase font-bold text-4xl">Respond</h2>
+                <p className="my-4 text-md">
+                  Give your heartfelt response to the scripture in praise,
+                  thanks, confession or requests.
+                </p>
+              </div>
             </div>
-            <div className="mb-8">
-              <h2 className="uppercase font-bold text-4xl">Pray His words.</h2>
-              <p className="my-4 text-xl">
-                Did you know there are 650 recorded prayers in the Bible? Why
-                wouldn't we pray the words found in God's Holy Word? Connecting
-                our prayers to Scripture grounds us in truth and enriches our
-                Bible study, which in turn enriches our prayer life.
+            <div>
+              <p className="text-md md:text-xl text-justify">
+                Never again will you have to wonder what to say to God. With
+                Scriptured Prayer, your conversations will flow naturally. As
+                you regularly talk with God, you will come to know him better,
+                love him more, and trust him completely.
               </p>
             </div>
           </div>
