@@ -30,7 +30,7 @@ export function Dashboard() {
       <div className="flex flex-col w-full">
         <div className="flex items-center w-full justify-between mb-4">
           <h1 className="text-2xl text-black font-black">
-            Welcome, {profile.username}!
+            Welcome{profile && profile.username ? `, ${profile.username}` : ""}!
           </h1>
           <ProfilePicture onClick={() => navigate("/profile")} />
         </div>
