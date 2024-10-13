@@ -1,6 +1,13 @@
 # CHANGELOG
 
 
+## v0.10.4 (2024-10-13)
+
+### Fixes
+
+* fix: correct react app locale convention (#146) ([`7790af4`](https://github.com/PrayTeam/scriptured-prayer/commit/7790af4b112c523dc8947ff953bdf22c0e4991c6))
+
+
 ## v0.10.3 (2024-10-13)
 
 ### Fixes
