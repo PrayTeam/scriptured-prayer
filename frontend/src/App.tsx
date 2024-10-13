@@ -23,7 +23,7 @@ function App() {
 
   return (
     <ProfileContext.Provider value={{ profile, setProfile }}>
-      <Theme className="h-full">
+      <Theme className="flex flex-col h-full">
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -31,12 +31,12 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route element={<Navigation />}>
+              <Route path="dashboard" element={<Dashboard />} />
               <Route path="daily-deck" element={<DailyDeck />} />
               <Route path="prayer-decks/:id" element={<PrayerDeck />} />
               <Route path="search" element={<Search />} />
               <Route element={<ProtectedRoutes />}>
                 <Route path="profile" element={<Profile />} />
-                <Route path="dashboard" element={<Dashboard />} />
                 <Route path="prayers">
                   <Route index element={<Prayers />} />
                   <Route path=":id" element={<PrayerDetail />} />

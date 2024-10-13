@@ -9,6 +9,7 @@ import {
   PrivacyIcon,
 } from "~/components/Icons";
 import { useApi, useProfile } from "~/hooks";
+import { localStorageDefaults } from "~/types";
 
 interface OptionProps {
   onClick: React.MouseEventHandler<HTMLDivElement> | undefined;
@@ -27,14 +28,14 @@ function Option({ onClick, icon: Icon, label }: OptionProps) {
 
 export function Profile() {
   const api = useApi();
-  const { profile, setProfile } = useProfile();
+  const { setProfile } = useProfile();
   const navigate = useNavigate();
 
   const logout = async () => {
     api.auth
       .logout()
       .then(() => {
-        setProfile({ ...profile, authenticated: false });
+        setProfile({ ...localStorageDefaults.profile, authenticated: false });
       })
       .catch((error) => console.error(error));
   };
