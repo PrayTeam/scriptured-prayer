@@ -85,10 +85,13 @@ function TopNavigationItem({
 }
 
 function TopNavigationBar(props: NavigationBarProps) {
+  const navigate = useNavigate();
   return (
     <div className="hidden lg:flex bg-indigo">
       <div className="flex space-x-12 w-[1280px] mx-auto text-white px-6 py-4">
-        <div className="mr-8">Scriptured Prayer</div>
+        <div className="mr-8 cursor-pointer" onClick={() => navigate("/")}>
+          Scriptured Prayer
+        </div>
         {navigationItems.map((n, i) => (
           <TopNavigationItem
             key={i}
@@ -107,10 +110,10 @@ export function Navigation() {
   const routeIndex = getCurrentRouteIndex(location.pathname);
 
   return (
-    <div className="flex flex-col grow mb-[50px] lg:mb-0">
+    <div className="flex flex-col grow lg:mb-0">
       <TopNavigationBar routeIndex={routeIndex} />
       <Outlet />
-      <BottomNavigationBar routeIndex={routeIndex} />
+      {routeIndex > -1 && <BottomNavigationBar routeIndex={routeIndex} />}
     </div>
   );
 }
