@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
 
@@ -26,7 +26,11 @@ function App() {
       <Theme className="flex flex-col h-full">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route
+              path="/"
+              element={<Navigate to={`/${profile.language}`} />}
+            />
+            <Route path={`/${profile.language}`} element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/about" element={<About />} />
             <Route path="/privacy" element={<Privacy />} />

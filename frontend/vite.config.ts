@@ -10,7 +10,7 @@ export default defineConfig({
       '~': '/src',
     },
   },
-  base: process.env.NODE_ENV === 'development' ? '' : 'static/prayerapp',
+  base: process.env.NODE_ENV === 'development' ? '' : '/static/prayerapp',
   build: {
     outDir: '../prayerapp/static/prayerapp',
     rollupOptions: {
