@@ -1,6 +1,13 @@
 # CHANGELOG
 
 
+## v0.11.1 (2024-10-14)
+
+### Fixes
+
+* fix: correct issues related to navigation in conjunction with locale (#148) ([`9e200c7`](https://github.com/PrayTeam/scriptured-prayer/commit/9e200c703a7bc2531d87d47578f8e26a8304bd9f))
+
+
 ## v0.11.0 (2024-10-13)
 
 ### Features
