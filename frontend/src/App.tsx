@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
 
@@ -21,16 +21,15 @@ import { useLocalStorage, ProfileContext } from "./hooks";
 function App() {
   const [profile, setProfile] = useLocalStorage("profile");
 
+  if (window.location.pathname === "/")
+    window.location.replace(`/${profile.language}`);
+
   return (
     <ProfileContext.Provider value={{ profile, setProfile }}>
       <Theme className="flex flex-col h-full">
-        <BrowserRouter>
+        <BrowserRouter basename={`/${profile.language}`}>
           <Routes>
-            <Route
-              path="/"
-              element={<Navigate to={`/${profile.language}`} />}
-            />
-            <Route path={`/${profile.language}`} element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/about" element={<About />} />
             <Route path="/privacy" element={<Privacy />} />

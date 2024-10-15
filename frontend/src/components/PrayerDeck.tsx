@@ -107,7 +107,7 @@ export function PrayerDeck() {
                     </SwiperSlide>
                   ))}
                   <SwiperSlide>
-                    <div className="flex justify-center items-center">
+                    <div className="flex justify-center items-center h-full">
                       <Button
                         onClick={() => navigate("/dashboard")}
                         size="4"
