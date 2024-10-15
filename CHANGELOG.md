@@ -1,6 +1,17 @@
 # CHANGELOG
 
 
+## v0.11.2 (2024-10-15)
+
+### Fixes
+
+* fix: correct missing basename on react router (#149)
+
+* fix: correct missing basename on react router
+
+* fix: correct styling on prayer deck button ([`dce2b84`](https://github.com/PrayTeam/scriptured-prayer/commit/dce2b847cbd0dea03c693fda3d01a62e1ceb0340))
+
+
 ## v0.11.1 (2024-10-14)
 
 ### Fixes
