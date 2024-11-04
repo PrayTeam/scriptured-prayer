@@ -227,6 +227,14 @@ class CardScriptureJson(models.Model):
         return f"{self.card.title} ({self.bible_version.abbreviation})"
 
 
+class DailyDeck(AuditModel):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    day = models.DateField(auto_now_add=True, blank=True)
+    config = models.JSONField()
+
+    def __str__(self) -> str:
+        return f"{self.user.username} - deck for the day of {self.day}"
+
 ## Signals ##
 
 

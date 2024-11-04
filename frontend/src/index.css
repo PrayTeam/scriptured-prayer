@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  /* chromium based */
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* firefox et al. */
+  .scrollbar-hidden {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+}
+
 html {
   height: 100%;
 }

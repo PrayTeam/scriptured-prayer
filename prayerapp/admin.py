@@ -13,6 +13,7 @@ from .models import (
     UserCategoryOptions,
     UserProfile,
     BibleVersion,
+    DailyDeck,
 )
 
 
@@ -115,7 +116,7 @@ class CardAdmin(admin.ModelAdmin):
         "category_genre",
         "instruction",
     )
-    search_fields = ("title", "scripture", "text", "instruction")
+    search_fields = ("title", "scripture", "instruction")
     readonly_fields = ("created_by", "modified_by", "created_date", "modified_date")
 
     def save_model(self, request, obj, form, change):
@@ -198,6 +199,38 @@ class CategoryAdmin(admin.ModelAdmin):
     list_filter = ("genre", "modified_by")
     sortable_by = ("name", "genre", "modified_date")
     readonly_fields = ("created_by", "modified_by", "created_date", "modified_date")
+
+    def save_model(self, request, obj, form, change):
+        if not obj.pk:
+            obj.created_by = request.user
+        obj.modified_by = request.user
+        super().save_model(request, obj, form, change)
+
+@admin.register(DailyDeck)
+class DailyDeckAdmin(admin.ModelAdmin):
+    fk_name = "user"
+    list_display = (
+        "user",
+        "day",
+        "modified_by",
+        "modified_date",
+    )
+    list_filter = (
+        "user",
+        "day",
+        "modified_by",
+        "modified_date",
+        "created_date",
+    )
+    sortable_by = ("modified_date", "created_date")
+    readonly_fields = (
+        "user",
+        "day",
+        "created_date",
+        "modified_date",
+        "created_by",
+        "modified_by",
+    )
 
     def save_model(self, request, obj, form, change):
         if not obj.pk:
