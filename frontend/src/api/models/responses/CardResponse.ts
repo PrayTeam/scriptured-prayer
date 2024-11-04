@@ -14,6 +14,7 @@ export interface CardResponse {
   description: string;
   copyright_notice: string;
   category: string;
+  category_id: number;
   genre: string;
   instruction: string;
 }

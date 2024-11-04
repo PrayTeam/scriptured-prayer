@@ -1,19 +1,17 @@
 import { Container } from "~/components";
-import { SearchIcon } from "~/components/Icons";
+import { TextSearch } from "~/components/form";
 
 export function Search() {
+  const onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value);
+  };
+
   return (
     <Container>
-      <div className="flex bg-gray p-4 rounded-full">
-        <SearchIcon width="24" height="24" />
-        <div className="ml-2 grow">
-          <input
-            type="text"
-            className="bg-transparent w-full outline-none placeholder-stone"
-            placeholder="Search topics, scripture, or prayers"
-          />
-        </div>
-      </div>
+      <TextSearch
+        onChange={onSearchChange}
+        placeholder="Search topics, scripture, or prayers"
+      />
     </Container>
   );
 }
