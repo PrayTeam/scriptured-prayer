@@ -1,3 +1,4 @@
+import json
 import re
 from rest_framework import serializers
 from .models import (
@@ -8,6 +9,7 @@ from .models import (
     CardScriptureJson,
     Card,
     Category,
+    DailyDeck,
 )
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -26,7 +28,9 @@ class BibleVerseSerializer(serializers.ModelSerializer):
 
 
 class CardSerializer(serializers.ModelSerializer):
+    # todo: should category be a { name, id } pair?
     category = serializers.SlugRelatedField(slug_field="name", read_only=True)
+    category_id = serializers.SlugRelatedField(slug_field="id", read_only=True, source="category")
     genre = serializers.SlugRelatedField(slug_field="genre", read_only=True, source="category")
     version = serializers.SlugRelatedField(slug_field="abbreviation", read_only=True, source="bibleversion")
     scripture_text = serializers.SerializerMethodField()
@@ -46,6 +50,7 @@ class CardSerializer(serializers.ModelSerializer):
             "description",
             "copyright_notice",
             "category",
+            "category_id",
             "genre",
             "instruction",
         ]
@@ -60,7 +65,9 @@ class CardSerializer(serializers.ModelSerializer):
 
 # -------
 class UserCardSerializer(serializers.ModelSerializer):
+    # todo: should category be a { name, id } pair?
     category = serializers.SerializerMethodField()
+    category_id = serializers.SlugRelatedField(slug_field="category__id", read_only=True, source="card")
     genre = serializers.SerializerMethodField()
     title = serializers.SlugRelatedField(slug_field="title", read_only=True, source="card")
     version = serializers.SerializerMethodField()
@@ -82,6 +89,7 @@ class UserCardSerializer(serializers.ModelSerializer):
             "description",
             "copyright_notice",
             "category",
+            "category_id",
             "genre",
             "usercardnote_set",
             "answered",
@@ -130,6 +138,30 @@ class CategorySerializer(serializers.ModelSerializer):
         if "user" in self.context:
             return obj.usercard_set.filter(user=self.context["user"]).count()
         return obj.card_set.count()
+
+
+class DailyDeckSerializer(serializers.ModelSerializer):
+    config = serializers.SerializerMethodField()
+    cards = serializers.SerializerMethodField()
+
+    class Meta:
+        model = DailyDeck
+        fields = [
+            "id",
+            "user",
+            "config",
+            "cards",
+        ]
+        read_only_fields = ["id", "user"]
+
+    def get_config(self, obj):
+        return json.loads(obj.config)
+
+    def get_cards(self, obj):
+        if not self.context['detail']:
+            return None
+        ids = dict((item['id'], item) for item in json.loads(obj.config))
+        return UserCardSerializer(UserCard.objects.filter(pk__in=ids), many=True).data
 
 
 @receiver(post_save, sender=Card)

@@ -8,6 +8,7 @@ interface ScriptureText {
 export interface UserCardResponse {
   answered: boolean;
   category: string;
+  category_id: number;
   copyright_notice: string;
   description: string;
   genre: string;
