@@ -1,8 +1,11 @@
 import Cookies from "js-cookie";
+import { format } from "date-fns";
 
 import { Profile } from "~/types";
 import {
   CardsRequest,
+  CreateDailyDeckRequest,
+  DailyDeckRequest,
   LoginRequest,
   UserCardsRequest,
 } from "~/api/models/requests";
@@ -12,6 +15,7 @@ import {
   UserResponse,
   CategoryResponse,
   CardResponse,
+  DailyDeckDetailResponse,
 } from "~/api/models/responses";
 
 const profile: Profile = JSON.parse(localStorage.getItem("profile")!);
@@ -24,6 +28,7 @@ async function req<T>(url: RequestInfo, options: RequestInit): Promise<T> {
   // if not within 2xx range
   if (!res.ok) throw res.status;
   else {
+    if (res.status === 204) return Promise.resolve(null as T);
     // since json is quite a common response type, let's determine that quickly:
     const json = res.headers.get("content-type")?.includes("application/json");
     if (json) return (await res.json()) as T;
@@ -38,6 +43,10 @@ function post<T>(url: RequestInfo, options?: RequestInit) {
 
 function get<T>(url: RequestInfo, options?: RequestInit) {
   return req<T>(url, { ...options, method: "GET" });
+}
+
+function put<T>(url: RequestInfo, options?: RequestInit) {
+  return req<T>(url, { ...options, method: "PUT" });
 }
 
 function toJson<T>(options: RequestInit, payload: T) {
@@ -61,20 +70,13 @@ function withCsrf(options: RequestInit) {
   };
 }
 
-// todo: grab from open api schema
-export const controllers = {
-  auth: "auth",
-  cards: "cards",
-  categories: "categories",
-  userCards: "usercards",
-};
-
 // eslint-disable-next-line
-const parameterizeRequest = (url: string, request?: Record<string, any>) =>
-  `${url}?${(request
+const parameterizeRequest = (url: string, request?: Record<string, any>) => {
+  const params = request
     ? Object.entries(request).map((e) => `${e[0]}=${e[1]}`)
-    : []
-  ).join("&")}`;
+    : [];
+  return params.length < 1 ? url : `${url}?${params.join("&")}`;
+};
 
 export function useApi() {
   const options: RequestInit = {
@@ -95,6 +97,7 @@ export function useApi() {
           parameterizeRequest("cards/", cardsRequest),
           options,
         ),
+      // daily: () => get<CardResponse[]>("cards/?limit=10", options),
     },
     categories: {
       all: () => get<CategoryResponse[]>("categories/", options),
@@ -106,7 +109,21 @@ export function useApi() {
           withCsrf(options),
         ),
       logCard: (pk: number) =>
-        post(`usercards/${pk}/log_prayer/`, withCsrf(options)),
+        put(`usercards/${pk}/log_prayer/`, withCsrf(options)),
+    },
+    dailyDecks: {
+      get: (dailyDeckRequest?: DailyDeckRequest) =>
+        get<DailyDeckDetailResponse | null>(
+          parameterizeRequest("dailydecks/", {
+            ...dailyDeckRequest,
+            ...(dailyDeckRequest?.date && {
+              day: format(dailyDeckRequest.date, "yyyy-MM-dd"),
+            }),
+          }),
+          withCsrf(options),
+        ),
+      create: (createDailyDeckRequest: CreateDailyDeckRequest) =>
+        post("dailydecks/", toJson(withCsrf(options), createDailyDeckRequest)),
     },
   };
 }

@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.utils import timezone
 from django.views.generic import TemplateView, UpdateView
-from rest_framework import permissions, status, viewsets
+from rest_framework import permissions, status, viewsets, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
@@ -17,8 +17,14 @@ from .models import (
     UserCardPrayedLog,
     UserCategoryOptions,
     UserProfile,
+    DailyDeck,
 )
-from .serializers import CardSerializer, CategorySerializer, UserCardSerializer
+from .serializers import (
+    CardSerializer,
+    CategorySerializer,
+    UserCardSerializer,
+    DailyDeckSerializer,
+)
 
 
 class IndexView(TemplateView):
@@ -152,15 +158,16 @@ class CardFilter(django_filters.FilterSet):
 class UserCardViewSet(viewsets.ModelViewSet):
     serializer_class = UserCardSerializer
     permission_classes = [permissions.IsAuthenticated]
-    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend, filters.SearchFilter]
     filterset_class = UserCardFilter
+    search_fields = ["card__title", "card__scripture", "card__instruction", "card__category__name"]
 
     def get_queryset(self):
         return UserCard.objects.filter(user=self.request.user).prefetch_related(
             "card", "card__category", "usercardnote_set"
         )
 
-    @action(detail=True, methods=["post"])
+    @action(detail=True, methods=["put"])
     def log_prayer(self, request, pk=None, **kwargs):
         usercard = self.get_object()
         if usercard.user != request.user:
@@ -168,14 +175,15 @@ class UserCardViewSet(viewsets.ModelViewSet):
         usercard.last_prayed = timezone.now()
         usercard.save()
         UserCardPrayedLog.objects.create(usercard=usercard)
-        return Response(status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_200_OK)
 
 
 class CardViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CardSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend, filters.SearchFilter]
     filterset_class = CardFilter
+    search_fields = ["title", "scripture", "instruction"]
 
     def get_queryset(self):
         return Card.objects.all().prefetch_related("category")
@@ -185,3 +193,32 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CategorySerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Category.objects.all()
+
+
+class DailyDeckViewSet(viewsets.ViewSet):
+    serializer_class = DailyDeckSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+
+    def get(self, request):
+        queryset = DailyDeck.objects.filter(
+            user=self.request.user,
+            day=self.request.query_params.get('day') or timezone.now(),
+        )[:1]
+        try:
+            serializer = DailyDeckSerializer(
+                queryset.get(),
+                context={'detail': bool(request.query_params.get('detail'))}
+            )
+            return Response(serializer.data)
+        except DailyDeck.DoesNotExist:
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def create(self, request):
+        dailydeck = DailyDeck()
+        dailydeck.user = self.request.user
+        dailydeck.created_by = request.user
+        dailydeck.created_date = timezone.now()
+        dailydeck.config = request.data["config"]
+        dailydeck.save()
+        return Response(status=status.HTTP_201_CREATED)
