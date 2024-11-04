@@ -7,6 +7,7 @@ import { Container, Deck, Loader } from "~/components";
 import { CategoryResponse, DailyDeckResponse } from "~/api/models/responses";
 import { deckColors } from "~/utilities";
 import { Button } from "~/components/form";
+import { useDemoDeckConfig } from "~/hooks/useDemoDeckConfig";
 
 export function Dashboard() {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ export function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState<CategoryResponse[]>([]);
   const [dailyDeck, setDailyDeck] = useState<DailyDeckResponse | null>(null);
+  const demoDeckConfig = useDemoDeckConfig();
 
   useEffect(() => {
     (async () => {
@@ -28,6 +30,16 @@ export function Dashboard() {
         .finally(() => setLoading(false));
     })();
   }, []);
+
+  const generateRandomizedDeck = () => {
+    (async () => {
+      const deckConfig = await demoDeckConfig;
+      api.dailyDecks
+        .create({ config: JSON.stringify(deckConfig) })
+        .then(() => navigate("/daily-deck"))
+        .catch((error) => console.error(error));
+    })();
+  };
 
   return (
     <Container className="grow flex w-full">
@@ -58,7 +70,8 @@ export function Dashboard() {
           <div className="flex w-full justify-center my-8">
             <Button
               className="bg-sky max-w-[200px]"
-              onClick={() => navigate("/daily-deck/edit")}
+              // onClick={() => navigate("/daily-deck/edit")}
+              onClick={() => generateRandomizedDeck()}
             >
               Create Your Deck
             </Button>
