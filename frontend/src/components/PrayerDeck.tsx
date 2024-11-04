@@ -38,28 +38,6 @@ export function PrayerDeck(props: PrayerDeckProps) {
               keyboard
               onActiveIndexChange={props.onCardChange}
             >
-              {/* <SwiperSlide>
-                <Card
-                  focus
-                  category={category.name}
-                  title="Inspiration"
-                  body={category.inspiration}
-                  cardCount={category.card_count}
-                />
-              </SwiperSlide>
-              {cards.map((card) => (
-                <SwiperSlide key={card.id}>
-                  <Card
-                    category={card.category}
-                    title={card.title}
-                    body={card.scripture_text
-                      .map((st) => st.text)
-                      .join(" ")}
-                    scripture={card.scripture}
-                    instruction={card.instruction}
-                  />
-                </SwiperSlide>
-              ))} */}
               {props.children}
               <SwiperSlide>
                 <div className="flex justify-center items-center h-full">
