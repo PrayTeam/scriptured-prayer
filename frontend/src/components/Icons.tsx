@@ -1,6 +1,7 @@
 /// <reference types="vite-plugin-svgr/client" />
 import LeftArrowIcon from "~/assets/icons/left-arrow.svg?react";
 import RightArrowIcon from "~/assets/icons/right-arrow.svg?react";
+import UpArrowIcon from "~/assets/icons/up-arrow.svg?react";
 import LogoutIcon from "~/assets/icons/logout.svg?react";
 import LanguageIcon from "~/assets/icons/language.svg?react";
 import NotificationIcon from "~/assets/icons/notification.svg?react";
@@ -16,6 +17,7 @@ import SearchIcon from "~/assets/icons/navigation/search.svg?react";
 export {
   LeftArrowIcon,
   RightArrowIcon,
+  UpArrowIcon,
   LogoutIcon,
   LanguageIcon,
   NotificationIcon,
