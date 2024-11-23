@@ -23,7 +23,6 @@ from .serializers import (
     CardSerializer,
     CategorySerializer,
     UserCardSerializer,
-    DailyDeckSerializer,
 )
 
 
@@ -194,31 +193,3 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Category.objects.all()
 
-
-class DailyDeckViewSet(viewsets.ViewSet):
-    serializer_class = DailyDeckSerializer
-    permission_classes = [permissions.IsAuthenticated]
-    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
-
-    def get(self, request):
-        queryset = DailyDeck.objects.filter(
-            user=self.request.user,
-            day=self.request.query_params.get('day') or timezone.now(),
-        )[:1]
-        try:
-            serializer = DailyDeckSerializer(
-                queryset.get(),
-                context={'detail': bool(request.query_params.get('detail'))}
-            )
-            return Response(serializer.data)
-        except DailyDeck.DoesNotExist:
-            return Response(status=status.HTTP_204_NO_CONTENT)
-
-    def create(self, request):
-        dailydeck = DailyDeck()
-        dailydeck.user = self.request.user
-        dailydeck.created_by = request.user
-        dailydeck.created_date = timezone.now()
-        dailydeck.config = request.data["config"]
-        dailydeck.save()
-        return Response(status=status.HTTP_201_CREATED)
