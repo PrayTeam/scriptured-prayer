@@ -4,7 +4,6 @@ import { format } from "date-fns";
 import { Profile } from "~/types";
 import {
   CardsRequest,
-  CreateDailyDeckRequest,
   DailyDeckRequest,
   LoginRequest,
   UserCardsRequest,
@@ -122,8 +121,6 @@ export function useApi() {
           }),
           withCsrf(options),
         ),
-      create: (createDailyDeckRequest: CreateDailyDeckRequest) =>
-        post("dailydecks/", toJson(withCsrf(options), createDailyDeckRequest)),
     },
   };
 }
