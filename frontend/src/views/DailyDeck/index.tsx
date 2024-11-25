@@ -18,7 +18,11 @@ export function DailyDeck() {
     if (dailyDeck.length === 0) {
       (async () => {
         api.cards
-          .all({ limit: 10 })
+          .all({
+            limit: 10,
+            include_end_utility_cards: true,
+            exclude_category__genre: "UT",
+          })
           .then((cards) => setDailyDeck(cards))
           .catch((error) => console.error(error))
           .finally(() => {
