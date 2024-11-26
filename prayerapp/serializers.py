@@ -140,30 +140,6 @@ class CategorySerializer(serializers.ModelSerializer):
         return obj.card_set.count()
 
 
-class DailyDeckSerializer(serializers.ModelSerializer):
-    config = serializers.SerializerMethodField()
-    cards = serializers.SerializerMethodField()
-
-    class Meta:
-        model = DailyDeck
-        fields = [
-            "id",
-            "user",
-            "config",
-            "cards",
-        ]
-        read_only_fields = ["id", "user"]
-
-    def get_config(self, obj):
-        return json.loads(obj.config)
-
-    def get_cards(self, obj):
-        if not self.context['detail']:
-            return None
-        ids = dict((item['id'], item) for item in json.loads(obj.config))
-        return UserCardSerializer(UserCard.objects.filter(pk__in=ids), many=True).data
-
-
 @receiver(post_save, sender=Card)
 def create_CardScriptureJson_for_card(instance, created, **kwargs):
     """When a new card is created, create a CardScriptureJson for each bible version."""

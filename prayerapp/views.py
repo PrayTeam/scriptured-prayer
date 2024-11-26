@@ -16,14 +16,12 @@ from .models import (
     UserCard,
     UserCardPrayedLog,
     UserCategoryOptions,
-    UserProfile,
-    DailyDeck,
+    UserProfile
 )
 from .serializers import (
     CardSerializer,
     CategorySerializer,
     UserCardSerializer,
-    DailyDeckSerializer,
 )
 
 
@@ -128,7 +126,9 @@ class UserCardFilter(django_filters.FilterSet):
 class CardFilter(django_filters.FilterSet):
     """Filter the queryset to return a certain number of cards divided evenly across the category."""
 
-    limit = django_filters.NumberFilter(method="limit_filter")
+    exclude_category__genre = django_filters.CharFilter(field_name="category__genre", lookup_expr="exact", label='Exclude category genre', exclude=True)
+    limit = django_filters.NumberFilter(method="limit_filter", label='Limit')
+    include_end_utility_cards = django_filters.BooleanFilter(method="include_end_utility_cards_filter", label='Include end utility cards')
 
     class Meta:
         model = Card
@@ -138,7 +138,7 @@ class CardFilter(django_filters.FilterSet):
         }
 
     def limit_filter(self, queryset, name, value):
-        categories = queryset.values_list("category", flat=True).distinct().order_by("?")
+        categories = queryset.values_list("category", flat=True).distinct()
         if len(categories) == 0:
             return queryset.none()
         if len(categories) == 1:
@@ -153,6 +153,12 @@ class CardFilter(django_filters.FilterSet):
             else:
                 new_queryset |= queryset.filter(category=category).order_by("?")[:count_each_category]
         return new_queryset
+    
+    def include_end_utility_cards_filter(self, queryset, name, value):
+        if value == True:
+            queryset |= Card.objects.filter(category__name="Request Starters").order_by("?")[:1]
+            queryset |= Card.objects.filter(category__name="Ending").order_by("?")[:1]
+        return queryset
 
 
 class UserCardViewSet(viewsets.ModelViewSet):
@@ -194,31 +200,3 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Category.objects.all()
 
-
-class DailyDeckViewSet(viewsets.ViewSet):
-    serializer_class = DailyDeckSerializer
-    permission_classes = [permissions.IsAuthenticated]
-    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
-
-    def get(self, request):
-        queryset = DailyDeck.objects.filter(
-            user=self.request.user,
-            day=self.request.query_params.get('day') or timezone.now(),
-        )[:1]
-        try:
-            serializer = DailyDeckSerializer(
-                queryset.get(),
-                context={'detail': bool(request.query_params.get('detail'))}
-            )
-            return Response(serializer.data)
-        except DailyDeck.DoesNotExist:
-            return Response(status=status.HTTP_204_NO_CONTENT)
-
-    def create(self, request):
-        dailydeck = DailyDeck()
-        dailydeck.user = self.request.user
-        dailydeck.created_by = request.user
-        dailydeck.created_date = timezone.now()
-        dailydeck.config = request.data["config"]
-        dailydeck.save()
-        return Response(status=status.HTTP_201_CREATED)
