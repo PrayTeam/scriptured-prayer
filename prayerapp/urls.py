@@ -6,7 +6,6 @@ router = routers.DefaultRouter()
 router.register(r"usercards", views.UserCardViewSet, basename="usercards")
 router.register(r"cards", views.CardViewSet, basename="cards")
 router.register(r"categories", views.CategoryViewSet, basename="categories")
-router.register(r"dailydecks", views.DailyDeckViewSet, basename="dailydecks")
 
 app_name = "prayerapp"
 urlpatterns = [
