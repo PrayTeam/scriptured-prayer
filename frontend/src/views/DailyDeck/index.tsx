@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
 import { SwiperSlide } from "swiper/react";
 
-import { DailyDeckDetailResponse } from "~/api/models/responses";
+import { CardResponse } from "~/api/models/responses";
 import { Card, Loader, PrayerDeck } from "~/components";
 import { useApi } from "~/hooks";
 
@@ -10,19 +9,21 @@ export function DailyDeck() {
   const api = useApi();
   const [loading, setLoading] = useState(true);
   const [countdownElapsed, setCountdownElapsed] = useState(false);
-  const [dailyDeck, setDailyDeck] = useState<DailyDeckDetailResponse | null>();
+  const [dailyDeck, setDailyDeck] = useState<CardResponse[]>([]);
 
   useEffect(() => {
     // delay at least 1 second before we unhide the "now praying" message curtain
     setTimeout(() => setCountdownElapsed(true), 1000);
 
-    if (!dailyDeck) {
+    if (dailyDeck.length === 0) {
       (async () => {
-        api.dailyDecks
-          .get({ detail: true })
-          .then((_dailyDeck) => {
-            setDailyDeck(_dailyDeck);
+        api.cards
+          .all({
+            limit: 10,
+            include_end_utility_cards: true,
+            exclude_category__genre: "UT",
           })
+          .then((cards) => setDailyDeck(cards))
           .catch((error) => console.error(error))
           .finally(() => {
             setLoading(false);
@@ -39,11 +40,9 @@ export function DailyDeck() {
       </div>
     );
 
-  if (!dailyDeck) return <Navigate to="/daily-deck/edit" />;
-
   return (
     <PrayerDeck title="My Daily Deck" loading={loading || !countdownElapsed}>
-      {dailyDeck.cards.map((card) => (
+      {dailyDeck.map((card) => (
         <SwiperSlide key={card.id}>
           <Card
             category={card.category}
@@ -57,6 +56,3 @@ export function DailyDeck() {
     </PrayerDeck>
   );
 }
-
-export * from "./CreateDailyDeck";
-export * from "./EditDailyDeck";

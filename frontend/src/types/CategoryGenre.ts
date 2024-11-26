@@ -4,4 +4,5 @@ export enum CategoryGenre {
   "RQ", // Request
   "CF", // Confession
   "TG", // Thanksgiving
+  "UT", // Utility
 }
