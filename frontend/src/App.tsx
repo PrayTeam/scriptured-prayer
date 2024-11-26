@@ -14,7 +14,6 @@ import {
   Prayers,
   PrayerDetail,
   Privacy,
-  EditDailyDeck,
 } from "./views";
 import { Navigation, ProtectedRoutes, CategoryDeck } from "./components";
 import { useLocalStorage, ProfileContext } from "./hooks";
@@ -36,10 +35,7 @@ function App() {
             <Route path="/privacy" element={<Privacy />} />
             <Route element={<Navigation />}>
               <Route path="dashboard" element={<Dashboard />} />
-              <Route path="daily-deck">
-                <Route index element={<DailyDeck />} />
-                <Route path="edit" element={<EditDailyDeck />} />
-              </Route>
+              <Route path="daily-deck" element={<DailyDeck />} />
               <Route path="prayer-decks/:id" element={<CategoryDeck />} />
               <Route path="search" element={<Search />} />
               <Route element={<ProtectedRoutes />}>

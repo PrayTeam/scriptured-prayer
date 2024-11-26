@@ -1,11 +1,8 @@
 import Cookies from "js-cookie";
-import { format } from "date-fns";
 
 import { Profile } from "~/types";
 import {
   CardsRequest,
-  CreateDailyDeckRequest,
-  DailyDeckRequest,
   LoginRequest,
   UserCardsRequest,
 } from "~/api/models/requests";
@@ -15,7 +12,6 @@ import {
   UserResponse,
   CategoryResponse,
   CardResponse,
-  DailyDeckDetailResponse,
 } from "~/api/models/responses";
 
 const profile: Profile = JSON.parse(localStorage.getItem("profile")!);
@@ -110,20 +106,6 @@ export function useApi() {
         ),
       logCard: (pk: number) =>
         put(`usercards/${pk}/log_prayer/`, withCsrf(options)),
-    },
-    dailyDecks: {
-      get: (dailyDeckRequest?: DailyDeckRequest) =>
-        get<DailyDeckDetailResponse | null>(
-          parameterizeRequest("dailydecks/", {
-            ...dailyDeckRequest,
-            ...(dailyDeckRequest?.date && {
-              day: format(dailyDeckRequest.date, "yyyy-MM-dd"),
-            }),
-          }),
-          withCsrf(options),
-        ),
-      create: (createDailyDeckRequest: CreateDailyDeckRequest) =>
-        post("dailydecks/", toJson(withCsrf(options), createDailyDeckRequest)),
     },
   };
 }
