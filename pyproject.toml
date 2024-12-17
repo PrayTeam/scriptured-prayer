@@ -38,9 +38,6 @@ build-backend = "poetry.core.masonry.api"
 line-length = 119
 
 [tool.semantic_release]
-version_variable = [
-    "scriptured_prayer/__init__.py:__version__"
-]
 version_toml = [
     "pyproject.toml:tool.poetry.version"
 ]
