@@ -48,6 +48,7 @@ jobs:
       run: poetry export -f requirements.txt --output requirements.txt --without-hashes
     - name: Get version
       id: semantic-release
+      if: github.event.pull_request.merged == true
       run: poetry run semantic-release version --print
     - name: package the release
       run: |
