@@ -1,4 +1,7 @@
 import { Badge, Text } from "@radix-ui/themes";
+import { RepeatIcon, RespondIcon, RewordIcon } from "./Icons";
+import { theme } from "~/tailwind.config";
+import { ThemeColor } from "~/types";
 
 interface CardProps {
   focus?: boolean;
@@ -8,6 +11,27 @@ interface CardProps {
   scripture?: string;
   cardCount?: number;
   instruction?: string;
+  color: ThemeColor;
+}
+
+interface InstructionIconProps {
+  instruction?: string;
+  width: string;
+  height: string;
+  className?: string;
+}
+
+function InstructionIcon({ instruction, ...props }: InstructionIconProps) {
+  switch (instruction?.toLowerCase()) {
+    case "repeat":
+      return <RepeatIcon {...props} />;
+    case "reword":
+      return <RewordIcon {...props} />;
+    case "respond":
+      return <RespondIcon {...props} />;
+    default:
+      return <></>;
+  }
 }
 
 export function Card({
@@ -18,6 +42,7 @@ export function Card({
   scripture,
   cardCount,
   instruction,
+  color,
 }: CardProps) {
   return (
     <div
@@ -29,17 +54,40 @@ export function Card({
           size="2"
           mb="4"
           variant="soft"
-          className={`uppercase ${focus ? "text-white bg-ocean/50" : "text-ocean bg-gray"}`}
+          className={`uppercase text-black bg-${color}`}
+          style={{
+            backgroundColor: theme.colors[color],
+          }}
         >
           {category}
         </Badge>
       </div>
 
-      <h3 className="text-3xl pb-8 text-ocean">{title}</h3>
+      <h3 className="text-3xl text-ocean">{title}</h3>
 
-      <div className={`text-ocean ${!focus && "border-l-8 border-ocean pl-4"}`}>
+      <div className="flex items-center my-8">
+        <InstructionIcon
+          instruction={instruction}
+          className="mr-4"
+          width="36"
+          height="36"
+        />
+        <Text as="p" size="3" className="text-olive">
+          {!focus &&
+            (instruction && instruction.length > 0
+              ? instruction
+              : "(No instructions)")}
+        </Text>
+      </div>
+
+      <div
+        className="p-4 rounded-md text-ocean"
+        style={{
+          backgroundColor: theme.colors[color],
+        }}
+      >
+        {scripture && <p className="uppercase text-sm mb-4">{scripture}</p>}
         <p className="text-lg">{body}</p>
-        {scripture && <p className="uppercase text-sm pt-4">{scripture}</p>}
         {cardCount && (
           <Badge
             radius="small"
@@ -52,13 +100,6 @@ export function Card({
           </Badge>
         )}
       </div>
-
-      <Text as="p" size="2" mt="8" className="text-olive text-center">
-        {!focus &&
-          (instruction && instruction.length > 0
-            ? instruction
-            : "(No instructions)")}
-      </Text>
     </div>
   );
 }
