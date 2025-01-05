@@ -1,8 +1,7 @@
 import { useState } from "react";
 
 import { UserCardResponse } from "~/api/models/responses";
-import { theme } from "~/tailwind.config";
-import { deckColors } from "~/utilities";
+import { categoryColors } from "~/utilities";
 
 interface CardPreviewProps extends UserCardResponse {
   onClick?: () => void;
@@ -20,7 +19,7 @@ export function CardPreview(props: CardPreviewProps) {
     <div
       onClick={handleClick}
       style={{
-        backgroundColor: theme.colors[deckColors[props.category_id % 6]],
+        backgroundColor: categoryColors[props.category],
       }}
       className={`flex flex-col w-full mb-4 rounded-xl text-white cursor-pointer p-4 transition-all ${selected ? "opacity-50" : ""} ${props.onClick ? "active:scale-95 ease-out duration-75" : ""}`}
     >
