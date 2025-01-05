@@ -3,7 +3,6 @@
 }
 
 /* Add your custom styles for pagination container */
-.swiper-pagination-fraction,
 .swiper-pagination-custom,
 .swiper-horizontal > .swiper-pagination-bullets,
 .swiper-pagination-bullets.swiper-pagination-horizontal {
@@ -15,7 +14,7 @@
   width: 80%;
 }
 
-.swiper-pagination-fraction {
+.swiper-pagination-custom {
   font-size: 14px; /* Adjust font size */
   color: #000; /* Set desired color */
   position: relative;

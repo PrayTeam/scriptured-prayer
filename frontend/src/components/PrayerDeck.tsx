@@ -20,6 +20,8 @@ interface PrayerDeckProps {
 
 export function PrayerDeck(props: PrayerDeckProps) {
   const navigate = useNavigate();
+  const renderCustom = (_: SwiperClass, current: number, total: number) =>
+    current === total ? "" : `${current} / ${total - 1}`;
 
   return (
     <>
@@ -33,7 +35,8 @@ export function PrayerDeck(props: PrayerDeckProps) {
               slidesPerView={1}
               pagination={{
                 clickable: true,
-                type: "fraction",
+                type: "custom",
+                renderCustom,
               }}
               keyboard
               onActiveIndexChange={props.onCardChange}

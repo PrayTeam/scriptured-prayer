@@ -14,10 +14,12 @@ export function Dashboard() {
   const api = useApi();
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState<CategoryResponse[]>([]);
+  const deckCardTotal = 12; // todo: should this be retrieved from the response object?
 
   useEffect(() => {
     (async () => {
-      api.categories.all()
+      api.categories
+        .all()
         .then((_categories) => setCategories(_categories))
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));
@@ -45,7 +47,7 @@ export function Dashboard() {
             <div className="mb-4">
               <Deck
                 title="View Your Daily Deck"
-                description="10 cards in this deck"
+                description={`${deckCardTotal} cards in this deck`}
                 color="obsidian"
                 onClick={() => navigate("/daily-deck")}
               />
