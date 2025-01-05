@@ -5,7 +5,7 @@ import { ProfilePicture } from "~/components/ProfilePicture";
 import { useApi, useProfile } from "~/hooks";
 import { Container, Deck, Loader } from "~/components";
 import { CategoryResponse } from "~/api/models/responses";
-import { deckColors } from "~/utilities";
+import { categoryColors } from "~/utilities";
 
 export function Dashboard() {
   const navigate = useNavigate();
@@ -17,7 +17,8 @@ export function Dashboard() {
 
   useEffect(() => {
     (async () => {
-      api.categories.all()
+      api.categories
+        .all()
         .then((_categories) => setCategories(_categories))
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));
@@ -59,7 +60,7 @@ export function Dashboard() {
                   key={i}
                   title={category.name}
                   description={category.inspiration}
-                  color={deckColors[i]}
+                  color={categoryColors[category.name]}
                   onClick={() => navigate(`/prayer-decks/${category.id}`)}
                 />
               ))}
