@@ -66,7 +66,7 @@ function AccordionItemHeader(props: AccordionItemHeaderProps) {
 
   return (
     <AccordionTrigger
-      className="bg-snowgrass hover:bg-lichen w-full flex items-center p-4 text-left"
+      className="bg-snowgrass hover:bg-ghost w-full flex items-center p-4 text-left"
       onClick={() => setOpen(!open)}
     >
       <div className="grow font-semibold text-lg">{props.question}</div>

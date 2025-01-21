@@ -107,7 +107,7 @@ export function Home() {
           </div>
         </div>
       </div>
-      <div className="bg-lichen">
+      <div className="bg-night">
         {prayerDecks.map((row, i) => (
           <div
             key={i}
@@ -126,7 +126,7 @@ export function Home() {
           </div>
         ))}
       </div>
-      <div className="bg-olive">
+      <div className="bg-lichen">
         <div className="px-6 py-8 md:py-16 max-w-screen-xl mx-auto">
           <h2 className="text-white text-center uppercase font-bold text-2xl md:text-4xl mb-6">
             Frequently Asked Questions
