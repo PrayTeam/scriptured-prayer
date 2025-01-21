@@ -13,21 +13,21 @@ const demoPrayerDecks: DemoPrayerDeck[][] = [
       title: "God Is",
       description: '"God" is verses act as a checkup for your relationship...',
       image: forest,
-      color: "olive",
+      color: "yellow",
       id: 2,
     },
     {
       title: "In Christ",
       description: "When we become Christians, it's not simply a label...",
       image: dryGrass,
-      color: "indigo",
+      color: "lichen",
       id: 5,
     },
     {
       title: "Promises of God",
       description: "Believing God's promises is how the men and women...",
       image: readingBible,
-      color: "sky",
+      color: "coral",
       id: 6,
     },
   ],
@@ -36,7 +36,7 @@ const demoPrayerDecks: DemoPrayerDeck[][] = [
       title: "Names of God",
       description: "Look upon God and grow in love with Him...",
       image: mountains,
-      color: "ocean",
+      color: "orange",
       id: 1,
     },
     {
@@ -44,7 +44,7 @@ const demoPrayerDecks: DemoPrayerDeck[][] = [
       description:
         "Meditate on the names of Jesus and see the overflow of God’s heart...",
       image: galaxy,
-      color: "obsidian",
+      color: "teal",
       id: 3,
     },
     {
@@ -52,7 +52,7 @@ const demoPrayerDecks: DemoPrayerDeck[][] = [
       description:
         "When you meditate on these verses and see what the Spirit does for you...",
       image: clouds,
-      color: "leaf",
+      color: "seafoam",
       id: 4,
     },
   ],
