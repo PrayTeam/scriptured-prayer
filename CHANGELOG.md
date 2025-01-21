@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.12.0 (2025-01-21)
+
+### Features
+
+- Modify card styles and colors
+  ([`1e75fef`](https://github.com/PrayTeam/scriptured-prayer/commit/1e75fef14d93b7ef6dd84a6061d8b1ac192b4379))
+
+
 ## v0.11.3 (2024-12-18)
 
 ### Bug Fixes
