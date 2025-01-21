@@ -14,6 +14,10 @@ import DeckIcon from "~/assets/icons/navigation/deck.svg?react";
 import PrayerIcon from "~/assets/icons/navigation/prayer.svg?react";
 import SearchIcon from "~/assets/icons/navigation/search.svg?react";
 
+import RepeatIcon from "~/assets/icons/cards/repeat.svg?react";
+import RewordIcon from "~/assets/icons/cards/reword.svg?react";
+import RespondIcon from "~/assets/icons/cards/respond.svg?react";
+
 export {
   LeftArrowIcon,
   RightArrowIcon,
@@ -28,4 +32,7 @@ export {
   DeckIcon,
   PrayerIcon,
   SearchIcon,
+  RepeatIcon,
+  RewordIcon,
+  RespondIcon,
 };
