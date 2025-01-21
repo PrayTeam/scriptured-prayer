@@ -1,7 +1,15 @@
 # CHANGELOG
 
 
+## v0.12.1 (2025-01-21)
+
+
 ## v0.12.0 (2025-01-21)
+
+### Bug Fixes
+
+- Make prayer deck count reflect changes from 592d370f
+  ([`739e4aa`](https://github.com/PrayTeam/scriptured-prayer/commit/739e4aa407ef85a2ab1ac024a5fac5d2b57d8c2e))
 
 ### Features
 
