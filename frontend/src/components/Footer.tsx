@@ -2,8 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "~/components/form";
 import { theme } from "~/tailwind.config";
 import { FooterColumn, FooterLinks, FooterLink } from "~/components";
-
-type ThemeColor = keyof typeof theme.colors;
+import { ThemeColor } from "~/types";
 
 interface FooterProps {
   color: ThemeColor;

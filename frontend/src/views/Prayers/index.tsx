@@ -5,7 +5,7 @@ import { Container } from "~/components";
 import { AddIcon, RightArrowIcon } from "~/components/Icons";
 import { useArray } from "~/hooks";
 import { theme } from "~/tailwind.config";
-import { deckColors } from "~/utilities";
+import { categoryColors } from "~/utilities";
 
 interface PrayerRequest {
   id: number;
@@ -85,7 +85,7 @@ export function Prayers() {
     <Container>
       <h1 className="text-2xl text-black font-black mb-4">Prayer Requests</h1>
       {prayerRequests.map((pr, i) => (
-        <PrayerRequestPreview key={i} color={deckColors[i % 6]} {...pr} />
+        <PrayerRequestPreview key={i} color={categoryColors[i % 6]} {...pr} />
       ))}
       <div className="flex w-full justify-center py-4">
         <div className="flex flex-col justify-center text-center">

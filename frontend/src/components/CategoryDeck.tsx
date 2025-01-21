@@ -10,6 +10,7 @@ import { CardResponse } from "~/api/models/responses";
 import { CategoryResponse } from "~/api/models/responses";
 import { Card } from "./Card";
 import { PrayerDeck } from "./PrayerDeck";
+import { categoryColors } from "~/utilities";
 
 export function CategoryDeck() {
   const api = useApi();
@@ -75,16 +76,19 @@ export function CategoryDeck() {
               title="Inspiration"
               body={category.inspiration}
               cardCount={category.card_count}
+              color="ghost"
             />
           </SwiperSlide>
           {cards.map((card) => (
             <SwiperSlide key={card.id}>
+              {/* todo: get card color from backend? */}
               <Card
                 category={card.category}
                 title={card.title}
                 body={card.scripture_text.map((st) => st.text).join(" ")}
                 scripture={card.scripture}
                 instruction={card.instruction}
+                color={categoryColors[card.category]}
               />
             </SwiperSlide>
           ))}
