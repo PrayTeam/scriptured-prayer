@@ -4,6 +4,7 @@ import { SwiperSlide } from "swiper/react";
 import { CardResponse } from "~/api/models/responses";
 import { Card, Loader, PrayerDeck } from "~/components";
 import { useApi } from "~/hooks";
+import { categoryColors } from "~/utilities";
 
 export function DailyDeck() {
   const api = useApi();
@@ -50,6 +51,7 @@ export function DailyDeck() {
             body={card.scripture_text.map((st) => st.text).join(" ")}
             scripture={card.scripture}
             instruction={card.instruction}
+            color={categoryColors[card.category]}
           />
         </SwiperSlide>
       ))}
