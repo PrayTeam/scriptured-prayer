@@ -19,16 +19,18 @@ class Command(BaseCommand):
             gid = category[1]
             genre = category[2]
             inspiration = category[3]
+            default_instruction = category[5]
 
             category, cat_created = Category.objects.get_or_create(
                 name=category_name,
-                defaults={"genre": genre, "inspiration": inspiration},
+                defaults={"genre": genre, "inspiration": inspiration, "default_instruction": default_instruction},
             )
             if cat_created:
                 category.save()
             else:
                 category.genre = genre
                 category.inspiration = inspiration
+                category.default_instruction = default_instruction
                 category.save()
 
             if gid is not None:
