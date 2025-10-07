@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v0.13.0 (2025-10-07)
+
+### Chores
+
+- **deps**: Updates
+  ([`0d6b4b2`](https://github.com/PrayTeam/scriptured-prayer/commit/0d6b4b25dddcb1e474e49314cd6ca775c77e19db))
+
+### Features
+
+- Include the category default instruction in load_cards
+  ([`e587e21`](https://github.com/PrayTeam/scriptured-prayer/commit/e587e21ef03d112a1ba70f4480844a85f9ae319d))
+
+
 ## v0.12.1 (2025-01-21)
 
 
